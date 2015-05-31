@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>66891E36-A980-455B-9043-1A4E97CD3271</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>CLYC</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>ABCFB26A2320E1BCCB59CDED6036E644F370D21E</key>
 		<string>github.com:wuweili/CLYC.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CLYC/CLYC.xcodeproj/project.xcworkspace</string>
+	<string>CLYC/CLYC.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>ABCFB26A2320E1BCCB59CDED6036E644F370D21E</key>
