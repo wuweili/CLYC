@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		023C32331B12248F005FA0A5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023C32321B12248F005FA0A5 /* LoginViewController.m */; };
+		023C32381B122548005FA0A5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 023C32371B122548005FA0A5 /* Login.storyboard */; };
 		5A1BC8461B09E4D500A2A1DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC8451B09E4D500A2A1DC /* main.m */; };
 		5A1BC8491B09E4D500A2A1DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC8481B09E4D500A2A1DC /* AppDelegate.m */; };
 		5A1BC84C1B09E4D500A2A1DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC84B1B09E4D500A2A1DC /* ViewController.m */; };
@@ -27,6 +29,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		023C32311B12248F005FA0A5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Login/LoginViewController.h; sourceTree = "<group>"; };
+		023C32321B12248F005FA0A5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Login/LoginViewController.m; sourceTree = "<group>"; };
+		023C32371B122548005FA0A5 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5A1BC8401B09E4D500A2A1DC /* CLYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1BC8441B09E4D500A2A1DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A1BC8451B09E4D500A2A1DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -60,6 +65,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		023C32361B1224C9005FA0A5 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				023C32311B12248F005FA0A5 /* LoginViewController.h */,
+				023C32321B12248F005FA0A5 /* LoginViewController.m */,
+				023C32371B122548005FA0A5 /* Login.storyboard */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		5A1BC8371B09E4D500A2A1DC = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +96,7 @@
 		5A1BC8421B09E4D500A2A1DC /* CLYC */ = {
 			isa = PBXGroup;
 			children = (
+				023C32361B1224C9005FA0A5 /* Login */,
 				5A1BC8471B09E4D500A2A1DC /* AppDelegate.h */,
 				5A1BC8481B09E4D500A2A1DC /* AppDelegate.m */,
 				5A1BC84A1B09E4D500A2A1DC /* ViewController.h */,
@@ -199,6 +215,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				023C32381B122548005FA0A5 /* Login.storyboard in Resources */,
 				5A1BC84F1B09E4D500A2A1DC /* Main.storyboard in Resources */,
 				5A1BC8541B09E4D500A2A1DC /* LaunchScreen.xib in Resources */,
 				5A1BC8511B09E4D500A2A1DC /* Images.xcassets in Resources */,
@@ -219,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				023C32331B12248F005FA0A5 /* LoginViewController.m in Sources */,
 				5A1BC84C1B09E4D500A2A1DC /* ViewController.m in Sources */,
 				5A1BC8491B09E4D500A2A1DC /* AppDelegate.m in Sources */,
 				5A1BC8461B09E4D500A2A1DC /* main.m in Sources */,
@@ -416,6 +434,7 @@
 				5A1BC8651B09E4D500A2A1DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5A1BC8661B09E4D500A2A1DC /* Build configuration list for PBXNativeTarget "CLYCTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +443,7 @@
 				5A1BC8681B09E4D500A2A1DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

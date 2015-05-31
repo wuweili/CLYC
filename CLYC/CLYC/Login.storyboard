@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="3IJ-hM-pre">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="yiL-Kf-P86">
+            <objects>
+                <navigationController id="3IJ-hM-pre" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Dbn-Uk-plc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="JaA-np-u5c" kind="relationship" relationship="rootViewController" id="e7f-qc-sbe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OXf-Id-7RN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-134" y="410"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="aXO-U6-KnO">
+            <objects>
+                <viewController id="JaA-np-u5c" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zEr-uA-Tqo"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Vc-bH-58t"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Aov-yy-cHe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4E-VM-GPc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.29546789583604882" green="0.81740556811416343" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="222" id="8Ng-Xd-aUd"/>
+                                    <constraint firstAttribute="height" constant="360" id="YSM-Aw-66j">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="300"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="8Ng-Xd-aUd"/>
+                                        <exclude reference="YSM-Aw-66j"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="8Ng-Xd-aUd"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="8Ng-Xd-aUd"/>
+                                        <include reference="YSM-Aw-66j"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="I4E-VM-GPc" secondAttribute="centerX" id="Aak-9O-1n8">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-2.5"/>
+                            </constraint>
+                            <constraint firstItem="I4E-VM-GPc" firstAttribute="top" secondItem="Aov-yy-cHe" secondAttribute="topMargin" id="DWb-Vj-9SY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="I4E-VM-GPc" secondAttribute="trailing" id="NoC-9c-sgm">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                            </constraint>
+                            <constraint firstItem="I4E-VM-GPc" firstAttribute="top" secondItem="Aov-yy-cHe" secondAttribute="topMargin" constant="-16" id="R8I-sO-JXG"/>
+                            <constraint firstItem="I4E-VM-GPc" firstAttribute="trailing" secondItem="Aov-yy-cHe" secondAttribute="trailingMargin" constant="-16" id="VfN-Hg-O1Z"/>
+                            <constraint firstItem="I4E-VM-GPc" firstAttribute="top" secondItem="Aov-yy-cHe" secondAttribute="topMargin" id="bac-Zd-PRl"/>
+                            <constraint firstItem="I4E-VM-GPc" firstAttribute="top" secondItem="Aov-yy-cHe" secondAttribute="topMargin" id="k93-Zg-aen"/>
+                            <constraint firstAttribute="centerX" secondItem="I4E-VM-GPc" secondAttribute="centerX" id="rI5-Jq-xR5"/>
+                            <constraint firstItem="I4E-VM-GPc" firstAttribute="leading" secondItem="Aov-yy-cHe" secondAttribute="leadingMargin" id="v88-kt-JoP">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
+                            </constraint>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="I4E-VM-GPc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Aak-9O-1n8"/>
+                                <exclude reference="DWb-Vj-9SY"/>
+                                <exclude reference="NoC-9c-sgm"/>
+                                <exclude reference="R8I-sO-JXG"/>
+                                <exclude reference="VfN-Hg-O1Z"/>
+                                <exclude reference="bac-Zd-PRl"/>
+                                <exclude reference="k93-Zg-aen"/>
+                                <exclude reference="rI5-Jq-xR5"/>
+                                <exclude reference="v88-kt-JoP"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="I4E-VM-GPc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="R8I-sO-JXG"/>
+                                <exclude reference="VfN-Hg-O1Z"/>
+                                <exclude reference="bac-Zd-PRl"/>
+                                <exclude reference="k93-Zg-aen"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="I4E-VM-GPc"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Aak-9O-1n8"/>
+                                <include reference="DWb-Vj-9SY"/>
+                                <include reference="NoC-9c-sgm"/>
+                                <exclude reference="R8I-sO-JXG"/>
+                                <include reference="rI5-Jq-xR5"/>
+                                <include reference="v88-kt-JoP"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="vRN-MK-FgR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tYE-8d-me2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="558" y="403"/>
+        </scene>
+    </scenes>
+</document>
