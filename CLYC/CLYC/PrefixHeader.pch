@@ -20,5 +20,6 @@
 #import "HXOther.h"
 #import "IMUnitsMethods.h"
 #import "HXUserModel.h"
+#import "CLYCCoreBizHttpRequest.h"
 
 #endif

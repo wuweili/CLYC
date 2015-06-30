@@ -188,11 +188,11 @@
     [_footView addSubview:_remindPwdButton];
     
     //忘记密码
-    UIButton *forgetPwdButton = [[UIButton alloc]initWithFrame:CGRectMake(kMainScreenWidth - 15 - 78, _remindPwdButton.frame.origin.y, 78, 25)];
+    UIButton *forgetPwdButton = [[UIButton alloc]initWithFrame:CGRectMake(kMainScreenWidth - 15 - 78, _remindPwdButton.frame.origin.y, 78, 20)];
     forgetPwdButton.backgroundColor = [UIColor clearColor];
     [forgetPwdButton setTitle:@"忘记密码" forState:UIControlStateNormal];
     [forgetPwdButton setTitleColor:UIColorFromRGB(0x70cbeb) forState:UIControlStateNormal];
-    
+    forgetPwdButton.titleLabel.font = HEL_15;
     [forgetPwdButton addTarget:self action:@selector(forgotPassword) forControlEvents:UIControlEventTouchUpInside];
     [_footView addSubview:forgetPwdButton];
     
@@ -378,6 +378,21 @@
 
 -(void)clickLoginButton
 {
+    
+    NSDictionary *sendDic = @{@"loginId":@"ios",@"password":@"sj@ios",@"moblieType":@"2",@"cId":@"23456789"};
+    
+    [CLYCCoreBizHttpRequest loginYBUserWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+        
+    } paramDic:sendDic password:@"sj@ios" logonId:@"ios"];
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     _isDirectLogin = NO;
     

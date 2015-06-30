@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02B39A741B42E4BF007FDD26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A731B42E4BF007FDD26 /* AudioToolbox.framework */; };
+		02B39A761B42E4C7007FDD26 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A751B42E4C7007FDD26 /* AVFoundation.framework */; };
+		02B39A781B42E4D6007FDD26 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A771B42E4D6007FDD26 /* libicucore.dylib */; };
+		02B39A7A1B42E4DF007FDD26 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A791B42E4DF007FDD26 /* CoreGraphics.framework */; };
+		02B39A7C1B42E4E8007FDD26 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A7B1B42E4E8007FDD26 /* QuartzCore.framework */; };
+		02B39A7E1B42E4F0007FDD26 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A7D1B42E4F0007FDD26 /* UIKit.framework */; };
+		02B39A801B42E4FF007FDD26 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A7F1B42E4FF007FDD26 /* Foundation.framework */; };
+		02B39A841B42E9E1007FDD26 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A831B42E9E1007FDD26 /* libsqlite3.dylib */; };
+		02B39A8A1B42F014007FDD26 /* CLYCCoreBizHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B39A891B42F014007FDD26 /* CLYCCoreBizHttpRequest.m */; };
 		5A1BC8461B09E4D500A2A1DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC8451B09E4D500A2A1DC /* main.m */; };
 		5A1BC8491B09E4D500A2A1DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC8481B09E4D500A2A1DC /* AppDelegate.m */; };
 		5A1BC84F1B09E4D500A2A1DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A1BC84D1B09E4D500A2A1DC /* Main.storyboard */; };
@@ -72,10 +81,10 @@
 		5AB02E4D1B3FD2720003B65F /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D411B3FD2710003B65F /* UIScrollView+MJRefresh.m */; };
 		5AB02E4E1B3FD2720003B65F /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D431B3FD2710003B65F /* UIView+MJExtension.m */; };
 		5AB02E4F1B3FD2720003B65F /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D451B3FD2710003B65F /* NSDate+Utilities.m */; };
-		5AB02E501B3FD2720003B65F /* NSString+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D471B3FD2710003B65F /* NSString+Additional.m */; };
+		5AB02E501B3FD2720003B65F /* NSString+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D471B3FD2710003B65F /* NSString+Additional.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5AB02E511B3FD2720003B65F /* NSString+PinYin.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D491B3FD2710003B65F /* NSString+PinYin.m */; };
 		5AB02E521B3FD2720003B65F /* NSString+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D4B1B3FD2710003B65F /* NSString+Utility.m */; };
-		5AB02E531B3FD2720003B65F /* OpenUDID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D4E1B3FD2710003B65F /* OpenUDID.mm */; };
+		5AB02E531B3FD2720003B65F /* OpenUDID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D4E1B3FD2710003B65F /* OpenUDID.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5AB02E541B3FD2720003B65F /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D501B3FD2710003B65F /* Photo.m */; };
 		5AB02E551B3FD2720003B65F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D531B3FD2710003B65F /* Reachability.m */; };
 		5AB02E561B3FD2720003B65F /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02D561B3FD2710003B65F /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -186,6 +195,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02B39A731B42E4BF007FDD26 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		02B39A751B42E4C7007FDD26 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		02B39A771B42E4D6007FDD26 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		02B39A791B42E4DF007FDD26 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		02B39A7B1B42E4E8007FDD26 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		02B39A7D1B42E4F0007FDD26 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		02B39A7F1B42E4FF007FDD26 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		02B39A831B42E9E1007FDD26 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		02B39A881B42F014007FDD26 /* CLYCCoreBizHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLYCCoreBizHttpRequest.h; sourceTree = "<group>"; };
+		02B39A891B42F014007FDD26 /* CLYCCoreBizHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLYCCoreBizHttpRequest.m; sourceTree = "<group>"; };
+		02B39A8C1B4309EB007FDD26 /* CLYCHttpDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLYCHttpDefine.h; sourceTree = "<group>"; };
 		5A1BC8401B09E4D500A2A1DC /* CLYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1BC8441B09E4D500A2A1DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A1BC8451B09E4D500A2A1DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -518,6 +538,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02B39A841B42E9E1007FDD26 /* libsqlite3.dylib in Frameworks */,
+				02B39A801B42E4FF007FDD26 /* Foundation.framework in Frameworks */,
+				02B39A7E1B42E4F0007FDD26 /* UIKit.framework in Frameworks */,
+				02B39A7C1B42E4E8007FDD26 /* QuartzCore.framework in Frameworks */,
+				02B39A7A1B42E4DF007FDD26 /* CoreGraphics.framework in Frameworks */,
+				02B39A781B42E4D6007FDD26 /* libicucore.dylib in Frameworks */,
+				02B39A761B42E4C7007FDD26 /* AVFoundation.framework in Frameworks */,
+				02B39A741B42E4BF007FDD26 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,9 +559,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02B39A871B42EFCF007FDD26 /* CLYCHttpManager */ = {
+			isa = PBXGroup;
+			children = (
+				02B39A881B42F014007FDD26 /* CLYCCoreBizHttpRequest.h */,
+				02B39A891B42F014007FDD26 /* CLYCCoreBizHttpRequest.m */,
+				02B39A8C1B4309EB007FDD26 /* CLYCHttpDefine.h */,
+			);
+			path = CLYCHttpManager;
+			sourceTree = "<group>";
+		};
 		5A1BC8371B09E4D500A2A1DC = {
 			isa = PBXGroup;
 			children = (
+				02B39A831B42E9E1007FDD26 /* libsqlite3.dylib */,
+				02B39A7F1B42E4FF007FDD26 /* Foundation.framework */,
+				02B39A7D1B42E4F0007FDD26 /* UIKit.framework */,
+				02B39A7B1B42E4E8007FDD26 /* QuartzCore.framework */,
+				02B39A791B42E4DF007FDD26 /* CoreGraphics.framework */,
+				02B39A771B42E4D6007FDD26 /* libicucore.dylib */,
+				02B39A751B42E4C7007FDD26 /* AVFoundation.framework */,
+				02B39A731B42E4BF007FDD26 /* AudioToolbox.framework */,
 				5A1BC8421B09E4D500A2A1DC /* CLYC */,
 				5A1BC85C1B09E4D500A2A1DC /* CLYCTests */,
 				5A1BC8411B09E4D500A2A1DC /* Products */,
@@ -552,6 +598,7 @@
 		5A1BC8421B09E4D500A2A1DC /* CLYC */ = {
 			isa = PBXGroup;
 			children = (
+				02B39A871B42EFCF007FDD26 /* CLYCHttpManager */,
 				5AB02ECD1B3FDDE60003B65F /* Resource */,
 				5AB02EB41B3FD4450003B65F /* GlobalHeader */,
 				5AB02EB01B3FD3490003B65F /* Model */,
@@ -1546,6 +1593,7 @@
 				5AB02E491B3FD2720003B65F /* MJRefreshConst.m in Sources */,
 				5AB02CCA1B3FD2270003B65F /* SDCollectionViewCell.m in Sources */,
 				5AB02E741B3FD2720003B65F /* PBScrollView.m in Sources */,
+				02B39A8A1B42F014007FDD26 /* CLYCCoreBizHttpRequest.m in Sources */,
 				5AB02E561B3FD2720003B65F /* RegexKitLite.m in Sources */,
 				5AB02E211B3FD2710003B65F /* AFURLRequestSerialization.m in Sources */,
 				5AB02E671B3FD2720003B65F /* UIImageView+LBBlurredImage.m in Sources */,
