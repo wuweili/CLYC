@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoBroswerVC">
+            <connections>
+                <outlet property="scrollView" destination="RLq-hQ-X8E" id="Zjo-9h-zSA"/>
+                <outlet property="scrollViewRightMarginC" destination="Tvg-wG-r5c" id="OXi-IA-O76"/>
+                <outlet property="topBarHeightC" destination="z0u-B8-TAv" id="twn-SD-aHw"/>
+                <outlet property="topBarLabel" destination="2GQ-dh-k6A" id="qIS-hF-hWW"/>
+                <outlet property="topBarView" destination="aju-yJ-YWP" id="EHe-Z8-sdY"/>
+                <outlet property="view" destination="iN0-l3-epB" id="zub-Uj-0zk"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLq-hQ-X8E" customClass="PBScrollView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="0DS-ez-gbh"/>
+                    </connections>
+                </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aju-yJ-YWP" userLabel="TopBarView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <subviews>
+                        <toolbar clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" barStyle="blackTranslucent" translatesAutoresizingMaskIntoConstraints="NO" id="j0X-oO-d7p">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                            <items/>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </toolbar>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GQ-dh-k6A">
+                            <rect key="frame" x="300" y="42" width="0.0" height="0.0"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNA-Uz-FcA" userLabel="BackButton" customClass="PBBackButton">
+                            <rect key="frame" x="5" y="27" width="60" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Xg8-2e-nOK"/>
+                                <constraint firstAttribute="width" constant="60" id="gwc-jc-ZC6"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="1" minY="0.0" maxX="-3" maxY="0.0"/>
+                            <inset key="titleEdgeInsets" minX="-1" minY="0.0" maxX="-6" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="-3" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="返回" image="PB.bundle/back_arrow.png"/>
+                            <connections>
+                                <action selector="leftBtnClick:" destination="-1" eventType="touchUpInside" id="dSd-rT-waU"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="2GQ-dh-k6A" secondAttribute="centerY" constant="-10" id="0Q9-Ux-ped"/>
+                        <constraint firstItem="j0X-oO-d7p" firstAttribute="top" secondItem="aju-yJ-YWP" secondAttribute="top" id="4ci-id-PLD"/>
+                        <constraint firstAttribute="height" constant="64" id="MMc-Xx-tCw"/>
+                        <constraint firstItem="DNA-Uz-FcA" firstAttribute="leading" secondItem="aju-yJ-YWP" secondAttribute="leading" constant="5" id="MwV-ra-BNA"/>
+                        <constraint firstItem="j0X-oO-d7p" firstAttribute="leading" secondItem="aju-yJ-YWP" secondAttribute="leading" id="UNo-68-8de"/>
+                        <constraint firstAttribute="bottom" secondItem="j0X-oO-d7p" secondAttribute="bottom" id="Wdb-hj-076"/>
+                        <constraint firstAttribute="centerX" secondItem="2GQ-dh-k6A" secondAttribute="centerX" id="Zkm-NY-RWy"/>
+                        <constraint firstAttribute="trailing" secondItem="j0X-oO-d7p" secondAttribute="trailing" id="a03-Mf-v8T"/>
+                        <constraint firstAttribute="centerY" secondItem="DNA-Uz-FcA" secondAttribute="centerY" constant="-10" id="j8c-PB-e1D"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="aju-yJ-YWP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="04D-fi-2NY"/>
+                <constraint firstAttribute="bottom" secondItem="RLq-hQ-X8E" secondAttribute="bottom" id="NXy-TB-ShD"/>
+                <constraint firstAttribute="trailing" secondItem="RLq-hQ-X8E" secondAttribute="trailing" id="Tvg-wG-r5c"/>
+                <constraint firstItem="RLq-hQ-X8E" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="grk-ds-Vu1"/>
+                <constraint firstAttribute="trailing" secondItem="aju-yJ-YWP" secondAttribute="trailing" id="mdb-vv-b3Q"/>
+                <constraint firstItem="RLq-hQ-X8E" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mr6-yK-Tcv"/>
+                <constraint firstItem="aju-yJ-YWP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="z0u-B8-TAv"/>
+            </constraints>
+            <point key="canvasLocation" x="-498" y="104"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="PB.bundle/back_arrow.png" width="16" height="16"/>
+    </resources>
+</document>

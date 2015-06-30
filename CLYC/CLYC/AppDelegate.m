@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MyKeyChainHelper.h"
+#import "HXRootViewViewController.h"
 
 @interface AppDelegate ()
 
@@ -15,9 +17,69 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    [self.window makeKeyAndVisible];
+    
+    if ([self isNeedLogin])
+    {
+        [self goToLoginView];
+    }
+    
+    
+    
     return YES;
+}
+
+#pragma mark - 跳转到登陆界面
+- (void)goToLoginView
+{
+    
+    
+    HXRootViewViewController *loginMVC  = [[HXRootViewViewController alloc]initWithDirectLogin:NO];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:loginMVC];
+    self.window.rootViewController = navController;
+    
+    
+}
+
+
+/**
+ *	log启用，内存显示等全局设置
+ */
+- (void)initGlobalSettings
+{
+    
+#ifdef YB_HTTP_IDP_SERVER_LOACL_DEBUG
+    
+    [Log logOpen];
+    
+#endif
+  
+    
+}
+
+#pragma mark - 判断是否需要登陆
+- (BOOL)isNeedLogin
+{
+    
+    NSString *userLoginId = [MyKeyChainHelper getUserNameWithService:KEY_USERNAME];
+    NSString *password = [MyKeyChainHelper getPasswordWithService:KEY_PASSWORD];
+    
+    if ([NSString isBlankString:userLoginId] || [NSString isBlankString:password])
+    {
+        
+        return YES;
+    }
+    
+    [HXUserModel shareInstance].loginId=userLoginId;
+    [HXUserModel shareInstance].password=password;
+    
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
