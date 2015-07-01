@@ -57,9 +57,9 @@
 
 
 
-#define KEY_USERNAME  @"com.weihua.bjyb.username"
+#define KEY_USERNAME  @"com.clyc.username"
 
-#define KEY_PASSWORD  @"com.weihua.bjyb.password"
+#define KEY_PASSWORD  @"com.clyc.password"
 
 #define HX_PATIENT_PLIST_NAME     @"patientSetting.plist"
 

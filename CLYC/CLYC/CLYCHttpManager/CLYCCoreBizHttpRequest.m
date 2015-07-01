@@ -9,6 +9,8 @@
 #import "CLYCCoreBizHttpRequest.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "CLYCHttpDefine.h"
+#import "SoapHelper.h"
+
 
 
 static NSString * LogonId = @"";
@@ -29,14 +31,12 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [[AFHTTPResponseSerializer alloc] init];
-    [manager.requestSerializer setValue:@"application/soap+xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    [manager.requestSerializer setValue:@"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
      [manager.requestSerializer setValue: @"http://service.skcl.com.cn/doService" forHTTPHeaderField:@"SOAPAction"];
     
     NSString *sendStr = [[self class] getUserCenterRequestSendDataWithParamSender:paramDic];
-    
-    [manager.requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error) {
-        return sendStr;
-    }];
+
     [manager POST:path parameters:sendStr success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *response = [[NSString alloc] initWithData:(NSData *)responseObject encoding:NSUTF8StringEncoding];
         NSLog(@"%@, %@", operation, response);
@@ -116,6 +116,19 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     return Pwd;
 }
 
++(NSString *)getSoapMessageWithParamSender:(id)paramSender methodName:(NSString *)methodName
+{
+    NSMutableArray *arr=[NSMutableArray array];
+    [arr addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"params",paramSender, nil]];
+    
+    NSString *soapMsg=[SoapHelper arrayToDefaultSoapMessage:arr methodName:@"GetWebNewsByType"];
+  
+}
+
+
+
+
+
 @end
 
 
@@ -123,7 +136,10 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 +(void)loginYBUserWithBlock:(void (^)(NSString *, NSString *, NSError *))block paramDic:(NSDictionary *)paramDic password:(NSString *)password logonId:(NSString *)logonId
 {
-    NSString *  path= [NSString stringWithFormat:@"%@%@",YB_HTTP_SERVER,@"UserLoginService"];
+//    NSString *  path= [NSString stringWithFormat:@"%@%@",YB_HTTP_SERVER,@"UserLoginService"];
+//    http://localhost:8080/wsportal/doService?wsdl
+    
+    NSString *  path= @"http://210.73.152.201:7070/wsportal/doService?wsdl/UserLoginService";
     
     [BaseHttpRequest setLogonId:logonId];
     
