@@ -12,7 +12,6 @@
 #import "SoapHelper.h"
 
 
-
 static NSString * LogonId = @"";
 
 static NSString * Pwd = @"";
@@ -27,23 +26,114 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 @implementation BaseHttpRequest
 
-+(void)basePostRequestWithPath:(NSString *)path parmDic:(NSDictionary *)paramDic withBlock:(void (^)(NSString *, NSString *, id, NSError *))block
++(void)basePostRequestWithPath:(NSString *)path parmDic:(NSDictionary *)paramDic methodName:(NSString *)methodName withBlock:(void (^)(NSString *, NSString *, id, NSError *))block
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+//    NSString *sopeMessage = [[self class] getSoapMessageWithParamSender:paramDic methodName:methodName];
     
-    [manager.requestSerializer setValue:@"text/xml; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-     [manager.requestSerializer setValue: @"http://service.skcl.com.cn/doService" forHTTPHeaderField:@"SOAPAction"];
+//    NSData *sendData = [sopeMessage dataUsingEncoding:NSUTF8StringEncoding];
     
-    NSString *sendStr = [[self class] getUserCenterRequestSendDataWithParamSender:paramDic];
+    
+    
+    //测试1
+//    NSString *soapMessage = [NSString stringWithFormat:
+//                             @"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+//                             "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"
+//                             "<soap:Body>\n"
+//                             "<getOffesetUTCTime xmlns=\"http://www.Nanonull.com/TimeService/\">\n"
+//                             "<hoursOffset>%@</hoursOffset>\n"
+//                             "</getOffesetUTCTime>\n"
+//                             "</soap:Body>\n"
+//                             "</soap:Envelope>\n",@"5"
+//                             ];
+    //测试2
+    
+    /**
+     *<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.skcl.com.cn/">
+     <soapenv:Header/>
+     <soapenv:Body>
+     <ser:doService>
+     <serverName>UserLoginService</serverName>
+     <params>eyJib2R5Ijp7InBhc3N3b3JkIjoic2pAaW9zIiwibG9naW5JZCI6ImlvcyIsImNJZCI6IjIzNDU2Nzg5IiwibW9ibGllVHlwZSI6IjIifSwic2lnbiI6IjVkYWRhMzBhNzA2OTI3NjdiMTQ5MDIzYWJlNmVjODFiIiwic2VjcmV0Ijp7ImxvZ29uSWQiOiJpb3MiLCJwd2QiOiJzakBpb3MifX0=</params>
+     </ser:doService>
+     </soapenv:Body>
+     </soapenv:Envelope>
+     */
+    
+    
+    
+    
+    NSString *soapMessage = [NSString stringWithFormat:
+                             @"<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://service.skcl.com.cn/\">\n"
+                             "<soapenv:Header/>\n"
+                             "<soapenv:Body>\n"
+                             "<ser:doService>\n"
+                             "<serverName>%@</serverName>\n"
+                             "<params>%@</params>\n"
+                             "</ser:doService>\n"
+                             "</soapenv:Body>\n"
+                             "</soapenv:Envelope>\n",@"UserLoginService",@"eyJib2R5Ijp7InBhc3N3b3JkIjoic2pAaW9zIiwibG9naW5JZCI6ImlvcyIsImNJZCI6IjIzNDU2Nzg5IiwibW9ibGllVHlwZSI6IjIifSwic2lnbiI6IjVkYWRhMzBhNzA2OTI3NjdiMTQ5MDIzYWJlNmVjODFiIiwic2VjcmV0Ijp7ImxvZ29uSWQiOiJpb3MiLCJwd2QiOiJzakBpb3MifX0="
+                             ];
+    
+    
+    //测试3
+//    NSString *soapMessage =@"<?xml version=\"1.0\" encoding=\"utf-8\"?> \n"
+//    "<soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">"
+//    "<soap12:Body>"
+//    "<getSupportCity xmlns=\"http://WebXml.com.cn/\">"
+//    "<byProvinceName>ALL</byProvinceName>"
+//    "</getSupportCity>"
+//    "</soap12:Body>"
+//    "</soap12:Envelope>";
+    
+    //测试3
+//    NSString *soapMessage  = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+//                                                "<soap12:Envelope "
+//                                                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" "
+//                                                "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" "
+//                                                "xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">"
+//                                                "<soap12:Body>"
+//                                                "<getMobileCodeInfo xmlns=\"http://WebXml.com.cn/\">"
+//                                                "<mobileCode>%@</mobileCode>"
+//                                                "<userID>%@</userID>"
+//                                                "</getMobileCodeInfo>"
+//                                                "</soap12:Body>"
+//                                                "</soap12:Envelope>", @"15062232055", @""];;
+    
+    
 
-    [manager POST:path parameters:sendStr success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *response = [[NSString alloc] initWithData:(NSData *)responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"%@, %@", operation, response);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSString *response = [[NSString alloc] initWithData:(NSData *)[operation responseObject] encoding:NSUTF8StringEncoding];
-        NSLog(@"%@, %@", operation, error);
-    }];
+    // 实例化NSMutableURLRequest，并进行参数配置
+    
+//    NSString *urlString = @"http://www.nanonull.com/TimeService/TimeService.asmx";
+    
+    NSString *urlString =   @"http://210.73.152.201:7070/wsportal/doService?wsdl";
+    
+//    NSString *urlString = @"http://www.webxml.com.cn/WebServices/WeatherWebService.asmx";
+
+//    NSString *urlString = @"http://webservice.webxml.com.cn/WebServices/MobileCodeWS.asmx";
+    
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString: urlString]];
+    [request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    [request setTimeoutInterval: 30];
+    
+//     [request addValue: @"http://WebXml.com.cn/getMobileCodeInfo" forHTTPHeaderField:@"SOAPAction"];
+    
+    [request addValue: @"http://service.skcl.com.cn/doService" forHTTPHeaderField:@"SOAPAction"];
+    [request addValue:@"text/xml;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[soapMessage dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         NSString *response = [[NSString alloc] initWithData:(NSData *)responseObject encoding:NSUTF8StringEncoding];
+         NSLog(@"%@, %@", operation, response);
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSString *response = [[NSString alloc] initWithData:(NSData *)[operation responseObject] encoding:NSUTF8StringEncoding];
+         NSLog(@"%@, %@", operation, error);(error);
+     }];
+    [operation start];
 }
 
 +(NSString *)getUserCenterRequestSendDataWithParamSender:(id)paramSender
@@ -118,10 +208,16 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 +(NSString *)getSoapMessageWithParamSender:(id)paramSender methodName:(NSString *)methodName
 {
-    NSMutableArray *arr=[NSMutableArray array];
-    [arr addObject:[NSDictionary dictionaryWithObjectsAndKeys:@"params",paramSender, nil]];
+    NSString *paramsStr = [[self class] getUserCenterRequestSendDataWithParamSender:paramSender];
     
-    NSString *soapMsg=[SoapHelper arrayToDefaultSoapMessage:arr methodName:@"GetWebNewsByType"];
+    NSMutableArray *arr=[NSMutableArray array];
+    
+    [arr addObject:[NSDictionary dictionaryWithObjectsAndKeys:methodName,@"serverName", nil]];
+    [arr addObject:[NSDictionary dictionaryWithObjectsAndKeys:paramsStr,@"params", nil]];
+    
+    NSString *soapMsg=[SoapHelper arrayToDefaultSoapMessage:arr methodName:methodName];
+    
+    return soapMsg;
   
 }
 
@@ -139,15 +235,18 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 //    NSString *  path= [NSString stringWithFormat:@"%@%@",YB_HTTP_SERVER,@"UserLoginService"];
 //    http://localhost:8080/wsportal/doService?wsdl
     
-    NSString *  path= @"http://210.73.152.201:7070/wsportal/doService?wsdl/UserLoginService";
+    NSString *  path= YB_HTTP_SERVER;
     
     [BaseHttpRequest setLogonId:logonId];
     
     [BaseHttpRequest setPwd:password];
     
-    [BaseHttpRequest basePostRequestWithPath:path parmDic:paramDic withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+    [BaseHttpRequest basePostRequestWithPath:path parmDic:paramDic methodName:@"UserLoginService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
         
     }];
+    
+    
+    
     
     
 }

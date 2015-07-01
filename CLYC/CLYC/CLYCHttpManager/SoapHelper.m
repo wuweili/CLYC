@@ -42,15 +42,51 @@
 
 @implementation SoapHelper
 +(NSString*)defaultSoapMesage{
-   NSString *soapBody=@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
-    "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"
-    "<soap:Body>%@</soap:Body></soap:Envelope>";
+//   NSString *soapBody=@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+//    "<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n"
+//    "<soap:Body>%@</soap:Body></soap:Envelope>";
+//    return soapBody;
+    
+//    NSString *soapBody=@"<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://service.skcl.com.cn/\" >\n"
+//    "<soapenv:Header/>\n"
+//    "<soapenv:Body>\n%@</soapenv:Body></soapenv:Envelope>";
+//    return soapBody;
+    
+    
+    NSString *soapBody=@"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+    "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://service.skcl.com.cn/\" >\n"
+    "<soapenv:Header/>\n"
+    "<soapenv:Body>\n%@</soapenv:Body></soapenv:Envelope>";
     return soapBody;
+    
+//    NSString *soapBody = [NSString stringWithFormat:
+//                          @"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
+//                          "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ser=\"http://service.skcl.com.cn/\" >\n"
+//                          "<soapenv:Header/>\n"
+//                          "<soapenv:Body>\n"
+//                          "%@"
+//                          "</soapenv:Body>\n"
+//                          "</soapenv:Envelope>\n"
+//                          ];
+//    
+//    return soapBody;
+    
+    
+    
+    
 }
 +(NSString*)methodSoapMessage:(NSString*)methodName{
-    NSMutableString *soap=[NSMutableString stringWithFormat:@"<%@ xmlns=\"%@\">",methodName,NAME_SPACE];
+//    NSMutableString *soap=[NSMutableString stringWithFormat:@"<%@ xmlns=\"%@\">",methodName,NAME_SPACE];
+    
+//    [soap appendString:@"%@"];
+//    [soap appendFormat:@"</%@>",methodName];
+//    return [NSString stringWithFormat:[self defaultSoapMesage],soap];
+
+    
+    NSMutableString *soap=[NSMutableString stringWithFormat:@"<ser:doService>\n"];
+    
     [soap appendString:@"%@"];
-    [soap appendFormat:@"</%@>",methodName];
+    [soap appendFormat:@"</ser:doService>"];
     return [NSString stringWithFormat:[self defaultSoapMesage],soap];
 }
 +(NSString*)nameSpaceSoapMessage:(NSString*)space methodName:(NSString*)methodName{

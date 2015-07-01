@@ -14,7 +14,7 @@
 /**
  * 加密请求 post 不带附件
  */
-+(void)basePostRequestWithPath:(NSString *)path parmDic:(NSDictionary *)paramDic withBlock:(void (^)( NSString *retCode, NSString *retMessage, id responseObject, NSError *error))block;
++(void)basePostRequestWithPath:(NSString *)path parmDic:(NSDictionary *)paramDic methodName:(NSString *)methodName withBlock:(void (^)( NSString *retCode, NSString *retMessage, id responseObject, NSError *error))block;
 
 /**
  * 得到最终发送给服务器的字典

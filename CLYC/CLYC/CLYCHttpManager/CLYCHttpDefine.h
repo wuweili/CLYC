@@ -56,20 +56,20 @@
 #else //内网开发
 
 
-#define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService"
+#define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
 //webservice配置
-#define defaultWebServiceUrl @"http://60.251.51.217/ElandMDC.admin/MDC.asmx"
 
-static NSString * NAME_SPACE = @"http://service.skcl.com.cn/";
-
-static NSString * METHOD_NAME = @"doService";
-
-static NSString * SOAP_ACTION = @"http://service.skcl.com.cn/doService";
 
 
 
 #endif
 
+
+#define NAME_SPACE  @"http://service.skcl.com.cn/"
+
+#define METHOD_NAME  @"doService"
+
+#define SOAP_ACTION   @"http://service.skcl.com.cn/doService"
 
 #endif
