@@ -36,7 +36,6 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     [request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
     [request setTimeoutInterval: 30];
     
-    
     [request addValue:@"text/xml;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[soapMessage dataUsingEncoding:NSUTF8StringEncoding]];
@@ -52,7 +51,8 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
           a2NsLmNvbW1vbi5leGNlcHRpb24uSW52YWxpZERhdGFFeGNlcHRpb24ifSwic2lnbiI6IiJ9</String></ns2:doServiceResponse></soap:Body></soap:Envelope>
           
           **/
-
+         
+         
          
          NSString *response = [[NSString alloc] initWithData:(NSData *)responseObject encoding:NSUTF8StringEncoding];
          NSLog(@"%@, %@", operation, response);

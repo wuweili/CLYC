@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
             endingLineNumber = "103"
-            landmarkName = "+arrayToDefaultSoapMessage:methodName:"
+            landmarkName = "+arrayToNameSpaceSoapMessage:params:methodName:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,39 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
             endingLineNumber = "90"
-            landmarkName = "+methodSoapMessage:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CLYC/CLYCHttpManager/CLYCCoreBizHttpRequest.m"
-            timestampString = "457464921.482413"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "+basePostRequestWithPath:parmDic:methodName:withBlock:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CLYC/CLYCHttpManager/CLYCCoreBizHttpRequest.m"
-            timestampString = "457464921.482413"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "+basePostRequestWithPath:parmDic:methodName:withBlock:"
+            landmarkName = "+arrayToDefaultSoapMessage:methodName:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -95,23 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "122"
             endingLineNumber = "122"
-            landmarkName = "+basePostRequestWithPath:parmDic:methodName:withBlock:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CLYC/CLYCHttpManager/CLYCCoreBizHttpRequest.m"
-            timestampString = "457464921.482413"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "+basePostRequestWithPath:parmDic:methodName:withBlock:"
+            landmarkName = "+getSoapMessageWithParamSender:methodName:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
