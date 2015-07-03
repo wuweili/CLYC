@@ -381,6 +381,7 @@
     
     NSDictionary *sendDic = @{@"loginId":@"ios",@"password":@"sj@ios",@"moblieType":@"2",@"cId":@"23456789"};
     
+    
     [CLYCCoreBizHttpRequest loginYBUserWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
         
     } paramDic:sendDic password:@"sj@ios" logonId:@"ios"];

@@ -30,7 +30,7 @@
         return @"";
     }
     GDataXMLElement* rootNode = [document rootElement];
-    NSString *searchStr=[NSString stringWithFormat:@"%@Result",methodName];
+    NSString *searchStr=[NSString stringWithFormat:@"ns2:%@Response",methodName];
     NSString *MsgResult=@"";
     NSArray *result=[rootNode children];
     while ([result count]>0) {

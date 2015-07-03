@@ -10,6 +10,8 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "CLYCHttpDefine.h"
 #import "SoapHelper.h"
+#import "SoapXmlParseHelper.h"
+#import "GTMBase64.h"
 
 
 static NSString * LogonId = @"";
@@ -17,6 +19,9 @@ static NSString * LogonId = @"";
 static NSString * Pwd = @"";
 
 static NSString * License = @"7c4887a7ff0b4f665b7b3c64264a27d7";
+
+
+
 
 #define Str_RespondErrorOrFailedDefaultInfo       NSLocalizedString(@"操作失败，请稍后重试", @"")
 
@@ -28,7 +33,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 +(void)basePostRequestWithPath:(NSString *)path parmDic:(NSDictionary *)paramDic methodName:(NSString *)methodName withBlock:(void (^)(NSString *, NSString *, id, NSError *))block
 {
-    
+
     NSString *soapMessage = [[self class] getSoapMessageWithParamSender:paramDic methodName:methodName];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -46,16 +51,29 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
          /**
              
           Printing description of response:
-          <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:doServiceResponse xmlns:ns2="http://service.skcl.com.cn/"><String>eyJzdGF0dXNDb2RlIjoiMTAwMDUiLCJkZXNjcmlwdGlvbiI6Iuivt+axguaVsOaNruWMheS9k+ea&#xD;
+          <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+          <ns2:doServiceResponse xmlns:ns2="http://service.skcl.com.cn/">
+          <String>eyJzdGF0dXNDb2RlIjoiMTAwMDUiLCJkZXNjcmlwdGlvbiI6Iuivt+axguaVsOaNruWMheS9k+ea&#xD;
           hOacieaViOaAp+mqjOivgemUmeivr++8gSIsImJvZHkiOnsiZXJyb3JDbGFzcyI6ImNuLmNvbS5z&#xD;
-          a2NsLmNvbW1vbi5leGNlcHRpb24uSW52YWxpZERhdGFFeGNlcHRpb24ifSwic2lnbiI6IiJ9</String></ns2:doServiceResponse></soap:Body></soap:Envelope>
+          a2NsLmNvbW1vbi5leGNlcHRpb24uSW52YWxpZERhdGFFeGNlcHRpb24ifSwic2lnbiI6IiJ9</String>
+          </ns2:doServiceResponse>
+          </soap:Body>
+          </soap:Envelope>
           
           **/
-         
-         
-         
+
          NSString *response = [[NSString alloc] initWithData:(NSData *)responseObject encoding:NSUTF8StringEncoding];
-         NSLog(@"%@, %@", operation, response);
+         
+         
+         NSString *resultStr =  [SoapXmlParseHelper SoapMessageResultXml:responseObject ServiceMethodName:@"doService"];
+         
+         NSData* decodeData = [GTMBase64 decodeString:resultStr];
+         
+         NSDictionary * resultDic = [NSJSONSerialization JSONObjectWithData:decodeData options:0 error:nil];
+         
+         DDLogInfo(@"%@, %@  %@", operation, response,resultDic);
+
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          
@@ -69,21 +87,47 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 +(NSString *)getUserCenterRequestSendDataWithParamSender:(id)paramSender
 {
-    NSString *resultStr = @"";
     
     NSString *sign = [[self class] getSignWithWithParamSender:paramSender];
     
     NSDictionary *secretDic = @{@"logonId":LogonId,@"pwd":Pwd};
-    
-    NSDictionary *sendDic = @{@"secret":secretDic,@"body":paramSender,@"sign":sign};
+  
     
     NSError *error = nil;
+  
+    NSString *secretJsonStr = [[NSString alloc]initWithData:[NSJSONSerialization dataWithJSONObject:secretDic options:(NSJSONWritingOptions)0 error:&error] encoding:NSUTF8StringEncoding];
     
-    NSData *paramDicToData = [NSJSONSerialization dataWithJSONObject:sendDic options:(NSJSONWritingOptions)0 error:&error];
     
-    resultStr = [paramDicToData base64EncodedStringWithOptions:0];
+    NSString *bodyJsonStr = @"";
     
-    return resultStr;
+    if ([paramSender isKindOfClass:[NSString class]])
+        
+    {
+        bodyJsonStr = paramSender;
+    }
+    else
+    {
+        bodyJsonStr = [[NSString alloc]initWithData:[NSJSONSerialization dataWithJSONObject:paramSender options:(NSJSONWritingOptions)0 error:&error] encoding:NSUTF8StringEncoding];
+    }
+    
+    NSString *signJsonStr = sign;
+    
+    if ([sign isKindOfClass:[NSString class]])
+    {
+        signJsonStr = sign;
+    }
+    else
+    {
+        signJsonStr = [[NSString alloc]initWithData:[NSJSONSerialization dataWithJSONObject:sign options:(NSJSONWritingOptions)0 error:&error] encoding:NSUTF8StringEncoding];
+    }
+ 
+    NSString *sendResultStr = [NSString stringWithFormat:@"{\"secret\":%@,\"body\":%@,\"sign\":\"%@\"}",secretJsonStr,bodyJsonStr,signJsonStr];
+
+    NSData *sendUnBase64Data = [sendResultStr dataUsingEncoding:NSUTF8StringEncoding];
+ 
+    NSString *tempResultStr  =   [[NSString alloc] initWithData:[GTMBase64 encodeData:sendUnBase64Data] encoding:NSUTF8StringEncoding];
+    
+    return tempResultStr;
 }
 
 +(NSString *)getSignWithWithParamSender:(id)paramSendObject
