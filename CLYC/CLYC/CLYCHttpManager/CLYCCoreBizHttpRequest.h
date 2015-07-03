@@ -14,7 +14,7 @@
 /**
  * 加密请求 post 不带附件
  */
-+(void)basePostRequestWithPath:(NSString *)path parmDic:(NSDictionary *)paramDic methodName:(NSString *)methodName withBlock:(void (^)( NSString *retCode, NSString *retMessage, id responseObject, NSError *error))block;
++(void)basePostRequestWithPath:(NSString *)path keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray methodName:(NSString *)methodName withBlock:(void (^)( NSString *retCode, NSString *retMessage, id responseObject, NSError *error))block;
 
 /**
  * 得到最终发送给服务器的字典
@@ -55,6 +55,6 @@
 /**
  * 登录
  */
-+(void)loginYBUserWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block paramDic:(NSDictionary *)paramDic password:(NSString *)password logonId:(NSString *)logonId;
++(void)loginYBUserWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray password:(NSString *)password logonId:(NSString *)logonId;
 
 @end

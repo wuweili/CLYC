@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
 #import "MJRefresh.h"
+#import "CLYCHomeViewController.h"
 
 
 
@@ -62,6 +63,8 @@
         [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEL_20,UITextAttributeFont,[UIColor whiteColor],UITextAttributeTextColor, nil]];
     }
     
+    [self setupLeftMenuButton];
+    
     
     [IMUnitsMethods drawTheLeftBarBtn:self btnTitle:STR_BACK];
     
@@ -74,6 +77,30 @@
     [self.view addGestureRecognizer:tap];
     
    
+    
+}
+
+-(void)setupLeftMenuButton
+{
+    if ([self isKindOfClass:[CLYCHomeViewController class]])
+    {
+        [IMUnitsMethods drawTheLeftBarBtn:self function:@selector(leftDrawerButtonPress:) btnTitle:nil ];
+//        [IMUnitsMethods drawTheRightBarBtn:self function:@selector(rightDrawerButtonPress:) btnTitle:nil bgImage:XC_rightNavButton_bg_image];
+        
+    }
+    else
+    {
+        [IMUnitsMethods drawTheLeftBarBtnWithNoTitle:self function:@selector(clickLeftNavMenu)];
+    }
+}
+
+-(void)leftDrawerButtonPress:(id)sender
+{
+    [HXAPPDELEGATE.backgroundViewController showLeft];
+}
+
+-(void)clickLeftNavMenu
+{
     
 }
 

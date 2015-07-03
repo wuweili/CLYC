@@ -21,23 +21,18 @@
 +(void)drawTheLeftBarBtn:(UIViewController *)control function:(SEL )funName  btnTitle:(NSString*)title
 {
 
-    if (CurrentSystemVersion >= 7.0)
-    {
-        [control.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, HEL_20,NSFontAttributeName,nil]];
-    }
-
     UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 41/2)];
     //modify by xishuaishuai
     backBtn.backgroundColor = [UIColor clearColor];
    
     [backBtn.titleLabel setFont:HEL_BOLD_16];
     //end by xishuaishuai
-    NSString *titleStr = [NSString stringWithFormat:@"  %@",title];
-    
-    [backBtn setTitle:titleStr forState:UIControlStateNormal];
-    
-    [backBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [backBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
+//    NSString *titleStr = [NSString stringWithFormat:@"  %@",title];
+//    
+//    [backBtn setTitle:titleStr forState:UIControlStateNormal];
+//    
+//    [backBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [backBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     
     if ([title isEqualToString:STR_BACK])
     {
@@ -49,6 +44,9 @@
     {
         backBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
+    
+    [backBtn setImage:FirstPageLeftMenu_bg forState:UIControlStateNormal];
+
 
     [backBtn addTarget:control action:funName forControlEvents:UIControlEventTouchUpInside];
     
@@ -107,7 +105,23 @@
     control.navigationItem.rightBarButtonItem = rightEditBtn;
 }
 
-
++(void)drawTheLeftBarBtnWithNoTitle:(UIViewController *)control function:(SEL )funName
+{
+    UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 15, 50/2)];
+    backBtn.backgroundColor = [UIColor clearColor];
+    
+    [backBtn.titleLabel setFont:HEL_BOLD_16];
+    
+    
+    [backBtn setImage:Left_bar_nav_image forState:UIControlStateNormal];
+    
+    [backBtn addTarget:control action:funName forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *backBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backBtn];
+    control.navigationItem.leftBarButtonItem = backBtnItem;
+    
+    [[self class]setViewControllerProperty:control];
+}
 
 #pragma mark -
 #pragma mark  获取当前用户文件目录（如没有则创建）

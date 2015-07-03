@@ -9,7 +9,6 @@
 #import "CLYCCoreBizHttpRequest.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "CLYCHttpDefine.h"
-#import "SoapHelper.h"
 #import "SoapXmlParseHelper.h"
 #import "GTMBase64.h"
 
@@ -31,10 +30,13 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 @implementation BaseHttpRequest
 
-+(void)basePostRequestWithPath:(NSString *)path parmDic:(NSDictionary *)paramDic methodName:(NSString *)methodName withBlock:(void (^)(NSString *, NSString *, id, NSError *))block
++(void)basePostRequestWithPath:(NSString *)path keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray methodName:(NSString *)methodName withBlock:(void (^)(NSString *, NSString *, id, NSError *))block
 {
 
-    NSString *soapMessage = [[self class] getSoapMessageWithParamSender:paramDic methodName:methodName];
+    NSString *sendParamStr = [[self class] getOrderJsonStrWithKeyArray:keyArray valueArray:valueArray];
+    
+    
+    NSString *soapMessage = [[self class] getSoapMessageWithParamSender:sendParamStr methodName:methodName];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString: path]];
@@ -72,13 +74,36 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
          
          NSDictionary * resultDic = [NSJSONSerialization JSONObjectWithData:decodeData options:0 error:nil];
          
+         NSString *statuscode = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"statusCode"]];
+         NSString *retmessage = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"description"]];
+         
+         NSString *retSign = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"sign"]];
+         if (![NSString isBlankString:retSign])
+         {
+             [HXUserModel shareInstance].sign = retSign;
+         }
+         
+         
+
+         id body = [resultDic valueForKeyPath:@"body"];
+
+         if (block)
+         {
+             block(statuscode,retmessage,body,nil);
+         }
+         
          DDLogInfo(@"%@, %@  %@", operation, response,resultDic);
 
          
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          
          NSString *response = [[NSString alloc] initWithData:(NSData *)[operation responseObject] encoding:NSUTF8StringEncoding];
-         NSLog(@"%@, %@", operation, error);(error);
+         DDLogInfo(@"%@, %@", operation, error);(error);
+         
+         if (block)
+         {
+             block(nil,nil,nil,error);
+         }
          
      }];
     
@@ -122,10 +147,14 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     }
  
     NSString *sendResultStr = [NSString stringWithFormat:@"{\"secret\":%@,\"body\":%@,\"sign\":\"%@\"}",secretJsonStr,bodyJsonStr,signJsonStr];
+    
+    DDLogInfo(@"发送的数据 ：%@",sendResultStr);
 
     NSData *sendUnBase64Data = [sendResultStr dataUsingEncoding:NSUTF8StringEncoding];
  
     NSString *tempResultStr  =   [[NSString alloc] initWithData:[GTMBase64 encodeData:sendUnBase64Data] encoding:NSUTF8StringEncoding];
+    
+    DDLogInfo(@"发送的数据经过base64后 ：%@",tempResultStr);
     
     return tempResultStr;
 }
@@ -214,6 +243,37 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 }
 
 
+/**
+ * 得到按加入顺序的JSON
+ */
++(NSString *)getOrderJsonStrWithKeyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    if (keyArray && valueArray && [keyArray count] == [valueArray count] && [keyArray count]>0)
+    {
+        NSString *jsonStr = [NSString stringWithFormat:@"{\"%@\":\"%@\"",keyArray[0],valueArray[0]] ;
+        
+        for (NSInteger i = 1; i< [keyArray count]; i++)
+        {
+            
+            jsonStr = [jsonStr stringByAppendingString:[NSString stringWithFormat:@",\"%@\":\"%@\"",keyArray[i],valueArray[i]]];
+            
+        }
+        
+        jsonStr = [jsonStr stringByAppendingString:@"}"];
+        
+        return jsonStr;
+    }
+    
+    else
+        return @"";
+}
+
+
+
+
+
+
+
 
 +(void)setLogonId:(NSString *)logonId
 {
@@ -251,7 +311,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 @implementation CLYCCoreBizHttpRequest
 
-+(void)loginYBUserWithBlock:(void (^)(NSString *, NSString *, NSError *))block paramDic:(NSDictionary *)paramDic password:(NSString *)password logonId:(NSString *)logonId
++(void)loginYBUserWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray password:(NSString *)password logonId:(NSString *)logonId
 {
 //    NSString *  path= [NSString stringWithFormat:@"%@%@",YB_HTTP_SERVER,@"UserLoginService"];
 //    http://localhost:8080/wsportal/doService?wsdl
@@ -262,14 +322,40 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     
     [BaseHttpRequest setPwd:password];
     
-    [BaseHttpRequest basePostRequestWithPath:path parmDic:paramDic methodName:@"UserLoginService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"UserLoginService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            [HXUserModel shareInstance].userId = [NSString stringWithoutNil:returnDic[@"userId"]];
+            
+            [HXUserModel shareInstance].loginId = [NSString stringWithoutNil:returnDic[@"loginId"]];
+            
+            [HXUserModel shareInstance].userName = [NSString stringWithoutNil:returnDic[@"userName"]];
+            
+            [HXUserModel shareInstance].sex = [NSString stringWithoutNil:returnDic[@"sex"]];
+            
+            [HXUserModel shareInstance].email = [NSString stringWithoutNil:returnDic[@"email"]];
+            
+            [HXUserModel shareInstance].telphone = [NSString stringWithoutNil:returnDic[@"telphone"]];
+            
+            [HXUserModel shareInstance].roleNo = [NSString stringWithoutNil:returnDic[@"roleNo"]];
+            
+            [HXUserModel shareInstance].deptId = [NSString stringWithoutNil:returnDic[@"deptId"]];
+            
+            [HXUserModel shareInstance].deptName = [NSString stringWithoutNil:returnDic[@"deptName"]];
+            
+        }
+        else
+        {
+            
+        }
+        
+        
         
     }];
-    
-    
-    
-    
-    
+   
 }
 
 

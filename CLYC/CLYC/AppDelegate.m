@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "MyKeyChainHelper.h"
 #import "HXRootViewViewController.h"
+#import "AFNetworkReachabilityManager.h"
+
 
 @interface AppDelegate ()
 
@@ -25,6 +27,8 @@
     
     [self.window makeKeyAndVisible];
     
+    [self initGlobalSettings];
+    
     if ([self isNeedLogin])
     {
         [self goToLoginView];
@@ -35,17 +39,7 @@
     return YES;
 }
 
-#pragma mark - 跳转到登陆界面
-- (void)goToLoginView
-{
-    
-    
-    HXRootViewViewController *loginMVC  = [[HXRootViewViewController alloc]initWithDirectLogin:NO];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:loginMVC];
-    self.window.rootViewController = navController;
-    
-    
-}
+
 
 
 /**
@@ -62,6 +56,47 @@
   
     
 }
+
+-(void)monitorNetWork
+{
+    [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus = AFNetworkReachabilityStatusReachableViaWiFi;
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusUnknown:
+            {
+                DDLogInfo(@"monitorNetWork 网络 AFNetworkReachabilityStatusUnknown");
+            }
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+            {
+                DDLogInfo(@"monitorNetWork 网络 AFNetworkReachabilityStatusNotReachable");
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            {
+                DDLogInfo(@"monitorNetWork 网络 AFNetworkReachabilityStatusReachableViaWWAN");
+                
+                
+            }
+                break;
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+            {
+                DDLogInfo(@"monitorNetWork 网络 AFNetworkReachabilityStatusReachableViaWiFi");
+                
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }];
+    
+}
+
 
 #pragma mark - 判断是否需要登陆
 - (BOOL)isNeedLogin
@@ -80,6 +115,61 @@
     [HXUserModel shareInstance].password=password;
     
     return NO;
+}
+
+#pragma mark - 跳转到登陆界面
+- (void)goToLoginView
+{
+    self.window.rootViewController = nil;
+    
+    if (!self.rootNavController)
+    {
+        HXRootViewViewController *loginMVC  = [[HXRootViewViewController alloc]initWithDirectLogin:NO];
+        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:loginMVC];
+        self.rootNavController = navController;
+        
+        self.window.rootViewController = self.rootNavController;
+        
+    }
+    else
+    {
+        if (![self.rootNavController.topViewController isKindOfClass:[HXRootViewViewController class]])
+        {
+            self.window.rootViewController = self.rootNavController;
+            
+            [self.rootNavController popToRootViewControllerAnimated:YES];
+            
+        }
+        else
+        {
+            self.window.rootViewController = self.rootNavController;
+        }
+    }
+    
+}
+
+#pragma mark - 跳转到主界面
+- (void)goToMainView
+{
+    if (!_backgroundViewController)
+    {
+        _backgroundViewController = [[HXBackgroundViewController alloc]init];
+        
+        
+    }
+    
+    self.window.rootViewController = _backgroundViewController;
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSArray *array = self.rootNavController.viewControllers;
+        NSMutableArray *resultArray = [NSMutableArray arrayWithCapacity:0];
+        
+        [resultArray addObject:[array firstObject]];
+        
+        [self.rootNavController setViewControllers:resultArray animated:NO];
+        
+    });
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

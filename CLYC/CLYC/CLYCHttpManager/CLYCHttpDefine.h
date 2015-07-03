@@ -72,4 +72,11 @@
 
 #define SOAP_ACTION   @"http://service.skcl.com.cn/doService"
 
+
+#define YB_HTTP_CODE_OK                        @"00000"
+
+
+
+
+
 #endif

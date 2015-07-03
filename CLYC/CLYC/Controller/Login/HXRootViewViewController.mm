@@ -17,6 +17,8 @@
 #import "SDCycleScrollView.h"
 #import "MBProgressHUD.h"
 
+#import "AppDelegate.h"
+
 
 @interface HXRootViewViewController ()<RadioButtonDelegate,SDCycleScrollViewDelegate>
 {
@@ -192,6 +194,7 @@
     forgetPwdButton.backgroundColor = [UIColor clearColor];
     [forgetPwdButton setTitle:@"忘记密码" forState:UIControlStateNormal];
     [forgetPwdButton setTitleColor:UIColorFromRGB(0x70cbeb) forState:UIControlStateNormal];
+    [forgetPwdButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     forgetPwdButton.titleLabel.font = HEL_15;
     [forgetPwdButton addTarget:self action:@selector(forgotPassword) forControlEvents:UIControlEventTouchUpInside];
     [_footView addSubview:forgetPwdButton];
@@ -381,13 +384,27 @@
     
     NSDictionary *sendDic = @{@"loginId":@"ios",@"password":@"sj@ios",@"moblieType":@"2",@"cId":@"23456789"};
     
+    NSArray *keyArray = @[@"loginId",@"password",@"moblieType",@"cId"];
+    
+    NSArray *valueArray = @[@"ios",@"sj@ios",@"2",@"23456789"];
+    
     
     [CLYCCoreBizHttpRequest loginYBUserWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
         
-    } paramDic:sendDic password:@"sj@ios" logonId:@"ios"];
+        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+        }
+        else
+        {
+            
+        }
+        
+        
+    } keyArray:keyArray valueArray:valueArray  password:@"sj@ios" logonId:@"ios"];
     
     
-    
+    [HXAPPDELEGATE goToMainView];
     
     
     

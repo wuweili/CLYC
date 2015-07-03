@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HXBackgroundViewController.h"
+
+#define HXAPPDELEGATE   ((AppDelegate *)[UIApplication sharedApplication].delegate)
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) UINavigationController *rootNavController;
+
+@property (strong, nonatomic) HXBackgroundViewController *backgroundViewController;
+
+
+- (void)goToMainView;
 
 
 @end

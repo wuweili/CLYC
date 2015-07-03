@@ -35,3 +35,12 @@
 #define ICON_LOGIN   IMAGE(@"hx_icon_register.png")
 
 #define MJ_ARROW_Image          IMAGE(@"mj_arrow.png")
+
+#define FirstPageLeftMenu_bg    IMAGE(@"FirstPageLeftMenu_bg.png")
+
+#define Left_bar_nav_image    IMAGE(@"left_bar_image.png")
+
+#define HOME_PAGE_BANNER_image    IMAGE(@"banner.png")
+
+
+

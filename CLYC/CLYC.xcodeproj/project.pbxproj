@@ -10,6 +10,18 @@
 		028D3D9F1B45949700AC7C7D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 028D3D9C1B45949700AC7C7D /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		028D3DA01B45949700AC7C7D /* SoapXmlParseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 028D3D9E1B45949700AC7C7D /* SoapXmlParseHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		028D3DA41B4594CE00AC7C7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 028D3DA31B4594CE00AC7C7D /* libxml2.dylib */; };
+		028FA1B81B470405007A2C8C /* HXBackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028FA1B71B470405007A2C8C /* HXBackgroundViewController.m */; };
+		028FA1BB1B470471007A2C8C /* BaseLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028FA1BA1B470471007A2C8C /* BaseLeftViewController.m */; };
+		028FA1BE1B47058A007A2C8C /* CLYCLeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028FA1BD1B47058A007A2C8C /* CLYCLeftViewController.m */; };
+		028FA1C11B47062A007A2C8C /* CLYCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 028FA1C01B47062A007A2C8C /* CLYCHomeViewController.m */; };
+		028FA1C31B47079A007A2C8C /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1C21B47079A007A2C8C /* back@3x.png */; };
+		028FA1C91B470ACE007A2C8C /* XCCenterFirstCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 028FA1C61B470ACE007A2C8C /* XCCenterFirstCollectionViewCell.m */; };
+		028FA1CA1B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 028FA1C81B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.m */; };
+		028FA1CF1B470E29007A2C8C /* FirstPageLeftMenu_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1CB1B470E29007A2C8C /* FirstPageLeftMenu_bg@2x.png */; };
+		028FA1D01B470E29007A2C8C /* FirstPageLeftMenu_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1CC1B470E29007A2C8C /* FirstPageLeftMenu_bg@3x.png */; };
+		028FA1D11B470E29007A2C8C /* left_bar_image@@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1CD1B470E29007A2C8C /* left_bar_image@@3x.png */; };
+		028FA1D21B470E29007A2C8C /* left_bar_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1CE1B470E29007A2C8C /* left_bar_image@2x.png */; };
+		028FA1D41B470FAB007A2C8C /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1D31B470FAB007A2C8C /* banner.png */; };
 		02B39A741B42E4BF007FDD26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A731B42E4BF007FDD26 /* AudioToolbox.framework */; };
 		02B39A761B42E4C7007FDD26 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A751B42E4C7007FDD26 /* AVFoundation.framework */; };
 		02B39A781B42E4D6007FDD26 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A771B42E4D6007FDD26 /* libicucore.dylib */; };
@@ -186,7 +198,6 @@
 		5AB02EDE1B3FE7AE0003B65F /* hxLogin_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB02EDA1B3FE7AE0003B65F /* hxLogin_unselected@2x.png */; };
 		5AB02EDF1B3FE7AE0003B65F /* hx_icon_register@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB02EDB1B3FE7AE0003B65F /* hx_icon_register@2x.png */; };
 		5AB2C6D81B437305005B42B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AB2C6D61B437305005B42B8 /* Main.storyboard */; };
-		5AB2C6DE1B43B27D005B42B8 /* SoapHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB2C6DD1B43B27D005B42B8 /* SoapHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +218,24 @@
 		028D3D9D1B45949700AC7C7D /* SoapXmlParseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoapXmlParseHelper.h; sourceTree = "<group>"; };
 		028D3D9E1B45949700AC7C7D /* SoapXmlParseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoapXmlParseHelper.m; sourceTree = "<group>"; };
 		028D3DA31B4594CE00AC7C7D /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		028FA1B61B470405007A2C8C /* HXBackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBackgroundViewController.h; sourceTree = "<group>"; };
+		028FA1B71B470405007A2C8C /* HXBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXBackgroundViewController.m; sourceTree = "<group>"; };
+		028FA1B91B470471007A2C8C /* BaseLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLeftViewController.h; sourceTree = "<group>"; };
+		028FA1BA1B470471007A2C8C /* BaseLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseLeftViewController.m; sourceTree = "<group>"; };
+		028FA1BC1B47058A007A2C8C /* CLYCLeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLYCLeftViewController.h; sourceTree = "<group>"; };
+		028FA1BD1B47058A007A2C8C /* CLYCLeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLYCLeftViewController.m; sourceTree = "<group>"; };
+		028FA1BF1B47062A007A2C8C /* CLYCHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLYCHomeViewController.h; sourceTree = "<group>"; };
+		028FA1C01B47062A007A2C8C /* CLYCHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLYCHomeViewController.m; sourceTree = "<group>"; };
+		028FA1C21B47079A007A2C8C /* back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@3x.png"; sourceTree = "<group>"; };
+		028FA1C51B470ACE007A2C8C /* XCCenterFirstCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCenterFirstCollectionViewCell.h; sourceTree = "<group>"; };
+		028FA1C61B470ACE007A2C8C /* XCCenterFirstCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCenterFirstCollectionViewCell.m; sourceTree = "<group>"; };
+		028FA1C71B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCCenterSecondCollectionViewCell.h; sourceTree = "<group>"; };
+		028FA1C81B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCCenterSecondCollectionViewCell.m; sourceTree = "<group>"; };
+		028FA1CB1B470E29007A2C8C /* FirstPageLeftMenu_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FirstPageLeftMenu_bg@2x.png"; sourceTree = "<group>"; };
+		028FA1CC1B470E29007A2C8C /* FirstPageLeftMenu_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FirstPageLeftMenu_bg@3x.png"; sourceTree = "<group>"; };
+		028FA1CD1B470E29007A2C8C /* left_bar_image@@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_bar_image@@3x.png"; sourceTree = "<group>"; };
+		028FA1CE1B470E29007A2C8C /* left_bar_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_bar_image@2x.png"; sourceTree = "<group>"; };
+		028FA1D31B470FAB007A2C8C /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
 		02B39A731B42E4BF007FDD26 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		02B39A751B42E4C7007FDD26 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		02B39A771B42E4D6007FDD26 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -546,8 +575,6 @@
 		5AB02EDA1B3FE7AE0003B65F /* hxLogin_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hxLogin_unselected@2x.png"; sourceTree = "<group>"; };
 		5AB02EDB1B3FE7AE0003B65F /* hx_icon_register@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hx_icon_register@2x.png"; sourceTree = "<group>"; };
 		5AB2C6D71B437305005B42B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5AB2C6DC1B43B27D005B42B8 /* SoapHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoapHelper.h; sourceTree = "<group>"; };
-		5AB2C6DD1B43B27D005B42B8 /* SoapHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoapHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -590,13 +617,22 @@
 			path = xmlParse;
 			sourceTree = "<group>";
 		};
+		028FA1C41B470ACE007A2C8C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				028FA1C51B470ACE007A2C8C /* XCCenterFirstCollectionViewCell.h */,
+				028FA1C61B470ACE007A2C8C /* XCCenterFirstCollectionViewCell.m */,
+				028FA1C71B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.h */,
+				028FA1C81B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		02B39A871B42EFCF007FDD26 /* CLYCHttpManager */ = {
 			isa = PBXGroup;
 			children = (
 				5A8BF6F21B46C15700C9573B /* GTMBase64 */,
 				028D3D981B45949700AC7C7D /* xmlParse */,
-				5AB2C6DC1B43B27D005B42B8 /* SoapHelper.h */,
-				5AB2C6DD1B43B27D005B42B8 /* SoapHelper.m */,
 				02B39A8C1B4309EB007FDD26 /* CLYCHttpDefine.h */,
 				02B39A881B42F014007FDD26 /* CLYCCoreBizHttpRequest.h */,
 				02B39A891B42F014007FDD26 /* CLYCCoreBizHttpRequest.m */,
@@ -685,7 +721,15 @@
 			children = (
 				5AB02EB21B3FD3D70003B65F /* HXBJHXBaseViewController.h */,
 				5AB02EB11B3FD3D70003B65F /* HXBJHXBaseViewController.mm */,
+				028FA1B61B470405007A2C8C /* HXBackgroundViewController.h */,
+				028FA1B71B470405007A2C8C /* HXBackgroundViewController.m */,
 				5AB02CAF1B3FD1AC0003B65F /* Login */,
+				028FA1B91B470471007A2C8C /* BaseLeftViewController.h */,
+				028FA1BA1B470471007A2C8C /* BaseLeftViewController.m */,
+				028FA1BC1B47058A007A2C8C /* CLYCLeftViewController.h */,
+				028FA1BD1B47058A007A2C8C /* CLYCLeftViewController.m */,
+				028FA1BF1B47062A007A2C8C /* CLYCHomeViewController.h */,
+				028FA1C01B47062A007A2C8C /* CLYCHomeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1407,6 +1451,7 @@
 		5AB02EA81B3FD3430003B65F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				028FA1C41B470ACE007A2C8C /* Home */,
 				5AB02EA91B3FD3430003B65F /* Login */,
 			);
 			path = View;
@@ -1446,6 +1491,12 @@
 		5AB02ECD1B3FDDE60003B65F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				028FA1D31B470FAB007A2C8C /* banner.png */,
+				028FA1CB1B470E29007A2C8C /* FirstPageLeftMenu_bg@2x.png */,
+				028FA1CC1B470E29007A2C8C /* FirstPageLeftMenu_bg@3x.png */,
+				028FA1CD1B470E29007A2C8C /* left_bar_image@@3x.png */,
+				028FA1CE1B470E29007A2C8C /* left_bar_image@2x.png */,
+				028FA1C21B47079A007A2C8C /* back@3x.png */,
 				5AB02ED81B3FE7AE0003B65F /* mj_arrow@2x.png */,
 				5AB02ED91B3FE7AE0003B65F /* hxLogin_selected@2x.png */,
 				5AB02EDA1B3FE7AE0003B65F /* hxLogin_unselected@2x.png */,
@@ -1557,8 +1608,12 @@
 			files = (
 				5AB02ED51B3FDEF50003B65F /* hx_icon_number@2x.png in Resources */,
 				5AB02EDF1B3FE7AE0003B65F /* hx_icon_register@2x.png in Resources */,
+				028FA1D01B470E29007A2C8C /* FirstPageLeftMenu_bg@3x.png in Resources */,
+				028FA1D11B470E29007A2C8C /* left_bar_image@@3x.png in Resources */,
 				5AB02EDC1B3FE7AE0003B65F /* mj_arrow@2x.png in Resources */,
+				028FA1C31B47079A007A2C8C /* back@3x.png in Resources */,
 				5A1BC8541B09E4D500A2A1DC /* LaunchScreen.xib in Resources */,
+				028FA1D41B470FAB007A2C8C /* banner.png in Resources */,
 				5AB02ED41B3FDEF50003B65F /* hx_icon_code@2x.png in Resources */,
 				5AB2C6D81B437305005B42B8 /* Main.storyboard in Resources */,
 				5AB02EDD1B3FE7AE0003B65F /* hxLogin_selected@2x.png in Resources */,
@@ -1575,6 +1630,8 @@
 				5AB02ED71B3FE2540003B65F /* HX_login_first@2x.png in Resources */,
 				5AB02E8F1B3FD2720003B65F /* CoreSDWebImage.bundle in Resources */,
 				5AB02E791B3FD2720003B65F /* PhotoBroswerVC.xib in Resources */,
+				028FA1D21B470E29007A2C8C /* left_bar_image@2x.png in Resources */,
+				028FA1CF1B470E29007A2C8C /* FirstPageLeftMenu_bg@2x.png in Resources */,
 				5A1BC8511B09E4D500A2A1DC /* Images.xcassets in Resources */,
 				5AB02ED01B3FDDE60003B65F /* hx_back_green@2x.png in Resources */,
 			);
@@ -1599,7 +1656,6 @@
 				5AB02E2E1B3FD2710003B65F /* DDFileLogger.m in Sources */,
 				5AB02E351B3FD2710003B65F /* DateFormate.m in Sources */,
 				5AB02E2A1B3FD2710003B65F /* UIRefreshControl+AFNetworking.m in Sources */,
-				5AB2C6DE1B43B27D005B42B8 /* SoapHelper.m in Sources */,
 				5AB02E941B3FD2720003B65F /* SDWebImageDecoder.m in Sources */,
 				5AB02E2B1B3FD2710003B65F /* UIWebView+AFNetworking.m in Sources */,
 				5AB02E681B3FD2720003B65F /* UITextField+HXExtentRange.m in Sources */,
@@ -1613,6 +1669,7 @@
 				5AB02E4D1B3FD2720003B65F /* UIScrollView+MJRefresh.m in Sources */,
 				5AB02E341B3FD2710003B65F /* Log.m in Sources */,
 				5AB02E781B3FD2720003B65F /* PhotoBroswerVC.m in Sources */,
+				028FA1BB1B470471007A2C8C /* BaseLeftViewController.m in Sources */,
 				5AB02E401B3FD2720003B65F /* MBProgressHUD.m in Sources */,
 				5AB02E2C1B3FD2710003B65F /* DDAbstractDatabaseLogger.m in Sources */,
 				5AB02E6C1B3FD2720003B65F /* PBConst.m in Sources */,
@@ -1621,9 +1678,11 @@
 				5AB02E7D1B3FD2720003B65F /* CALayer+Transition.m in Sources */,
 				028D3D9F1B45949700AC7C7D /* GDataXMLNode.m in Sources */,
 				5AB02E591B3FD2720003B65F /* SBJsonStreamParser.m in Sources */,
+				028FA1B81B470405007A2C8C /* HXBackgroundViewController.m in Sources */,
 				5AB02E991B3FD2720003B65F /* UIButton+WebCache.m in Sources */,
 				5AB02CC51B3FD2270003B65F /* NSData+SDDataCache.m in Sources */,
 				5AB02E2F1B3FD2710003B65F /* DDLog.m in Sources */,
+				028FA1C11B47062A007A2C8C /* CLYCHomeViewController.m in Sources */,
 				5AB02E7B1B3FD2720003B65F /* CoreArchive.m in Sources */,
 				5AB02E5D1B3FD2720003B65F /* SBJsonStreamWriter.m in Sources */,
 				5AB02E6A1B3FD2720003B65F /* XpaShowMemoryCount.m in Sources */,
@@ -1675,6 +1734,7 @@
 				5AB02E961B3FD2720003B65F /* SDWebImageDownloaderOperation.m in Sources */,
 				5AB02E761B3FD2720003B65F /* PhotoItemView.m in Sources */,
 				5AB02E5F1B3FD2720003B65F /* SBJsonStreamWriterState.m in Sources */,
+				028FA1BE1B47058A007A2C8C /* CLYCLeftViewController.m in Sources */,
 				5AB02E9B1B3FD2720003B65F /* UIImage+MultiFormat.m in Sources */,
 				5AB02E1B1B3FD2710003B65F /* AFHTTPRequestOperation.m in Sources */,
 				5AB02E9F1B3FD2720003B65F /* UIView+WebCacheOperation.m in Sources */,
@@ -1692,6 +1752,7 @@
 				5AB02E3B1B3FD2720003B65F /* FMResultSet.m in Sources */,
 				5AB02E6D1B3FD2720003B65F /* PhotoBroswerLayout.m in Sources */,
 				5AB02E5E1B3FD2720003B65F /* SBJsonStreamWriterAccumulator.m in Sources */,
+				028FA1C91B470ACE007A2C8C /* XCCenterFirstCollectionViewCell.m in Sources */,
 				5AB02E841B3FD2720003B65F /* UIDevice+Extend.m in Sources */,
 				5AB02E801B3FD2720003B65F /* NSObject+Extend.m in Sources */,
 				5AB02CB21B3FD1AC0003B65F /* HXRootViewViewController.mm in Sources */,
@@ -1725,6 +1786,7 @@
 				5AB02CCC1B3FD2270003B65F /* UIView+SDExtension.m in Sources */,
 				5AB02E7F1B3FD2720003B65F /* NSDate+Extend.m in Sources */,
 				5AB02E751B3FD2720003B65F /* PhotoImageView.m in Sources */,
+				028FA1CA1B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.m in Sources */,
 				5AB02E261B3FD2710003B65F /* UIAlertView+AFNetworking.m in Sources */,
 				5AB02E881B3FD2720003B65F /* UIImage+Extend.m in Sources */,
 				5AB02CCB1B3FD2270003B65F /* SDCycleScrollView.m in Sources */,

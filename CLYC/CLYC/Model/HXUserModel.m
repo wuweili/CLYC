@@ -62,6 +62,8 @@ static HXUserModel *instance = nil;
         self.deptName = @"";
         
         self.password = @"";
+        
+        self.sign = @"";
    
     }
     return self;

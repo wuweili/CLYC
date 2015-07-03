@@ -10,6 +10,7 @@
 
 @interface HXBJHXBaseViewController : UIViewController
 
+-(void)clickLeftNavMenu;
 
 #pragma mark - MBHUDProgress and NSTime
 -(void)initMBHudWithTitle:(NSString *)title;

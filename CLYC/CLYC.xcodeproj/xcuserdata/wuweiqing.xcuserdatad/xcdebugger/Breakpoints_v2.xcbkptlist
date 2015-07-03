@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CLYC/CLYCHttpManager/CLYCCoreBizHttpRequest.m"
-            timestampString = "457451828.839943"
+            timestampString = "457635427.164922"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "+basePostRequestWithPath:parmDic:methodName:withBlock:"
-            landmarkType = "5">
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "@implementation BaseHttpRequest"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CLYC/CLYCHttpManager/CLYCCoreBizHttpRequest.m"
-            timestampString = "457464921.482413"
+            timestampString = "457637201.802138"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "+getSoapMessageWithParamSender:methodName:"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "+basePostRequestWithPath:keyArray:valueArray:methodName:withBlock:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

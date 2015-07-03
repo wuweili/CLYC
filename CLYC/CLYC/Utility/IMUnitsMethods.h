@@ -28,6 +28,8 @@
 +(void)drawTheRightBarBtn:(UIViewController *)control function:(SEL )funName  btnTitle:(NSString*)title bgImage:(UIImage*)image;
 
 
++(void)drawTheLeftBarBtnWithNoTitle:(UIViewController *)control function:(SEL )funName;
+
 // 获取当前用户文件目录（如没有则通过合抱用户id创建）
 + (NSString *)userFilePath;
 
