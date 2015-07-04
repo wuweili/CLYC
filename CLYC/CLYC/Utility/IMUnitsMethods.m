@@ -21,7 +21,7 @@
 +(void)drawTheLeftBarBtn:(UIViewController *)control function:(SEL )funName  btnTitle:(NSString*)title
 {
 
-    UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 41/2)];
+    UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 41/2)];
     //modify by xishuaishuai
     backBtn.backgroundColor = [UIColor clearColor];
    

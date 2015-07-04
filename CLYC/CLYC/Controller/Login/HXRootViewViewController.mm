@@ -382,36 +382,6 @@
 -(void)clickLoginButton
 {
     
-    NSDictionary *sendDic = @{@"loginId":@"ios",@"password":@"sj@ios",@"moblieType":@"2",@"cId":@"23456789"};
-    
-    NSArray *keyArray = @[@"loginId",@"password",@"moblieType",@"cId"];
-    
-    NSArray *valueArray = @[@"ios",@"sj@ios",@"2",@"23456789"];
-    
-    
-    [CLYCCoreBizHttpRequest loginYBUserWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
-        
-        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-        {
-            
-        }
-        else
-        {
-            
-        }
-        
-        
-    } keyArray:keyArray valueArray:valueArray  password:@"sj@ios" logonId:@"ios"];
-    
-    
-    [HXAPPDELEGATE goToMainView];
-    
-    
-    
-    
-    
-    
-    
     _isDirectLogin = NO;
     
     
@@ -460,8 +430,31 @@
 
 - (void)loginWithUserName:(NSString *)userName password:(NSString *)password
 {
+    [self initMBHudWithTitle:nil];
+    
+    NSString *pwdMd5 = [NSString getMD5_16_Str:password];
+    
+    NSArray *keyArray = @[@"loginId",@"password",@"moblieType",@"cId"];
+    
+    NSArray *valueArray = @[userName,pwdMd5,@"2",@"23456789"];
     
     
+    [CLYCCoreBizHttpRequest loginYBUserWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+        
+        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
+            
+            [HXAPPDELEGATE goToMainView];
+
+        }
+        else
+        {
+            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
+        }
+        
+        
+    } keyArray:keyArray valueArray:valueArray];
 
     
 }

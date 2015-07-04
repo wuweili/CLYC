@@ -55,7 +55,7 @@
     
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    imageView.image = [UIImage imageNamed:@"back"];
+    imageView.image = [UIImage imageNamed:@"backGroundImage.png"];
     
     [self.view addSubview:imageView];
     

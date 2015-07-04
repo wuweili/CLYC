@@ -55,6 +55,8 @@
 
 #define USER_ID    ([HXUserModel shareInstance].userId)
 
+#define IS_DefaultUser    ([HXUserModel shareInstance].isDefaultUser)
+
 
 
 #define KEY_USERNAME  @"com.clyc.username"
@@ -113,6 +115,10 @@
 #define HEL_22              [UIFont fontWithName:@"Helvetica" size:22]
 #define HEL_26              [UIFont fontWithName:@"Helvetica" size:26]
 #define HEL_28              [UIFont fontWithName:@"Helvetica" size:28]
+#define HEL_34              [UIFont fontWithName:@"Helvetica" size:34]
+
+
+
 
 #define HEL_BOLD_10         [UIFont fontWithName:@"Helvetica-Bold" size:10]
 #define HEL_BOLD_11         [UIFont fontWithName:@"Helvetica-Bold" size:11]

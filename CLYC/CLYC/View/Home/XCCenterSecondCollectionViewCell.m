@@ -18,9 +18,8 @@
     {
         self.backgroundColor = [UIColor clearColor];
 
-        self.cellImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 70)];
+        self.cellImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetWidth(self.frame))];
         self.cellImageView.backgroundColor = [UIColor clearColor];
-        self.cellImageView.layer.cornerRadius = 4;
         [self addSubview:self.cellImageView];
 
         

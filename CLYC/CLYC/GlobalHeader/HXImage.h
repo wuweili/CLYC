@@ -42,5 +42,79 @@
 
 #define HOME_PAGE_BANNER_image    IMAGE(@"banner.png")
 
+//约车人
+//约车申请
+#define FIRST_HOME_BOOK_CAR_image    IMAGE(@"first_home_book_car.png")
+//约车记录
+#define FIRST_HOME_HISTORY_LIST_image    IMAGE(@"First_history_list.png")
+//里程确认
+#define FIRST_HOME_MILE_CONFIRM_image    IMAGE(@"First_home_mile_confirm.png")
+
+//里程确认
+#define FIRST_HOME_COMPLAIN_image    IMAGE(@"First_home_complain.png")
+
+
+
+//司机
+//约车单管理
+#define FIRST_HOME_ORDER_MANAGER_image    IMAGE(@"First_home_order_manager.png")
+
+
+//First_home_comment@2x  评价记录
+
+#define FIRST_HOME_COMMENT_image    IMAGE(@"First_home_comment.png")
+
+
+//个人信息
+
+#define FIRST_HOME_PERSONAL_INFO_image    IMAGE(@"First_home_personal_info.png")
+
+
+//设置
+#define FIRST_HOME_SETTING_image    IMAGE(@"home_setting.png")
+
+
+#define FIRST_HOME_NVOD_1_image    IMAGE(@"add_img1.png")
+
+//首页
+#define LEFT_menu_home_image    IMAGE(@"menu_home.png")
+
+//menu_mile_confirm  费用查询
+#define LEFT_menu_mile_confirm_image    IMAGE(@"menu_mile_confirm.png")
+
+//版本更新 menu_update
+#define LEFT_menu_update_image    IMAGE(@"menu_update.png")
+
+//个人信息menu_user_info
+#define LEFT_menu_user_info_image    IMAGE(@"menu_user_info.png")
+
+
+//车辆信息menu_history
+
+#define LEFT_menu_history_image    IMAGE(@"menu_history.png")
+
+//车辆轨迹menu_travel_way
+#define LEFT_menu_travel_way_image    IMAGE(@"menu_travel_way.png")
+
+
+#define LEFT_USER_DEFAULT_image    IMAGE(@"HXPatientDefaultHeadImage.png")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

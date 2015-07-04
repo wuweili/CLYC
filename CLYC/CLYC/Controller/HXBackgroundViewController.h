@@ -10,6 +10,8 @@
 
 @interface HXBackgroundViewController : UIViewController
 
+-(void)showHome;
+
 -(void)showLeft;
 
 

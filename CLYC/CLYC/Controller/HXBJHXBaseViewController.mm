@@ -66,7 +66,6 @@
     [self setupLeftMenuButton];
     
     
-    [IMUnitsMethods drawTheLeftBarBtn:self btnTitle:STR_BACK];
     
     
     self.navigationController.navigationBar.translucent = NO;
@@ -94,9 +93,28 @@
     }
 }
 
+static  BOOL hideLeft  = NO;
+
 -(void)leftDrawerButtonPress:(id)sender
 {
+    
     [HXAPPDELEGATE.backgroundViewController showLeft];
+
+    return;
+    
+//    if (hideLeft)
+//    {
+//        [HXAPPDELEGATE.backgroundViewController showHome];
+//
+//    }
+//    else
+//    {
+//        [HXAPPDELEGATE.backgroundViewController showLeft];
+//    }
+//    
+//    hideLeft = !hideLeft;
+
+    
 }
 
 -(void)clickLeftNavMenu

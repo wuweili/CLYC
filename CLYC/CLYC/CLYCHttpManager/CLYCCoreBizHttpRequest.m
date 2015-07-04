@@ -13,9 +13,9 @@
 #import "GTMBase64.h"
 
 
-static NSString * LogonId = @"";
+static NSString * LogonId = @"ios";
 
-static NSString * Pwd = @"";
+static NSString * Pwd = @"sj@ios";
 
 static NSString * License = @"7c4887a7ff0b4f665b7b3c64264a27d7";
 
@@ -275,32 +275,32 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 
 
-+(void)setLogonId:(NSString *)logonId
-{
-    if (![NSString isBlankString:logonId])
-    {
-        LogonId = logonId;
-    }
-}
-
-+(NSString *)getLogonId
-{
-    return LogonId;
-}
-
-
-+(void)setPwd:(NSString *)pwd
-{
-    if (![NSString isBlankString:pwd])
-    {
-        Pwd = pwd;
-    }
-}
-
-+(NSString *)getPwd
-{
-    return Pwd;
-}
+//+(void)setLogonId:(NSString *)logonId
+//{
+//    if (![NSString isBlankString:logonId])
+//    {
+//        LogonId = logonId;
+//    }
+//}
+//
+//+(NSString *)getLogonId
+//{
+//    return LogonId;
+//}
+//
+//
+//+(void)setPwd:(NSString *)pwd
+//{
+//    if (![NSString isBlankString:pwd])
+//    {
+//        Pwd = pwd;
+//    }
+//}
+//
+//+(NSString *)getPwd
+//{
+//    return Pwd;
+//}
 
 
 
@@ -311,16 +311,14 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 @implementation CLYCCoreBizHttpRequest
 
-+(void)loginYBUserWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray password:(NSString *)password logonId:(NSString *)logonId
++(void)loginYBUserWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
 {
 //    NSString *  path= [NSString stringWithFormat:@"%@%@",YB_HTTP_SERVER,@"UserLoginService"];
 //    http://localhost:8080/wsportal/doService?wsdl
     
     NSString *  path= YB_HTTP_SERVER;
     
-    [BaseHttpRequest setLogonId:logonId];
     
-    [BaseHttpRequest setPwd:password];
     
     [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"UserLoginService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
         
@@ -346,16 +344,64 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
             
             [HXUserModel shareInstance].deptName = [NSString stringWithoutNil:returnDic[@"deptName"]];
             
+            if ([[HXUserModel shareInstance].roleNo isEqualToString:@"1"])
+            {
+                IS_DefaultUser = YES;
+            }
+            else
+            {
+                IS_DefaultUser = NO;
+            }
+            
+            
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
         }
         else
         {
-            
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
         }
         
         
         
     }];
    
+}
+
++(void)selectCarInfoListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarQueryPageListService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+          
+            
+            
+            
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray arrayode,retMessage,error);
+            }
+        }
+        
+        
+        
+    }];
+    
+    
+    
 }
 
 

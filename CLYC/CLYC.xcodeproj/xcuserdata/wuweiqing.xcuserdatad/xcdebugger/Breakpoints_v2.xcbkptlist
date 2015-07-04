@@ -9,22 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CLYC/CLYCHttpManager/CLYCCoreBizHttpRequest.m"
-            timestampString = "457635427.164922"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "@implementation BaseHttpRequest"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CLYC/CLYCHttpManager/SoapHelper.m"
             timestampString = "457457715.197922"
             startingColumnNumber = "9223372036854775807"
@@ -64,6 +48,22 @@
             startingLineNumber = "100"
             endingLineNumber = "100"
             landmarkName = "+basePostRequestWithPath:keyArray:valueArray:methodName:withBlock:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CLYC/Controller/DefaultUser/ApplyCarViewController.m"
+            timestampString = "457725427.281693"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
+            landmarkName = "-endTimeDateChanged"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

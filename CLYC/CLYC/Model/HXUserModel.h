@@ -40,7 +40,7 @@
  */
 @property(nonatomic,strong)NSString *telphone;
 /**
- * 角色
+ * 角色 1 用车人  2  司机
  */
 @property(nonatomic,strong)NSString *roleNo;
 
@@ -57,6 +57,8 @@
 @property(nonatomic,strong)NSString *password;
 
 @property(nonatomic,strong)NSString *sign;
+
+@property(nonatomic,assign)BOOL isDefaultUser;
 
 
 

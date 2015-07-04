@@ -26,23 +26,23 @@
  * 设置加密密钥的值
  */
 
-+(void)setLogonId:(NSString *)logonId;
-
-/**
- * 获取加密密钥的值
- */
-+(NSString *)getLogonId;
-
-/**
- * 设置加密密钥的值
- */
-
-+(void)setPwd:(NSString *)pwd;
-
-/**
- * 获取加密密钥的值
- */
-+(NSString *)getPwd;
+//+(void)setLogonId:(NSString *)logonId;
+//
+///**
+// * 获取加密密钥的值
+// */
+//+(NSString *)getLogonId;
+//
+///**
+// * 设置加密密钥的值
+// */
+//
+//+(void)setPwd:(NSString *)pwd;
+//
+///**
+// * 获取加密密钥的值
+// */
+//+(NSString *)getPwd;
 
 
 @end
@@ -55,6 +55,11 @@
 /**
  * 登录
  */
-+(void)loginYBUserWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray password:(NSString *)password logonId:(NSString *)logonId;
++(void)loginYBUserWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 所有车辆信息查询接口
+ */
++(void)selectCarInfoListWithBlock:(void (^)(NSMutableArray *ListArry,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
 
 @end

@@ -27,6 +27,14 @@
     
     [self.window makeKeyAndVisible];
     
+    
+    
+    
+    
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    
     [self initGlobalSettings];
     
     if ([self isNeedLogin])
@@ -151,6 +159,45 @@
 #pragma mark - 跳转到主界面
 - (void)goToMainView
 {
+    if ([[HXUserModel shareInstance].roleNo isEqualToString:@"1"])
+    {
+        if(CurrentSystemVersion >= 7.0)
+        {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        }
+        else
+        {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
+        }
+        
+        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x4fc1e9)];
+        
+        if (CurrentSystemVersion>=8.0)
+        {
+            [UINavigationBar appearance].translucent = NO;
+        }
+    }
+    else
+    {
+        if(CurrentSystemVersion >= 7.0)
+        {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+        }
+        else
+        {
+            [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
+        }
+        
+        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x69d25c)];
+        
+        if (CurrentSystemVersion>=8.0)
+        {
+            [UINavigationBar appearance].translucent = NO;
+        }
+    }
+    
+    
+    
     if (!_backgroundViewController)
     {
         _backgroundViewController = [[HXBackgroundViewController alloc]init];
