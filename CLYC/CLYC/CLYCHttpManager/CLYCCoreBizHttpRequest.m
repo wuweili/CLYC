@@ -374,7 +374,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
    
 }
 
-+(void)selectCarInfoListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
++(void)selectCarInfoListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *,NSString *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
 {
     NSString *  path= YB_HTTP_SERVER;
 
@@ -383,8 +383,56 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
         if ([retCode isEqualToString:YB_HTTP_CODE_OK])
         {
           
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
             
             
+            NSArray *carListArray = [returnDic objectForKey:@"carList"];
+            
+            NSString *totalNum = [NSString stringWithoutNil:returnDic[@"totalNum"]];
+            
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in carListArray)
+                {
+                    
+                    SelectCarInfoModel *model = [[SelectCarInfoModel alloc]init];
+                    
+                    model.carCode = [NSString stringWithoutNil:dic[@"carCode"]];
+                    
+                    model.carId = [NSString stringWithoutNil:dic[@"carId"]];
+                    
+                    model.carModel = [NSString stringWithoutNil:dic[@"carModel"]];
+                    
+                    model.carModelId = [NSString stringWithoutNil:dic[@"carModelId"]];
+                    
+                    model.carType = [NSString stringWithoutNil:dic[@"carType"]];
+                    
+                    model.driver = [NSString stringWithoutNil:dic[@"driver"]];
+                    
+                    model.driverId = [NSString stringWithoutNil:dic[@"driverId"]];
+                    
+                    model.driverTel = [NSString stringWithoutNil:dic[@"driverTel"]];
+                    
+                    model.price = [NSString stringWithoutNil:dic[@"price"]];
+                    
+                    [mutabArray addObject:model];
+                    
+                    
+                    
+                }
+            }
+            
+            
+            
+            
+            
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error,totalNum);
+            }
+            
+  
             
             
         }
@@ -392,7 +440,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
         {
             if (block)
             {
-                block([NSMutableArray arrayode,retMessage,error);
+                block([NSMutableArray array],retCode,retMessage,error,nil);
             }
         }
         

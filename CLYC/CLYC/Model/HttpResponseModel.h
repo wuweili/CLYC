@@ -52,7 +52,7 @@
 /**
  * 车辆类型  1 内部车辆  2 外部车辆
  */
-@property(nonatomic,strong)NSString *catType;
+@property(nonatomic,strong)NSString *carType;
 
 /**
  * 单价

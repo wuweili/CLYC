@@ -60,6 +60,6 @@
 /**
  * 所有车辆信息查询接口
  */
-+(void)selectCarInfoListWithBlock:(void (^)(NSMutableArray *ListArry,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
++(void)selectCarInfoListWithBlock:(void (^)(NSMutableArray *ListArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
 
 @end

@@ -11,3 +11,10 @@
 @implementation HttpResponseModel
 
 @end
+
+
+@implementation SelectCarInfoModel
+
+
+
+@end

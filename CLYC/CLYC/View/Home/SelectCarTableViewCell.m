@@ -25,8 +25,8 @@
         
         [self.contentView addSubview:_headImageView];
         
-        self.carCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_headImageView.frame), 5, 100, 20)];
-        self.carCodeLabel.font = HEL_10;
+        self.carCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_headImageView.frame)+5, 5, 120, 20)];
+        self.carCodeLabel.font = HEL_12;
         
         self.carCodeLabel.textColor = [UIColor blackColor];
         
@@ -37,10 +37,10 @@
         [self.contentView addSubview:self.carCodeLabel];
         
         
-        self.priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carCodeLabel.frame)+10, 5, 100, 20)];
+        self.priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carCodeLabel.frame)+10, 5, 120, 20)];
         
         
-        self.priceLabel.font = HEL_10;
+        self.priceLabel.font = HEL_12;
         
         self.priceLabel.textColor = [UIColor blackColor];
         
@@ -51,9 +51,9 @@
         [self.contentView addSubview:self.priceLabel];
         
         
-        self.driverLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_headImageView.frame), CGRectGetMaxY(self.carCodeLabel.frame), 100, 20)];
+        self.driverLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_headImageView.frame)+5, CGRectGetMaxY(self.carCodeLabel.frame), 120, 20)];
         
-        self.driverLabel.font = HEL_10;
+        self.driverLabel.font = HEL_12;
         
         self.driverLabel.textColor = [UIColor blackColor];
         
@@ -63,9 +63,9 @@
         
         [self.contentView addSubview:self.driverLabel];
         
-        self.driverTelLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.driverLabel.frame), CGRectGetMaxY(self.carCodeLabel.frame), 100, 20)];
+        self.driverTelLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.driverLabel.frame)+10, CGRectGetMaxY(self.carCodeLabel.frame), 120, 20)];
         
-        self.driverTelLabel.font = HEL_10;
+        self.driverTelLabel.font = HEL_12;
         
         self.driverTelLabel.textColor = [UIColor blackColor];
         
@@ -75,11 +75,7 @@
         
         [self.contentView addSubview:self.driverTelLabel];
         
-        
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(18, 49.5, kMainScreenWidth -18, 0.5)];
-        lineView.backgroundColor = UIColorFromRGB(0x709981);
-        
-        [self.contentView addSubview:lineView];
+      
         
         
         
@@ -94,14 +90,7 @@
 {
     _headImageView.image = [UIImage imageNamed:@"car_temp.png"];
     
-    if ([model.catType isEqualToString:@"2"])
-    {
-        self.carCodeLabel.text = [NSString stringWithFormat:@"车牌：%@(外)",model.carCode];
-    }
-    else
-    {
-        self.carCodeLabel.text = [NSString stringWithFormat:@"车牌：%@",model.carCode];
-    }
+    self.carCodeLabel.text = [NSString stringWithFormat:@"车牌：%@",model.carCode];
     
     self.priceLabel.text = [NSString stringWithFormat:@"单价：%@元/公里",model.price];
     
@@ -112,7 +101,21 @@
     
 }
 
-
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+    CGContextFillRect(context, rect);
+   
+    //上分割线，
+    //    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
+    //    CGContextStrokeRect(context, CGRectMake(space_to_left, -1, rect.size.width -space_to_left, 1));
+    
+    //下分割线
+    CGContextSetStrokeColorWithColor(context, UIColorFromRGB(0x709981).CGColor);
+    CGContextStrokeRect(context, CGRectMake(0, rect.size.height, rect.size.width, 1));
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

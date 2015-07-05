@@ -37,6 +37,10 @@
     
     NSMutableArray *_dataArray;
     
+    NSString *_pageNum;
+    
+    UIView *_canSelectedView;
+    
     
 }
 
@@ -53,6 +57,8 @@
     [self initData];
     
     [self initTableView];
+    
+    [self obtainDefaultData];
     
 }
 
@@ -74,11 +80,15 @@
     
     
     
+    
+    
 }
 
 -(void)initData
 {
     _dataArray = [NSMutableArray arrayWithCapacity:0];
+    
+    _pageNum = @"0";
 }
 
 -(void)initTableView
@@ -96,7 +106,7 @@
 -(void)initHeadView
 {
     _headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 110)];
-    _headView.backgroundColor = [UIColor yellowColor];
+    _headView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:_headView];
     
@@ -142,7 +152,7 @@
     startTimeLabel.font = HEL_14;
     startTimeLabel.textColor = [UIColor blackColor];
     startTimeLabel.textAlignment = NSTextAlignmentRight;
-    startTimeLabel.backgroundColor = [UIColor redColor];
+    startTimeLabel.backgroundColor = [UIColor clearColor];
     startTimeLabel.text = @"开始时间：";
     [_headView addSubview:startTimeLabel];
     
@@ -196,7 +206,7 @@
     endTimeLabel.font = HEL_14;
     endTimeLabel.textColor = [UIColor blackColor];
     endTimeLabel.textAlignment = NSTextAlignmentRight;
-    endTimeLabel.backgroundColor = [UIColor redColor];
+    endTimeLabel.backgroundColor = [UIColor clearColor];
     endTimeLabel.text = @"结束时间：";
     [_headView addSubview:endTimeLabel];
     
@@ -245,7 +255,7 @@
     _carNumberLabel.font = HEL_14;
     _carNumberLabel.textColor = [UIColor blackColor];
     _carNumberLabel.textAlignment = NSTextAlignmentRight;
-    _carNumberLabel.backgroundColor = [UIColor redColor];
+    _carNumberLabel.backgroundColor = [UIColor clearColor];
     _carNumberLabel.text = @"车辆号：";
     _carNumberLabel.hidden = !expandMoreSearchCondition;
     [_headView addSubview:_carNumberLabel];
@@ -269,7 +279,7 @@
     _carTypeLabel.font = HEL_14;
     _carTypeLabel.textColor = [UIColor blackColor];
     _carTypeLabel.textAlignment = NSTextAlignmentRight;
-    _carTypeLabel.backgroundColor = [UIColor redColor];
+    _carTypeLabel.backgroundColor = [UIColor clearColor];
     _carTypeLabel.text = @"车辆类型：";
     _carTypeLabel.hidden = !expandMoreSearchCondition;
     [_headView addSubview:_carTypeLabel];
@@ -294,12 +304,12 @@
 
 -(void)initStartSearchView
 {
-    _startSearchBackGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_headView.frame), kMainScreenWidth, 30)];
+    _startSearchBackGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_headView.frame), kMainScreenWidth, 35)];
     
     _startSearchBackGroundView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_startSearchBackGroundView];
     
-    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, _startSearchBackGroundView.frame.size.width-20, 32)];
+    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 0, _startSearchBackGroundView.frame.size.width-20, 30)];
     [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search.png"] forState:UIControlStateNormal];
     
     [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search_select.png"] forState:UIControlStateHighlighted];
@@ -315,6 +325,66 @@
 }
 
 
+
+
+
+
+-(void)obtainDefaultData
+{
+    //得到当前选中的时间
+    NSDate *currDate=[NSDate date];
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    NSString *str=[dateFormatter stringFromDate:currDate ];
+    
+    NSArray *keyArray = @[@"queryCarCode",@"queryCarModelId",@"queryBeginTime",@"queryEndTime",@"pageSize",@"pageNum"];
+
+    
+    NSArray *valueArray = @[@"",@"",str,str,@"20",_pageNum];
+    
+    [_dataArray removeAllObjects];
+    
+    [self searchCarWithKeyArray:keyArray valueArray:valueArray];
+    
+    
+    
+}
+
+
+-(void)searchCarWithKeyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    
+    [self initMBHudWithTitle:nil];
+    
+    [CLYCCoreBizHttpRequest selectCarInfoListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error,NSString *totalNum) {
+        
+        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
+            
+            [_dataArray addObjectsFromArray:ListArry];
+            
+            
+            
+            
+            [_tableView reloadData];
+            
+            
+        }
+        else
+        {
+            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
+        }
+        
+        
+        
+    } keyArray:keyArray valueArray:valueArray];
+    
+    
+}
+
+
 #pragma mark - 点击更多
 
 -(void)clickMoreSearchConditions
@@ -323,7 +393,7 @@
     
     if (expandMoreSearchCondition)
     {
-        _headView.frame = CGRectMake(0, 0, kMainScreenWidth, 190);
+        _headView.frame = CGRectMake(0, 0, kMainScreenWidth, 180);
     }
     else
     {
@@ -333,6 +403,8 @@
  
     _startSearchBackGroundView.frame =CGRectMake(0, CGRectGetMaxY(_headView.frame), kMainScreenWidth, 32);
     
+    _tableView.frame=CGRectMake(0,CGRectGetMaxY(_startSearchBackGroundView.frame),kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight);
+    
     _carNumberField.hidden = !expandMoreSearchCondition;
     
     _carTypeField.hidden = !expandMoreSearchCondition;
@@ -340,6 +412,9 @@
     _carNumberLabel.hidden = !expandMoreSearchCondition;
     
     _carTypeLabel.hidden = !expandMoreSearchCondition;
+    
+    
+    
 
     
 }
@@ -427,8 +502,79 @@
 
 -(void)clickStartSearchButton
 {
-    NSArray *keyArray = @[@"queryCarCode",@"queryCarModelId",@"queryCarModelId",@"queryEndTime",@"pageSize",@"pageNum"];
     
+    if ([NSString isBlankString:_startTimeField.text])
+    {
+        
+        [self displaySomeInfoWithInfo:@"请输入开始时间" finsh:nil];
+        
+        return;
+        
+    }
+    
+    if ([NSString isBlankString:_endTimeField.text])
+    {
+        
+        [self displaySomeInfoWithInfo:@"请输入结束时间" finsh:nil];
+        
+        return;
+        
+    }
+    
+    
+    
+    
+    NSArray *keyArray = @[@"queryCarCode",@"queryCarModelId",@"queryBeginTime",@"queryEndTime",@"pageSize",@"pageNum"];
+    
+    NSString *carNumber = _carNumberField.text;
+    
+    if ([NSString isBlankString:_carNumberField.text])
+    {
+        carNumber = @"";
+    }
+    
+    NSString *carType = _carTypeField.text;
+    
+    if ([NSString isBlankString:_carTypeField.text])
+    {
+        carType = @"";
+    }
+    
+    
+    [_dataArray removeAllObjects];
+    
+    NSArray *valueArray = @[carNumber,carType,_startTimeField.text,_endTimeField.text,@"20",@"0"];
+    
+    [self searchCarWithKeyArray:keyArray valueArray:valueArray];
+    
+    
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *searchTipView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 30)];
+    searchTipView.backgroundColor = UIColorFromRGB(0xEFEFEF);
+    
+    
+    UILabel *searchTipLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 80, 20)];
+    
+    searchTipLabel.backgroundColor = [UIColor clearColor];
+    
+    searchTipLabel.textColor = [UIColor grayColor];
+    
+    searchTipLabel.font = HEL_12;
+    
+    searchTipLabel.text = @"可选车辆";
+    
+    [searchTipView addSubview:searchTipLabel];
+    
+    return searchTipView;
     
     
     
@@ -442,6 +588,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if ([NSString isBlankString:_startTimeField.text])
+    {
+        
+        [self displaySomeInfoWithInfo:@"请输入开始时间" finsh:nil];
+        
+        return;
+        
+    }
+    
+    if ([NSString isBlankString:_endTimeField.text])
+    {
+        
+        [self displaySomeInfoWithInfo:@"请输入结束时间" finsh:nil];
+        
+        return;
+        
+    }
+    
+    
+    
+    
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

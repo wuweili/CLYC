@@ -87,6 +87,7 @@
 		5A1BC8511B09E4D500A2A1DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1BC8501B09E4D500A2A1DC /* Images.xcassets */; };
 		5A1BC8541B09E4D500A2A1DC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1BC8521B09E4D500A2A1DC /* LaunchScreen.xib */; };
 		5A1BC8601B09E4D500A2A1DC /* CLYCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC85F1B09E4D500A2A1DC /* CLYCTests.m */; };
+		5A6773781B48BCE20090F8A9 /* ApplyCarHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6773771B48BCE20090F8A9 /* ApplyCarHistoryViewController.m */; };
 		5A8BF6F61B46C15700C9573B /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BF6F41B46C15700C9573B /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5AB02CB21B3FD1AC0003B65F /* HXRootViewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */; };
 		5AB02CC51B3FD2270003B65F /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB51B3FD2270003B65F /* NSData+SDDataCache.m */; };
@@ -363,6 +364,8 @@
 		5A1BC8591B09E4D500A2A1DC /* CLYCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLYCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1BC85E1B09E4D500A2A1DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A1BC85F1B09E4D500A2A1DC /* CLYCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLYCTests.m; sourceTree = "<group>"; };
+		5A6773761B48BCE20090F8A9 /* ApplyCarHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyCarHistoryViewController.h; sourceTree = "<group>"; };
+		5A6773771B48BCE20090F8A9 /* ApplyCarHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyCarHistoryViewController.m; sourceTree = "<group>"; };
 		5A8BF6F31B46C15700C9573B /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		5A8BF6F41B46C15700C9573B /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		5A8BF6F51B46C15700C9573B /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -724,6 +727,8 @@
 			children = (
 				023A64581B482CD700CB096D /* ApplyCarViewController.h */,
 				023A64591B482CD700CB096D /* ApplyCarViewController.m */,
+				5A6773761B48BCE20090F8A9 /* ApplyCarHistoryViewController.h */,
+				5A6773771B48BCE20090F8A9 /* ApplyCarHistoryViewController.m */,
 			);
 			path = DefaultUser;
 			sourceTree = "<group>";
@@ -2004,6 +2009,7 @@
 				5AB02E901B3FD2720003B65F /* MKAnnotationView+WebCache.m in Sources */,
 				5AB02E861B3FD2720003B65F /* UIImage+Color.m in Sources */,
 				5AB02E611B3FD2720003B65F /* SBJsonUTF8Stream.m in Sources */,
+				5A6773781B48BCE20090F8A9 /* ApplyCarHistoryViewController.m in Sources */,
 				5AB02E281B3FD2710003B65F /* UIImageView+AFNetworking.m in Sources */,
 				5AB02E4A1B3FD2720003B65F /* MJRefreshFooterView.m in Sources */,
 				5AB02E981B3FD2720003B65F /* SDWebImagePrefetcher.m in Sources */,
