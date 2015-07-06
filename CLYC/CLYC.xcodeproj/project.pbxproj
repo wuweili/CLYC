@@ -250,6 +250,7 @@
 		5AB02EDE1B3FE7AE0003B65F /* hxLogin_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB02EDA1B3FE7AE0003B65F /* hxLogin_unselected@2x.png */; };
 		5AB02EDF1B3FE7AE0003B65F /* hx_icon_register@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB02EDB1B3FE7AE0003B65F /* hx_icon_register@2x.png */; };
 		5AB2C6D81B437305005B42B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AB2C6D61B437305005B42B8 /* Main.storyboard */; };
+		5AB9BE8D1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -684,6 +685,8 @@
 		5AB02EDA1B3FE7AE0003B65F /* hxLogin_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hxLogin_unselected@2x.png"; sourceTree = "<group>"; };
 		5AB02EDB1B3FE7AE0003B65F /* hx_icon_register@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hx_icon_register@2x.png"; sourceTree = "<group>"; };
 		5AB2C6D71B437305005B42B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5AB9BE8B1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyCarHistoryTableViewCell.h; sourceTree = "<group>"; };
+		5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyCarHistoryTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -762,6 +765,8 @@
 				028FA1C81B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.m */,
 				023A645E1B485DA200CB096D /* SelectCarTableViewCell.h */,
 				023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */,
+				5AB9BE8B1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.h */,
+				5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1897,6 +1902,7 @@
 				5AB02E2B1B3FD2710003B65F /* UIWebView+AFNetworking.m in Sources */,
 				5AB02E681B3FD2720003B65F /* UITextField+HXExtentRange.m in Sources */,
 				5AB02EA61B3FD2720003B65F /* SVProgressHUD.m in Sources */,
+				5AB9BE8D1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m in Sources */,
 				5AB02E511B3FD2720003B65F /* NSString+PinYin.m in Sources */,
 				5AB02E721B3FD2720003B65F /* PBPGView.m in Sources */,
 				5AB02EA41B3FD2720003B65F /* SVIndefiniteAnimatedView.m in Sources */,
