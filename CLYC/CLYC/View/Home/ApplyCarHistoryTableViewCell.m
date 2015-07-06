@@ -127,12 +127,7 @@
         self.driverTelLabel.backgroundColor = [UIColor clearColor];
         
         [self.contentView addSubview:self.driverTelLabel];
-        
-        
-        
-        
-        
-        
+     
     }
     
     return self;
