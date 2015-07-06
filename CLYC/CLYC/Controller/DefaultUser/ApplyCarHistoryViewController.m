@@ -37,6 +37,8 @@
     [self initSwitchView];
     
     
+    
+    
 }
 
 -(void)initSwitchView
