@@ -8,6 +8,7 @@
 
 #import "ApplyCarHistoryViewController.h"
 #import "MJRefresh.h"
+#import "ApplyCarHistoryTableViewCell.h"
 
 
 @interface ApplyCarHistoryViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
@@ -53,6 +54,7 @@
     
     [self initConditionView];
     
+    [self searchHadAlreadyGoOutDataWithDownPull:YES];
     
     
     
@@ -140,7 +142,7 @@
     [_conditionView addSubview:_carNumTextField];
     
     
-    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(startTimeLabel.frame)+10, kMainScreenWidth-20, 30)];
+    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(endTimeLabel.frame)+10, kMainScreenWidth-20, 30)];
     [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search.png"] forState:UIControlStateNormal];
     
     [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search_select.png"] forState:UIControlStateHighlighted];
@@ -174,6 +176,80 @@
     
     [self tableViewMJRefresh:_tableView];
 }
+
+
+-(void)obtainDataWithDownPull:(BOOL)downPull
+{
+    [self initMBHudWithTitle:nil];
+    
+    if (switchIndex == 0)
+    {
+        
+    }
+    else if (switchIndex == 1)
+    {
+        
+    }
+    else
+    {
+        
+    }
+  
+}
+
+#pragma mark - 查询已出行
+
+-(void)searchHadAlreadyGoOutDataWithDownPull:(BOOL)downPull
+{
+    NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
+    
+    NSString *projectNumStr = _projectNumTextField.text;
+    
+    if ([NSString isBlankString:_projectNumTextField.text])
+    {
+        projectNumStr = @"";
+    }
+    
+    NSString *carNumStr = _carNumTextField.text;
+    
+    if ([NSString isBlankString:_carNumTextField.text])
+    {
+        carNumStr = @"";
+    }
+    
+    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"1",[HXUserModel shareInstance].userId,@"20",@"0"];
+    
+    
+    [CLYCCoreBizHttpRequest obtainApplyCarHistorWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
+        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            [_dataArray addObjectsFromArray:ListArry];
+            [_tableView reloadData];
+        }
+        else
+        {
+            
+        }
+        
+        
+    } keyArray:keyArray valueArray:valueArray];
+    
+}
+
+
+#pragma mark - 查询未出行
+
+-(void)searchHadNotAlreadyGoOutDataWithDownPull:(BOOL)downPull
+{
+    
+}
+
+
+
+
+
+#pragma mark - 查询已取消
+
 
 #pragma  mark - UISegmentedControl  -
 
@@ -213,6 +289,32 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [_dataArray count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *identifier = @"ApplyCarHistoryCell";
+    
+    ApplyCarHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    
+    if (cell == nil)
+    {
+        cell = [[ApplyCarHistoryTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    
+    cell.backgroundColor = [UIColor whiteColor];
+    
+    if ([_dataArray count]>0)
+    {
+        ApplyCarListModel *model = [_dataArray objectAtIndex:indexPath.row];
+        [cell setCellContentWithApplyCarListModel:model];
+        
+        
+    }
+    
+    return cell;
+    
+    
 }
 
 #pragma mark - 点击查询 - 

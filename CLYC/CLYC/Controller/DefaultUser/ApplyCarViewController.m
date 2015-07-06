@@ -620,7 +620,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier = [NSString stringWithFormat:@"leftSideCell%ld",(long)indexPath.row];
+    NSString *identifier = @"ApplyCarCell";
     
     SelectCarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     

@@ -32,6 +32,6 @@
 @property(nonatomic,strong)UILabel *driverTelLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
--(void)setCellContentWithSelectedModel:(SelectCarInfoModel *)model;
+-(void)setCellContentWithApplyCarListModel:(ApplyCarListModel *)model;
 
 @end

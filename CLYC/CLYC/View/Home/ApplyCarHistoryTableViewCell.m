@@ -134,6 +134,21 @@
     
 }
 
+-(void)setCellContentWithApplyCarListModel:(ApplyCarListModel *)model
+{
+    self.projectNameLabel.text = model.projectName;
+    
+    self.timeLabel.text = [NSString stringWithFormat:@"%@至%@",model.beginTime,model.endTime];
+
+    self.carCodeLabel.text = [NSString stringWithFormat:@"车牌：%@",model.carCode];
+    
+    self.mileLabel.text = [NSString stringWithFormat:@"里程（公里）：%@",model.totalMil];
+    
+    self.driverLabel.text = [NSString stringWithFormat:@"司机：%@",model.driver];
+    
+    self.driverTelLabel.text = [NSString stringWithFormat:@"电话：%@",model.driverTel];
+    
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

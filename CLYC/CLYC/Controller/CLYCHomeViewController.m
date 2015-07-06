@@ -11,6 +11,7 @@
 #import "XCCenterFirstCollectionViewCell.h"
 #import "XCCenterSecondCollectionViewCell.h"
 #import "ApplyCarViewController.h"
+#import "ApplyCarHistoryViewController.h"
 
 
 
@@ -220,6 +221,8 @@
             break;
         case 1:
         {
+            ApplyCarHistoryViewController *applyCarMVC = [[ApplyCarHistoryViewController alloc]init];
+            [self.navigationController pushViewController:applyCarMVC animated:YES];
         }
             break;
             

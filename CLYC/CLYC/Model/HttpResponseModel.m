@@ -18,3 +18,9 @@
 
 
 @end
+
+@implementation ApplyCarListModel
+
+
+
+@end
