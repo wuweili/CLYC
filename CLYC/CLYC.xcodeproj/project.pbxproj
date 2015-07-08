@@ -58,6 +58,7 @@
 		023A645A1B482CD700CB096D /* ApplyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A64591B482CD700CB096D /* ApplyCarViewController.m */; };
 		023A645D1B485C0C00CB096D /* HttpResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A645C1B485C0C00CB096D /* HttpResponseModel.m */; };
 		023A64601B485DA200CB096D /* SelectCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */; };
+		026592081B4D756900E194E5 /* ConfirmMileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026592071B4D756900E194E5 /* ConfirmMileViewController.m */; };
 		028D3D9F1B45949700AC7C7D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 028D3D9C1B45949700AC7C7D /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		028D3DA01B45949700AC7C7D /* SoapXmlParseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 028D3D9E1B45949700AC7C7D /* SoapXmlParseHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		028D3DA41B4594CE00AC7C7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 028D3DA31B4594CE00AC7C7D /* libxml2.dylib */; };
@@ -319,6 +320,8 @@
 		023A645C1B485C0C00CB096D /* HttpResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpResponseModel.m; sourceTree = "<group>"; };
 		023A645E1B485DA200CB096D /* SelectCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCarTableViewCell.h; sourceTree = "<group>"; };
 		023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCarTableViewCell.m; sourceTree = "<group>"; };
+		026592061B4D756900E194E5 /* ConfirmMileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmMileViewController.h; sourceTree = "<group>"; };
+		026592071B4D756900E194E5 /* ConfirmMileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmMileViewController.m; sourceTree = "<group>"; };
 		028D3D991B45949700AC7C7D /* GDataDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataDefines.h; sourceTree = "<group>"; };
 		028D3D9A1B45949700AC7C7D /* GDataTargetNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataTargetNamespace.h; sourceTree = "<group>"; };
 		028D3D9B1B45949700AC7C7D /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
@@ -732,6 +735,8 @@
 				023A64591B482CD700CB096D /* ApplyCarViewController.m */,
 				5A6773761B48BCE20090F8A9 /* ApplyCarHistoryViewController.h */,
 				5A6773771B48BCE20090F8A9 /* ApplyCarHistoryViewController.m */,
+				026592061B4D756900E194E5 /* ConfirmMileViewController.h */,
+				026592071B4D756900E194E5 /* ConfirmMileViewController.m */,
 			);
 			path = DefaultUser;
 			sourceTree = "<group>";
@@ -1935,6 +1940,7 @@
 				5AB02E9D1B3FD2720003B65F /* UIImageView+HighlightedWebCache.m in Sources */,
 				5AB02E1C1B3FD2710003B65F /* AFHTTPRequestOperationManager.m in Sources */,
 				5AB02CC61B3FD2270003B65F /* TAAbstractDotView.m in Sources */,
+				026592081B4D756900E194E5 /* ConfirmMileViewController.m in Sources */,
 				5AB02E8A1B3FD2720003B65F /* UIImage+Water.m in Sources */,
 				5AB02E421B3FD2720003B65F /* HXUserAgent.mm in Sources */,
 				5AB02E201B3FD2710003B65F /* AFURLConnectionOperation.m in Sources */,
