@@ -27,6 +27,12 @@
     UITableView *_tableView;
     
     NSMutableArray *_dataArray;
+    
+    BOOL _isDownPullLoading;
+    BOOL _isUpPullLoading;
+    
+    int _currentDoctorPageIndex;
+
 
 
 }
@@ -40,6 +46,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)dealloc
+{
+    
+}
 
 - (void)viewDidLoad
 {
@@ -50,17 +60,22 @@
     
     _dataArray = [NSMutableArray arrayWithCapacity:0];
     
+    switchIndex = 0;
+    
+    _currentDoctorPageIndex = 0;
+    
     [self initSwitchView];
     
     [self initConditionView];
     
-    [self searchHadAlreadyGoOutDataWithDownPull:YES];
+    [self initTableView];
     
+    [self initRefreshView];
     
+    [_segmentedSwitchView setSelectedSegmentIndex:switchIndex];
     
-    
-    
-    
+    [self switchViewValueChanged:switchIndex];
+  
     
 }
 
@@ -83,9 +98,9 @@
 -(void)initConditionView
 {
     _conditionView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_segmentedSwitchView.frame)+8, kMainScreenWidth
-                                                             , 110)];
+                                                             , 120)];
     
-    _conditionView.backgroundColor = [UIColor yellowColor];
+    _conditionView.backgroundColor = [UIColor clearColor];
     
     [self.view addSubview:_conditionView];
     
@@ -157,7 +172,7 @@
 
 -(void)initTableView
 {
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(_conditionView.frame),kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(_conditionView.frame),kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight-166) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -178,30 +193,15 @@
 }
 
 
--(void)obtainDataWithDownPull:(BOOL)downPull
-{
-    [self initMBHudWithTitle:nil];
-    
-    if (switchIndex == 0)
-    {
-        
-    }
-    else if (switchIndex == 1)
-    {
-        
-    }
-    else
-    {
-        
-    }
-  
-}
+
 
 #pragma mark - 查询已出行
 
--(void)searchHadAlreadyGoOutDataWithDownPull:(BOOL)downPull
+-(void)searchHadAlreadyGoOutDataWithUpPull:(BOOL)upPull
 {
-    NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
+    [self initMBHudWithTitle:nil];
+    
+    NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryState",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
     
     NSString *projectNumStr = _projectNumTextField.text;
     
@@ -217,18 +217,37 @@
         carNumStr = @"";
     }
     
-    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"1",[HXUserModel shareInstance].userId,@"20",@"0"];
+    NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
+    
+    
+    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"",@"1",[HXUserModel shareInstance].userId,@"20",currentPage];
     
     
     [CLYCCoreBizHttpRequest obtainApplyCarHistorWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
+        
+        [self stopRefresh];
+        
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
+            
+            [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
+            
+            if (!upPull)
+            {
+                [_dataArray removeAllObjects];
+            }
+            
             [_dataArray addObjectsFromArray:ListArry];
+            
+            _currentDoctorPageIndex++;
+            
+            
+            
             [_tableView reloadData];
         }
         else
         {
-            
+            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
         
         
@@ -239,9 +258,58 @@
 
 #pragma mark - 查询未出行
 
--(void)searchHadNotAlreadyGoOutDataWithDownPull:(BOOL)downPull
+-(void)searchHadNotAlreadyGoOutDataWithUpPull:(BOOL)upPull
 {
+    [self initMBHudWithTitle:nil];
     
+    NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryState",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
+    
+    NSString *projectNumStr = _projectNumTextField.text;
+    
+    if ([NSString isBlankString:_projectNumTextField.text])
+    {
+        projectNumStr = @"";
+    }
+    
+    NSString *carNumStr = _carNumTextField.text;
+    
+    if ([NSString isBlankString:_carNumTextField.text])
+    {
+        carNumStr = @"";
+    }
+    
+    NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
+    
+    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"",@"2",[HXUserModel shareInstance].userId,@"20",currentPage];
+    
+    
+    [CLYCCoreBizHttpRequest obtainApplyCarHistorWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
+        
+        [self stopRefresh];
+        
+        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
+          
+            if (!upPull)
+            {
+                [_dataArray removeAllObjects];
+            }
+            
+            [_dataArray addObjectsFromArray:ListArry];
+            
+            _currentDoctorPageIndex++;
+            
+            [_tableView reloadData];
+  
+        }
+        else
+        {
+            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
+        }
+        
+        
+    } keyArray:keyArray valueArray:valueArray];
 }
 
 
@@ -249,6 +317,58 @@
 
 
 #pragma mark - 查询已取消
+
+-(void)searchHadAlreadyCancleDataWithUpPull:(BOOL)upPull
+{
+    [self initMBHudWithTitle:nil];
+    
+    NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryState",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
+    
+    NSString *projectNumStr = _projectNumTextField.text;
+    
+    if ([NSString isBlankString:_projectNumTextField.text])
+    {
+        projectNumStr = @"";
+    }
+    
+    NSString *carNumStr = _carNumTextField.text;
+    
+    if ([NSString isBlankString:_carNumTextField.text])
+    {
+        carNumStr = @"";
+    }
+    
+    NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
+    
+    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"2",@"",[HXUserModel shareInstance].userId,@"20",currentPage];
+    
+    
+    [CLYCCoreBizHttpRequest obtainApplyCarHistorWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
+        
+        [self stopRefresh];
+        
+        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
+            
+            if (!upPull)
+            {
+                [_dataArray removeAllObjects];
+            }
+            
+            [_dataArray addObjectsFromArray:ListArry];
+            
+            _currentDoctorPageIndex++;
+            [_tableView reloadData];
+        }
+        else
+        {
+            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
+        }
+        
+        
+    } keyArray:keyArray valueArray:valueArray];
+}
 
 
 #pragma  mark - UISegmentedControl  -
@@ -262,9 +382,31 @@
         return;
     }
     
-    
     switchIndex = selectedSegmentIndex;
     
+    _currentDoctorPageIndex = 0;
+    
+    [self switchViewValueChanged:selectedSegmentIndex];
+    
+    
+    
+}
+
+-(void)switchViewValueChanged:(NSInteger)index
+{
+    
+    if (index == 0)
+    {
+        [self searchHadNotAlreadyGoOutDataWithUpPull:NO];
+    }
+    else if (index == 1)
+    {
+        [self searchHadAlreadyGoOutDataWithUpPull:NO];
+    }
+    else
+    {
+        [self searchHadAlreadyCancleDataWithUpPull:NO];
+    }
     
     
 }
@@ -321,7 +463,7 @@
 
 -(void)clickStartSearchButton
 {
-    
+    [self switchViewValueChanged:switchIndex];
 }
 
 
@@ -329,13 +471,22 @@
 
 -(void)headerRefreshing
 {
-//    _isDownPullLoading = YES;
-//    
-//    _currentDoctorPageIndex = PAGE_INDEX_START;
-//    
-//    [_doctorArray removeAllObjects];
-//    
-//    [self loadAllDoctorDataFromNetWithNoHub:NO];
+    _isDownPullLoading = YES;
+    
+    _currentDoctorPageIndex = 0;
+    
+    if (switchIndex == 0)
+    {
+        [self searchHadNotAlreadyGoOutDataWithUpPull:NO];
+    }
+    else if (switchIndex == 1)
+    {
+        [self searchHadAlreadyGoOutDataWithUpPull:NO];
+    }
+    else
+    {
+        [self searchHadAlreadyCancleDataWithUpPull:NO];
+    }
     
 }
 
@@ -343,9 +494,20 @@
 
 -(void)footerRefreshing
 {
-//    _isUpPullLoading = YES;
-//    
-//    [self loadAllDoctorDataFromNetWithNoHub:NO];
+    _isUpPullLoading = YES;
+    
+    if (switchIndex == 0)
+    {
+        [self searchHadNotAlreadyGoOutDataWithUpPull:YES];
+    }
+    else if (switchIndex == 1)
+    {
+        [self searchHadAlreadyGoOutDataWithUpPull:YES];
+    }
+    else
+    {
+        [self searchHadAlreadyCancleDataWithUpPull:YES];
+    }
     
 }
 
@@ -354,17 +516,17 @@
 //如果有更多数据，
 -(void)stopRefresh
 {
-//    if (_isDownPullLoading)
-//    {
-//        _isDownPullLoading = NO;
-//        [_doctorTableView headerEndRefreshing];
-//    }
-//    
-//    if (_isUpPullLoading)
-//    {
-//        _isUpPullLoading = NO;
-//        [_doctorTableView footerEndRefreshing];
-//    }
+    if (_isDownPullLoading)
+    {
+        _isDownPullLoading = NO;
+        [_tableView headerEndRefreshing];
+    }
+    
+    if (_isUpPullLoading)
+    {
+        _isUpPullLoading = NO;
+        [_tableView footerEndRefreshing];
+    }
 }
 
 

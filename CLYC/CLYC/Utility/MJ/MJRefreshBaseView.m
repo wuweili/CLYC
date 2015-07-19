@@ -257,12 +257,9 @@ typedef void (*send_type)(void *, SEL, UIView *);
             // 回调
             if ([self.beginRefreshingTaget respondsToSelector:self.beginRefreshingAction])
             {
-                
-#warning  wwwwww
-                
-                
-                
-//                objc_msgSend(self.beginRefreshingTaget, self.beginRefreshingAction, self);
+
+
+                objc_msgSend(self.beginRefreshingTaget, self.beginRefreshingAction, self);
             }
             
             if (self.beginRefreshingCallback) {

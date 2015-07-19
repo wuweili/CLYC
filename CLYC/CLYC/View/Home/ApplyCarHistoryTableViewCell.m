@@ -22,7 +22,7 @@
     if(self)
     {
         
-        self.projectTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 30, 20)];
+        self.projectTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 40, 20)];
         self.projectTitleLabel.font = HEL_12;
         
         self.projectTitleLabel.textColor = [UIColor blackColor];
@@ -31,7 +31,7 @@
         
         self.projectTitleLabel.backgroundColor = [UIColor clearColor];
         
-        self.projectTitleLabel.text = @"项目";
+        self.projectTitleLabel.text = @"项目：";
         
         [self.contentView addSubview:self.projectTitleLabel];
         
@@ -49,7 +49,7 @@
         
 
         
-        self.timeTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, CGRectGetMaxY(self.projectTitleLabel.frame)+5, 30, 30)];
+        self.timeTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, CGRectGetMaxY(self.projectTitleLabel.frame), 40, 30)];
         self.timeTitleLabel.font = HEL_12;
         
         self.timeTitleLabel.numberOfLines = 0;
@@ -60,12 +60,12 @@
         
         self.timeTitleLabel.backgroundColor = [UIColor clearColor];
         
-         self.timeTitleLabel.text = @"时间";
+         self.timeTitleLabel.text = @"时间：";
         
         [self.contentView addSubview:self.timeTitleLabel];
         
         
-        self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.timeTitleLabel.frame), 5, kMainScreenWidth-10-CGRectGetWidth(self.timeTitleLabel.frame), 30)];
+        self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.timeTitleLabel.frame), CGRectGetMaxY(self.projectTitleLabel.frame), kMainScreenWidth-10-CGRectGetWidth(self.timeTitleLabel.frame), 30)];
         self.timeLabel.font = HEL_12;
         
         self.timeLabel.textColor = [UIColor blackColor];
@@ -76,9 +76,21 @@
         
         [self.contentView addSubview:self.timeLabel];
         
-
+        self.carCodeTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, CGRectGetMaxY(self.timeLabel.frame), 40, 20)];
+        self.carCodeTitleLabel.font = HEL_12;
         
-        self.carCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, CGRectGetMaxY(self.timeLabel.frame), 120, 20)];
+        self.carCodeTitleLabel.textColor = [UIColor blackColor];
+        
+        self.carCodeTitleLabel.textAlignment = NSTextAlignmentLeft;
+        
+        self.carCodeTitleLabel.backgroundColor = [UIColor clearColor];
+        
+        self.carCodeTitleLabel.text = @"车牌：";
+        
+        [self.contentView addSubview:self.carCodeTitleLabel];
+        
+        
+        self.carCodeLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carCodeTitleLabel.frame), CGRectGetMaxY(self.timeLabel.frame), 100, 20)];
         self.carCodeLabel.font = HEL_12;
         
         self.carCodeLabel.textColor = [UIColor blackColor];
@@ -90,7 +102,23 @@
         [self.contentView addSubview:self.carCodeLabel];
         
         
-        self.mileLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carCodeLabel.frame)+10, 5, 120, 20)];
+        
+        self.mileTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carCodeLabel.frame)+10, CGRectGetMaxY(self.timeLabel.frame), 90, 20)];
+        
+        self.mileTitleLabel.font = HEL_12;
+        
+        self.mileTitleLabel.textColor = [UIColor blackColor];
+        
+        self.mileTitleLabel.textAlignment = NSTextAlignmentLeft;
+        
+        self.mileTitleLabel.backgroundColor = [UIColor clearColor];
+        
+        self.mileTitleLabel.text = @"里程（公里）：";
+        
+        [self.contentView addSubview:self.mileTitleLabel];
+        
+        
+        self.mileLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.mileTitleLabel.frame), CGRectGetMaxY(self.timeLabel.frame), 70, 20)];
         
         
         self.mileLabel.font = HEL_12;
@@ -104,7 +132,24 @@
         [self.contentView addSubview:self.mileLabel];
         
         
-        self.driverLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, CGRectGetMaxY(self.carCodeLabel.frame), 120, 20)];
+        
+        self.driverTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, CGRectGetMaxY(self.carCodeLabel.frame), 40, 20)];
+        
+        self.driverTitleLabel.font = HEL_12;
+        
+        self.driverTitleLabel.textColor = [UIColor blackColor];
+        
+        self.driverTitleLabel.textAlignment = NSTextAlignmentLeft;
+        
+        self.driverTitleLabel.backgroundColor = [UIColor clearColor];
+        
+        self.driverTitleLabel.text = @"司机：";
+        
+        [self.contentView addSubview:self.driverTitleLabel];
+        
+        
+        
+        self.driverLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.driverTitleLabel.frame), CGRectGetMaxY(self.carCodeLabel.frame), 100, 20)];
         
         self.driverLabel.font = HEL_12;
         
@@ -116,7 +161,23 @@
         
         [self.contentView addSubview:self.driverLabel];
         
-        self.driverTelLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.driverLabel.frame)+10, CGRectGetMaxY(self.carCodeLabel.frame), 120, 20)];
+        
+        self.driverTelTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.driverLabel.frame)+10, CGRectGetMaxY(self.carCodeLabel.frame), 40, 20)];
+        
+        self.driverTelTitleLabel.font = HEL_12;
+        
+        self.driverTelTitleLabel.textColor = [UIColor blackColor];
+        
+        self.driverTelTitleLabel.textAlignment = NSTextAlignmentLeft;
+        
+        self.driverTelTitleLabel.backgroundColor = [UIColor clearColor];
+        
+        self.driverTelTitleLabel.text = @"电话：";
+        
+        [self.contentView addSubview:self.driverTelTitleLabel];
+        
+        
+        self.driverTelLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.driverTelTitleLabel.frame), CGRectGetMaxY(self.carCodeLabel.frame), 100, 20)];
         
         self.driverTelLabel.font = HEL_12;
         
@@ -138,17 +199,30 @@
 {
     self.projectNameLabel.text = model.projectName;
     
-    self.timeLabel.text = [NSString stringWithFormat:@"%@至%@",model.beginTime,model.endTime];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ 至 %@",model.beginTime,model.endTime];
 
-    self.carCodeLabel.text = [NSString stringWithFormat:@"车牌：%@",model.carCode];
+    self.carCodeLabel.text = [NSString stringWithFormat:@"%@",model.carCode];
     
-    self.mileLabel.text = [NSString stringWithFormat:@"里程（公里）：%@",model.totalMil];
+    self.mileLabel.text = [NSString stringWithFormat:@"%@",model.totalMil];
     
-    self.driverLabel.text = [NSString stringWithFormat:@"司机：%@",model.driver];
+    self.driverLabel.text = [NSString stringWithFormat:@"%@",model.driver];
     
-    self.driverTelLabel.text = [NSString stringWithFormat:@"电话：%@",model.driverTel];
+    self.driverTelLabel.text = [NSString stringWithFormat:@"%@",model.driverTel];
     
 }
+
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+    CGContextFillRect(context, rect);
+   
+    CGContextSetStrokeColorWithColor(context, CELL_LINE_COLOR.CGColor);
+    CGContextStrokeRect(context, CGRectMake(0, rect.size.height, rect.size.width, 0.5));
+   
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

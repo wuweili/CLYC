@@ -208,11 +208,11 @@ static  BOOL hideLeft  = NO;
 {
     tableView.headerPullToRefreshText = @"下拉可以刷新了";
     tableView.headerReleaseToRefreshText = @"松开马上刷新了";
-    tableView.headerRefreshingText = @"医宝正在帮您刷新,请稍等";
+    tableView.headerRefreshingText = @"正在帮您刷新,请稍等";
     
     tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
     tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-    tableView.footerRefreshingText = @"医宝正在帮您刷新,请稍等";
+    tableView.footerRefreshingText = @"正在帮您刷新,请稍等";
 
 }
 
