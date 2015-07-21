@@ -74,6 +74,8 @@
 		028FA1D11B470E29007A2C8C /* left_bar_image@@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1CD1B470E29007A2C8C /* left_bar_image@@3x.png */; };
 		028FA1D21B470E29007A2C8C /* left_bar_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1CE1B470E29007A2C8C /* left_bar_image@2x.png */; };
 		028FA1D41B470FAB007A2C8C /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1D31B470FAB007A2C8C /* banner.png */; };
+		02B27EA31B5E93E400477278 /* SaveApplyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B27EA21B5E93E400477278 /* SaveApplyCarViewController.m */; };
+		02B27EA71B5E989D00477278 /* SaveApplyCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B27EA61B5E989D00477278 /* SaveApplyCarTableViewCell.m */; };
 		02B39A741B42E4BF007FDD26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A731B42E4BF007FDD26 /* AudioToolbox.framework */; };
 		02B39A761B42E4C7007FDD26 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A751B42E4C7007FDD26 /* AVFoundation.framework */; };
 		02B39A781B42E4D6007FDD26 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A771B42E4D6007FDD26 /* libicucore.dylib */; };
@@ -348,6 +350,10 @@
 		028FA1CD1B470E29007A2C8C /* left_bar_image@@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_bar_image@@3x.png"; sourceTree = "<group>"; };
 		028FA1CE1B470E29007A2C8C /* left_bar_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_bar_image@2x.png"; sourceTree = "<group>"; };
 		028FA1D31B470FAB007A2C8C /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
+		02B27EA11B5E93E400477278 /* SaveApplyCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveApplyCarViewController.h; sourceTree = "<group>"; };
+		02B27EA21B5E93E400477278 /* SaveApplyCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveApplyCarViewController.m; sourceTree = "<group>"; };
+		02B27EA51B5E989D00477278 /* SaveApplyCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveApplyCarTableViewCell.h; sourceTree = "<group>"; };
+		02B27EA61B5E989D00477278 /* SaveApplyCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveApplyCarTableViewCell.m; sourceTree = "<group>"; };
 		02B39A731B42E4BF007FDD26 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		02B39A751B42E4C7007FDD26 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		02B39A771B42E4D6007FDD26 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -742,6 +748,8 @@
 				026592071B4D756900E194E5 /* ConfirmMileViewController.m */,
 				5A0042CD1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.h */,
 				5A0042CE1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.m */,
+				02B27EA11B5E93E400477278 /* SaveApplyCarViewController.h */,
+				02B27EA21B5E93E400477278 /* SaveApplyCarViewController.m */,
 			);
 			path = DefaultUser;
 			sourceTree = "<group>";
@@ -777,6 +785,8 @@
 				023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */,
 				5AB9BE8B1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.h */,
 				5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */,
+				02B27EA51B5E989D00477278 /* SaveApplyCarTableViewCell.h */,
+				02B27EA61B5E989D00477278 /* SaveApplyCarTableViewCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1918,6 +1928,7 @@
 				5AB02EA41B3FD2720003B65F /* SVIndefiniteAnimatedView.m in Sources */,
 				5AB02E381B3FD2710003B65F /* FMDatabaseAdditions.m in Sources */,
 				5AB02E471B3FD2720003B65F /* MyKeyChainHelper.m in Sources */,
+				02B27EA31B5E93E400477278 /* SaveApplyCarViewController.m in Sources */,
 				5AB02E5B1B3FD2720003B65F /* SBJsonStreamParserAdapter.m in Sources */,
 				5AB02E4D1B3FD2720003B65F /* UIScrollView+MJRefresh.m in Sources */,
 				5AB02E341B3FD2710003B65F /* Log.m in Sources */,
@@ -1928,6 +1939,7 @@
 				5AB02E6C1B3FD2720003B65F /* PBConst.m in Sources */,
 				5AB02E731B3FD2720003B65F /* PBSaveBtn.m in Sources */,
 				5AB02E391B3FD2710003B65F /* FMDatabasePool.m in Sources */,
+				02B27EA71B5E989D00477278 /* SaveApplyCarTableViewCell.m in Sources */,
 				5AB02E7D1B3FD2720003B65F /* CALayer+Transition.m in Sources */,
 				028D3D9F1B45949700AC7C7D /* GDataXMLNode.m in Sources */,
 				5AB02E591B3FD2720003B65F /* SBJsonStreamParser.m in Sources */,
