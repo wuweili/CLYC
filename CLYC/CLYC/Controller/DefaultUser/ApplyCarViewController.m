@@ -8,6 +8,7 @@
 
 #import "ApplyCarViewController.h"
 #import "SelectCarTableViewCell.h"
+#import "SaveApplyCarViewController.h"
 
 @interface ApplyCarViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -607,7 +608,16 @@
         
     }
     
-    
+    if ([_dataArray count]>0)
+    {
+        SelectCarInfoModel *model = [_dataArray objectAtIndex:indexPath.row];
+        
+        
+        SaveApplyCarViewController *saveApplyMVC = [[SaveApplyCarViewController alloc]initWithStartTime:_startTimeField.text endTime:_endTimeField.text selectedCarModel:model];
+        [self.navigationController pushViewController:saveApplyMVC animated:YES];
+        
+        
+    }
     
     
     

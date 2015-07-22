@@ -126,5 +126,39 @@
 @end
 
 
+//部门列表
 
+@interface DeptListModel : NSObject
 
+/**
+ * 部门主键
+ */
+@property(nonatomic,strong)NSString *deptId;
+
+/**
+ * 部门名称
+ */
+@property(nonatomic,strong)NSString *deptName;
+
+@end
+
+//项目列表
+
+@interface ProjectListModel : NSObject
+
+/**
+ * 项目主键
+ */
+@property(nonatomic,strong)NSString *projectId;
+
+/**
+ * 项目号
+ */
+@property(nonatomic,strong)NSString *projectNo;
+
+/**
+ * 项目名称
+ */
+@property(nonatomic,strong)NSString *projectName;
+
+@end

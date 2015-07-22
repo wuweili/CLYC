@@ -10,4 +10,7 @@
 
 @interface SaveApplyCarViewController : HXBJHXBaseViewController
 
+-(id)initWithStartTime:(NSString *)beginTime endTime:(NSString *)endTime selectedCarModel:(SelectCarInfoModel *)selectedCarModel;
+
+
 @end
