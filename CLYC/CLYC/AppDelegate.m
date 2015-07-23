@@ -41,6 +41,11 @@
     {
         [self goToLoginView];
     }
+    else
+    {
+        [self goToLoginViewToDirectLogin];
+    }
+    
     
     
     
@@ -217,6 +222,37 @@
         [self.rootNavController setViewControllers:resultArray animated:NO];
         
     });
+}
+
+#pragma mark - 跳转到登陆界面且直接登录
+-(void)goToLoginViewToDirectLogin
+{
+    self.window.rootViewController = nil;
+    
+    if (!self.rootNavController)
+    {
+        HXRootViewViewController *loginMVC  =[[HXRootViewViewController alloc]initWithDirectLogin:YES];
+        
+        UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:loginMVC];
+        
+        self.rootNavController = navController;
+        
+        self.window.rootViewController = self.rootNavController;
+    }
+    else
+    {
+        if (![self.rootNavController.topViewController isKindOfClass:[HXRootViewViewController class]])
+        {
+            self.window.rootViewController = self.rootNavController;
+            
+            [self.rootNavController popToRootViewControllerAnimated:YES];
+            
+        }
+        else
+        {
+            self.window.rootViewController = self.rootNavController;
+        }
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

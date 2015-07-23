@@ -14,6 +14,6 @@ typedef void(^SelectCarBlock)(SelectCarInfoModel *model);
 @interface SelecteCarViewController : HXBJHXBaseViewController
 
 
--(id)initWithDefaultSelectedCarModel:(SelectCarInfoModel *)selectedCarModel selectCarBlock:(SelectCarBlock )block;
+-(id)initWithDefaultSelectedCarModel:(SelectCarInfoModel *)selectedCarModel beginTime:(NSString *)beginTime endTime:(NSString *)endTime selectCarBlock:(SelectCarBlock )block;
 
 @end

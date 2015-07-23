@@ -446,6 +446,15 @@
             [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
             
             [HXAPPDELEGATE goToMainView];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                if (!_isDirectLogin)
+                {
+                    [self rememberPwdOrNot];
+                }
+                
+            });
 
         }
         else

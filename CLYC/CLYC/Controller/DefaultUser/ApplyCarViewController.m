@@ -365,12 +365,8 @@
             [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
             
             [_dataArray addObjectsFromArray:ListArry];
-            
-            
-            
-            
+  
             [_tableView reloadData];
-            
             
         }
         else

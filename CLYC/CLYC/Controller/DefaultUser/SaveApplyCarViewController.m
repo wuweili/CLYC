@@ -8,6 +8,7 @@
 
 #import "SaveApplyCarViewController.h"
 #import "SaveApplyCarTableViewCell.h"
+#import "SelecteCarViewController.h"
 
 @interface SaveApplyCarViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 {
@@ -232,6 +233,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 1)
+    {
+        SelecteCarViewController *selectCarMVC = [[SelecteCarViewController alloc]initWithDefaultSelectedCarModel:_carModel beginTime:_beginTime endTime:_endTime selectCarBlock:^(SelectCarInfoModel *model) {
+            
+            _carModel = model;
+            
+            [_tableView reloadData];
+            
+            
+        }];
+        
+        [self.navigationController pushViewController:selectCarMVC animated:YES];
+        
+    }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -87,6 +87,7 @@
 		02B39A8A1B42F014007FDD26 /* CLYCCoreBizHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B39A891B42F014007FDD26 /* CLYCCoreBizHttpRequest.m */; };
 		5A0042CF1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0042CE1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.m */; };
 		5A023E6F1B606EFA00823035 /* SelecteCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A023E6E1B606EFA00823035 /* SelecteCarViewController.m */; };
+		5A023E721B60764200823035 /* SelectDeptmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A023E711B60764200823035 /* SelectDeptmentViewController.m */; };
 		5A1BC8461B09E4D500A2A1DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC8451B09E4D500A2A1DC /* main.m */; };
 		5A1BC8491B09E4D500A2A1DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC8481B09E4D500A2A1DC /* AppDelegate.m */; };
 		5A1BC8511B09E4D500A2A1DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A1BC8501B09E4D500A2A1DC /* Images.xcassets */; };
@@ -370,6 +371,8 @@
 		5A0042CE1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyCarListDetailViewController.m; sourceTree = "<group>"; };
 		5A023E6D1B606EFA00823035 /* SelecteCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelecteCarViewController.h; sourceTree = "<group>"; };
 		5A023E6E1B606EFA00823035 /* SelecteCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelecteCarViewController.m; sourceTree = "<group>"; };
+		5A023E701B60764200823035 /* SelectDeptmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDeptmentViewController.h; sourceTree = "<group>"; };
+		5A023E711B60764200823035 /* SelectDeptmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDeptmentViewController.m; sourceTree = "<group>"; };
 		5A1BC8401B09E4D500A2A1DC /* CLYC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLYC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A1BC8441B09E4D500A2A1DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A1BC8451B09E4D500A2A1DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -755,6 +758,8 @@
 				02B27EA21B5E93E400477278 /* SaveApplyCarViewController.m */,
 				5A023E6D1B606EFA00823035 /* SelecteCarViewController.h */,
 				5A023E6E1B606EFA00823035 /* SelecteCarViewController.m */,
+				5A023E701B60764200823035 /* SelectDeptmentViewController.h */,
+				5A023E711B60764200823035 /* SelectDeptmentViewController.m */,
 			);
 			path = DefaultUser;
 			sourceTree = "<group>";
@@ -1963,6 +1968,7 @@
 				5AB02E1C1B3FD2710003B65F /* AFHTTPRequestOperationManager.m in Sources */,
 				5AB02CC61B3FD2270003B65F /* TAAbstractDotView.m in Sources */,
 				026592081B4D756900E194E5 /* ConfirmMileViewController.m in Sources */,
+				5A023E721B60764200823035 /* SelectDeptmentViewController.m in Sources */,
 				5AB02E8A1B3FD2720003B65F /* UIImage+Water.m in Sources */,
 				5AB02E421B3FD2720003B65F /* HXUserAgent.mm in Sources */,
 				5AB02E201B3FD2710003B65F /* AFURLConnectionOperation.m in Sources */,
