@@ -59,6 +59,9 @@
 		023A645D1B485C0C00CB096D /* HttpResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A645C1B485C0C00CB096D /* HttpResponseModel.m */; };
 		023A64601B485DA200CB096D /* SelectCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */; };
 		026592081B4D756900E194E5 /* ConfirmMileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026592071B4D756900E194E5 /* ConfirmMileViewController.m */; };
+		02744B021B612CD800B46CAD /* SelectDeptmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02744B011B612CD800B46CAD /* SelectDeptmentTableViewCell.m */; };
+		02744B051B61373C00B46CAD /* SelectProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02744B041B61373C00B46CAD /* SelectProjectViewController.m */; };
+		02744B091B613A9000B46CAD /* SelectProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02744B081B613A9000B46CAD /* SelectProjectTableViewCell.m */; };
 		028D3D9F1B45949700AC7C7D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 028D3D9C1B45949700AC7C7D /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		028D3DA01B45949700AC7C7D /* SoapXmlParseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 028D3D9E1B45949700AC7C7D /* SoapXmlParseHelper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		028D3DA41B4594CE00AC7C7D /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 028D3DA31B4594CE00AC7C7D /* libxml2.dylib */; };
@@ -327,6 +330,12 @@
 		023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCarTableViewCell.m; sourceTree = "<group>"; };
 		026592061B4D756900E194E5 /* ConfirmMileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmMileViewController.h; sourceTree = "<group>"; };
 		026592071B4D756900E194E5 /* ConfirmMileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmMileViewController.m; sourceTree = "<group>"; };
+		02744B001B612CD800B46CAD /* SelectDeptmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDeptmentTableViewCell.h; sourceTree = "<group>"; };
+		02744B011B612CD800B46CAD /* SelectDeptmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDeptmentTableViewCell.m; sourceTree = "<group>"; };
+		02744B031B61373C00B46CAD /* SelectProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectProjectViewController.h; sourceTree = "<group>"; };
+		02744B041B61373C00B46CAD /* SelectProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectProjectViewController.m; sourceTree = "<group>"; };
+		02744B071B613A9000B46CAD /* SelectProjectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectProjectTableViewCell.h; sourceTree = "<group>"; };
+		02744B081B613A9000B46CAD /* SelectProjectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectProjectTableViewCell.m; sourceTree = "<group>"; };
 		028D3D991B45949700AC7C7D /* GDataDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataDefines.h; sourceTree = "<group>"; };
 		028D3D9A1B45949700AC7C7D /* GDataTargetNamespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataTargetNamespace.h; sourceTree = "<group>"; };
 		028D3D9B1B45949700AC7C7D /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
@@ -760,6 +769,8 @@
 				5A023E6E1B606EFA00823035 /* SelecteCarViewController.m */,
 				5A023E701B60764200823035 /* SelectDeptmentViewController.h */,
 				5A023E711B60764200823035 /* SelectDeptmentViewController.m */,
+				02744B031B61373C00B46CAD /* SelectProjectViewController.h */,
+				02744B041B61373C00B46CAD /* SelectProjectViewController.m */,
 			);
 			path = DefaultUser;
 			sourceTree = "<group>";
@@ -797,6 +808,10 @@
 				5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */,
 				02B27EA51B5E989D00477278 /* SaveApplyCarTableViewCell.h */,
 				02B27EA61B5E989D00477278 /* SaveApplyCarTableViewCell.m */,
+				02744B001B612CD800B46CAD /* SelectDeptmentTableViewCell.h */,
+				02744B011B612CD800B46CAD /* SelectDeptmentTableViewCell.m */,
+				02744B071B613A9000B46CAD /* SelectProjectTableViewCell.h */,
+				02744B081B613A9000B46CAD /* SelectProjectTableViewCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2036,6 +2051,7 @@
 				5AB02E841B3FD2720003B65F /* UIDevice+Extend.m in Sources */,
 				5AB02E801B3FD2720003B65F /* NSObject+Extend.m in Sources */,
 				5AB02CB21B3FD1AC0003B65F /* HXRootViewViewController.mm in Sources */,
+				02744B091B613A9000B46CAD /* SelectProjectTableViewCell.m in Sources */,
 				5AB02E8B1B3FD2720003B65F /* UITableViewCell+Extend.m in Sources */,
 				5AB02E241B3FD2710003B65F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				5AB02E571B3FD2720003B65F /* NSObject+SBJson.m in Sources */,
@@ -2078,7 +2094,9 @@
 				5A1BC8461B09E4D500A2A1DC /* main.m in Sources */,
 				5AB02E221B3FD2710003B65F /* AFURLResponseSerialization.m in Sources */,
 				5AB02E651B3FD2720003B65F /* UIImage+IMChat.m in Sources */,
+				02744B051B61373C00B46CAD /* SelectProjectViewController.m in Sources */,
 				5AB02E891B3FD2720003B65F /* UIImage+FixOrientation.m in Sources */,
+				02744B021B612CD800B46CAD /* SelectDeptmentTableViewCell.m in Sources */,
 				5AB02E6E1B3FD2720003B65F /* PhotoModel.m in Sources */,
 				5AB02E271B3FD2710003B65F /* UIButton+AFNetworking.m in Sources */,
 				5AB02CC91B3FD2270003B65F /* TAPageControl.m in Sources */,

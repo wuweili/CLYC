@@ -74,28 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CLYC/Controller/DefaultUser/SaveApplyCarViewController.m"
-            timestampString = "459276236.616846"
+            timestampString = "459363014.755574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
-            landmarkName = "-textViewShouldBeginEditing:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CLYC/View/Home/SaveApplyCarTableViewCell.m"
-            timestampString = "459276304.459378"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "-changeheightForTextView:"
+            startingLineNumber = "584"
+            endingLineNumber = "584"
+            landmarkName = "-clickSaveButton"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

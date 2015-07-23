@@ -112,14 +112,13 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 +(NSString *)getUserCenterRequestSendDataWithParamSender:(id)paramSender
 {
-    
     NSString *sign = [[self class] getSignWithWithParamSender:paramSender];
     
     NSDictionary *secretDic = @{@"logonId":LogonId,@"pwd":Pwd};
-  
+    
     
     NSError *error = nil;
-  
+    
     NSString *secretJsonStr = [[NSString alloc]initWithData:[NSJSONSerialization dataWithJSONObject:secretDic options:(NSJSONWritingOptions)0 error:&error] encoding:NSUTF8StringEncoding];
     
     
@@ -145,18 +144,21 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     {
         signJsonStr = [[NSString alloc]initWithData:[NSJSONSerialization dataWithJSONObject:sign options:(NSJSONWritingOptions)0 error:&error] encoding:NSUTF8StringEncoding];
     }
- 
+    
     NSString *sendResultStr = [NSString stringWithFormat:@"{\"secret\":%@,\"body\":%@,\"sign\":\"%@\"}",secretJsonStr,bodyJsonStr,signJsonStr];
     
     DDLogInfo(@"发送的数据 ：%@",sendResultStr);
-
+    
     NSData *sendUnBase64Data = [sendResultStr dataUsingEncoding:NSUTF8StringEncoding];
- 
+    
     NSString *tempResultStr  =   [[NSString alloc] initWithData:[GTMBase64 encodeData:sendUnBase64Data] encoding:NSUTF8StringEncoding];
     
     DDLogInfo(@"发送的数据经过base64后 ：%@",tempResultStr);
     
     return tempResultStr;
+    
+    
+    
 }
 
 +(NSString *)getSignWithWithParamSender:(id)paramSendObject
@@ -265,7 +267,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     }
     
     else
-        return @"";
+        return [NSString stringWithFormat:@"{}"] ;;
 }
 
 
@@ -521,6 +523,149 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
             if (block)
             {
                 block([NSMutableArray array],retCode,retMessage,error,nil);
+            }
+        }
+        
+        
+        
+    }];
+}
+
+
++(void)obtainDeptListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"DeptListService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            NSArray *deptListArray = [returnDic objectForKey:@"deptList"];
+
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in deptListArray)
+                {
+                    
+                    DeptListModel *model = [[DeptListModel alloc]init];
+                    
+                    model.deptId = [NSString stringWithoutNil:dic[@"deptId"]];
+                    model.deptName =[NSString stringWithoutNil:dic[@"deptName"]];
+
+                    [mutabArray addObject:model];
+     
+                }
+            }
+
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error);
+            }
+            
+            
+            
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error);
+            }
+        }
+        
+        
+        
+    }];
+    
+}
+
++(void)obtainProjectListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *, NSString *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"ProjectListService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            
+            NSArray *projectListArray = [returnDic objectForKey:@"projectList"];
+            
+            NSString *totalNum = [NSString stringWithoutNil:returnDic[@"totalNum"]];
+            
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in projectListArray)
+                {
+                    
+                    ProjectListModel *model = [[ProjectListModel alloc]init];
+                    
+                    model.projectId =[NSString stringWithoutNil:dic[@"projectId"]];
+                    
+                    model.projectName =[NSString stringWithoutNil:dic[@"projectName"]];
+                    
+                    model.projectNo =[NSString stringWithoutNil:dic[@"projectNo"]];
+                   
+                    
+                    [mutabArray addObject:model];
+                    
+                    
+                    
+                }
+            }
+
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error,totalNum);
+            }
+   
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error,nil);
+            }
+        }
+        
+        
+        
+    }];
+}
+
+
++(void)saveApplyCarWithBlock:(void (^)(NSString *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppSaveNewService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+ 
+            NSString *appid = [NSString stringWithoutNil:returnDic[@"appId"]];
+    
+            if (block)
+            {
+                block(appid,retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(nil,retCode,retMessage,error);
             }
         }
         

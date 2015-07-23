@@ -68,4 +68,21 @@
  */
 +(void)obtainApplyCarHistorWithBlock:(void (^)(NSMutableArray *ListArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
 
+/**
+ * 获取部门列表
+ */
++(void)obtainDeptListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 获取项目列表
+ */
++(void)obtainProjectListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 保存 - 约车申请
+ */
+
++(void)saveApplyCarWithBlock:(void (^)(NSString  *appId,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+
 @end

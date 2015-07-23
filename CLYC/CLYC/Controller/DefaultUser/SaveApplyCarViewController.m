@@ -9,6 +9,8 @@
 #import "SaveApplyCarViewController.h"
 #import "SaveApplyCarTableViewCell.h"
 #import "SelecteCarViewController.h"
+#import "SelectDeptmentViewController.h"
+#import "SelectProjectViewController.h"
 
 @interface SaveApplyCarViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 {
@@ -247,6 +249,28 @@
         
         [self.navigationController pushViewController:selectCarMVC animated:YES];
         
+    }
+    else if (indexPath.row == 2)
+    {
+
+        SelectDeptmentViewController *selectDeptMVC = [[SelectDeptmentViewController alloc]initWithDefaultSelectedDeptModel:_deptModel selectDeptBlock:^(DeptListModel *model) {
+            _deptModel = model;
+            
+            [_tableView reloadData];
+            
+        }];
+        [self.navigationController pushViewController:selectDeptMVC animated:YES];
+        
+    }
+    else if (indexPath.row == 3)
+    {
+        SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_projectModel selectProjectBlock:^(ProjectListModel *model) {
+            _projectModel = model;
+            
+            [_tableView reloadData];
+        }];
+        
+        [self.navigationController pushViewController:selectProjectMVC animated:YES];
     }
     
 }
@@ -493,6 +517,82 @@
 
 -(void)clickSaveButton
 {
+    if ([NSString isBlankString:_carModel.carId])
+    {
+        [self displaySomeInfoWithInfo:@"请选择车辆" finsh:nil];
+        
+        return;
+    }
+    
+    if ([NSString isBlankString:_deptModel.deptId])
+    {
+        [self displaySomeInfoWithInfo:@"请选择用车部门" finsh:nil];
+        
+        return;
+    }
+    
+    if ([NSString isBlankString:_projectModel.projectId])
+    {
+        [self displaySomeInfoWithInfo:@"请选择项目" finsh:nil];
+        
+        return;
+    }
+    
+    if ([NSString isBlankString:_beginAdrr])
+    {
+        [self displaySomeInfoWithInfo:@"请选择出发地" finsh:nil];
+        
+        return;
+    }
+    
+    if ([NSString isBlankString:_endAdrr])
+    {
+        [self displaySomeInfoWithInfo:@"请选择目的地" finsh:nil];
+        
+        return;
+    }
+    
+    if ([NSString isBlankString:_endAdrr])
+    {
+        [self displaySomeInfoWithInfo:@"请选择目的地" finsh:nil];
+        
+        return;
+    }
+    
+    if ([NSString isBlankString:_carAppUse])
+    {
+        [self displaySomeInfoWithInfo:@"请填写用车人" finsh:nil];
+        
+        return;
+    }
+    
+    
+    NSArray *keyArray = @[@"carAppDeptId",@"projectId",@"projectNo",@"projectName",@"carId",@"beginAdrr",@"endAdrr",@"beginTime",@"endTime",@"carAppUserId",@"carUse",@"status",@"appTime",@"appUserId",@"appDeptId"];
+    
+    
+    //得到当前选中的时间
+    NSDate *currDate=[NSDate date];
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    NSString *str=[dateFormatter stringFromDate:currDate ];
+    
+    NSArray *valueArray = @[_deptModel.deptId,_projectModel.projectId,_projectModel.projectNo,_projectModel.projectName,_carModel.carId,_beginAdrr,_endAdrr,_beginTime,_endTime,[HXUserModel shareInstance].userId,_carUse,@"0",str,[HXUserModel shareInstance].userId,[HXUserModel shareInstance].deptId];
+    
+    [CLYCCoreBizHttpRequest saveApplyCarWithBlock:^(NSString *appId, NSString *retcode, NSString *retmessage, NSError *error) {
+        
+        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+        }
+        else
+        {
+            
+        }
+        
+        
+    } keyArray:keyArray valueArray:valueArray];
+    
     
 }
 
