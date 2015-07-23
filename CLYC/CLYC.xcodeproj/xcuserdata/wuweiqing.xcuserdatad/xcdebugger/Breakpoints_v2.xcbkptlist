@@ -57,22 +57,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CLYC/Controller/DefaultUser/ApplyCarViewController.m"
-            timestampString = "457725427.281693"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "384"
-            endingLineNumber = "384"
-            landmarkName = "-searchCarWithKeyArray:valueArray:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CLYC/Controller/DefaultUser/ApplyCarHistoryViewController.m"
             timestampString = "457894245.349404"
             startingColumnNumber = "9223372036854775807"
@@ -89,13 +73,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CLYC/CLYCHttpManager/CLYCCoreBizHttpRequest.m"
-            timestampString = "457894488.279536"
+            filePath = "CLYC/Controller/DefaultUser/SaveApplyCarViewController.m"
+            timestampString = "459276236.616846"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "+basePostRequestWithPath:keyArray:valueArray:methodName:withBlock:"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
+            landmarkName = "-textViewShouldBeginEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CLYC/View/Home/SaveApplyCarTableViewCell.m"
+            timestampString = "459276304.459378"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "-changeheightForTextView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

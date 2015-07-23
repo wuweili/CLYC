@@ -24,3 +24,47 @@
 
 
 @end
+
+@implementation DeptListModel
+
+-(id)init
+{
+    self = [super init];
+    
+    if ( self)
+    {
+        self.deptId = @"";
+        self.deptName = @"";
+    }
+    
+    return self;
+}
+
+@end
+
+
+@implementation ProjectListModel
+
+-(id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.projectId = @"";
+        self.projectName = @"";
+        self.projectNo = @"";
+    }
+    
+    return self;
+}
+
+@end
+
+
+
+
+
+
+
+

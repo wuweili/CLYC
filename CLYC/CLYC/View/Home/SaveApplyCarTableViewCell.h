@@ -15,6 +15,8 @@
 @property(nonatomic,strong)UITextView *cellTextView;
 @property(nonatomic,strong)NSIndexPath *indexPath;
 
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath;
 
+-(void)setContentWithIndexPath:(NSIndexPath *)indexPath andContentStr:(NSString *)text;
 
 @end
