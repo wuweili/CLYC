@@ -474,15 +474,15 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
                 for (NSDictionary *dic in carListArray)
                 {
                     
-                    ApplyCarListModel *model = [[ApplyCarListModel alloc]init];
+                    ApplyCarDetailModel *model = [[ApplyCarDetailModel alloc]init];
                     
                     model.appId = [NSString stringWithoutNil:dic[@"appId"]];
                     
-                    model.carAppDeptId = [NSString stringWithoutNil:dic[@"carAppDeptId"]];
+                    model.deptModel.deptId = [NSString stringWithoutNil:dic[@"carAppDeptId"]];
                     
-                    model.projectName = [NSString stringWithoutNil:dic[@"projectName"]];
+                    model.projectModel.projectName = [NSString stringWithoutNil:dic[@"projectName"]];
                     
-                    model.carCode = [NSString stringWithoutNil:dic[@"carCode"]];
+                    model.selectedCarModel.carCode = [NSString stringWithoutNil:dic[@"carCode"]];
                     
                     model.beginTime = [NSString stringWithoutNil:dic[@"beginTime"]];
                     

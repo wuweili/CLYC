@@ -448,7 +448,7 @@
     
     if ([_dataArray count]>0)
     {
-        ApplyCarListModel *model = [_dataArray objectAtIndex:indexPath.row];
+        ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
         [cell setCellContentWithApplyCarListModel:model];
         
         

@@ -195,13 +195,13 @@
     
 }
 
--(void)setCellContentWithApplyCarListModel:(ApplyCarListModel *)model
+-(void)setCellContentWithApplyCarListModel:(ApplyCarDetailModel *)model
 {
-    self.projectNameLabel.text = model.projectName;
+    self.projectNameLabel.text = model.projectModel.projectName;
     
     self.timeLabel.text = [NSString stringWithFormat:@"%@ 至 %@",model.beginTime,model.endTime];
 
-    self.carCodeLabel.text = [NSString stringWithFormat:@"%@",model.carCode];
+    self.carCodeLabel.text = [NSString stringWithFormat:@"%@",model.selectedCarModel.carCode];
     
     self.mileLabel.text = [NSString stringWithFormat:@"%@",model.totalMil];
     

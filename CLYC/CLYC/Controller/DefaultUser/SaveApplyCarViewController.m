@@ -566,6 +566,7 @@
         return;
     }
     
+    [self initMBHudWithTitle:nil];
     
     NSArray *keyArray = @[@"carAppDeptId",@"projectId",@"projectNo",@"projectName",@"carId",@"beginAdrr",@"endAdrr",@"beginTime",@"endTime",@"carAppUserId",@"carUse",@"status",@"appTime",@"appUserId",@"appDeptId"];
     
@@ -583,11 +584,14 @@
         
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
+            [self stopMBHudAndNSTimerWithmsg:@"保存成功" finsh:nil];
+            
+            
             
         }
         else
         {
-            
+            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
         
         

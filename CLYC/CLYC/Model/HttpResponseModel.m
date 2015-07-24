@@ -19,11 +19,6 @@
 
 @end
 
-@implementation ApplyCarListModel
-
-
-
-@end
 
 @implementation DeptListModel
 
@@ -62,6 +57,40 @@
 @end
 
 
+@implementation ApplyCarDetailModel
+
+-(id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.appId = @"";
+        self.deptModel = [[DeptListModel alloc] init];
+        self.projectModel = [[ProjectListModel alloc]init];
+        self.selectedCarModel = [[SelectCarInfoModel alloc]init];
+        self.beginAdrr = @"";
+        self.endAdrr = @"";
+        self.beginTime = @"";
+        self.endTime = @"";
+        self.carAppUserName = @"";
+        self.carAppUserId = @"";
+        self.carUse = @"";
+        self.status = @"";
+        self.appTime = @"";
+        self.appUserId = @"";
+        self.appDeptId = @"";
+        self.driver = @"";
+        self.driverTel = @"";
+        self.totalMil = @"";
+        
+        
+    }
+    
+    return self;
+}
+
+@end
 
 
 
