@@ -1,18 +1,19 @@
 //
-//  ApplyCarHistoryViewController.m
+//  D_ApplyCarListViewController.m
 //  CLYC
 //
-//  Created by weili.wu on 15/7/5.
+//  Created by wuweiqing on 15/7/25.
 //  Copyright (c) 2015年 weili.wu. All rights reserved.
 //
 
-#import "ApplyCarHistoryViewController.h"
+#import "D_ApplyCarListViewController.h"
 #import "MJRefresh.h"
-#import "ApplyCarHistoryTableViewCell.h"
-#import "EditApplyCarViewController.h"
+#import "DateFormate.h"
+#import "D_ApplyCarListTableViewCell.h"
 
 
-@interface ApplyCarHistoryViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+
+@interface D_ApplyCarListViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     UISegmentedControl *_segmentedSwitchView;
     
@@ -33,31 +34,18 @@
     BOOL _isUpPullLoading;
     
     int _currentDoctorPageIndex;
-
-
-
 }
 
 @end
 
-@implementation ApplyCarHistoryViewController
-
--(void)clickLeftNavMenu
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
--(void)dealloc
-{
-    
-}
+@implementation D_ApplyCarListViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"约车记录";
+    self.title = @"派车单";
     
     _dataArray = [NSMutableArray arrayWithCapacity:0];
     
@@ -76,13 +64,13 @@
     [_segmentedSwitchView setSelectedSegmentIndex:switchIndex];
     
     [self switchViewValueChanged:switchIndex];
-  
+    
     
 }
 
 -(void)initSwitchView
 {
-    NSArray* titles=[[NSArray alloc]initWithObjects:@"未出行", @"已出行", @"已取消", nil];
+    NSArray* titles=[[NSArray alloc]initWithObjects:@"近三天", @"所有派车单", nil];
     
     _segmentedSwitchView = [[UISegmentedControl alloc]initWithItems:titles];
     
@@ -114,7 +102,7 @@
     startTimeLabel.backgroundColor = [UIColor clearColor];
     startTimeLabel.text = @"项目号：";
     [_conditionView addSubview:startTimeLabel];
-
+    
     
     _projectNumTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(startTimeLabel.frame), startTimeLabel.frame.origin.y , kMainScreenWidth-CGRectGetMaxX(startTimeLabel.frame)-10, 30)];
     _projectNumTextField.placeholder=@"请输入项目号";
@@ -128,7 +116,7 @@
     _projectNumTextField.borderStyle = UITextBorderStyleRoundedRect;
     
     [_conditionView addSubview:_projectNumTextField];
-
+    
     
     
     //车辆号
@@ -139,13 +127,13 @@
     endTimeLabel.textColor = [UIColor blackColor];
     endTimeLabel.textAlignment = NSTextAlignmentRight;
     endTimeLabel.backgroundColor = [UIColor clearColor];
-    endTimeLabel.text = @"车辆号：";
+    endTimeLabel.text = @"用车人：";
     [_conditionView addSubview:endTimeLabel];
     
-  
+    
     
     _carNumTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(endTimeLabel.frame), endTimeLabel.frame.origin.y , kMainScreenWidth-CGRectGetMaxX(endTimeLabel.frame)-10, 30)];
-    _carNumTextField.placeholder=@"请输入车辆号";
+    _carNumTextField.placeholder=@"请输入用车人";
     _carNumTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _carNumTextField.autocapitalizationType=UITextAutocapitalizationTypeNone;
     _carNumTextField.font = HEL_15;
@@ -196,13 +184,13 @@
 
 
 
-#pragma mark - 查询已出行
+#pragma mark - 查询近三天
 
--(void)searchHadAlreadyGoOutDataWithUpPull:(BOOL)upPull
+-(void)searchLastThreeDayDataWithUpPull:(BOOL)upPull
 {
     [self initMBHudWithTitle:nil];
     
-    NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryState",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
+    NSArray *keyArray = @[@"queryProjectNo",@"queryCarAppUserName",@"queryBeginTime",@"queryEndTime",@"queryDriverId",@"queryStatus",@"pageSize",@"pageNum"];
     
     NSString *projectNumStr = _projectNumTextField.text;
     
@@ -211,20 +199,24 @@
         projectNumStr = @"";
     }
     
-    NSString *carNumStr = _carNumTextField.text;
+    NSString *carUserStr = _carNumTextField.text;
     
     if ([NSString isBlankString:_carNumTextField.text])
     {
-        carNumStr = @"";
+        carUserStr = @"";
     }
     
     NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
     
     
-    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"",@"1",[HXUserModel shareInstance].userId,@"20",currentPage];
+    NSString *threeDaysAterStr = [DateFormate getThreeDaysAfterTimeStr];
     
     
-    [CLYCCoreBizHttpRequest obtainApplyCarHistorWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
+    
+    NSArray *valueArray = @[projectNumStr,carUserStr,threeDaysAterStr,@"",[HXUserModel shareInstance].userId,@"1",[HXUserModel shareInstance].userId,@"2",@"20",currentPage];
+    
+    
+    [CLYCCoreBizHttpRequest driverObtainCarApplyListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
         
         [self stopRefresh];
         
@@ -241,8 +233,6 @@
             [_dataArray addObjectsFromArray:ListArry];
             
             _currentDoctorPageIndex++;
-            
-            
             
             [_tableView reloadData];
         }
@@ -257,13 +247,13 @@
 }
 
 
-#pragma mark - 查询未出行
+#pragma mark - 查询所有
 
--(void)searchHadNotAlreadyGoOutDataWithUpPull:(BOOL)upPull
+-(void)searchAllDataWithUpPull:(BOOL)upPull
 {
     [self initMBHudWithTitle:nil];
     
-    NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryState",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
+    NSArray *keyArray = @[@"queryProjectNo",@"queryCarAppUserName",@"queryBeginTime",@"queryEndTime",@"queryDriverId",@"queryStatus",@"pageSize",@"pageNum"];
     
     NSString *projectNumStr = _projectNumTextField.text;
     
@@ -272,84 +262,25 @@
         projectNumStr = @"";
     }
     
-    NSString *carNumStr = _carNumTextField.text;
+    NSString *carUserStr = _carNumTextField.text;
     
     if ([NSString isBlankString:_carNumTextField.text])
     {
-        carNumStr = @"";
+        carUserStr = @"";
     }
     
     NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
-    
-    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"",@"2",[HXUserModel shareInstance].userId,@"20",currentPage];
-    
-    
-    [CLYCCoreBizHttpRequest obtainApplyCarHistorWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
-        
-        [self stopRefresh];
-        
-        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-        {
-            [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
-          
-            if (!upPull)
-            {
-                [_dataArray removeAllObjects];
-            }
-            
-            [_dataArray addObjectsFromArray:ListArry];
-            
-            _currentDoctorPageIndex++;
-            
-            [_tableView reloadData];
   
-        }
-        else
-        {
-            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
-        }
-        
-        
-    } keyArray:keyArray valueArray:valueArray];
-}
-
-
-
-
-
-#pragma mark - 查询已取消
-
--(void)searchHadAlreadyCancleDataWithUpPull:(BOOL)upPull
-{
-    [self initMBHudWithTitle:nil];
-    
-    NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryState",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
-    
-    NSString *projectNumStr = _projectNumTextField.text;
-    
-    if ([NSString isBlankString:_projectNumTextField.text])
-    {
-        projectNumStr = @"";
-    }
-    
-    NSString *carNumStr = _carNumTextField.text;
-    
-    if ([NSString isBlankString:_carNumTextField.text])
-    {
-        carNumStr = @"";
-    }
-    
-    NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
-    
-    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"2",@"",[HXUserModel shareInstance].userId,@"20",currentPage];
+    NSArray *valueArray = @[projectNumStr,carUserStr,@"",@"",[HXUserModel shareInstance].userId,@"1",[HXUserModel shareInstance].userId,@"2",@"20",currentPage];
     
     
-    [CLYCCoreBizHttpRequest obtainApplyCarHistorWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
+    [CLYCCoreBizHttpRequest driverObtainCarApplyListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
         
         [self stopRefresh];
         
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
+            
             [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
             
             if (!upPull)
@@ -360,6 +291,7 @@
             [_dataArray addObjectsFromArray:ListArry];
             
             _currentDoctorPageIndex++;
+            
             [_tableView reloadData];
         }
         else
@@ -370,6 +302,7 @@
         
     } keyArray:keyArray valueArray:valueArray];
 }
+
 
 
 #pragma  mark - UISegmentedControl  -
@@ -398,23 +331,26 @@
     
     if (index == 0)
     {
-        [self searchHadNotAlreadyGoOutDataWithUpPull:NO];
-    }
-    else if (index == 1)
-    {
-        [self searchHadAlreadyGoOutDataWithUpPull:NO];
+        [self searchLastThreeDayDataWithUpPull:NO];
     }
     else
     {
-        [self searchHadAlreadyCancleDataWithUpPull:NO];
+        [self searchAllDataWithUpPull:NO];
     }
-    
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    if ([_dataArray count]>0)
+    {
+        ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
+        
+        CGFloat height = [D_ApplyCarListTableViewCell CellHeightWithApplyCarListModel:model];
+        
+        return height;
+    }
+    else
+        return 0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -425,8 +361,8 @@
     {
         ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
         
-        EditApplyCarViewController *editMVC = [[EditApplyCarViewController alloc]initWithApplyCarDetailModel:model];
-        [self.navigationController pushViewController:editMVC animated:YES];
+//        EditApplyCarViewController *editMVC = [[EditApplyCarViewController alloc]initWithApplyCarDetailModel:model];
+//        [self.navigationController pushViewController:editMVC animated:YES];
         
         
         
@@ -447,11 +383,11 @@
 {
     NSString *identifier = @"ApplyCarHistoryCell";
     
-    ApplyCarHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    D_ApplyCarListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil)
     {
-        cell = [[ApplyCarHistoryTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[D_ApplyCarListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
     cell.backgroundColor = [UIColor whiteColor];
@@ -469,7 +405,7 @@
     
 }
 
-#pragma mark - 点击查询 - 
+#pragma mark - 点击查询 -
 
 -(void)clickStartSearchButton
 {
@@ -489,16 +425,13 @@
     
     if (switchIndex == 0)
     {
-        [self searchHadNotAlreadyGoOutDataWithUpPull:NO];
-    }
-    else if (switchIndex == 1)
-    {
-        [self searchHadAlreadyGoOutDataWithUpPull:NO];
+        [self searchLastThreeDayDataWithUpPull:NO];
     }
     else
     {
-        [self searchHadAlreadyCancleDataWithUpPull:NO];
+        [self searchAllDataWithUpPull:NO];
     }
+    
     
 }
 
@@ -510,16 +443,14 @@
     
     if (switchIndex == 0)
     {
-        [self searchHadNotAlreadyGoOutDataWithUpPull:YES];
-    }
-    else if (switchIndex == 1)
-    {
-        [self searchHadAlreadyGoOutDataWithUpPull:YES];
+        [self searchLastThreeDayDataWithUpPull:YES];
     }
     else
     {
-        [self searchHadAlreadyCancleDataWithUpPull:YES];
+        [self searchAllDataWithUpPull:YES];
     }
+    
+   
     
 }
 
@@ -546,6 +477,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation

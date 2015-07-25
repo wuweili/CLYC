@@ -1,23 +1,25 @@
 //
-//  SaveApplyCarTableViewCell.m
+//  D_ConfirmMile2TableViewCell.m
 //  CLYC
 //
-//  Created by wuweiqing on 15/7/21.
+//  Created by wuweiqing on 15/7/26.
 //  Copyright (c) 2015年 weili.wu. All rights reserved.
 //
 
-#import "SaveApplyCarTableViewCell.h"
-
+#import "D_ConfirmMile2TableViewCell.h"
 
 const static int titleLabelwidth = 80;
 
+@implementation D_ConfirmMile2TableViewCell
 
-@implementation SaveApplyCarTableViewCell
+- (void)awakeFromNib {
+    // Initialization code
+}
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-
+    
     if (self)
     {
         self.indexPath = indexPath;
@@ -28,10 +30,10 @@ const static int titleLabelwidth = 80;
         _cellTitleLabel.textAlignment = NSTextAlignmentRight;
         _cellTitleLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_cellTitleLabel];
-
+        
         if (indexPath.row == 0)
         {
-            //用车时间
+            //用车人
             _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2 , 30)];
             _cellTextView.textColor = [UIColor blackColor];
             _cellTextView.scrollEnabled = YES;
@@ -42,12 +44,12 @@ const static int titleLabelwidth = 80;
             _cellTextView.userInteractionEnabled = NO;
             
             _cellTextView.backgroundColor = [UIColor clearColor];
-
+            
             [self.contentView addSubview:_cellTextView];
         }
         else if (indexPath.row == 1)
         {
-            //车牌号
+            //用车时间
             _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2, 30)];
             _cellTextView.textColor = [UIColor blackColor];
             _cellTextView.scrollEnabled = YES;
@@ -95,7 +97,7 @@ const static int titleLabelwidth = 80;
         }
         else if (indexPath.row == 4)
         {
-            //出发地
+            
             _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2, 30)];
             _cellTextView.textColor = [UIColor blackColor];
             _cellTextView.scrollEnabled = YES;
@@ -106,17 +108,17 @@ const static int titleLabelwidth = 80;
             _cellTextView.showsVerticalScrollIndicator = NO;
             
             _cellTextView.backgroundColor = [UIColor clearColor];
-//            if (CurrentSystemVersion >= 7.0) {
-//                
-//                UIEdgeInsets inset = _cellTextView.textContainerInset;
-//                
-//                _cellTextView.textContainerInset = UIEdgeInsetsMake(inset.top,-4,inset.bottom,-4);
-//            }
+            //            if (CurrentSystemVersion >= 7.0) {
+            //
+            //                UIEdgeInsets inset = _cellTextView.textContainerInset;
+            //
+            //                _cellTextView.textContainerInset = UIEdgeInsetsMake(inset.top,-4,inset.bottom,-4);
+            //            }
             [self.contentView addSubview:_cellTextView];
         }
         else if (indexPath.row == 5)
         {
-            //目的地
+            
             _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2, 30)];
             _cellTextView.textColor = [UIColor blackColor];
             _cellTextView.scrollEnabled = YES;
@@ -126,17 +128,17 @@ const static int titleLabelwidth = 80;
             _cellTextView.showsVerticalScrollIndicator = NO;
             
             _cellTextView.backgroundColor = [UIColor clearColor];
-//            if (CurrentSystemVersion >= 7.0) {
-//                
-//                UIEdgeInsets inset = _cellTextView.textContainerInset;
-//                
-//                _cellTextView.textContainerInset = UIEdgeInsetsMake(inset.top,-4,inset.bottom,-4);
-//            }
+            //            if (CurrentSystemVersion >= 7.0) {
+            //
+            //                UIEdgeInsets inset = _cellTextView.textContainerInset;
+            //
+            //                _cellTextView.textContainerInset = UIEdgeInsetsMake(inset.top,-4,inset.bottom,-4);
+            //            }
             [self.contentView addSubview:_cellTextView];
         }
         else if (indexPath.row == 6)
         {
-            //车辆用途
+            
             _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2, 30)];
             _cellTextView.textColor = [UIColor blackColor];
             _cellTextView.scrollEnabled = YES;
@@ -146,12 +148,12 @@ const static int titleLabelwidth = 80;
             _cellTextView.showsVerticalScrollIndicator = NO;
             
             _cellTextView.backgroundColor = [UIColor clearColor];
-//            if (CurrentSystemVersion >= 7.0) {
-//                
-//                UIEdgeInsets inset = _cellTextView.textContainerInset;
-//                
-//                _cellTextView.textContainerInset = UIEdgeInsetsMake(inset.top,-4,inset.bottom,-4);
-//            }
+            //            if (CurrentSystemVersion >= 7.0) {
+            //
+            //                UIEdgeInsets inset = _cellTextView.textContainerInset;
+            //
+            //                _cellTextView.textContainerInset = UIEdgeInsetsMake(inset.top,-4,inset.bottom,-4);
+            //            }
             [self.contentView addSubview:_cellTextView];
         }
         else
@@ -170,12 +172,11 @@ const static int titleLabelwidth = 80;
             
             [self.contentView addSubview:_cellTextView];
         }
-                
+        
     }
     
     return self;
 }
-
 
 -(id)initMileInfoWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath
 {
@@ -212,11 +213,10 @@ const static int titleLabelwidth = 80;
     return self;
 }
 
-
 -(void)setContentWithIndexPath:(NSIndexPath *)indexPath andContentStr:(NSString *)text
 {
     self.indexPath = indexPath;
-
+    
     if (indexPath.row == 0)
     {
         _cellTextView.text = text;
@@ -226,46 +226,46 @@ const static int titleLabelwidth = 80;
     {
         _cellTextView.text = text;
         [self changeheightForTextView:_cellTextView];
-
+        
     }
     else if (indexPath.row == 2)
     {
         _cellTextView.text = text;
         [self changeheightForTextView:_cellTextView];
-
-
+        
+        
     }
     else if (indexPath.row == 3)
     {
         _cellTextView.text = text;
         [self changeheightForTextView:_cellTextView];
-
-
+        
+        
     }
     else if (indexPath.row == 4)
     {
         _cellTextView.text = text;
         [self changeheightForTextView:_cellTextView];
-
+        
     }
     else if (indexPath.row == 5)
     {
         _cellTextView.text = text;
         [self changeheightForTextView:_cellTextView];
-
+        
     }
     else if (indexPath.row == 6)
     {
         _cellTextView.text = text;
         [self changeheightForTextView:_cellTextView];
-
+        
     }
     else
     {
         _cellTextView.text = text;
         [self changeheightForTextView:_cellTextView];
     }
-   
+    
 }
 
 
@@ -275,7 +275,6 @@ const static int titleLabelwidth = 80;
     _cellTextView.text = text;
     [self changeheightForTextView:_cellTextView];
 }
-
 
 #pragma mark - UITextView 高度变化及cell高度
 
@@ -290,7 +289,7 @@ const static int titleLabelwidth = 80;
     {
         heightTextView = 30;
     }
-
+    
     [textView setFrame:CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, heightTextView)];
     
     [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, kMainScreenWidth, heightTextView+14)];
@@ -324,11 +323,7 @@ const static int titleLabelwidth = 80;
         CGContextSetStrokeColorWithColor(context, CELL_LINE_COLOR.CGColor);
         CGContextStrokeRect(context, CGRectMake(107, rect.size.height, rect.size.width-107, 0.5));
     }
-   
-}
-
-- (void)awakeFromNib {
-    // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

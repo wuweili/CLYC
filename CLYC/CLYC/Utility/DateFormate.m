@@ -506,7 +506,7 @@ static NSString *MONTHFULLSPELL[] = {@"January", @"February", @"March", @"April"
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     
     
     NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
@@ -530,7 +530,7 @@ static NSString *MONTHFULLSPELL[] = {@"January", @"February", @"March", @"April"
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     [formatter setTimeZone:timeZone];
 
@@ -568,5 +568,35 @@ static NSString *MONTHFULLSPELL[] = {@"January", @"February", @"March", @"April"
     
     return time;
 }
+
++(NSString *)getThreeDaysAfterTimeStr
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *comps;
+    comps = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[[NSDate alloc] init]];
+    
+    [comps setHour:+24]; //+24表示获取下一天的date，-24表示获取前一天的date；
+    [comps setMinute:0];
+    [comps setSecond:0];
+    
+    NSDate *nowDate = [NSDate date];
+    
+    NSDate *threeDaysAfterDate = [calendar dateByAddingComponents:comps toDate:nowDate options:0];   //showDate表示某天的date，nowDate表示showDate的前一天或下一天的date
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/beijing"]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSString *threeDaysAfterDateStr =[formatter stringFromDate:threeDaysAfterDate];
+    
+    return threeDaysAfterDateStr;
+    
+    
+}
+
 
 @end

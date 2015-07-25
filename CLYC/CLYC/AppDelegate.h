@@ -23,6 +23,6 @@
 
 - (void)goToMainView;
 
-
+-(void)logOut;
 @end
 

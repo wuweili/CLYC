@@ -75,14 +75,25 @@
         self.endTime = @"";
         self.carAppUserName = @"";
         self.carAppUserId = @"";
+        self.carAppUserTel = @"";
         self.carUse = @"";
         self.status = @"";
         self.appTime = @"";
         self.appUserId = @"";
-        self.appDeptId = @"";
+        self.applyDeptModel =[[DeptListModel alloc] init];
         self.driver = @"";
         self.driverTel = @"";
         self.totalMil = @"";
+        
+        self.beginMil = @"";
+        self.beginMilStatus = @"";
+        self.beginMilRemark = @"";
+        self.finishMil = @"";
+        self.addMil = @"";
+        self.finishMilStatus = @"";
+        self.finishMilRemark = @"";
+        
+        
         
         
     }

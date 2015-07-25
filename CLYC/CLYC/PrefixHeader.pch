@@ -23,6 +23,4 @@
 #import "CLYCCoreBizHttpRequest.h"
 #import "CLYCHttpDefine.h"
 #import "HttpResponseModel.h"
-
-
 #endif

@@ -12,6 +12,7 @@
 #import "XCCenterSecondCollectionViewCell.h"
 #import "ApplyCarViewController.h"
 #import "ApplyCarHistoryViewController.h"
+#import "ConfirmMileViewController.h"
 
 
 
@@ -208,7 +209,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDLogInfo(@"选择%d",indexPath.row);
+    DDLogInfo(@"选择%ld",(long)indexPath.row);
     switch (indexPath.row)
     {
         case 0:
@@ -228,6 +229,8 @@
             
         case 2:
         {
+            ConfirmMileViewController *confirmMVC = [[ConfirmMileViewController alloc]init];
+            [self.navigationController pushViewController:confirmMVC animated:YES];
         }
             break;
             

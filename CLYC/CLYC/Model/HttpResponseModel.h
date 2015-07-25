@@ -135,7 +135,7 @@
 @property(nonatomic,strong)NSString *beginAdrr;
 
 /**
- * 始发地
+ * 目的地
  */
 @property(nonatomic,strong)NSString *endAdrr;
 
@@ -163,6 +163,11 @@
 @property(nonatomic,strong)NSString *carAppUserId;
 
 /**
+ * 用车人电话
+ */
+@property(nonatomic,strong)NSString *carAppUserTel;
+
+/**
  * 车辆用途
  */
 @property(nonatomic,strong)NSString *carUse;
@@ -185,12 +190,29 @@
  */
 @property(nonatomic,strong)NSString *appUserId;
 
+/**
+ * 申请人名称
+ */
+@property(nonatomic,strong)NSString *appUserName;
+
 
 /**
- * 申请人部门主键
+ * 申请部门
+ * deptId  = appDeptId  申请人部门主键
+ * deptName = appDeptName 申请人部门名称
  */
-@property(nonatomic,strong)NSString *appDeptId;
+@property(nonatomic,strong)DeptListModel *applyDeptModel;
 
+///**
+// * 申请人部门主键
+// */
+//@property(nonatomic,strong)NSString *appDeptId;
+//
+//
+///**
+// * 申请人部门名称
+// */
+//@property(nonatomic,strong)NSString *appDeptName;
 
 /**
  * 跟车司机
@@ -206,6 +228,43 @@
  * 里程
  */
 @property(nonatomic,strong)NSString *totalMil ;
+
+
+/**
+ * 开始里程
+ */
+@property(nonatomic,strong)NSString *beginMil ;
+
+/**
+ * 开始里程确 认状态
+ */
+@property(nonatomic,strong)NSString *beginMilStatus ;
+
+/**
+ * 开始里程备注
+ */
+@property(nonatomic,strong)NSString *beginMilRemark ;
+
+/**
+ * 结束里程
+ */
+@property(nonatomic,strong)NSString *finishMil ;
+
+/**
+ * ￼加价里程
+ */
+@property(nonatomic,strong)NSString *addMil ;
+
+/**
+ * ￼结束里程确认状态
+ */
+@property(nonatomic,strong)NSString *finishMilStatus ;
+
+/**
+ * ￼结束里程备注
+ */
+@property(nonatomic,strong)NSString *finishMilRemark ;
+
 
 
 

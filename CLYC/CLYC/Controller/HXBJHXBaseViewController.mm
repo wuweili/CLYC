@@ -119,7 +119,8 @@ static  BOOL hideLeft  = NO;
 
 -(void)clickLeftNavMenu
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated

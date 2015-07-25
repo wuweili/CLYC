@@ -64,6 +64,7 @@
 
 +(HXUserModel *)shareInstance;
 
+-(void)clear;
 
 
 @end

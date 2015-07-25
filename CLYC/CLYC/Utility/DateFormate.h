@@ -82,4 +82,6 @@
 
 +(NSString *)getCurrentTimeWithNoDian:(NSDate*)date;
 
++(NSString *)getThreeDaysAfterTimeStr;
+
 @end

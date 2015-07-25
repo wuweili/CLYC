@@ -71,5 +71,32 @@ static HXUserModel *instance = nil;
     return self;
 }
 
+-(void)clear
+{
+    self.userId = @"";
+    
+    self.loginId = @"";
+    
+    self.userName = @"";
+    
+    self.sex = @"";
+    
+    self.email = @"";
+    
+    self.telphone = @"";
+    
+    self.roleNo = @"";
+    
+    self.deptId = @"";
+    
+    self.deptName = @"";
+    
+    self.password = @"";
+    
+    self.sign = @"";
+    
+    self.isDefaultUser = YES;
+}
+
 
 @end

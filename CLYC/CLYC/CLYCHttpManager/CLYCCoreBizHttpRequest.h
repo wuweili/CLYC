@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HttpResponseModel.h"
 
 
 @interface BaseHttpRequest : NSObject
@@ -84,5 +85,45 @@
 
 +(void)saveApplyCarWithBlock:(void (^)(NSString  *appId,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
 
+/**
+ * 保存 - 约车申请 详情
+ */
++(void)obtainApplyCarDetailWithBlock:(void (^)(ApplyCarDetailModel *model,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 修改 -约车申请
+ */
++(void)editApplyCarWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 提交 -约车申请
+ */
++(void)commitApplyCarWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 删除 -约车申请
+ */
++(void)deleteApplyCarWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 里程单确认查询（申请人）
+ */
++(void)obtainMileOrderConfirmListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+
+/**
+ * 用户起始里程确认
+ */
++(void)userConfirmBeginMileWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 用户结束里程确认
+ */
++(void)userConfirmFinishMileWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 派车单查询
+ */
++(void)driverObtainCarApplyListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
 
 @end

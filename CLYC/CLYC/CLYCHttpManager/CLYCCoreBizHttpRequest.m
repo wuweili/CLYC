@@ -674,4 +674,351 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     }];
 }
 
++(void)obtainApplyCarDetailWithBlock:(void (^)(ApplyCarDetailModel *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppEditService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            
+            ApplyCarDetailModel *model = [[ApplyCarDetailModel alloc]init];
+            
+            model.appId = [NSString stringWithoutNil:dic[@"appId"]];
+            
+            model.deptModel.deptId = [NSString stringWithoutNil:dic[@"carAppDeptId"]];
+            model.deptModel.deptName = [NSString stringWithoutNil:dic[@"carAppDeptName"]];
+            
+            model.projectModel.projectId = [NSString stringWithoutNil:dic[@"projectId"]];
+            model.projectModel.projectName = [NSString stringWithoutNil:dic[@"projectName"]];
+            model.projectModel.projectNo = [NSString stringWithoutNil:dic[@"projectNo"]];
+            
+            model.selectedCarModel.carId = [NSString stringWithoutNil:dic[@"carId"]];
+            model.selectedCarModel.carCode = [NSString stringWithoutNil:dic[@"carCode"]];
+            
+            model.beginAdrr = [NSString stringWithoutNil:dic[@"beginAdrr"]];
+            model.endAdrr = [NSString stringWithoutNil:dic[@"endAdrr"]];
+
+            model.beginTime = [NSString stringWithoutNil:dic[@"beginTime"]];
+            
+            model.endTime = [NSString stringWithoutNil:dic[@"endTime"]];
+            
+            model.carAppUserId = [NSString stringWithoutNil:dic[@"carAppUserId"]];
+            model.carAppUserName = [NSString stringWithoutNil:dic[@"carAppUserName"]];
+            
+            model.carUse = [NSString stringWithoutNil:dic[@"carUse"]];
+
+            model.status = [NSString stringWithoutNil:dic[@"status"]];
+            
+            model.appTime = [NSString stringWithoutNil:dic[@"appTime"]];
+
+            model.appUserId = [NSString stringWithoutNil:dic[@"appUserId"]];
+            model.appUserName = [NSString stringWithoutNil:dic[@"appUserName"]];
+
+            model.applyDeptModel.deptId = [NSString stringWithoutNil:dic[@"appDeptId"]];
+            model.applyDeptModel.deptName = [NSString stringWithoutNil:dic[@"appDeptName"]];
+            
+            
+            model.beginMil = [NSString stringWithoutNil:dic[@"beginMil"]];
+
+            model.beginMilStatus = [NSString stringWithoutNil:dic[@"beginMilStatus"]];
+
+            model.beginMilRemark = [NSString stringWithoutNil:dic[@"beginMilRemark"]];
+
+            model.finishMil = [NSString stringWithoutNil:dic[@"finishMil"]];
+
+            model.addMil = [NSString stringWithoutNil:dic[@"addMil"]];
+
+            model.finishMilStatus = [NSString stringWithoutNil:dic[@"finishMilStatus"]];
+
+            model.finishMilRemark = [NSString stringWithoutNil:dic[@"finishMilRemark"]];
+
+            if (block)
+            {
+                block(model,retCode,retMessage,error);
+            }
+    
+        }
+        else
+        {
+            if (block)
+            {
+                block(nil,retCode,retMessage,error);
+            }
+        }
+  
+    }];
+}
+
++(void)editApplyCarWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppSaveEditService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+        
+        
+        
+    }];
+}
+
++(void)commitApplyCarWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppUpdateStautsService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+        
+        
+        
+    }];
+}
+
++(void)deleteApplyCarWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppDelService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+        
+        
+        
+    }];
+}
+
++(void)obtainMileOrderConfirmListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *, NSString *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"QueryMilConfirmByUserService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            
+            NSArray *carListArray = [returnDic objectForKey:@"carAppList"];
+            
+            NSString *totalNum = [NSString stringWithoutNil:returnDic[@"totalNum"]];
+            
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in carListArray)
+                {
+                    
+                    ApplyCarDetailModel *model = [[ApplyCarDetailModel alloc]init];
+                    
+                    model.appId = [NSString stringWithoutNil:dic[@"appId"]];
+                    
+                    model.deptModel.deptName = [NSString stringWithoutNil:dic[@"carAppDeptName"]];
+                    
+                    model.projectModel.projectName = [NSString stringWithoutNil:dic[@"projectName"]];
+                    
+                    model.selectedCarModel.carCode = [NSString stringWithoutNil:dic[@"carCode"]];
+                    
+                    model.beginTime = [NSString stringWithoutNil:dic[@"beginTime"]];
+                    
+                    model.endTime = [NSString stringWithoutNil:dic[@"endTime"]];
+                    
+                    model.carAppUserName = [NSString stringWithoutNil:dic[@"carAppUserName"]];
+                    
+                    model.driver = [NSString stringWithoutNil:dic[@"driver"]];
+                    
+                    model.driverTel = [NSString stringWithoutNil:dic[@"driverTel"]];
+                    
+                    model.beginAdrr = [NSString stringWithoutNil:dic[@"beginAdrr"]];
+                    model.endAdrr = [NSString stringWithoutNil:dic[@"endAdrr"]];
+                    
+                    model.status = [NSString stringWithoutNil:dic[@"status"]];
+                    
+                    [mutabArray addObject:model];
+         
+                }
+            }
+ 
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error,totalNum);
+            }
+     
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error,nil);
+            }
+        }
+ 
+    }];
+
+}
+
++(void)userConfirmBeginMileWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppBeginMilCheckService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+    }];
+}
+
++(void)userConfirmFinishMileWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppFinishMilCheckService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+    }];
+}
+
++(void)driverObtainCarApplyListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *, NSString *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppByDriverService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            
+            NSArray *carListArray = [returnDic objectForKey:@"carAppList"];
+            
+            NSString *totalNum = [NSString stringWithoutNil:returnDic[@"totalNum"]];
+            
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in carListArray)
+                {
+                    
+                    ApplyCarDetailModel *model = [[ApplyCarDetailModel alloc]init];
+                    
+                    model.appId = [NSString stringWithoutNil:dic[@"appId"]];
+                    
+                    model.deptModel.deptId = [NSString stringWithoutNil:dic[@"carAppDeptId"]];
+                    
+                    model.projectModel.projectName = [NSString stringWithoutNil:dic[@"projectName"]];
+                    
+                    model.selectedCarModel.carCode = [NSString stringWithoutNil:dic[@"carCode"]];
+                    
+                    model.beginTime = [NSString stringWithoutNil:dic[@"beginTime"]];
+                    
+                    model.endTime = [NSString stringWithoutNil:dic[@"endTime"]];
+                    
+                    model.carAppUserName = [NSString stringWithoutNil:dic[@"carAppUserName"]];
+    
+                    model.carAppUserTel =[NSString stringWithoutNil:dic[@"carAppUserTel"]];
+                    
+                    model.beginAdrr = [NSString stringWithoutNil:dic[@"beginAdrr"]];
+                    
+                    model.endAdrr =[NSString stringWithoutNil:dic[@"endAdrr"]];
+                    
+                    
+                    model.status = [NSString stringWithoutNil:dic[@"status"]];
+                
+                    [mutabArray addObject:model];
+           
+                }
+            }
+    
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error,totalNum);
+            }
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error,nil);
+            }
+        }
+    }];
+
+}
+
+
 @end

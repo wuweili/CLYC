@@ -11,32 +11,17 @@
 #import "SelecteCarViewController.h"
 #import "SelectDeptmentViewController.h"
 #import "SelectProjectViewController.h"
+#import "EditApplyCarViewController.h"
 
 @interface SaveApplyCarViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 {
     UITableView *_tableView;
-    
-    
-    NSString *_beginTime;
-    NSString *_endTime;
-    
-    SelectCarInfoModel *_carModel;
-    
-    DeptListModel *_deptModel;
-    
-    ProjectListModel *_projectModel;
-    
-    NSString *_beginAdrr;//始发地
-    
-    NSString *_endAdrr;//目的地
-    
-    NSString *_carUse;//使用用途
-    
-    NSString *_carAppUse;//用车人
 
     NSMutableArray *_dataArray;
     
     NSIndexPath *_currentFirstRespondIndexPath;
+    
+    ApplyCarDetailModel *_applyCarModel;
 
    
 }
@@ -58,9 +43,16 @@
     
     if (self)
     {
-        _beginTime =beginTime;
-        _endTime =endTime;
-        _carModel =selectedCarModel;
+        if (!_applyCarModel)
+        {
+            _applyCarModel = [[ApplyCarDetailModel alloc]init];
+        }
+        
+        _applyCarModel.beginTime =beginTime;
+        _applyCarModel.endTime =endTime;
+        _applyCarModel.selectedCarModel =selectedCarModel;
+        
+        
     }
     
     
@@ -110,17 +102,20 @@
 -(void)initData
 {
     _dataArray = [NSMutableArray arrayWithObjects:@"用车时间：",@"车牌号：",@"用车部门：",@"项目名称：",@"出发地：",@"目的地：",@"车辆用途：",@"用车人：", nil];
-    _deptModel = [[DeptListModel alloc]init];
-    _deptModel.deptId = [HXUserModel shareInstance].deptId;
-    _deptModel.deptName =[HXUserModel shareInstance].deptName;
     
-    _projectModel = [[ProjectListModel alloc] init];
+    if (!_applyCarModel)
+    {
+        _applyCarModel = [[ApplyCarDetailModel alloc]init];
+    }
     
-    _beginAdrr = @"";
-    _endAdrr = @"";
-    _carUse = @"";
-
-    _carAppUse =[HXUserModel shareInstance].userName;
+    _applyCarModel.deptModel.deptId = [HXUserModel shareInstance].deptId;
+    _applyCarModel.deptModel.deptName =[HXUserModel shareInstance].deptName;
+    
+    _applyCarModel.applyDeptModel.deptId = [HXUserModel shareInstance].deptId;
+    _applyCarModel.applyDeptModel.deptName = [HXUserModel shareInstance].deptName;
+    
+    
+    _applyCarModel.carAppUserName =[HXUserModel shareInstance].userName;
     
     _currentFirstRespondIndexPath = nil;
    
@@ -135,11 +130,11 @@
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.backgroundView = nil;
-//    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    if ([_tableView respondsToSelector:@selector(setSeparatorInset:)])
-    {
-        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 97, 0, 0)];
-    }
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    if ([_tableView respondsToSelector:@selector(setSeparatorInset:)])
+//    {
+//        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 97, 0, 0)];
+//    }
     
     
     [self.view addSubview:_tableView];
@@ -175,39 +170,39 @@
 {
     if (indexPath.row == 0)
     {
-        NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_beginTime,_endTime];
+        NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
         return [self heightForRowWitUITextViewText:timeStr] +14;
     }
     else if (indexPath.row == 1)
     {
-        return [self heightForRowWitUITextViewText:_carModel.carCode] +14;
+        return [self heightForRowWitUITextViewText:_applyCarModel.selectedCarModel.carCode] +14;
     }
     else if (indexPath.row == 2)
     {
-        return [self heightForRowWitUITextViewText:_deptModel.deptName] +14;
+        return [self heightForRowWitUITextViewText:_applyCarModel.deptModel.deptName] +14;
 
     }
     else if (indexPath.row == 3)
     {
-        return [self heightForRowWitUITextViewText:_projectModel.projectName] +14;
+        return [self heightForRowWitUITextViewText:_applyCarModel.projectModel.projectName] +14;
     }
     else if (indexPath.row == 4)
     {
-        return [self heightForRowWitUITextViewText:_beginAdrr] +14;
+        return [self heightForRowWitUITextViewText:_applyCarModel.beginAdrr] +14;
     }
     else if (indexPath.row == 5)
     {
-        return [self heightForRowWitUITextViewText:_endAdrr] +14;
+        return [self heightForRowWitUITextViewText:_applyCarModel.endAdrr] +14;
 
     }
     else if (indexPath.row == 6)
     {
-        return [self heightForRowWitUITextViewText:_carUse] +14;
+        return [self heightForRowWitUITextViewText:_applyCarModel.carUse] +14;
 
     }
     else
     {
-        return [self heightForRowWitUITextViewText:_carAppUse] +14;
+        return [self heightForRowWitUITextViewText:_applyCarModel.carAppUserName] +14;
 
     }
 }
@@ -238,9 +233,9 @@
     
     if (indexPath.row == 1)
     {
-        SelecteCarViewController *selectCarMVC = [[SelecteCarViewController alloc]initWithDefaultSelectedCarModel:_carModel beginTime:_beginTime endTime:_endTime selectCarBlock:^(SelectCarInfoModel *model) {
+        SelecteCarViewController *selectCarMVC = [[SelecteCarViewController alloc]initWithDefaultSelectedCarModel:_applyCarModel.selectedCarModel beginTime:_applyCarModel.beginTime endTime:_applyCarModel.endTime selectCarBlock:^(SelectCarInfoModel *model) {
             
-            _carModel = model;
+            _applyCarModel.selectedCarModel = model;
             
             [_tableView reloadData];
             
@@ -253,8 +248,8 @@
     else if (indexPath.row == 2)
     {
 
-        SelectDeptmentViewController *selectDeptMVC = [[SelectDeptmentViewController alloc]initWithDefaultSelectedDeptModel:_deptModel selectDeptBlock:^(DeptListModel *model) {
-            _deptModel = model;
+        SelectDeptmentViewController *selectDeptMVC = [[SelectDeptmentViewController alloc]initWithDefaultSelectedDeptModel:_applyCarModel.deptModel selectDeptBlock:^(DeptListModel *model) {
+            _applyCarModel.deptModel = model;
             
             [_tableView reloadData];
             
@@ -264,8 +259,8 @@
     }
     else if (indexPath.row == 3)
     {
-        SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_projectModel selectProjectBlock:^(ProjectListModel *model) {
-            _projectModel = model;
+        SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_applyCarModel.projectModel selectProjectBlock:^(ProjectListModel *model) {
+            _applyCarModel.projectModel = model;
             
             [_tableView reloadData];
         }];
@@ -305,40 +300,40 @@
     
     if (indexPath.row == 0)
     {
-       NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_beginTime,_endTime];
+       NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
         celleStr = timeStr;
     }
     else if (indexPath.row == 1)
     {
-        celleStr = _carModel.carCode;
+        celleStr = _applyCarModel.selectedCarModel.carCode;
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if (indexPath.row == 2)
     {
-        celleStr = _deptModel.deptName;
+        celleStr = _applyCarModel.deptModel.deptName;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if (indexPath.row == 3)
     {
-        celleStr = _projectModel.projectName;
+        celleStr = _applyCarModel.projectModel.projectName;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if (indexPath.row == 4)
     {
-        celleStr = _beginAdrr;
+        celleStr = _applyCarModel.beginAdrr;
     }
     else if (indexPath.row == 5)
     {
-        celleStr = _endAdrr;
+        celleStr = _applyCarModel.endAdrr;
     }
     else if (indexPath.row == 6)
     {
-        celleStr = _carUse;
+        celleStr = _applyCarModel.carUse;
     }
     else
     {
-        celleStr = _carAppUse;
+        celleStr = _applyCarModel.carAppUserName;
     }
     
     
@@ -351,7 +346,7 @@
 -(CGFloat)heightForRowWitUITextViewText:(NSString  *)text
 {
     float fPadding = 16.0; // 8.0px x 2
-    CGSize constraint = CGSizeMake(200 - fPadding, CGFLOAT_MAX);
+    CGSize constraint = CGSizeMake(kMainScreenWidth - 25-2-95 - fPadding, CGFLOAT_MAX);
     CGSize size = [text sizeWithFont:HEL_14 constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
     float fHeight = size.height + 16.0;
     if (fHeight<30)
@@ -360,6 +355,8 @@
     }
     return fHeight;
 }
+
+
 
 
 #pragma mark - UITextViewDelegate
@@ -387,16 +384,16 @@
     }
     else if (textView.tag == 1004)
     {
-        _beginAdrr = textView.text;
+        _applyCarModel.beginAdrr = textView.text;
     }
     else if (textView.tag == 1005)
     {
-        _endAdrr = textView.text;
+        _applyCarModel.endAdrr = textView.text;
         
     }
     else if (textView.tag == 1006)
     {
-        _carUse = textView.text;
+        _applyCarModel.carUse = textView.text;
     }
     
     
@@ -517,49 +514,44 @@
 
 -(void)clickSaveButton
 {
-    if ([NSString isBlankString:_carModel.carId])
+    if ([NSString isBlankString:_applyCarModel.selectedCarModel.carId])
     {
         [self displaySomeInfoWithInfo:@"请选择车辆" finsh:nil];
         
         return;
     }
     
-    if ([NSString isBlankString:_deptModel.deptId])
+    if ([NSString isBlankString:_applyCarModel.deptModel.deptId])
     {
         [self displaySomeInfoWithInfo:@"请选择用车部门" finsh:nil];
         
         return;
     }
     
-    if ([NSString isBlankString:_projectModel.projectId])
+    if ([NSString isBlankString:_applyCarModel.projectModel.projectId])
     {
         [self displaySomeInfoWithInfo:@"请选择项目" finsh:nil];
         
         return;
     }
     
-    if ([NSString isBlankString:_beginAdrr])
+    if ([NSString isBlankString:_applyCarModel.beginAdrr])
     {
         [self displaySomeInfoWithInfo:@"请选择出发地" finsh:nil];
         
         return;
     }
     
-    if ([NSString isBlankString:_endAdrr])
+    if ([NSString isBlankString:_applyCarModel.endAdrr])
     {
         [self displaySomeInfoWithInfo:@"请选择目的地" finsh:nil];
         
         return;
     }
     
-    if ([NSString isBlankString:_endAdrr])
-    {
-        [self displaySomeInfoWithInfo:@"请选择目的地" finsh:nil];
-        
-        return;
-    }
     
-    if ([NSString isBlankString:_carAppUse])
+    
+    if ([NSString isBlankString:_applyCarModel.carAppUserName])
     {
         [self displaySomeInfoWithInfo:@"请填写用车人" finsh:nil];
         
@@ -578,7 +570,7 @@
     [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     
-    NSArray *valueArray = @[_deptModel.deptId,_projectModel.projectId,_projectModel.projectNo,_projectModel.projectName,_carModel.carId,_beginAdrr,_endAdrr,_beginTime,_endTime,[HXUserModel shareInstance].userId,_carUse,@"0",str,[HXUserModel shareInstance].userId,[HXUserModel shareInstance].deptId];
+    NSArray *valueArray = @[_applyCarModel.deptModel.deptId,_applyCarModel.projectModel.projectId,_applyCarModel.projectModel.projectNo,_applyCarModel.projectModel.projectName,_applyCarModel.selectedCarModel.carId,_applyCarModel.beginAdrr,_applyCarModel.endAdrr,_applyCarModel.beginTime,_applyCarModel.endTime,[HXUserModel shareInstance].userId,_applyCarModel.carUse,@"0",str,[HXUserModel shareInstance].userId,_applyCarModel.applyDeptModel.deptId];
     
     [CLYCCoreBizHttpRequest saveApplyCarWithBlock:^(NSString *appId, NSString *retcode, NSString *retmessage, NSError *error) {
         
@@ -586,8 +578,11 @@
         {
             [self stopMBHudAndNSTimerWithmsg:@"保存成功" finsh:nil];
             
+            _applyCarModel.appId =appId;
             
-            
+            EditApplyCarViewController *editMVC = [[EditApplyCarViewController alloc]initWithApplyCarDetailModel:_applyCarModel];
+            [self.navigationController pushViewController:editMVC animated:YES];
+   
         }
         else
         {

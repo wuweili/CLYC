@@ -9,6 +9,7 @@
 #import "CLYCLeftViewController.h"
 #import "XCLeftSideTableViewCell.h"
 #import "AppDelegate.h"
+#import "PersonalInfoViewController.h"
 
 @interface CLYCLeftViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -147,7 +148,11 @@
             {
                 //个人信息
                 
-                [self displaySomeInfoWithInfo:@"即将推出，敬请期待" finsh:nil];
+                PersonalInfoViewController *personalMVC = [[PersonalInfoViewController alloc]init];
+                [self.navigationController pushViewController:personalMVC animated:YES];
+                
+                
+//                [self displaySomeInfoWithInfo:@"即将推出，敬请期待" finsh:nil];
 
             }
                 break;

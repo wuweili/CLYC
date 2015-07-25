@@ -1,20 +1,15 @@
 //
-//  EditApplyCarViewController.m
+//  ConfirmMile2ViewController.m
 //  CLYC
 //
-//  Created by weili.wu on 15/7/24.
+//  Created by wuweiqing on 15/7/25.
 //  Copyright (c) 2015年 weili.wu. All rights reserved.
 //
 
-#import "EditApplyCarViewController.h"
+#import "ConfirmMile2ViewController.h"
 #import "SaveApplyCarTableViewCell.h"
-#import "SelecteCarViewController.h"
-#import "SelectDeptmentViewController.h"
-#import "SelectProjectViewController.h"
-#import "DateFormate.h"
-#import "SaveApplyCarViewController.h"
 
-@interface EditApplyCarViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
+@interface ConfirmMile2ViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 {
     UITableView *_tableView;
     
@@ -25,17 +20,14 @@
     ApplyCarDetailModel *_applyCarModel;
     
     NSIndexPath *_currentFirstRespondIndexPath;
-    
+
     UIView *_editFootView;
-    UIView *_cancleFootView;
-    
-    
 
 }
 
 @end
 
-@implementation EditApplyCarViewController
+@implementation ConfirmMile2ViewController
 
 -(id)initWithApplyCarDetailModel:(ApplyCarDetailModel *)model;
 {
@@ -48,30 +40,6 @@
     
     return self;
 }
-
--(void)clickLeftNavMenu
-{
-    NSArray *array = self.navigationController.viewControllers;
-    
-    NSMutableArray *resultArray = [NSMutableArray arrayWithArray:array];
-    
-    for (int index = 0; index < [resultArray count];index ++)
-    {
-        UIViewController *temp = [resultArray objectAtIndex:index];
-        if ([temp isKindOfClass:[SaveApplyCarViewController class]])
-        {
-            [resultArray removeObjectAtIndex:index];
-            break;
-        }
-        
-    }
-    [self.navigationController setViewControllers:resultArray animated:NO];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -92,39 +60,38 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self];;
 }
 
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self initUI];
     [self initData];
     
     [self initTableView];
+    
     [self initEditFootView];
-    [self initCancleFootView];
     
     [self obtainData];
-    
 }
 
 -(void)initUI
 {
     self.view.backgroundColor = UIColorFromRGB(0xf3f3f3);
-    self.title = @"约车申请";
+    self.title = @"里程确认";
     
-    [IMUnitsMethods drawTheRightBarBtn:self function:@selector(updateApplyCarStatus) btnTitle:@"提交" bgImage:nil];
 }
 
 -(void)initData
 {
-    _dataArray = [NSMutableArray arrayWithObjects:@"用车时间：",@"车牌号：",@"用车部门：",@"项目名称：",@"出发地：",@"目的地：",@"车辆用途：",@"用车人：", nil];
+    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：", nil];
+    _secondDataArray = [NSMutableArray arrayWithCapacity:0];
     
     if (!_applyCarModel)
     {
         _applyCarModel = [[ApplyCarDetailModel alloc]init];
     }
-    
-    _secondDataArray = [NSMutableArray arrayWithCapacity:0];
-    
     _currentFirstRespondIndexPath = nil;
     
 }
@@ -137,54 +104,39 @@
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.backgroundView = nil;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    if ([_tableView respondsToSelector:@selector(setSeparatorInset:)])
-//    {
-//        [_tableView setSeparatorInset:UIEdgeInsetsMake(0, 97, 0, 0)];
-//    }
-    
-    
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }
 
 -(void)initEditFootView
 {
-    _editFootView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 50)];
+    _editFootView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 70)];
     
     _editFootView.backgroundColor = UIColorFromRGB(0xf3f3f3);
     
-    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(15, 10, kMainScreenWidth-30, 30)];
+    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(15, 10, (kMainScreenWidth-30-30)/2, 30)];
     [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search.png"] forState:UIControlStateNormal];
     
     [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search_select.png"] forState:UIControlStateHighlighted];
     
-    [startSearchButton setTitle:@"修改" forState:UIControlStateNormal];
+    [startSearchButton setTitle:@"同意" forState:UIControlStateNormal];
     
     [startSearchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [startSearchButton addTarget:self action:@selector(clickEditButton) forControlEvents:UIControlEventTouchUpInside];
+    [startSearchButton addTarget:self action:@selector(clickAgreeButton) forControlEvents:UIControlEventTouchUpInside];
     [_editFootView addSubview:startSearchButton];
     
-    _tableView.tableFooterView = _editFootView;
+    UIButton *unAgreeButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(startSearchButton.frame)+30, 10, (kMainScreenWidth-30-30)/2, 30)];
+    [unAgreeButton setBackgroundImage:[UIImage imageNamed:@"button_search.png"] forState:UIControlStateNormal];
     
-}
+    [unAgreeButton setBackgroundImage:[UIImage imageNamed:@"button_search_select.png"] forState:UIControlStateHighlighted];
+    
+    [unAgreeButton setTitle:@"不同意" forState:UIControlStateNormal];
+    
+    [unAgreeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [unAgreeButton addTarget:self action:@selector(clickUnAgreeButton) forControlEvents:UIControlEventTouchUpInside];
+    [_editFootView addSubview:unAgreeButton];
 
--(void)initCancleFootView
-{
-    _cancleFootView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 50)];
-    
-    _cancleFootView.backgroundColor = UIColorFromRGB(0xf3f3f3);
-    
-    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(15, 10, kMainScreenWidth-30, 30)];
-    [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search.png"] forState:UIControlStateNormal];
-    
-    [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search_select.png"] forState:UIControlStateHighlighted];
-    
-    [startSearchButton setTitle:@"取消" forState:UIControlStateNormal];
-    
-    [startSearchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [startSearchButton addTarget:self action:@selector(clickCancleButton) forControlEvents:UIControlEventTouchUpInside];
-    [_cancleFootView addSubview:startSearchButton];
-    
+    _tableView.tableFooterView = _editFootView;
     
 }
 
@@ -201,37 +153,7 @@
             [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
             
             _applyCarModel = model;
-            
-            if (_applyCarModel.status.integerValue ==1 )
-            {
-                NSString *currentTime = [NSString stringWithFormat:@"%lld",(long long)[[NSDate date]timeIntervalSince1970]*1000];
-                
-                NSString *appBeginTime = [DateFormate getTimeIntervalFromTimeStr:_applyCarModel.beginTime ];
-                
-                NSInteger residualDays = appBeginTime.longLongValue - currentTime.longLongValue;
-                
-                if (residualDays >0)
-                {
-                    _tableView.tableFooterView = nil;
-                    self.navigationItem.rightBarButtonItem = nil;
-                    _tableView.tableFooterView = _cancleFootView;
-                    
-                }
-                else
-                {
-                    
-                    _tableView.tableFooterView = nil;
-                    self.navigationItem.rightBarButtonItem = nil;
-                }
-                
-            }
-            else if (_applyCarModel.status.integerValue != 0)
-            {
-                _tableView.tableFooterView = nil;
-                self.navigationItem.rightBarButtonItem = nil;
-            }
-            
-            
+
             if (_applyCarModel.beginMilStatus.integerValue != 0 )
             {
                 NSDictionary *dic1 = @{@"mileInfoKey":@"开始里程(公里)：",@"mileInfoValue":_applyCarModel.beginMil};
@@ -257,12 +179,22 @@
                 [_secondDataArray addObject:dic2];
                 
                 
+                if ([NSString isBlankString:_applyCarModel.beginMilRemark])
+                {
+                    if (_applyCarModel.beginMilStatus.integerValue != 1)
+                    {
+                        _applyCarModel.beginMilRemark = @"无";
+                    
+                    }
+                    
+                }
+    
                 NSDictionary *dic3 = @{@"mileInfoKey":@"开始里程备注：",@"mileInfoValue":_applyCarModel.beginMilRemark};
                 
                 [_secondDataArray addObject:dic3];
-                
+   
             }
-           
+            
             
             if (_applyCarModel.finishMilStatus.integerValue !=0)
             {
@@ -285,7 +217,7 @@
                 {
                     confirmStr =@"未通过";
                 }
-            
+                
                 NSDictionary *dic6 = @{@"mileInfoKey":@"结束里程状态：",@"mileInfoValue":confirmStr};
                 
                 [_secondDataArray addObject:dic6];
@@ -298,14 +230,16 @@
                 
                 [_secondDataArray addObject:dic7];
                 
-                
                 NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
                 
                 [_secondDataArray addObject:dic8];
+                
+                
+                
             }
             
             [_tableView reloadData];
-  
+            
         }
         else
         {
@@ -316,69 +250,88 @@
     
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0)
     {
         if (indexPath.row == 0)
         {
-            NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
-            return [self heightForRowWitUITextViewText:timeStr] +14;
+            return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.carAppUserName] +14;
         }
         else if (indexPath.row == 1)
         {
-            return [self heightForRowWitUITextViewText:_applyCarModel.selectedCarModel.carCode] +14;
+            NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
+            return [self heightForOneSectionRowWitUITextViewText:timeStr] +14;
         }
         else if (indexPath.row == 2)
         {
-            return [self heightForRowWitUITextViewText:_applyCarModel.deptModel.deptName] +14;
-            
+            //出发地
+            return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.beginAdrr] +14;
         }
         else if (indexPath.row == 3)
         {
-            return [self heightForRowWitUITextViewText:_applyCarModel.projectModel.projectName] +14;
+            //目的地
+            
+            return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.endAdrr] +14;
         }
         else if (indexPath.row == 4)
         {
-            return [self heightForRowWitUITextViewText:_applyCarModel.beginAdrr] +14;
-        }
-        else if (indexPath.row == 5)
-        {
-            return [self heightForRowWitUITextViewText:_applyCarModel.endAdrr] +14;
-            
-        }
-        else if (indexPath.row == 6)
-        {
-            return [self heightForRowWitUITextViewText:_applyCarModel.carUse] +14;
+            //用车部门
+            return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.deptModel.deptName] +14;
             
         }
         else
         {
-            return [self heightForRowWitUITextViewText:_applyCarModel.carAppUserName] +14;
-            
+            //项目名称
+            return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.projectModel.projectName] +14;
         }
     }
     else
     {
-        
-        if ([_secondDataArray count]>0)
+        if (indexPath.row == 0)
         {
-            NSDictionary *dic =[_secondDataArray objectAtIndex:indexPath.row];
+            //开始里程
+            return 44;
+  
+        }
+        else if (indexPath.row == 1)
+        {
+            //开始里程状态
+            return 44;
+        }
+        else if (indexPath.row == 2)
+        {
+            //开始里程备注
+            return [self heightForSecondSectionSectionRowWitUITextViewText:_applyCarModel.beginMilRemark]+14;
+        }
+        else if (indexPath.row == 3)
+        {
+            //结束里程
+            return 44;
+        }
+        else if (indexPath.row == 4)
+        {
+            //加价里程
+            return 44;
             
-            NSString *celleStr = dic[@"mileInfoValue"];
-            return [self heightForSecondRowWitUITextViewText:celleStr] +14;
+        }
+        else if (indexPath.row == 5)
+        {
+            //结束里程状态
+            return 44;
+        }
+        else if (indexPath.row == 6)
+        {
+            //实际里程
+            return 44;
         }
         else
         {
-            return 0;
+            //结束里程备注
+            return [self heightForSecondSectionSectionRowWitUITextViewText:_applyCarModel.finishMilRemark]+14;
+            
         }
-        
-        
-        return 44;
     }
-    
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -411,62 +364,16 @@
         UILabel *sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, kMainScreenWidth-10, 30)];
         sectionLabel.backgroundColor =UIColorFromRGB(0xf3f3f3);
         sectionLabel.textAlignment = NSTextAlignmentLeft;
-        sectionLabel.text = @"里程信息";
+        sectionLabel.text = @"以下为您的里程信息，请确认(如有需要，可填备注)";
         sectionLabel.font = HEL_13;
         [sectionHeadView addSubview:sectionLabel];
         return sectionHeadView;
     }
-    
-    
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.section == 0)
-    {
-        if (indexPath.row == 1)
-        {
-            SelecteCarViewController *selectCarMVC = [[SelecteCarViewController alloc]initWithDefaultSelectedCarModel:_applyCarModel.selectedCarModel beginTime:_applyCarModel.beginTime endTime:_applyCarModel.endTime selectCarBlock:^(SelectCarInfoModel *model) {
-                
-                _applyCarModel.selectedCarModel = model;
-                
-                [_tableView reloadData];
-                
-                
-            }];
-            
-            [self.navigationController pushViewController:selectCarMVC animated:YES];
-            
-        }
-        else if (indexPath.row == 2)
-        {
-            
-            SelectDeptmentViewController *selectDeptMVC = [[SelectDeptmentViewController alloc]initWithDefaultSelectedDeptModel:_applyCarModel.deptModel selectDeptBlock:^(DeptListModel *model) {
-                _applyCarModel.deptModel = model;
-                
-                [_tableView reloadData];
-                
-            }];
-            [self.navigationController pushViewController:selectDeptMVC animated:YES];
-            
-        }
-        else if (indexPath.row == 3)
-        {
-            SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_applyCarModel.projectModel selectProjectBlock:^(ProjectListModel *model) {
-                _applyCarModel.projectModel = model;
-                
-                [_tableView reloadData];
-            }];
-            
-            [self.navigationController pushViewController:selectProjectMVC animated:YES];
-        }
-    }
-    
-    
-    
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -513,48 +420,43 @@
         
         if (cell.cellTextView)
         {
-            cell.cellTextView.delegate = self;
+            cell.cellTextView.editable = NO;
+            cell.cellTextView.userInteractionEnabled = NO;
         }
         
         NSString *celleStr;
         
         if (indexPath.row == 0)
         {
-            NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
-            celleStr = timeStr;
+            
+            celleStr = _applyCarModel.carAppUserName;
         }
         else if (indexPath.row == 1)
         {
-            celleStr = _applyCarModel.selectedCarModel.carCode;
+            NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
+            celleStr = timeStr;
             
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 2)
         {
-            celleStr = _applyCarModel.deptModel.deptName;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            celleStr = _applyCarModel.beginAdrr;
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 3)
         {
-            celleStr = _applyCarModel.projectModel.projectName;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            celleStr = _applyCarModel.endAdrr;
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 4)
         {
-            celleStr = _applyCarModel.beginAdrr;
-        }
-        else if (indexPath.row == 5)
-        {
-            celleStr = _applyCarModel.endAdrr;
-        }
-        else if (indexPath.row == 6)
-        {
-            celleStr = _applyCarModel.carUse;
+            celleStr = _applyCarModel.deptModel.deptName;
         }
         else
         {
-            celleStr = _applyCarModel.carAppUserName;
+            celleStr = _applyCarModel.projectModel.projectName;
         }
+        
         
         
         [cell setContentWithIndexPath:indexPath andContentStr:celleStr];
@@ -579,18 +481,42 @@
             cell.cellTitleLabel.text = dic[@"mileInfoKey"];
             
             NSString *celleStr = dic[@"mileInfoValue"];
-
+            
             [cell setContentWithIndexPath:indexPath andContentStr:celleStr];
+        }
+        
+        if (_applyCarModel.beginMilStatus.integerValue ==1)
+        {
+            if (indexPath.row == 2)
+            {
+                cell.cellTextView.editable = YES;
+                cell.cellTextView.userInteractionEnabled = YES;
+                cell.cellTextView.delegate = self;
+                cell.cellTextView.tag = 2002;
+            }
+        }
+        else if (_applyCarModel.finishMilStatus.integerValue ==1)
+        {
+            if (indexPath.row == 7)
+            {
+                cell.cellTextView.editable = YES;
+                cell.cellTextView.userInteractionEnabled = YES;
+                cell.cellTextView.delegate = self;
+                cell.cellTextView.tag = 2007;
+            }
+        }
+        else
+        {
+            cell.cellTextView.editable = NO;
+            cell.cellTextView.userInteractionEnabled = NO;
         }
 
         return cell;
     }
-    
-    
 }
 
 
--(CGFloat)heightForRowWitUITextViewText:(NSString  *)text
+-(CGFloat)heightForOneSectionRowWitUITextViewText:(NSString  *)text
 {
     float fPadding = 16.0; // 8.0px x 2
     CGSize constraint = CGSizeMake(kMainScreenWidth-25-2-95 - fPadding, CGFLOAT_MAX);
@@ -603,10 +529,10 @@
     return fHeight;
 }
 
--(CGFloat)heightForSecondRowWitUITextViewText:(NSString  *)text
+-(CGFloat)heightForSecondSectionSectionRowWitUITextViewText:(NSString  *)text
 {
     float fPadding = 16.0; // 8.0px x 2
-    CGSize constraint = CGSizeMake(kMainScreenWidth - 10-2-105 - fPadding, CGFLOAT_MAX);
+    CGSize constraint = CGSizeMake(kMainScreenWidth - 10-2-105  - fPadding, CGFLOAT_MAX);
     CGSize size = [text sizeWithFont:HEL_14 constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
     float fHeight = size.height + 16.0;
     if (fHeight<30)
@@ -616,68 +542,9 @@
     return fHeight;
 }
 
-
-#pragma mark - UITextViewDelegate
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-{
-    _currentFirstRespondIndexPath = [NSIndexPath indexPathForRow:textView.tag-1000 inSection:0];
-    return YES;
-}
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    
-    [textView becomeFirstResponder];
-    
-}
-
-
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    
-    [textView resignFirstResponder];
-    if (textView.tag == 1000)
-    {
-    }
-    else if (textView.tag == 1004)
-    {
-        _applyCarModel.beginAdrr = textView.text;
-    }
-    else if (textView.tag == 1005)
-    {
-        _applyCarModel.endAdrr = textView.text;
-        
-    }
-    else if (textView.tag == 1006)
-    {
-        _applyCarModel.carUse = textView.text;
-    }
-    
-    
-    [self reloadRowsWithRowTag:textView.tag];
-}
-
--(void)reloadRowsWithRowTag:(NSInteger)tag
-{
-    
-    //    [_detailInfoTableView reloadData];
-    
-    NSIndexPath *reloadIndexPath = [NSIndexPath indexPathForRow:tag-1000 inSection:0];
-    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if ([text isEqualToString:@"\n"])
-    {
-        [textView resignFirstResponder];
-        
-        return NO;
-        
-    }
-    
-    return YES;
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UIKeyboardNotification-
@@ -753,11 +620,11 @@
 
 -(void)moveKeyBoardDown
 {
-    NSInteger numberOfCells = [_tableView.dataSource tableView:_tableView numberOfRowsInSection:0];
+    NSInteger numberOfCells = [_tableView.dataSource tableView:_tableView numberOfRowsInSection:1];
     
     for (NSInteger counter = 0;counter < numberOfCells;counter++)
     {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:counter inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:counter inSection:1];
         
         SaveApplyCarTableViewCell *cell = (SaveApplyCarTableViewCell *)[_tableView cellForRowAtIndexPath:indexPath];
         
@@ -770,157 +637,215 @@
     
 }
 
--(void)clickEditButton
+-(void)unEnableAllTextView
 {
-    if ([NSString isBlankString:_applyCarModel.selectedCarModel.carId])
+    NSInteger numberOfCells = [_tableView.dataSource tableView:_tableView numberOfRowsInSection:1];
+    
+    for (NSInteger counter = 0;counter < numberOfCells;counter++)
     {
-        [self displaySomeInfoWithInfo:@"请选择车辆" finsh:nil];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:counter inSection:1];
         
-        return;
-    }
-    
-    if ([NSString isBlankString:_applyCarModel.deptModel.deptId])
-    {
-        [self displaySomeInfoWithInfo:@"请选择用车部门" finsh:nil];
+        SaveApplyCarTableViewCell *cell = (SaveApplyCarTableViewCell *)[_tableView cellForRowAtIndexPath:indexPath];
         
-        return;
-    }
-    
-    if ([NSString isBlankString:_applyCarModel.projectModel.projectId])
-    {
-        [self displaySomeInfoWithInfo:@"请选择项目" finsh:nil];
-        
-        return;
-    }
-    
-    if ([NSString isBlankString:_applyCarModel.beginAdrr])
-    {
-        [self displaySomeInfoWithInfo:@"请选择出发地" finsh:nil];
-        
-        return;
-    }
-    
-    if ([NSString isBlankString:_applyCarModel.endAdrr])
-    {
-        [self displaySomeInfoWithInfo:@"请选择目的地" finsh:nil];
-        
-        return;
-    }
-    
-    
-    
-    if ([NSString isBlankString:_applyCarModel.carAppUserName])
-    {
-        [self displaySomeInfoWithInfo:@"请填写用车人" finsh:nil];
-        
-        return;
-    }
-    
-    [self initMBHudWithTitle:nil];
-    
-    NSArray *keyArray = @[@"appId",@"carAppDeptId",@"projectId",@"projectNo",@"projectName",@"carId",@"beginAdrr",@"endAdrr",@"beginTime",@"endTime",@"carAppUserId",@"carUse",@"status",@"appTime",@"appUserId",@"appDeptId"];
-    
-    
-    //得到当前选中的时间
-    NSDate *currDate=[NSDate date];
-    
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
-    NSString *str=[dateFormatter stringFromDate:currDate ];
-    
-    NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.deptModel.deptId,_applyCarModel.projectModel.projectId,_applyCarModel.projectModel.projectNo,_applyCarModel.projectModel.projectName,_applyCarModel.selectedCarModel.carId,_applyCarModel.beginAdrr,_applyCarModel.endAdrr,_applyCarModel.beginTime,_applyCarModel.endTime,[HXUserModel shareInstance].userId,_applyCarModel.carUse,@"0",str,[HXUserModel shareInstance].userId,[HXUserModel shareInstance].deptId];
-    
-    [CLYCCoreBizHttpRequest editApplyCarWithBlock:^( NSString *retcode, NSString *retmessage, NSError *error) {
-        
-        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+        if (cell.cellTextView)
         {
-            [self stopMBHudAndNSTimerWithmsg:@"修改成功" finsh:nil];
+            [cell.cellTextView resignFirstResponder];
+            cell.cellTextView.userInteractionEnabled = NO;
+        }
+        
+    }
+}
+
+
+#pragma mark - UITextViewDelegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    _currentFirstRespondIndexPath = [NSIndexPath indexPathForRow:textView.tag-2000 inSection:1];
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+    [textView becomeFirstResponder];
+    
+}
+
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    
+    [textView resignFirstResponder];
+    if (textView.tag == 2002)
+    {
+        _applyCarModel.beginMilRemark =textView.text;
+        
+        NSDictionary *dic3 = @{@"mileInfoKey":@"开始里程备注：",@"mileInfoValue":_applyCarModel.beginMilRemark};
+        
+        [_secondDataArray replaceObjectAtIndex:2 withObject:dic3];
+        
+        
+        
+    }
+    else if (textView.tag == 2007)
+    {
+        _applyCarModel.finishMilRemark = textView.text;
+        
+        NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
+        
+        [_secondDataArray replaceObjectAtIndex:7 withObject:dic8];
+        
+    }
  
-            [_tableView reloadData];
-     
-        }
-        else
-        {
-            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
-        }
-        
-        
-    } keyArray:keyArray valueArray:valueArray];
-    
-    
+    [self reloadRowsWithRowTag:textView.tag];
 }
 
--(void)updateApplyCarStatus
+-(void)reloadRowsWithRowTag:(NSInteger)tag
 {
-    [self initMBHudWithTitle:nil];
     
-    NSArray *keyArray = @[@"appId",@"status"];
-    NSArray *valueArray = @[_applyCarModel.appId,@"1"];
+    //    [_detailInfoTableView reloadData];
     
-    [CLYCCoreBizHttpRequest commitApplyCarWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
-        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-        {
-            [self stopMBHudAndNSTimerWithmsg:@"提交成功" finsh:nil];
-            
-            _tableView.tableFooterView = nil;
-            self.navigationItem.rightBarButtonItem = nil;
-            _tableView.tableFooterView = _cancleFootView;
-            
-            [_tableView reloadData];
-            
-        }
-        else
-        {
-            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
-        }
-    } keyArray:keyArray valueArray:valueArray];
-    
+    NSIndexPath *reloadIndexPath = [NSIndexPath indexPathForRow:tag-2000 inSection:1];
+    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
--(void)clickCancleButton
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    [self initMBHudWithTitle:nil];
-    
-    NSArray *keyArray = @[@"appId"];
-    NSArray *valueArray = @[_applyCarModel.appId];
-    
-    [CLYCCoreBizHttpRequest deleteApplyCarWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
         
-        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-        {
-            [self stopMBHudAndNSTimerWithmsg:@"取消成功" finsh:nil];
-            
-            _tableView.tableFooterView = nil;
-            self.navigationItem.rightBarButtonItem = nil;
-            
-            [_tableView reloadData];
-            
-        }
-        else
-        {
-            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
-        }
+        return NO;
         
-        
-    } keyArray:keyArray valueArray:valueArray];
+    }
     
+    return YES;
 }
 
+#pragma mark - 点击同意按钮-
+-(void)clickAgreeButton
+{
+    if (_applyCarModel.beginMilStatus.intValue ==1)
+    {
+        [self initMBHudWithTitle:nil];
+        //开始里程提交状态
+        NSArray *keyArray = @[@"appId",@"beginMilStatus",@"beginMilRemark"];
+        NSArray *valueArray = @[_applyCarModel.appId,@"2",_applyCarModel.beginMilRemark];
+        
+        [CLYCCoreBizHttpRequest userConfirmBeginMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+            
+            if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+            {
+                [self stopMBHudAndNSTimerWithmsg:@"同意操作成功" finsh:nil];
+                
+                
+                
+                _tableView.tableFooterView = nil;
+                
+                [_tableView reloadData];
+                
+                [self unEnableAllTextView];
+                
+            }
+            else
+            {
+                [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
+            }
+            
+            
+        } keyArray:keyArray valueArray:valueArray];
+   
+    }
+    else if (_applyCarModel.finishMilStatus.intValue == 1)
+    {
+        //结束里程提交状态
+        [self initMBHudWithTitle:nil];
+        
+        NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark"];
+        NSArray *valueArray = @[_applyCarModel.appId,@"2",_applyCarModel.finishMilRemark];
+        
+        [CLYCCoreBizHttpRequest userConfirmFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+            if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+            {
+                [self stopMBHudAndNSTimerWithmsg:@"同意操作成功" finsh:nil];
+      
+                _tableView.tableFooterView = nil;
+                
+                [_tableView reloadData];
+                
+                [self unEnableAllTextView];
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+                
+            }
+            else
+            {
+                [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
+            }
+        } keyArray:keyArray valueArray:valueArray];
+        
+    }
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - 点击不同意按钮 - 
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)clickUnAgreeButton
+{
+    if (_applyCarModel.beginMilStatus.intValue ==1)
+    {
+        [self initMBHudWithTitle:nil];
+        //开始里程提交状态
+        NSArray *keyArray = @[@"appId",@"beginMilStatus",@"beginMilRemark"];
+        NSArray *valueArray = @[_applyCarModel.appId,@"3",_applyCarModel.beginMilRemark];
+        
+        [CLYCCoreBizHttpRequest userConfirmBeginMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+            
+            if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+            {
+                [self stopMBHudAndNSTimerWithmsg:@"不同意操作成功" finsh:nil];
+                
+                _tableView.tableFooterView = nil;
+                
+                [_tableView reloadData];
+                
+                [self unEnableAllTextView];
+                
+            }
+            else
+            {
+                [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
+            }
+            
+            
+        } keyArray:keyArray valueArray:valueArray];
+        
+    }
+    else if (_applyCarModel.finishMilStatus.intValue == 1)
+    {
+        //结束里程提交状态
+        [self initMBHudWithTitle:nil];
+        
+        NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark"];
+        NSArray *valueArray = @[_applyCarModel.appId,@"3",_applyCarModel.finishMilRemark];
+        
+        [CLYCCoreBizHttpRequest userConfirmFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+            if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+            {
+                [self stopMBHudAndNSTimerWithmsg:@"不同意操作成功" finsh:nil];
+                
+                _tableView.tableFooterView = nil;
+                
+                [_tableView reloadData];
+                
+                [self unEnableAllTextView];
+                
+            }
+            else
+            {
+                [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
+            }
+        } keyArray:keyArray valueArray:valueArray];
+        
+    }
 }
-*/
-
 @end
