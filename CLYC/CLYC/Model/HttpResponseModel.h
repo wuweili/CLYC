@@ -266,7 +266,29 @@
 @property(nonatomic,strong)NSString *finishMilRemark ;
 
 
+@end
 
+@interface TrajectoryListModel : NSObject
+
+/**
+ * ￼时间
+ */
+@property(nonatomic,strong)NSString *receiveTime ;
+
+/**
+ * ￼维度
+ */
+@property(nonatomic,strong)NSString *latitude ;
+
+/**
+ * ￼经度
+ */
+@property(nonatomic,strong)NSString *longitude ;
+
+/**
+ * ￼方向
+ */
+@property(nonatomic,strong)NSString *direction ;
 
 
 @end

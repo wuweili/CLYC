@@ -173,6 +173,7 @@ const static int titleLabelwidth = 80;
             [self.contentView addSubview:_cellTextView];
         }
         
+        
     }
     
     return self;

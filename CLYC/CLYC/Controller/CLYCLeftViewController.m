@@ -30,6 +30,13 @@
 
 @implementation CLYCLeftViewController
 
+
+-(void)dealloc
+{
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -43,7 +50,7 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
     }
     
-    if ([[HXUserModel shareInstance].roleNo isEqualToString:@"1"])
+    if (IS_DefaultUser)
     {
         _dataArray = [NSArray arrayWithObjects:@"首页",@"车辆信息",@"车辆轨迹",@"费用查询",@"版本更新",@"个人信息", nil];
         
@@ -148,11 +155,14 @@
             {
                 //个人信息
                 
+                
                 PersonalInfoViewController *personalMVC = [[PersonalInfoViewController alloc]init];
-                [self.navigationController pushViewController:personalMVC animated:YES];
+                UINavigationController *userInfoNav = [[UINavigationController alloc]initWithRootViewController:personalMVC];
                 
-                
-//                [self displaySomeInfoWithInfo:@"即将推出，敬请期待" finsh:nil];
+                userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
+                    
+                }];
 
             }
                 break;
@@ -164,7 +174,44 @@
     }
     else
     {
-        
+        switch (indexPath.row)
+        {
+            case 0:
+            {
+                [HXAPPDELEGATE.backgroundViewController showHome];
+            }
+                break;
+            case 1:
+            {
+                //费用查询
+                [self displaySomeInfoWithInfo:@"即将推出，敬请期待" finsh:nil];
+            }
+                break;
+            case 2:
+            {
+                //版本更新
+            }
+                break;
+            case 3:
+            {
+                //个人信息
+                
+                
+                PersonalInfoViewController *personalMVC = [[PersonalInfoViewController alloc]init];
+                UINavigationController *userInfoNav = [[UINavigationController alloc]initWithRootViewController:personalMVC];
+                
+                userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
+                    
+                }];
+                
+            }
+                break;
+                
+                
+            default:
+                break;
+        }
     }
     
     
@@ -190,10 +237,7 @@
     }
     
     cell.backgroundColor = [UIColor clearColor];
-    
-    
-    
-    
+ 
     [cell setCellContentWithIndexPath:indexPath imageArray:_imageArray titleArray:_dataArray];
   
     

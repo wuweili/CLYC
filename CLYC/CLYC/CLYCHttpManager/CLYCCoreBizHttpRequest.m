@@ -338,7 +338,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
             
             [HXUserModel shareInstance].email = [NSString stringWithoutNil:returnDic[@"email"]];
             
-            [HXUserModel shareInstance].telphone = [NSString stringWithoutNil:returnDic[@"telphone"]];
+            [HXUserModel shareInstance].telphone = [NSString stringWithoutNil:returnDic[@"telephone"]];
             
             [HXUserModel shareInstance].roleNo = [NSString stringWithoutNil:returnDic[@"roleNo"]];
             
@@ -1020,5 +1020,130 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
 }
 
+
++(void)driverCommitBeginMileWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppBeginMilService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+    }];
+}
+
+
++(void)driverCommitFinishMileWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarAppFinishMilService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+    }];
+}
+
+
++(void)driverUploadGPSWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"GpsUploadService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+    }];
+}
+
+
++(void)driverCarTrajectoryWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarTrajectoryQueryService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            
+            NSArray *trajectoryListArray = [returnDic objectForKey:@"trajectoryList"];
+                        
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in trajectoryListArray)
+                {
+                    
+                    TrajectoryListModel *model = [[TrajectoryListModel alloc]init];
+                    
+                    model.receiveTime = [NSString stringWithoutNil:dic[@"receiveTime"]];
+                    
+                    model.latitude = [NSString stringWithoutNil:dic[@"latitude"]];
+                    
+                    model.longitude = [NSString stringWithoutNil:dic[@"longitude"]];
+                    
+                    model.direction = [NSString stringWithoutNil:dic[@"direction"]];
+                    
+                    [mutabArray addObject:model];
+                    
+                }
+            }
+            
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error);
+            }
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error);
+            }
+        }
+    }];
+}
 
 @end

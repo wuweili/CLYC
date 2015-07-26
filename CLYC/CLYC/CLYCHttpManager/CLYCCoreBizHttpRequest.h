@@ -23,28 +23,6 @@
 +(NSString *)getUserCenterRequestSendDataWithParamSender:(id )paramSender;
 
 
-/**
- * 设置加密密钥的值
- */
-
-//+(void)setLogonId:(NSString *)logonId;
-//
-///**
-// * 获取加密密钥的值
-// */
-//+(NSString *)getLogonId;
-//
-///**
-// * 设置加密密钥的值
-// */
-//
-//+(void)setPwd:(NSString *)pwd;
-//
-///**
-// * 获取加密密钥的值
-// */
-//+(NSString *)getPwd;
-
 
 @end
 
@@ -125,5 +103,29 @@
  * 派车单查询
  */
 +(void)driverObtainCarApplyListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 起始里程登记
+ */
++(void)driverCommitBeginMileWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 结束里程登记
+ */
++(void)driverCommitFinishMileWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+
+/**
+ * GPS上传
+ */
++(void)driverUploadGPSWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+
+/**
+ * 行车轨迹
+ */
++(void)driverCarTrajectoryWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+
 
 @end

@@ -441,6 +441,7 @@
     
     [CLYCCoreBizHttpRequest loginYBUserWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
         
+ 
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
             [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];

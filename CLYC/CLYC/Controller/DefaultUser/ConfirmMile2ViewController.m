@@ -78,7 +78,7 @@
 
 -(void)initUI
 {
-    self.view.backgroundColor = UIColorFromRGB(0xf3f3f3);
+//    self.view.backgroundColor = UIColorFromRGB(0xf3f3f3);
     self.title = @"里程确认";
     
 }
@@ -102,7 +102,7 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator = NO;
-    _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.backgroundView = nil;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
@@ -361,12 +361,34 @@
         UIView *sectionHeadView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 30)];
         sectionHeadView.backgroundColor = UIColorFromRGB(0xf3f3f3);
         
-        UILabel *sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, kMainScreenWidth-10, 30)];
+        UILabel *sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 60, 30)];
         sectionLabel.backgroundColor =UIColorFromRGB(0xf3f3f3);
         sectionLabel.textAlignment = NSTextAlignmentLeft;
-        sectionLabel.text = @"以下为您的里程信息，请确认(如有需要，可填备注)";
+        sectionLabel.text = @"里程信息";
         sectionLabel.font = HEL_13;
         [sectionHeadView addSubview:sectionLabel];
+        
+        UILabel *section2Label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(sectionLabel.frame), 0, kMainScreenWidth-10-CGRectGetMaxX(sectionLabel.frame), 30)];
+        section2Label.backgroundColor =UIColorFromRGB(0xf3f3f3);
+        section2Label.textAlignment = NSTextAlignmentLeft;
+        section2Label.font = HEL_11;
+        section2Label.backgroundColor = [UIColor clearColor];
+        section2Label.textColor = UIColorFromRGB(0xf48871);
+        [sectionHeadView addSubview:section2Label];
+        
+        NSString *tipString= @"";
+        
+        if (_applyCarModel.beginMilStatus.integerValue == 1)
+        {
+            tipString = @"(请确认开始里程(可填备注))";
+        }
+        else if (_applyCarModel.finishMilStatus.integerValue == 1)
+        {
+            tipString = @"(请确认结束里程(加价里程)(可填备注))";
+        }
+        
+        section2Label.text =tipString;
+        
         return sectionHeadView;
     }
 }
@@ -411,7 +433,7 @@
         {
             cell = [[SaveApplyCarTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
         }
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         
         if ([_dataArray count]>0)
         {
@@ -472,7 +494,7 @@
         {
             cell = [[SaveApplyCarTableViewCell alloc]initMileInfoWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
         }
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         
         if ([_secondDataArray count]>0)
         {

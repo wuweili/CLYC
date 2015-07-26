@@ -28,11 +28,27 @@
 
 @implementation PersonalInfoViewController
 
+-(void)clickLeftNavMenu
+{
+
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+
+-(void)dealloc
+{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     self.title = @"个人信息";
+    
+    [self initData];
 
     [self initTableView];
     
@@ -76,7 +92,17 @@
 -(void)initHeaderView
 {
     _headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 120)];
-    _headerView.backgroundColor = UIColorFromRGB(0x69d25c);
+    
+    if (IS_DefaultUser)
+    {
+         _headerView.backgroundColor = UIColorFromRGB(0x4fc1e9);
+    }
+    else
+    {
+         _headerView.backgroundColor = UIColorFromRGB(0x4fc1e9);
+    }
+    
+   
     
     UIButton *headButton = [[UIButton alloc]initWithFrame:CGRectMake(15, 15, 60, 60)];
     headButton.backgroundColor = [UIColor clearColor];
@@ -119,9 +145,9 @@
 {
     _editFootView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 70)];
     
-    _editFootView.backgroundColor = UIColorFromRGB(0xf3f3f3);
+    _editFootView.backgroundColor = [UIColor clearColor];
     
-    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(15, 10, kMainScreenWidth-30, 30)];
+    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(15, 10, kMainScreenWidth-30, 40)];
     [startSearchButton setBackgroundImage:[UIImage imageNamed:@"hx_icon_register.png"] forState:UIControlStateNormal];
     
 //    [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search_select.png"] forState:UIControlStateHighlighted];
@@ -131,6 +157,9 @@
     [startSearchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [startSearchButton addTarget:self action:@selector(clickLogoutButton) forControlEvents:UIControlEventTouchUpInside];
     [_editFootView addSubview:startSearchButton];
+    
+     _tableView.tableFooterView = _editFootView;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -203,7 +232,13 @@
 
 -(void)clickLogoutButton
 {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
     [HXAPPDELEGATE logOut];
+    
+    
 }
 
 

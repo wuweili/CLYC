@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "HXBackgroundViewController.h"
+#import <BaiduMapAPI/BMapKit.h>
+
 
 #define HXAPPDELEGATE   ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,BMKGeneralDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

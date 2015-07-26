@@ -66,6 +66,8 @@
 #define HX_PATIENT_PLIST_NAME     @"patientSetting.plist"
 
 
+#define CY_APPCAR_ID  @"appCarId"
+
 //color
 
 #define BACKGROUND_COLOR       UIColorFromRGB(0xEFEFEF)// 浅灰色

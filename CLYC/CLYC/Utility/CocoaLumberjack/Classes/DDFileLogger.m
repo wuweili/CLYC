@@ -1236,12 +1236,12 @@ BOOL doesAppRunInBackground(void);
 		
 		NSString *newFilePath = [fileDir stringByAppendingPathComponent:newFileName];
 		
-		NSLogVerbose(@"DDLogFileInfo: Renaming file: '%@' -> '%@'", self.fileName, newFileName);
+//		NSLogVerbose(@"DDLogFileInfo: Renaming file: '%@' -> '%@'", self.fileName, newFileName);
 		
 		NSError *error = nil;
 		if (![[NSFileManager defaultManager] moveItemAtPath:filePath toPath:newFilePath error:&error])
 		{
-			NSLogError(@"DDLogFileInfo: Error renaming file (%@): %@", self.fileName, error);
+//			NSLogError(@"DDLogFileInfo: Error renaming file (%@): %@", self.fileName, error);
 		}
 		
 		filePath = newFilePath;

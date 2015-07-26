@@ -11,6 +11,7 @@
 #import "HXRootViewViewController.h"
 #import "AFNetworkReachabilityManager.h"
 
+BMKMapManager* _mapManager;
 
 @interface AppDelegate ()
 
@@ -27,7 +28,13 @@
     
     [self.window makeKeyAndVisible];
     
+    // 要使用百度地图，请先启动BaiduMapManager
+    _mapManager = [[BMKMapManager alloc]init];
+    BOOL ret = [_mapManager start:BaiDuMap_AK generalDelegate:self];
     
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
     
     
     
@@ -133,6 +140,7 @@
 #pragma mark - 跳转到登陆界面
 - (void)goToLoginView
 {
+    _backgroundViewController = nil;
     self.window.rootViewController = nil;
     
     if (!self.rootNavController)
@@ -164,7 +172,7 @@
 #pragma mark - 跳转到主界面
 - (void)goToMainView
 {
-    if ([[HXUserModel shareInstance].roleNo isEqualToString:@"1"])
+    if (IS_DefaultUser)
     {
         if(CurrentSystemVersion >= 7.0)
         {
@@ -193,7 +201,9 @@
             [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
         }
         
-        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x69d25c)];
+        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x4fc1e9)];
+        
+//        [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x69d25c)];
         
         if (CurrentSystemVersion>=8.0)
         {
@@ -206,8 +216,6 @@
     if (!_backgroundViewController)
     {
         _backgroundViewController = [[HXBackgroundViewController alloc]init];
-        
-        
     }
     
     self.window.rootViewController = _backgroundViewController;
@@ -227,6 +235,8 @@
 #pragma mark - 跳转到登陆界面且直接登录
 -(void)goToLoginViewToDirectLogin
 {
+    _backgroundViewController = nil;
+    
     self.window.rootViewController = nil;
     
     if (!self.rootNavController)
@@ -259,6 +269,8 @@
 
 -(void)logOut
 {
+    [_backgroundViewController showHome];
+    
     [self clearUserInfo];
     //清空记住的用户名和密码
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -282,6 +294,9 @@
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    
+     [BMKMapView willBackGround];
+    
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
@@ -296,6 +311,8 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [BMKMapView didForeGround];
+    
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

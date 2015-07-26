@@ -106,6 +106,14 @@
 		5A1BC8541B09E4D500A2A1DC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1BC8521B09E4D500A2A1DC /* LaunchScreen.xib */; };
 		5A1BC8601B09E4D500A2A1DC /* CLYCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1BC85F1B09E4D500A2A1DC /* CLYCTests.m */; };
 		5A6773781B48BCE20090F8A9 /* ApplyCarHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6773771B48BCE20090F8A9 /* ApplyCarHistoryViewController.m */; };
+		5A7F70271B64694F0009F823 /* CLYCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7F70261B64694F0009F823 /* CLYCLocationManager.m */; };
+		5A7F70291B6469710009F823 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F70281B6469710009F823 /* MapKit.framework */; };
+		5A7F702B1B64697B0009F823 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F702A1B64697B0009F823 /* CoreLocation.framework */; };
+		5A7F702F1B64BEB10009F823 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F702E1B64BEB10009F823 /* BaiduMapAPI.framework */; };
+		5A7F70311B64BF2C0009F823 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F70301B64BF2C0009F823 /* OpenGLES.framework */; };
+		5A7F70331B64BF3C0009F823 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F70321B64BF3C0009F823 /* SystemConfiguration.framework */; };
+		5A7F70351B64BF4F0009F823 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F70341B64BF4F0009F823 /* Security.framework */; };
+		5A7F70371B64BFE40009F823 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5A7F70361B64BFE40009F823 /* mapapi.bundle */; };
 		5A8BF6F61B46C15700C9573B /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BF6F41B46C15700C9573B /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5AB02CB21B3FD1AC0003B65F /* HXRootViewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */; };
 		5AB02CC51B3FD2270003B65F /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB51B3FD2270003B65F /* NSData+SDDataCache.m */; };
@@ -422,6 +430,15 @@
 		5A1BC85F1B09E4D500A2A1DC /* CLYCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLYCTests.m; sourceTree = "<group>"; };
 		5A6773761B48BCE20090F8A9 /* ApplyCarHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyCarHistoryViewController.h; sourceTree = "<group>"; };
 		5A6773771B48BCE20090F8A9 /* ApplyCarHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyCarHistoryViewController.m; sourceTree = "<group>"; };
+		5A7F70251B64694F0009F823 /* CLYCLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLYCLocationManager.h; sourceTree = "<group>"; };
+		5A7F70261B64694F0009F823 /* CLYCLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLYCLocationManager.m; sourceTree = "<group>"; };
+		5A7F70281B6469710009F823 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5A7F702A1B64697B0009F823 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5A7F702E1B64BEB10009F823 /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI.framework; sourceTree = "<group>"; };
+		5A7F70301B64BF2C0009F823 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		5A7F70321B64BF3C0009F823 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5A7F70341B64BF4F0009F823 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		5A7F70361B64BFE40009F823 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		5A8BF6F31B46C15700C9573B /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		5A8BF6F41B46C15700C9573B /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		5A8BF6F51B46C15700C9573B /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -751,12 +768,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A7F70351B64BF4F0009F823 /* Security.framework in Frameworks */,
+				02B39A7A1B42E4DF007FDD26 /* CoreGraphics.framework in Frameworks */,
+				5A7F70331B64BF3C0009F823 /* SystemConfiguration.framework in Frameworks */,
+				5A7F70311B64BF2C0009F823 /* OpenGLES.framework in Frameworks */,
+				02B39A7C1B42E4E8007FDD26 /* QuartzCore.framework in Frameworks */,
+				5A7F702F1B64BEB10009F823 /* BaiduMapAPI.framework in Frameworks */,
+				5A7F702B1B64697B0009F823 /* CoreLocation.framework in Frameworks */,
+				5A7F70291B6469710009F823 /* MapKit.framework in Frameworks */,
 				028D3DA41B4594CE00AC7C7D /* libxml2.dylib in Frameworks */,
 				02B39A841B42E9E1007FDD26 /* libsqlite3.dylib in Frameworks */,
 				02B39A801B42E4FF007FDD26 /* Foundation.framework in Frameworks */,
 				02B39A7E1B42E4F0007FDD26 /* UIKit.framework in Frameworks */,
-				02B39A7C1B42E4E8007FDD26 /* QuartzCore.framework in Frameworks */,
-				02B39A7A1B42E4DF007FDD26 /* CoreGraphics.framework in Frameworks */,
 				02B39A781B42E4D6007FDD26 /* libicucore.dylib in Frameworks */,
 				02B39A761B42E4C7007FDD26 /* AVFoundation.framework in Frameworks */,
 				02B39A741B42E4BF007FDD26 /* AudioToolbox.framework in Frameworks */,
@@ -874,6 +897,8 @@
 				02B39A8C1B4309EB007FDD26 /* CLYCHttpDefine.h */,
 				02B39A881B42F014007FDD26 /* CLYCCoreBizHttpRequest.h */,
 				02B39A891B42F014007FDD26 /* CLYCCoreBizHttpRequest.m */,
+				5A7F70251B64694F0009F823 /* CLYCLocationManager.h */,
+				5A7F70261B64694F0009F823 /* CLYCLocationManager.m */,
 			);
 			path = CLYCHttpManager;
 			sourceTree = "<group>";
@@ -900,6 +925,7 @@
 		5A1BC8421B09E4D500A2A1DC /* CLYC */ = {
 			isa = PBXGroup;
 			children = (
+				5A7F702D1B64BEB10009F823 /* ThirtLibs */,
 				02B39A871B42EFCF007FDD26 /* CLYCHttpManager */,
 				5AB02ECD1B3FDDE60003B65F /* Resource */,
 				5AB02EB41B3FD4450003B65F /* GlobalHeader */,
@@ -942,6 +968,14 @@
 				5A1BC85E1B09E4D500A2A1DC /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5A7F702D1B64BEB10009F823 /* ThirtLibs */ = {
+			isa = PBXGroup;
+			children = (
+				5A7F702E1B64BEB10009F823 /* BaiduMapAPI.framework */,
+			);
+			path = ThirtLibs;
 			sourceTree = "<group>";
 		};
 		5A8BF6F21B46C15700C9573B /* GTMBase64 */ = {
@@ -1734,6 +1768,7 @@
 		5AB02ECD1B3FDDE60003B65F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				5A7F70361B64BFE40009F823 /* mapapi.bundle */,
 				023A64541B48275D00CB096D /* HXPatientDefaultHeadImage@2x.png */,
 				023A644C1B47C7B200CB096D /* home_setting.png */,
 				023A64321B47C7A700CB096D /* btn_cancel_normal.9.png */,
@@ -1803,6 +1838,11 @@
 		5AB2C6D51B4371D6005B42B8 /* FrameWork */ = {
 			isa = PBXGroup;
 			children = (
+				5A7F70341B64BF4F0009F823 /* Security.framework */,
+				5A7F70321B64BF3C0009F823 /* SystemConfiguration.framework */,
+				5A7F70301B64BF2C0009F823 /* OpenGLES.framework */,
+				5A7F70281B6469710009F823 /* MapKit.framework */,
+				5A7F702A1B64697B0009F823 /* CoreLocation.framework */,
 				028D3DA31B4594CE00AC7C7D /* libxml2.dylib */,
 				02B39A831B42E9E1007FDD26 /* libsqlite3.dylib */,
 				02B39A7F1B42E4FF007FDD26 /* Foundation.framework */,
@@ -1937,6 +1977,7 @@
 				023A63FA1B47BEA100CB096D /* first_home_book_car@2x.png in Resources */,
 				023A642C1B47C79B00CB096D /* add_img1.png in Resources */,
 				023A64431B47C7A700CB096D /* btn_submit_normal.9.png in Resources */,
+				5A7F70371B64BFE40009F823 /* mapapi.bundle in Resources */,
 				5AB02E3E1B3FD2720003B65F /* hud_right.png in Resources */,
 				023A64201B47BEBC00CB096D /* push.png in Resources */,
 				023A64551B48275D00CB096D /* HXPatientDefaultHeadImage@2x.png in Resources */,
@@ -2155,6 +2196,7 @@
 				02744B051B61373C00B46CAD /* SelectProjectViewController.m in Sources */,
 				5AB02E891B3FD2720003B65F /* UIImage+FixOrientation.m in Sources */,
 				028BE08C1B6351340012068C /* ConfirmMileTableViewCell.m in Sources */,
+				5A7F70271B64694F0009F823 /* CLYCLocationManager.m in Sources */,
 				02744B021B612CD800B46CAD /* SelectDeptmentTableViewCell.m in Sources */,
 				028BE09F1B63ECF50012068C /* D_ApplyCarListTableViewCell.m in Sources */,
 				5AB02E6E1B3FD2720003B65F /* PhotoModel.m in Sources */,
@@ -2308,10 +2350,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: qi zhi (63Z4FYXB55)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: qi zhi (63Z4FYXB55)";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CLYC/ThirtLibs",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLYC/PrefixHeader.pch";
 				INFOPLIST_FILE = CLYC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "13048e6e-cb43-4411-b9cc-6517c5c9081f";
 			};
@@ -2324,10 +2371,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Medpal Health Solution Co,ltd.";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Medpal Health Solution Co,ltd.";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CLYC/ThirtLibs",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CLYC/PrefixHeader.pch";
 				INFOPLIST_FILE = CLYC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1d43a3a8-bde0-47ef-880f-ee431a764683";
 			};

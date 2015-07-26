@@ -49,7 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor=BACKGROUND_COLOR ;//UIColorFromRGB(0xF5F5F5);
+    self.view.backgroundColor=UIColorFromRGB(0xf3f3f3) ;//UIColorFromRGB(0xF5F5F5);
     if (CurrentSystemVersion >= 7.0)
     {
         [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, HEL_20,NSFontAttributeName,nil]];

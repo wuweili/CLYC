@@ -575,7 +575,7 @@ static NSString *MONTHFULLSPELL[] = {@"January", @"February", @"March", @"April"
     NSDateComponents *comps;
     comps = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[[NSDate alloc] init]];
     
-    [comps setHour:+24]; //+24表示获取下一天的date，-24表示获取前一天的date；
+    [comps setHour:+72]; //+24表示获取下一天的date，-24表示获取前一天的date；
     [comps setMinute:0];
     [comps setSecond:0];
     

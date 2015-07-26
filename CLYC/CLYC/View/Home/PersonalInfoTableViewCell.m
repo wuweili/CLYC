@@ -72,6 +72,18 @@
     
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [UIColor clearColor].CGColor);
+    CGContextFillRect(context, rect);
+    
+    CGContextSetStrokeColorWithColor(context, CELL_LINE_COLOR.CGColor);
+    CGContextStrokeRect(context, CGRectMake(0, rect.size.height, rect.size.width, 0.5));
+    
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -20,7 +20,7 @@
     
     if (self)
     {
-        self.carUserNameTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 40, 20)];
+        self.carUserNameTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 50, 20)];
         
         self.carUserNameTitleLabel.font = HEL_12;
         
@@ -34,7 +34,7 @@
         
         [self.contentView addSubview:self.carUserNameTitleLabel];
         
-        self.carUserNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carUserNameTitleLabel.frame), CGRectGetMaxY(self.carUserNameTitleLabel.frame), 100, 20)];
+        self.carUserNameLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carUserNameTitleLabel.frame), CGRectGetMinY(self.carUserNameTitleLabel.frame), 100, 20)];
         
         self.carUserNameLabel.font = HEL_12;
         
@@ -46,7 +46,7 @@
         
         [self.contentView addSubview:self.carUserNameLabel];
         
-        self.carUserTelTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carUserNameLabel.frame)+10, CGRectGetMaxY(self.carUserNameLabel.frame), 40, 20)];
+        self.carUserTelTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carUserNameLabel.frame)+10, CGRectGetMinY(self.carUserNameLabel.frame), 40, 20)];
         
         self.carUserTelTitleLabel.font = HEL_12;
         
@@ -61,7 +61,7 @@
         [self.contentView addSubview:self.carUserTelTitleLabel];
         
         
-        self.carUserTelLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carUserTelTitleLabel.frame), CGRectGetMaxY(self.carUserTelTitleLabel.frame), 100, 20)];
+        self.carUserTelLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.carUserTelTitleLabel.frame), CGRectGetMinY(self.carUserTelTitleLabel.frame), 100, 20)];
         
         self.carUserTelLabel.font = HEL_12;
         
@@ -146,6 +146,8 @@
     self.carUserTelLabel.text = model.carAppUserTel;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ 至 %@",model.beginTime,model.endTime];
     self.addressLabel.text = [NSString stringWithFormat:@"%@ 至 %@",model.beginAdrr,model.endAdrr];
+    
+    [self changeheightForLabel:self.addressLabel];
 }
 
 #pragma mark - UIlabel 高度变化及cell高度

@@ -36,6 +36,8 @@
 
 #define YB_HTTP_SERVER                       @"http://210.73.152.201:8888/wsportal/doService"
 
+#define BaiDuMap_AK   @"LivYgBlngmQdmqkUbzqgOZZs"
+
 
 
 
@@ -44,12 +46,16 @@
 
 #define YB_HTTP_SERVER                       @"https://api.yibaomd-test.com/api-web/"
 
+#define BaiDuMap_AK   @"LivYgBlngmQdmqkUbzqgOZZs"
+
 
 
 #elif defined(YB_HTTP_IDP_SERVER_RELEASE_TEST) //外网测试
 
 
 #define YB_HTTP_SERVER                       @"https://test.yibaomd.com/api-web/"
+
+#define BaiDuMap_AK   @"LivYgBlngmQdmqkUbzqgOZZs"
 
 
 
@@ -59,6 +65,8 @@
 #define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
 //webservice配置
+
+#define BaiDuMap_AK   @"Kvyfr0qeGtHIn7cekBKVr8rR"
 
 
 

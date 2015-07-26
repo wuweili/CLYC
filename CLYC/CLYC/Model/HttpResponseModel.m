@@ -15,6 +15,26 @@
 
 @implementation SelectCarInfoModel
 
+-(id)init
+{
+    self = [super init];
+    
+    if ( self)
+    {
+        self.carId = @"";
+        self.carCode = @"";
+        
+        self.carModelId = @"";
+        self.carModel = @"";
+        self.driverId = @"";
+        self.driver = @"";
+        self.driverTel = @"";
+        self.carType = @"";
+        self.price = @"";
+    }
+    
+    return self;
+}
 
 
 @end
@@ -104,7 +124,25 @@
 @end
 
 
+@implementation TrajectoryListModel
 
+-(id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.receiveTime = @"";
+        self.latitude = @"";
+        self.longitude = @"";
+        self.direction = @"";
+        
+    }
+    
+    return self;
+}
+
+@end
 
 
 

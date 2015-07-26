@@ -10,6 +10,7 @@
 #import "MJRefresh.h"
 #import "DateFormate.h"
 #import "D_ApplyCarListTableViewCell.h"
+#import "D_ConfirmMile2ViewController.h"
 
 
 
@@ -213,7 +214,7 @@
     
     
     
-    NSArray *valueArray = @[projectNumStr,carUserStr,threeDaysAterStr,@"",[HXUserModel shareInstance].userId,@"1",[HXUserModel shareInstance].userId,@"2",@"20",currentPage];
+    NSArray *valueArray = @[projectNumStr,carUserStr,threeDaysAterStr,@"",[HXUserModel shareInstance].userId,@"2",@"20",currentPage];
     
     
     [CLYCCoreBizHttpRequest driverObtainCarApplyListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
@@ -271,7 +272,7 @@
     
     NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
   
-    NSArray *valueArray = @[projectNumStr,carUserStr,@"",@"",[HXUserModel shareInstance].userId,@"1",[HXUserModel shareInstance].userId,@"2",@"20",currentPage];
+    NSArray *valueArray = @[projectNumStr,carUserStr,@"",@"",[HXUserModel shareInstance].userId,@"2",@"20",currentPage];
     
     
     [CLYCCoreBizHttpRequest driverObtainCarApplyListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
@@ -361,8 +362,9 @@
     {
         ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
         
-//        EditApplyCarViewController *editMVC = [[EditApplyCarViewController alloc]initWithApplyCarDetailModel:model];
-//        [self.navigationController pushViewController:editMVC animated:YES];
+        
+        D_ConfirmMile2ViewController *editMVC = [[D_ConfirmMile2ViewController alloc]initWithApplyCarDetailModel:model];
+        [self.navigationController pushViewController:editMVC animated:YES];
         
         
         

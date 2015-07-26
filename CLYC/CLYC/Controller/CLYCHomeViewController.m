@@ -13,6 +13,8 @@
 #import "ApplyCarViewController.h"
 #import "ApplyCarHistoryViewController.h"
 #import "ConfirmMileViewController.h"
+#import "D_ApplyCarListViewController.h"
+#import "CLYCLocationManager.h"
 
 
 
@@ -44,11 +46,25 @@
     
     [self initUICollectionView];
     
+
+    if (!IS_DefaultUser)
+    {
+        
+        NSString *carAppId = [[NSUserDefaults standardUserDefaults] objectForKey:CY_APPCAR_ID];
+        
+        if (![NSString isBlankString:carAppId])
+        {
+            [[CLYCLocationManager shareInstance] startLocation];
+        }
+    
+    }
+   
+    
 }
 
 -(void)initUI
 {
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
     
     self.title = @"轻松约车";
     
@@ -61,7 +77,7 @@
     
     _section1Array = [NSMutableArray arrayWithCapacity:0];
     
-    if ([[HXUserModel shareInstance].roleNo isEqualToString:@"1"])
+    if (IS_DefaultUser)
     {
         [_section1Array addObjectsFromArray:@[
                                               FIRST_HOME_BOOK_CAR_image,
@@ -210,44 +226,91 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDLogInfo(@"选择%ld",(long)indexPath.row);
-    switch (indexPath.row)
+    
+    if (IS_DefaultUser)
     {
-        case 0:
+        switch (indexPath.row)
         {
-            ApplyCarViewController *applyCarMVC = [[ApplyCarViewController alloc]init];
-            [self.navigationController pushViewController:applyCarMVC animated:YES];
-            
-            
+            case 0:
+            {
+                ApplyCarViewController *applyCarMVC = [[ApplyCarViewController alloc]init];
+                [self.navigationController pushViewController:applyCarMVC animated:YES];
+                
+                
+            }
+                break;
+            case 1:
+            {
+                ApplyCarHistoryViewController *applyCarMVC = [[ApplyCarHistoryViewController alloc]init];
+                [self.navigationController pushViewController:applyCarMVC animated:YES];
+            }
+                break;
+                
+            case 2:
+            {
+                ConfirmMileViewController *confirmMVC = [[ConfirmMileViewController alloc]init];
+                [self.navigationController pushViewController:confirmMVC animated:YES];
+            }
+                break;
+                
+            case 3:
+            {
+            }
+                break;
+                
+            case 4:
+            {
+            }
+                break;
+                
+                
+            default:
+                break;
         }
-            break;
-        case 1:
-        {
-            ApplyCarHistoryViewController *applyCarMVC = [[ApplyCarHistoryViewController alloc]init];
-            [self.navigationController pushViewController:applyCarMVC animated:YES];
-        }
-            break;
-            
-        case 2:
-        {
-            ConfirmMileViewController *confirmMVC = [[ConfirmMileViewController alloc]init];
-            [self.navigationController pushViewController:confirmMVC animated:YES];
-        }
-            break;
-            
-        case 3:
-        {
-        }
-            break;
-            
-        case 4:
-        {
-        }
-            break;
-            
-            
-        default:
-            break;
     }
+    else
+    {
+        switch (indexPath.row)
+        {
+            case 0:
+            {
+                D_ApplyCarListViewController *applyCarMVC = [[D_ApplyCarListViewController alloc]init];
+                [self.navigationController pushViewController:applyCarMVC animated:YES];
+                
+                
+            }
+                break;
+            case 1:
+            {
+                ApplyCarHistoryViewController *applyCarMVC = [[ApplyCarHistoryViewController alloc]init];
+                [self.navigationController pushViewController:applyCarMVC animated:YES];
+            }
+                break;
+                
+            case 2:
+            {
+                ConfirmMileViewController *confirmMVC = [[ConfirmMileViewController alloc]init];
+                [self.navigationController pushViewController:confirmMVC animated:YES];
+            }
+                break;
+                
+            case 3:
+            {
+            }
+                break;
+                
+            case 4:
+            {
+            }
+                break;
+                
+                
+            default:
+                break;
+        }
+    }
+    
+    
 
     
     

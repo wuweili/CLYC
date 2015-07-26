@@ -108,7 +108,7 @@
 
 -(void)initUI
 {
-    self.view.backgroundColor = UIColorFromRGB(0xf3f3f3);
+//    self.view.backgroundColor = UIColorFromRGB(0xf3f3f3);
     self.title = @"约车申请";
     
     [IMUnitsMethods drawTheRightBarBtn:self function:@selector(updateApplyCarStatus) btnTitle:@"提交" bgImage:nil];

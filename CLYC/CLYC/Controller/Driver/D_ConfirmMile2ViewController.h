@@ -9,5 +9,5 @@
 #import "HXBJHXBaseViewController.h"
 
 @interface D_ConfirmMile2ViewController : HXBJHXBaseViewController
-
+-(id)initWithApplyCarDetailModel:(ApplyCarDetailModel *)model;
 @end

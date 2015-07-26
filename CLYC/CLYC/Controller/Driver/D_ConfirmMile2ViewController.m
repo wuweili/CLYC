@@ -78,7 +78,7 @@
 
 -(void)initUI
 {
-    self.view.backgroundColor = UIColorFromRGB(0xf3f3f3);
+//    self.view.backgroundColor = UIColorFromRGB(0xf3f3f3);
     self.title = @"里程确认";
     
 }
@@ -102,7 +102,7 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator = NO;
-    _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.backgroundView = nil;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
@@ -112,7 +112,7 @@
 {
     _editFootView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 70)];
     
-    _editFootView.backgroundColor = UIColorFromRGB(0xf3f3f3);
+    _editFootView.backgroundColor =UIColorFromRGB(0xf3f3f3);
     
     UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(15, 10, kMainScreenWidth-30, 30)];
     [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search.png"] forState:UIControlStateNormal];
@@ -122,7 +122,7 @@
     [startSearchButton setTitle:@"提交" forState:UIControlStateNormal];
     
     [startSearchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [startSearchButton addTarget:self action:@selector(clickAgreeButton) forControlEvents:UIControlEventTouchUpInside];
+    [startSearchButton addTarget:self action:@selector(clickCommitButton) forControlEvents:UIControlEventTouchUpInside];
     [_editFootView addSubview:startSearchButton];
     
     
@@ -145,8 +145,32 @@
             
             _applyCarModel = model;
             
-            if (_applyCarModel.beginMilStatus.integerValue != 0 )
+            if (_applyCarModel.beginMilStatus.integerValue == 0)
             {
+                //此时需要司机还未里程
+                
+                
+                NSDictionary *dic1 = @{@"mileInfoKey":@"开始里程(公里)：",@"mileInfoValue":_applyCarModel.beginMil};
+                
+                [_secondDataArray addObject:dic1];
+                
+            }
+            else if (_applyCarModel.beginMilStatus.integerValue == 1)
+            {
+                //此时需要司机已提交开始里程，但是用户还没有确认
+                
+                NSDictionary *dic1 = @{@"mileInfoKey":@"开始里程(公里)：",@"mileInfoValue":_applyCarModel.beginMil};
+                
+                [_secondDataArray addObject:dic1];
+                
+                _tableView.tableFooterView = nil;
+                
+            }
+            
+            else if (_applyCarModel.beginMilStatus.integerValue == 3)
+            {
+                //未通过
+                
                 NSDictionary *dic1 = @{@"mileInfoKey":@"开始里程(公里)：",@"mileInfoValue":_applyCarModel.beginMil};
                 
                 [_secondDataArray addObject:dic1];
@@ -185,49 +209,167 @@
                 [_secondDataArray addObject:dic3];
                 
             }
-            
-            
-            if (_applyCarModel.finishMilStatus.integerValue !=0)
+            else if(_applyCarModel.beginMilStatus.integerValue == 2)
             {
-                NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
-                [_secondDataArray addObject:dic4];
                 
-                NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
-                [_secondDataArray addObject:dic5];
+                //此时说明用户已经确认过且同意开始里程
+                
+                NSDictionary *dic1 = @{@"mileInfoKey":@"开始里程(公里)：",@"mileInfoValue":_applyCarModel.beginMil};
+                
+                [_secondDataArray addObject:dic1];
                 
                 NSString *confirmStr = @"";
-                if ([_applyCarModel.finishMilStatus isEqualToString:@"1"])
+                if ([_applyCarModel.beginMilStatus isEqualToString:@"1"])
                 {
                     confirmStr =@"提交";
                 }
-                else if ([_applyCarModel.finishMilStatus isEqualToString:@"2"])
+                else if ([_applyCarModel.beginMilStatus isEqualToString:@"2"])
                 {
                     confirmStr =@"通过";
                 }
-                else if ([_applyCarModel.finishMilStatus isEqualToString:@"3"])
+                else if ([_applyCarModel.beginMilStatus isEqualToString:@"3"])
                 {
                     confirmStr =@"未通过";
                 }
                 
-                NSDictionary *dic6 = @{@"mileInfoKey":@"结束里程状态：",@"mileInfoValue":confirmStr};
+                NSDictionary *dic2 = @{@"mileInfoKey":@"开始里程状态：",@"mileInfoValue":confirmStr};
                 
-                [_secondDataArray addObject:dic6];
+                [_secondDataArray addObject:dic2];
                 
-                float realMile = [_applyCarModel.finishMil floatValue] - [_applyCarModel.beginMil floatValue]+[_applyCarModel.addMil floatValue];
                 
-                NSString *realMileStr = [NSString stringWithFormat:@"%.1f",realMile];
+                if ([NSString isBlankString:_applyCarModel.beginMilRemark])
+                {
+                    if (_applyCarModel.beginMilStatus.integerValue != 1)
+                    {
+                        _applyCarModel.beginMilRemark = @"无";
+                        
+                    }
+                    
+                }
                 
-                NSDictionary *dic7 = @{@"mileInfoKey":@"实际里程(公里)：",@"mileInfoValue":realMileStr};
+                NSDictionary *dic3 = @{@"mileInfoKey":@"开始里程备注：",@"mileInfoValue":_applyCarModel.beginMilRemark};
                 
-                [_secondDataArray addObject:dic7];
+                [_secondDataArray addObject:dic3];
                 
-                NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
                 
-                [_secondDataArray addObject:dic8];
+                if (_applyCarModel.finishMilStatus.integerValue ==0)
+                {
+                    //说明司机还未提交结束里程
+                    NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
+                    [_secondDataArray addObject:dic4];
+                    
+                    NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                    [_secondDataArray addObject:dic5];
+                    
+                    
+                }
+                else if (_applyCarModel.finishMilStatus.integerValue ==1)
+                {
+                    //说明司机提交结束里程，但是用户还没有确认
+                    
+                    NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
+                    [_secondDataArray addObject:dic4];
+                    
+                    NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                    [_secondDataArray addObject:dic5];
+                    
+                    _tableView.tableFooterView = nil;
+                    
+                }
+                else if (_applyCarModel.finishMilStatus.integerValue ==3)
+                {
+                    //说明用户不同意结束里程
+                    
+                    NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
+                    [_secondDataArray addObject:dic4];
+                    
+                    NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                    [_secondDataArray addObject:dic5];
+                    
+                    NSString *confirmStr = @"";
+                    if ([_applyCarModel.finishMilStatus isEqualToString:@"1"])
+                    {
+                        confirmStr =@"提交";
+                    }
+                    else if ([_applyCarModel.finishMilStatus isEqualToString:@"2"])
+                    {
+                        confirmStr =@"通过";
+                    }
+                    else if ([_applyCarModel.finishMilStatus isEqualToString:@"3"])
+                    {
+                        confirmStr =@"未通过";
+                    }
+                    
+                    NSDictionary *dic6 = @{@"mileInfoKey":@"结束里程状态：",@"mileInfoValue":confirmStr};
+                    
+                    [_secondDataArray addObject:dic6];
+                    
+                    float realMile = [_applyCarModel.finishMil floatValue] - [_applyCarModel.beginMil floatValue]+[_applyCarModel.addMil floatValue];
+                    
+                    NSString *realMileStr = [NSString stringWithFormat:@"%.1f",realMile];
+                    
+                    NSDictionary *dic7 = @{@"mileInfoKey":@"实际里程(公里)：",@"mileInfoValue":realMileStr};
+                    
+                    [_secondDataArray addObject:dic7];
+                    
+                    NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
+                    
+                    [_secondDataArray addObject:dic8];
+                    
+                }
+                else if (_applyCarModel.finishMilStatus.integerValue ==2)
+                {
+                    //用户同意结束里程
+                    
+                    NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
+                    [_secondDataArray addObject:dic4];
+                    
+                    NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                    [_secondDataArray addObject:dic5];
+                    
+                    NSString *confirmStr = @"";
+                    if ([_applyCarModel.finishMilStatus isEqualToString:@"1"])
+                    {
+                        confirmStr =@"提交";
+                    }
+                    else if ([_applyCarModel.finishMilStatus isEqualToString:@"2"])
+                    {
+                        confirmStr =@"通过";
+                    }
+                    else if ([_applyCarModel.finishMilStatus isEqualToString:@"3"])
+                    {
+                        confirmStr =@"未通过";
+                    }
+                    
+                    NSDictionary *dic6 = @{@"mileInfoKey":@"结束里程状态：",@"mileInfoValue":confirmStr};
+                    
+                    [_secondDataArray addObject:dic6];
+                    
+                    float realMile = [_applyCarModel.finishMil floatValue] - [_applyCarModel.beginMil floatValue]+[_applyCarModel.addMil floatValue];
+                    
+                    NSString *realMileStr = [NSString stringWithFormat:@"%.1f",realMile];
+                    
+                    NSDictionary *dic7 = @{@"mileInfoKey":@"实际里程(公里)：",@"mileInfoValue":realMileStr};
+                    
+                    [_secondDataArray addObject:dic7];
+                    
+                    NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
+                    
+                    [_secondDataArray addObject:dic8];
+                    
+                    _tableView.tableFooterView = nil;
+                    
+                    
+                    
+                }
+                
                 
                 
                 
             }
+            
+            
+            
             
             [_tableView reloadData];
             
@@ -352,12 +494,83 @@
         UIView *sectionHeadView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 30)];
         sectionHeadView.backgroundColor = UIColorFromRGB(0xf3f3f3);
         
-        UILabel *sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, kMainScreenWidth-10, 30)];
+        UILabel *sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 60, 30)];
         sectionLabel.backgroundColor =UIColorFromRGB(0xf3f3f3);
         sectionLabel.textAlignment = NSTextAlignmentLeft;
-        sectionLabel.text = @"以下为您的里程信息，请确认(如有需要，可填备注)";
+        sectionLabel.text = @"里程信息";
         sectionLabel.font = HEL_13;
+        sectionLabel.backgroundColor = [UIColor clearColor];
         [sectionHeadView addSubview:sectionLabel];
+        
+        UILabel *section2Label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(sectionLabel.frame), 0, kMainScreenWidth-10-CGRectGetMaxX(sectionLabel.frame), 30)];
+        section2Label.backgroundColor =UIColorFromRGB(0xf3f3f3);
+        section2Label.textAlignment = NSTextAlignmentLeft;
+        section2Label.font = HEL_11;
+        section2Label.backgroundColor = [UIColor clearColor];
+        section2Label.textColor = UIColorFromRGB(0xf48871);
+        [sectionHeadView addSubview:section2Label];
+        
+        NSString *tipString= @"";
+        
+        if (_applyCarModel.beginMilStatus.integerValue == 0)
+        {
+            //此时需要司机还未提交开始里程
+            
+            tipString = @"(请填写提交开始里程)";
+        }
+        else if (_applyCarModel.beginMilStatus.integerValue == 1)
+        {
+            //此时需要司机已提交开始里程，但是用户还没有确认
+            tipString = @"(开始里程已提交，等待用车人确认)";
+            
+        }
+        
+        else if (_applyCarModel.beginMilStatus.integerValue == 3)
+        {
+            //未通过
+            tipString = @"(用车人不同意开始里程，请重填)";
+          
+            
+        }
+        else if(_applyCarModel.beginMilStatus.integerValue == 2)
+        {
+            
+            //此时说明用户已经确认过且同意开始里程
+            
+            
+            
+            if (_applyCarModel.finishMilStatus.integerValue ==0)
+            {
+                //说明司机还未提交结束里程
+               tipString = @"(请填写提交结束里程(加价里程不能大于50))";
+                
+                
+            }
+            else if (_applyCarModel.finishMilStatus.integerValue ==1)
+            {
+                //说明司机提交结束里程，但是用户还没有确认
+                tipString = @"(结束里程(加价里程)已提交，等待用车人确认)";
+              
+            }
+            else if (_applyCarModel.finishMilStatus.integerValue ==3)
+            {
+                //说明用户不同意结束里程
+                tipString = @"(用车人不同意结束里程(加价里程)，请重填)";
+               
+                
+            }
+            else if (_applyCarModel.finishMilStatus.integerValue ==2)
+            {
+                //用户同意结束里程
+                
+            }
+        
+        }
+        
+        section2Label.text =tipString;
+        
+        
+        
         return sectionHeadView;
     }
 }
@@ -396,13 +609,13 @@
     if (indexPath.section == 0)
     {
         NSString *identifier = [NSString stringWithFormat:@"detailInfo%ld%ld",(long)indexPath.section,(long)indexPath.row];
-        SaveApplyCarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        D_ConfirmMile2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         
         if (cell == nil)
         {
-            cell = [[SaveApplyCarTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
+            cell = [[D_ConfirmMile2TableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
         }
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         
         if ([_dataArray count]>0)
         {
@@ -427,17 +640,14 @@
             NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
             celleStr = timeStr;
             
-            //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 2)
         {
             celleStr = _applyCarModel.beginAdrr;
-            //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 3)
         {
             celleStr = _applyCarModel.endAdrr;
-            //            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         else if (indexPath.row == 4)
         {
@@ -457,13 +667,13 @@
     else
     {
         NSString *identifier = [NSString stringWithFormat:@"detailInfo%ld%ld",(long)indexPath.section,(long)indexPath.row];
-        SaveApplyCarTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        D_ConfirmMile2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         
         if (cell == nil)
         {
-            cell = [[SaveApplyCarTableViewCell alloc]initMileInfoWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
+            cell = [[D_ConfirmMile2TableViewCell alloc]initMileInfoWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
         }
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         
         if ([_secondDataArray count]>0)
         {
@@ -476,32 +686,83 @@
             [cell setContentWithIndexPath:indexPath andContentStr:celleStr];
         }
         
-        if (_applyCarModel.beginMilStatus.integerValue ==1)
+       
+        if (_applyCarModel.beginMilStatus.integerValue == 0)
         {
-            if (indexPath.row == 2)
+            //此时需要司机还未提交开始里程
+            
+            if (indexPath.row == 0)
             {
                 cell.cellTextView.editable = YES;
                 cell.cellTextView.userInteractionEnabled = YES;
                 cell.cellTextView.delegate = self;
-                cell.cellTextView.tag = 2002;
+                cell.cellTextView.tag = 2000;
             }
+           
+            
         }
-        else if (_applyCarModel.finishMilStatus.integerValue ==1)
+        else if (_applyCarModel.beginMilStatus.integerValue == 3)
         {
-            if (indexPath.row == 7)
+            //未通过
+            
+            if (indexPath.row == 0)
             {
                 cell.cellTextView.editable = YES;
                 cell.cellTextView.userInteractionEnabled = YES;
                 cell.cellTextView.delegate = self;
-                cell.cellTextView.tag = 2007;
+                cell.cellTextView.tag = 2000;
+            }
+  
+        }
+        else if(_applyCarModel.beginMilStatus.integerValue == 2)
+        {
+            
+            //此时说明用户已经确认过且同意开始里程
+            
+            if (_applyCarModel.finishMilStatus.integerValue ==0)
+            {
+                //说明司机还未提交结束里程
+                if (indexPath.row == 3)
+                {
+                    cell.cellTextView.editable = YES;
+                    cell.cellTextView.userInteractionEnabled = YES;
+                    cell.cellTextView.delegate = self;
+                    cell.cellTextView.tag = 2003;
+                }
+                else if (indexPath.row == 4)
+                {
+                    cell.cellTextView.editable = YES;
+                    cell.cellTextView.userInteractionEnabled = YES;
+                    cell.cellTextView.delegate = self;
+                    cell.cellTextView.tag = 2004;
+                }
+                
+            }
+            else if (_applyCarModel.finishMilStatus.integerValue ==3)
+            {
+                //说明用户不同意结束里程
+                
+                if (indexPath.row == 3)
+                {
+                    cell.cellTextView.editable = YES;
+                    cell.cellTextView.userInteractionEnabled = YES;
+                    cell.cellTextView.delegate = self;
+                    cell.cellTextView.tag = 2003;
+                }
+                else if (indexPath.row == 4)
+                {
+                    cell.cellTextView.editable = YES;
+                    cell.cellTextView.userInteractionEnabled = YES;
+                    cell.cellTextView.delegate = self;
+                    cell.cellTextView.tag = 2004;
+                }
+         
+            }
+            else if (_applyCarModel.finishMilStatus.integerValue ==2)
+            {
+                //用户同意结束里程
             }
         }
-        else
-        {
-            cell.cellTextView.editable = NO;
-            cell.cellTextView.userInteractionEnabled = NO;
-        }
-        
         return cell;
     }
 }
@@ -617,7 +878,7 @@
     {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:counter inSection:1];
         
-        SaveApplyCarTableViewCell *cell = (SaveApplyCarTableViewCell *)[_tableView cellForRowAtIndexPath:indexPath];
+        D_ConfirmMile2TableViewCell *cell = (D_ConfirmMile2TableViewCell *)[_tableView cellForRowAtIndexPath:indexPath];
         
         if (cell.cellTextView)
         {
@@ -636,7 +897,7 @@
     {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:counter inSection:1];
         
-        SaveApplyCarTableViewCell *cell = (SaveApplyCarTableViewCell *)[_tableView cellForRowAtIndexPath:indexPath];
+        D_ConfirmMile2TableViewCell *cell = (D_ConfirmMile2TableViewCell *)[_tableView cellForRowAtIndexPath:indexPath];
         
         if (cell.cellTextView)
         {
@@ -668,24 +929,30 @@
 {
     
     [textView resignFirstResponder];
-    if (textView.tag == 2002)
+    if (textView.tag == 2000)
     {
-        _applyCarModel.beginMilRemark =textView.text;
+        _applyCarModel.beginMil =textView.text;
         
-        NSDictionary *dic3 = @{@"mileInfoKey":@"开始里程备注：",@"mileInfoValue":_applyCarModel.beginMilRemark};
+        NSDictionary *dic0 = @{@"mileInfoKey":@"开始里程(公里)：",@"mileInfoValue":_applyCarModel.beginMil};
         
-        [_secondDataArray replaceObjectAtIndex:2 withObject:dic3];
+        [_secondDataArray replaceObjectAtIndex:0 withObject:dic0];
+    }
+    else if (textView.tag == 2003)
+    {
+        _applyCarModel.finishMil = textView.text;
         
-        
+        NSDictionary *dic3 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
+      
+        [_secondDataArray replaceObjectAtIndex:3 withObject:dic3];
         
     }
-    else if (textView.tag == 2007)
+    else if (textView.tag == 2004)
     {
-        _applyCarModel.finishMilRemark = textView.text;
+        _applyCarModel.addMil = textView.text;
         
-        NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
+        NSDictionary *dic4 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
         
-        [_secondDataArray replaceObjectAtIndex:7 withObject:dic8];
+        [_secondDataArray replaceObjectAtIndex:4 withObject:dic4];
         
     }
     
@@ -714,30 +981,36 @@
     return YES;
 }
 
-#pragma mark - 点击同意按钮-
--(void)clickAgreeButton
+#pragma mark - 点击提交按钮-
+-(void)clickCommitButton
 {
-    if (_applyCarModel.beginMilStatus.intValue ==1)
+    [self moveKeyBoardDown];
+    
+    if (_applyCarModel.beginMilStatus.intValue ==0 || _applyCarModel.beginMilStatus.intValue ==3)
     {
         [self initMBHudWithTitle:nil];
         //开始里程提交状态
-        NSArray *keyArray = @[@"appId",@"beginMilStatus",@"beginMilRemark"];
-        NSArray *valueArray = @[_applyCarModel.appId,@"2",_applyCarModel.beginMilRemark];
+        NSArray *keyArray = @[@"appId",@"beginMil"];
         
-        [CLYCCoreBizHttpRequest userConfirmBeginMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+        float beginMileValue = (float)[_applyCarModel.beginMil floatValue];
+        
+        NSString *beginMileValueStr = [NSString stringWithFormat:@"%.1f",beginMileValue];
+        _applyCarModel.beginMil =beginMileValueStr;
+        
+        NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.beginMil];
+        
+        [CLYCCoreBizHttpRequest driverCommitBeginMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+            
             
             if ([retcode isEqualToString:YB_HTTP_CODE_OK])
             {
-                [self stopMBHudAndNSTimerWithmsg:@"同意操作成功" finsh:nil];
-                
-                
-                
+                [self stopMBHudAndNSTimerWithmsg:@"提交操作成功" finsh:nil];
+           
                 _tableView.tableFooterView = nil;
                 
                 [_tableView reloadData];
                 
                 [self unEnableAllTextView];
-                
             }
             else
             {
@@ -748,109 +1021,53 @@
         } keyArray:keyArray valueArray:valueArray];
         
     }
-    else if (_applyCarModel.finishMilStatus.intValue == 1)
+    else if (_applyCarModel.finishMilStatus.intValue == 0|| _applyCarModel.finishMilStatus.intValue ==3)
     {
+        if (_applyCarModel.addMil.integerValue >50)
+        {
+            [self displaySomeInfoWithInfo:@"加价里程不能大于50" finsh:nil];
+            
+            return;
+        }
+ 
         //结束里程提交状态
         [self initMBHudWithTitle:nil];
         
-        NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark"];
-        NSArray *valueArray = @[_applyCarModel.appId,@"2",_applyCarModel.finishMilRemark];
+        NSArray *keyArray = @[@"appId",@"finishMil",@"addMil"];
         
-        [CLYCCoreBizHttpRequest userConfirmFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+        float finishMileValue = (float)[_applyCarModel.finishMil floatValue];
+        NSString *finishMileValueStr = [NSString stringWithFormat:@"%.1f",finishMileValue];
+        _applyCarModel.finishMil =finishMileValueStr;
+        
+        float addMileValue = (float)[_applyCarModel.addMil floatValue];
+        NSString *addMileValueStr = [NSString stringWithFormat:@"%.1f",addMileValue];
+        _applyCarModel.addMil =addMileValueStr;
+        
+
+        NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.finishMil,_applyCarModel.addMil];
+        
+        [CLYCCoreBizHttpRequest driverCommitFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
             if ([retcode isEqualToString:YB_HTTP_CODE_OK])
             {
-                [self stopMBHudAndNSTimerWithmsg:@"同意操作成功" finsh:nil];
+                [self stopMBHudAndNSTimerWithmsg:@"提交操作成功" finsh:nil];
                 
                 _tableView.tableFooterView = nil;
                 
                 [_tableView reloadData];
                 
                 [self unEnableAllTextView];
-                
-                
             }
             else
             {
                 [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
             }
         } keyArray:keyArray valueArray:valueArray];
-        
-    }
-}
-
-#pragma mark - 点击不同意按钮 -
-
--(void)clickUnAgreeButton
-{
-    if (_applyCarModel.beginMilStatus.intValue ==1)
-    {
-        [self initMBHudWithTitle:nil];
-        //开始里程提交状态
-        NSArray *keyArray = @[@"appId",@"beginMilStatus",@"beginMilRemark"];
-        NSArray *valueArray = @[_applyCarModel.appId,@"3",_applyCarModel.beginMilRemark];
-        
-        [CLYCCoreBizHttpRequest userConfirmBeginMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
-            
-            if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-            {
-                [self stopMBHudAndNSTimerWithmsg:@"不同意操作成功" finsh:nil];
-                
-                _tableView.tableFooterView = nil;
-                
-                [_tableView reloadData];
-                
-                [self unEnableAllTextView];
-                
-            }
-            else
-            {
-                [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
-            }
-            
-            
-        } keyArray:keyArray valueArray:valueArray];
-        
-    }
-    else if (_applyCarModel.finishMilStatus.intValue == 1)
-    {
-        //结束里程提交状态
-        [self initMBHudWithTitle:nil];
-        
-        NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark"];
-        NSArray *valueArray = @[_applyCarModel.appId,@"3",_applyCarModel.finishMilRemark];
-        
-        [CLYCCoreBizHttpRequest userConfirmFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
-            if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-            {
-                [self stopMBHudAndNSTimerWithmsg:@"不同意操作成功" finsh:nil];
-                
-                _tableView.tableFooterView = nil;
-                
-                [_tableView reloadData];
-                
-                [self unEnableAllTextView];
-                
-            }
-            else
-            {
-                [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
-            }
-        } keyArray:keyArray valueArray:valueArray];
-        
+  
     }
 }
 
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 /*
 #pragma mark - Navigation
