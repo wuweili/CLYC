@@ -84,4 +84,6 @@
 
 +(NSString *)getThreeDaysAfterTimeStr;
 
++ (NSString *) NSStringLocationDateToString:(NSDate *)date;
+
 @end

@@ -108,6 +108,8 @@
 - (CGFloat)singleHeightWithFont:(UIFont*)font;
 
 - (CGSize)singleSizeWithFont:(UIFont*)font;
-
-
+/**
+ * 格式化处理
+ */
++(NSString *)getFormatStr:(NSString *)oraginStr;
 @end

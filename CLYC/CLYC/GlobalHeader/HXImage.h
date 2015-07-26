@@ -62,12 +62,21 @@
 
 //First_home_comment@2x  评价记录
 
+//历史记录
+
+#define FIRST_HOME_D_HistoryList_image    IMAGE(@"D_history_list.png")
+
 #define FIRST_HOME_COMMENT_image    IMAGE(@"First_home_comment.png")
 
 
 //个人信息
 
 #define FIRST_HOME_PERSONAL_INFO_image    IMAGE(@"First_home_personal_info.png")
+
+//服务评价
+#define FIRST_HOME_SERVER_ASS_image    IMAGE(@"server_ass.png")
+
+
 
 
 //设置

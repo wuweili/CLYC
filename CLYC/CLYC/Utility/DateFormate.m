@@ -398,7 +398,6 @@ static NSString *MONTHFULLSPELL[] = {@"January", @"February", @"March", @"April"
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-//  [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
     [formatter setFormatterBehavior:NSDateFormatterBehavior10_4];
 	[formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
 	NSString *time = [formatter stringFromDate:date];
@@ -596,6 +595,18 @@ static NSString *MONTHFULLSPELL[] = {@"January", @"February", @"March", @"April"
     return threeDaysAfterDateStr;
     
     
+}
+
++ (NSString *) NSStringLocationDateToString:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/beijing"]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *time = [formatter stringFromDate:date];
+    
+    return time;
 }
 
 

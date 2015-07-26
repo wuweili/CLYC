@@ -135,7 +135,7 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator = NO;
-    _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.backgroundView = nil;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 //    if ([_tableView respondsToSelector:@selector(setSeparatorInset:)])
@@ -504,7 +504,7 @@
         {
             cell = [[SaveApplyCarTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
         }
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         
         if ([_dataArray count]>0)
         {
@@ -570,7 +570,7 @@
         {
             cell = [[SaveApplyCarTableViewCell alloc]initMileInfoWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
         }
-        cell.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = [UIColor whiteColor];
         
         if ([_secondDataArray count]>0)
         {

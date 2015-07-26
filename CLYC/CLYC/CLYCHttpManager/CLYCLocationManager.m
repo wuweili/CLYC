@@ -7,6 +7,15 @@
 //
 
 #import "CLYCLocationManager.h"
+#import "DateFormate.h"
+
+@interface CLYCLocationManager ()
+{
+    NSTimer * _startLocationTimer;
+}
+
+@end
+
 
 @implementation CLYCLocationManager
 
@@ -21,9 +30,6 @@ static CLYCLocationManager *instance = nil;
         if (nil == instance)
         {
             instance = [[CLYCLocationManager alloc] init];
-            
-            [NSTimer scheduledTimerWithTimeInterval:180 target:instance selector:@selector(startLocation) userInfo:nil repeats:YES];
-            
         }
     }
     return instance;
@@ -41,8 +47,43 @@ static CLYCLocationManager *instance = nil;
     return nil;
 }
 
+-(id)init
+{
+    self = [super init];
+    if (self)
+    {
+        
+    }
+    
+    return self;
+    
+    
+}
+
+-(void)stopLocationTimer
+{
+    if (_startLocationTimer)
+    {
+        [_startLocationTimer invalidate];
+        _startLocationTimer = nil;
+    }
+    
+    [_locService stopUserLocationService];
+}
+
+
 -(void)startLocation
 {
+    if (!_startLocationTimer)
+    {
+        _startLocationTimer = [NSTimer timerWithTimeInterval:180
+                                                      target:self
+                                                    selector:@selector(startLocation)
+                                                    userInfo:nil
+                                                     repeats:YES];
+        [[NSRunLoop currentRunLoop]addTimer:_startLocationTimer forMode:NSRunLoopCommonModes];
+    }
+    
 
     if (![CLLocationManager locationServicesEnabled])
     {
@@ -92,15 +133,49 @@ static CLYCLocationManager *instance = nil;
     
     DDLogInfo(@"heading is %@",userLocation.heading);
 }
+
+
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
     [_locService stopUserLocationService];
     
+    NSString *carAppId = [[NSUserDefaults standardUserDefaults] objectForKey:CY_APPCAR_ID];
     
-    DDLogInfo(@"didUpdateUserLocation lat %f,long %f course = %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude,userLocation.location.course);
-    
-    //NSLog(@"didUpdateUserLocation lat %f,long %f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
+    if (![NSString isBlankString:carAppId])
+    {
+
+        
+        NSString *latitude = [NSString getFormatStr:[NSString stringWithFormat:@"%f",userLocation.location.coordinate.latitude]];
+        
+        NSString *longitude = [NSString getFormatStr:[NSString stringWithFormat:@"%f",userLocation.location.coordinate.longitude]];
+        
+        NSString *course = [NSString getFormatStr:[NSString stringWithFormat:@"%f",userLocation.location.course]];
+        
+        NSString *recieveTime = [DateFormate NSStringLocationDateToString:userLocation.location.timestamp];
+   
+        NSArray *keyArray = @[@"applyId",@"receiveTime",@"latitude",@"longitude",@"direction"];
+        
+        NSArray *valueArray = @[carAppId,recieveTime,latitude,longitude,course];
+        
+        [CLYCCoreBizHttpRequest driverUploadGPSWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+            
+            if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+            {
+                DDLogInfo(@"上传GPS成功");
+            }
+            else
+            {
+                DDLogInfo(@"上传GPS失败");
+            }
+            
+            
+            
+            
+        } keyArray:keyArray valueArray:valueArray ];
+    }
+
+    DDLogInfo(@"didUpdateUserLocation lat %f,long %f course = %f timestamp = %@",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude,userLocation.location.course,userLocation.location.timestamp);
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "D_ConfirmMile2ViewController.h"
 #import "D_ConfirmMile2TableViewCell.h"
+#import "CLYCLocationManager.h"
 
 @interface D_ConfirmMile2ViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 {
@@ -992,9 +993,7 @@
         //开始里程提交状态
         NSArray *keyArray = @[@"appId",@"beginMil"];
         
-        float beginMileValue = (float)[_applyCarModel.beginMil floatValue];
-        
-        NSString *beginMileValueStr = [NSString stringWithFormat:@"%.1f",beginMileValue];
+        NSString *beginMileValueStr = [NSString getFormatStr:_applyCarModel.beginMil];
         _applyCarModel.beginMil =beginMileValueStr;
         
         NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.beginMil];
@@ -1006,6 +1005,14 @@
             {
                 [self stopMBHudAndNSTimerWithmsg:@"提交操作成功" finsh:nil];
            
+                if (![NSString isBlankString:_applyCarModel.appId])
+                {
+                    [[NSUserDefaults standardUserDefaults ]setValue:_applyCarModel.appId forKey:CY_APPCAR_ID];
+                    [[NSUserDefaults standardUserDefaults] synchronize];                    
+                    
+                    [[CLYCLocationManager shareInstance] startLocation];
+                }
+                
                 _tableView.tableFooterView = nil;
                 
                 [_tableView reloadData];
@@ -1035,12 +1042,10 @@
         
         NSArray *keyArray = @[@"appId",@"finishMil",@"addMil"];
         
-        float finishMileValue = (float)[_applyCarModel.finishMil floatValue];
-        NSString *finishMileValueStr = [NSString stringWithFormat:@"%.1f",finishMileValue];
+        NSString *finishMileValueStr =[NSString getFormatStr:_applyCarModel.finishMil] ;
         _applyCarModel.finishMil =finishMileValueStr;
         
-        float addMileValue = (float)[_applyCarModel.addMil floatValue];
-        NSString *addMileValueStr = [NSString stringWithFormat:@"%.1f",addMileValue];
+        NSString *addMileValueStr =[NSString getFormatStr:_applyCarModel.addMil] ;
         _applyCarModel.addMil =addMileValueStr;
         
 
@@ -1050,6 +1055,14 @@
             if ([retcode isEqualToString:YB_HTTP_CODE_OK])
             {
                 [self stopMBHudAndNSTimerWithmsg:@"提交操作成功" finsh:nil];
+                
+                if (![NSString isBlankString:_applyCarModel.appId])
+                {
+                    [[NSUserDefaults standardUserDefaults ]removeObjectForKey:CY_APPCAR_ID];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    [[CLYCLocationManager shareInstance] stopLocationTimer];
+                }
                 
                 _tableView.tableFooterView = nil;
                 

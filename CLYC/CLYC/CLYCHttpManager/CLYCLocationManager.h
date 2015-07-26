@@ -13,10 +13,14 @@
 
 @interface CLYCLocationManager : NSObject<BMKLocationServiceDelegate>
 
+
 @property(nonatomic,strong)BMKLocationService *locService;
+
 
 +(CLYCLocationManager *)shareInstance;
 
 -(void)startLocation;
+
+-(void)stopLocationTimer;
 
 @end

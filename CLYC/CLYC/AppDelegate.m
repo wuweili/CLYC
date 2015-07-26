@@ -10,6 +10,7 @@
 #import "MyKeyChainHelper.h"
 #import "HXRootViewViewController.h"
 #import "AFNetworkReachabilityManager.h"
+#import "CLYCLocationManager.h"
 
 BMKMapManager* _mapManager;
 
@@ -270,6 +271,8 @@ BMKMapManager* _mapManager;
 -(void)logOut
 {
     [_backgroundViewController showHome];
+    
+    [[CLYCLocationManager shareInstance] stopLocationTimer];
     
     [self clearUserInfo];
     //清空记住的用户名和密码

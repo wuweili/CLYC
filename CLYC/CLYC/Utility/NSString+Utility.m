@@ -468,5 +468,28 @@
     return size;
 }
 
++(NSString *)getFormatStr:(NSString *)oraginStr
+{
+    
+    NSString *result = [NSString stringWithFormat:@"%@",@(oraginStr.doubleValue)];
+    
+    NSRange range = [result rangeOfString:@"."];
+ 
+    if (range.location != NSNotFound)
+    {
+        
+    }
+    else
+    {
+        result = [NSString stringWithFormat:@"%.1f",result.doubleValue];
+    }
+    
+    
+    return result;
+    
+}
+
+
+
 
 @end

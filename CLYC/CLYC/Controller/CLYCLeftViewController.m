@@ -10,6 +10,7 @@
 #import "XCLeftSideTableViewCell.h"
 #import "AppDelegate.h"
 #import "PersonalInfoViewController.h"
+#import "D_CostSearchViewController.h"
 
 @interface CLYCLeftViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -144,11 +145,23 @@
             case 3:
             {
                 //费用查询
+                
+                D_CostSearchViewController *personalMVC = [[D_CostSearchViewController alloc]init];
+                UINavigationController *userInfoNav = [[UINavigationController alloc]initWithRootViewController:personalMVC];
+                
+                userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
+                    
+                }];
+                
             }
                 break;
             case 4:
             {
                 //版本更新
+                [self displaySomeInfoWithInfo:@"已是最新版本" finsh:nil];
+
+                
             }
                 break;
             case 5:
@@ -184,12 +197,23 @@
             case 1:
             {
                 //费用查询
-                [self displaySomeInfoWithInfo:@"即将推出，敬请期待" finsh:nil];
+                
+                D_CostSearchViewController *personalMVC = [[D_CostSearchViewController alloc]init];
+                UINavigationController *userInfoNav = [[UINavigationController alloc]initWithRootViewController:personalMVC];
+                
+                userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
+                    
+                }];
+                
             }
                 break;
             case 2:
             {
                 //版本更新
+                
+                [self displaySomeInfoWithInfo:@"已是最新版本" finsh:nil];
+
             }
                 break;
             case 3:

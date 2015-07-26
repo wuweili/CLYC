@@ -15,6 +15,9 @@
 #import "ConfirmMileViewController.h"
 #import "D_ApplyCarListViewController.h"
 #import "CLYCLocationManager.h"
+#import "D_HistoryListViewController.h"
+#import "D_ServiceCommentViewController.h"
+#import "D_CheckListViewController.h"
 
 
 
@@ -90,8 +93,8 @@
     {
         [_section1Array addObjectsFromArray:@[
                                               FIRST_HOME_ORDER_MANAGER_image,
-                                              FIRST_HOME_COMMENT_image,
-                                              FIRST_HOME_PERSONAL_INFO_image,
+                                              FIRST_HOME_D_HistoryList_image,
+                                              FIRST_HOME_SERVER_ASS_image,
                                               FIRST_HOME_SETTING_image
                                               ]];
     }
@@ -108,7 +111,7 @@
 -(void)initScrollImageView
 {
     
-    _imageScrollView= [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150) imagesGroup:_imageUrlArray];
+    _imageScrollView= [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 180) imagesGroup:_imageUrlArray];
     _imageScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     _imageScrollView.delegate = self;
     _imageScrollView.autoScrollTimeInterval = 4.0;
@@ -197,13 +200,13 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake((self.view.bounds.size.width-20-10)/2, (self.view.bounds.size.width-20-10)/2);
+    return CGSizeMake((self.view.bounds.size.width-30-10)/2, (self.view.bounds.size.width-30-10)/2);
 }
 
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return  UIEdgeInsetsMake(10, 10, 10, 10);
+    return  UIEdgeInsetsMake(10, 15, 10, 15);
 }
 
 
@@ -219,7 +222,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(self.view.bounds.size.width, 150);
+    return CGSizeMake(self.view.bounds.size.width, 180);
 }
 
 
@@ -282,43 +285,30 @@
                 break;
             case 1:
             {
-                ApplyCarHistoryViewController *applyCarMVC = [[ApplyCarHistoryViewController alloc]init];
+                D_HistoryListViewController *applyCarMVC = [[D_HistoryListViewController alloc]init];
                 [self.navigationController pushViewController:applyCarMVC animated:YES];
             }
                 break;
                 
             case 2:
             {
-                ConfirmMileViewController *confirmMVC = [[ConfirmMileViewController alloc]init];
-                [self.navigationController pushViewController:confirmMVC animated:YES];
+                //服务评价
+                D_ServiceCommentViewController *applyCarMVC = [[D_ServiceCommentViewController alloc]init];
+                [self.navigationController pushViewController:applyCarMVC animated:YES];
             }
                 break;
                 
             case 3:
             {
+                D_CheckListViewController *applyCarMVC = [[D_CheckListViewController alloc]init];
+                [self.navigationController pushViewController:applyCarMVC animated:YES];
             }
                 break;
-                
-            case 4:
-            {
-            }
-                break;
-                
-                
+            
             default:
                 break;
         }
     }
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
     
 }
 
