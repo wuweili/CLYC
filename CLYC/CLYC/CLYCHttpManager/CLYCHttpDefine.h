@@ -26,36 +26,31 @@
  */
 
 
-#define YB_HTTP_IDP_SERVER_LOACL_DEBUG    //注意：！！此宏打开表示用得是内网开发服务器
-
-
+#define YB_HTTP_IDP_SERVER_RELEASE_TEST    //注意：！！此宏打开表示用得是内网开发服务器
 
 
 #if defined(YB_HTTP_IDP_SERVER_RELEASE)   //外网真实环境
 
+#define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-#define YB_HTTP_SERVER                       @"http://210.73.152.201:8888/wsportal/doService"
-
-#define BaiDuMap_AK   @"LivYgBlngmQdmqkUbzqgOZZs"
-
+#define BaiDuMap_AK                          @"LivYgBlngmQdmqkUbzqgOZZs"
 
 
 
 #elif defined(YB_HTTP_IDP_SERVER_LOACL_TEST) //内网测试
 
+#define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-#define YB_HTTP_SERVER                       @"https://api.yibaomd-test.com/api-web/"
-
-#define BaiDuMap_AK   @"LivYgBlngmQdmqkUbzqgOZZs"
+#define BaiDuMap_AK                          @"LivYgBlngmQdmqkUbzqgOZZs"
 
 
 
 #elif defined(YB_HTTP_IDP_SERVER_RELEASE_TEST) //外网测试
 
 
-#define YB_HTTP_SERVER                       @"https://test.yibaomd.com/api-web/"
+#define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-#define BaiDuMap_AK   @"LivYgBlngmQdmqkUbzqgOZZs"
+#define BaiDuMap_AK                          @"LivYgBlngmQdmqkUbzqgOZZs"
 
 
 
@@ -64,9 +59,7 @@
 
 #define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-//webservice配置
-
-#define BaiDuMap_AK   @"Kvyfr0qeGtHIn7cekBKVr8rR"
+#define BaiDuMap_AK                          @"Kvyfr0qeGtHIn7cekBKVr8rR"
 
 
 

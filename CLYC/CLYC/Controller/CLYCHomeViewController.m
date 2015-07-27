@@ -18,6 +18,8 @@
 #import "D_HistoryListViewController.h"
 #import "D_ServiceCommentViewController.h"
 #import "D_CheckListViewController.h"
+#import "ComplainAndDealViewController.h"
+
 
 
 
@@ -258,15 +260,11 @@
                 
             case 3:
             {
+                ComplainAndDealViewController *confirmMVC = [[ComplainAndDealViewController alloc]init];
+                [self.navigationController pushViewController:confirmMVC animated:YES];
             }
                 break;
-                
-            case 4:
-            {
-            }
-                break;
-                
-                
+            
             default:
                 break;
         }

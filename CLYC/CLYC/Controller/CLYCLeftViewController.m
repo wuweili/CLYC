@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "PersonalInfoViewController.h"
 #import "D_CostSearchViewController.h"
+#import "CarTrajectoryViewController.h"
 
 @interface CLYCLeftViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -140,6 +141,15 @@
             case 2:
             {
                 //车辆轨迹
+                
+                CarTrajectoryViewController *personalMVC = [[CarTrajectoryViewController alloc]init];
+                UINavigationController *userInfoNav = [[UINavigationController alloc]initWithRootViewController:personalMVC];
+                
+                userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
+                    
+                }];
+                
             }
                 break;
             case 3:

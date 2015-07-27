@@ -119,6 +119,9 @@
 		5A7F70331B64BF3C0009F823 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F70321B64BF3C0009F823 /* SystemConfiguration.framework */; };
 		5A7F70351B64BF4F0009F823 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F70341B64BF4F0009F823 /* Security.framework */; };
 		5A7F70371B64BFE40009F823 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5A7F70361B64BFE40009F823 /* mapapi.bundle */; };
+		5A85DA211B65AC38002B36CE /* ComplainAndDealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A85DA201B65AC38002B36CE /* ComplainAndDealViewController.m */; };
+		5A85DA241B65AD72002B36CE /* CarTrajectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A85DA231B65AD72002B36CE /* CarTrajectoryViewController.m */; };
+		5A85DA271B65B17E002B36CE /* CarTrajectoryMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A85DA261B65B17E002B36CE /* CarTrajectoryMapViewController.m */; };
 		5A8BF6F61B46C15700C9573B /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BF6F41B46C15700C9573B /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5AB02CB21B3FD1AC0003B65F /* HXRootViewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */; };
 		5AB02CC51B3FD2270003B65F /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB51B3FD2270003B65F /* NSData+SDDataCache.m */; };
@@ -453,6 +456,12 @@
 		5A7F70321B64BF3C0009F823 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5A7F70341B64BF4F0009F823 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5A7F70361B64BFE40009F823 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
+		5A85DA1F1B65AC38002B36CE /* ComplainAndDealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainAndDealViewController.h; sourceTree = "<group>"; };
+		5A85DA201B65AC38002B36CE /* ComplainAndDealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainAndDealViewController.m; sourceTree = "<group>"; };
+		5A85DA221B65AD72002B36CE /* CarTrajectoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarTrajectoryViewController.h; sourceTree = "<group>"; };
+		5A85DA231B65AD72002B36CE /* CarTrajectoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarTrajectoryViewController.m; sourceTree = "<group>"; };
+		5A85DA251B65B17E002B36CE /* CarTrajectoryMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarTrajectoryMapViewController.h; sourceTree = "<group>"; };
+		5A85DA261B65B17E002B36CE /* CarTrajectoryMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarTrajectoryMapViewController.m; sourceTree = "<group>"; };
 		5A8BF6F31B46C15700C9573B /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		5A8BF6F41B46C15700C9573B /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		5A8BF6F51B46C15700C9573B /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -846,6 +855,12 @@
 				028BE08F1B6363680012068C /* ConfirmMile2ViewController.m */,
 				028BE0911B63C1080012068C /* PersonalInfoViewController.h */,
 				028BE0921B63C1080012068C /* PersonalInfoViewController.m */,
+				5A85DA1F1B65AC38002B36CE /* ComplainAndDealViewController.h */,
+				5A85DA201B65AC38002B36CE /* ComplainAndDealViewController.m */,
+				5A85DA221B65AD72002B36CE /* CarTrajectoryViewController.h */,
+				5A85DA231B65AD72002B36CE /* CarTrajectoryViewController.m */,
+				5A85DA251B65B17E002B36CE /* CarTrajectoryMapViewController.h */,
+				5A85DA261B65B17E002B36CE /* CarTrajectoryMapViewController.m */,
 			);
 			path = DefaultUser;
 			sourceTree = "<group>";
@@ -947,7 +962,6 @@
 		5A1BC8421B09E4D500A2A1DC /* CLYC */ = {
 			isa = PBXGroup;
 			children = (
-				02BF946E1B65148900D1B95F /* LaunchScreen.xib */,
 				5A7F702D1B64BEB10009F823 /* ThirtLibs */,
 				02B39A871B42EFCF007FDD26 /* CLYCHttpManager */,
 				5AB02ECD1B3FDDE60003B65F /* Resource */,
@@ -960,6 +974,7 @@
 				5A1BC8481B09E4D500A2A1DC /* AppDelegate.m */,
 				5A1BC8501B09E4D500A2A1DC /* Images.xcassets */,
 				5AB2C6D61B437305005B42B8 /* Main.storyboard */,
+				02BF946E1B65148900D1B95F /* LaunchScreen.xib */,
 				5A1BC8431B09E4D500A2A1DC /* Supporting Files */,
 			);
 			path = CLYC;
@@ -2106,6 +2121,7 @@
 				5AB02E4E1B3FD2720003B65F /* UIView+MJExtension.m in Sources */,
 				5AB02EB31B3FD3D70003B65F /* HXBJHXBaseViewController.mm in Sources */,
 				5AB02EAF1B3FD3430003B65F /* HXRootTableViewCell.m in Sources */,
+				5A85DA211B65AC38002B36CE /* ComplainAndDealViewController.m in Sources */,
 				5AB02E521B3FD2720003B65F /* NSString+Utility.m in Sources */,
 				5AB02E1A1B3FD2710003B65F /* NSData+CommonCrypto.m in Sources */,
 				5AB02E9E1B3FD2720003B65F /* UIImageView+WebCache.m in Sources */,
@@ -2164,6 +2180,7 @@
 				5AB02E811B3FD2720003B65F /* NSString+Extend.m in Sources */,
 				5AB02E5C1B3FD2720003B65F /* SBJsonStreamParserState.m in Sources */,
 				5AB02E691B3FD2720003B65F /* VariousKindsOfItems.m in Sources */,
+				5A85DA241B65AD72002B36CE /* CarTrajectoryViewController.m in Sources */,
 				5AB02E9C1B3FD2720003B65F /* UIImage+WebP.m in Sources */,
 				5AB02E8D1B3FD2720003B65F /* UIWindow+Launch.m in Sources */,
 				5AB02EA71B3FD2720003B65F /* LFRoundProgressView.m in Sources */,
@@ -2215,6 +2232,7 @@
 				028FA1CA1B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.m in Sources */,
 				5AB02E261B3FD2710003B65F /* UIAlertView+AFNetworking.m in Sources */,
 				5AB02E881B3FD2720003B65F /* UIImage+Extend.m in Sources */,
+				5A85DA271B65B17E002B36CE /* CarTrajectoryMapViewController.m in Sources */,
 				023A64531B48154C00CB096D /* XCLeftSideTableViewCell.m in Sources */,
 				5AB02CCB1B3FD2270003B65F /* SDCycleScrollView.m in Sources */,
 				5A1BC8491B09E4D500A2A1DC /* AppDelegate.m in Sources */,
