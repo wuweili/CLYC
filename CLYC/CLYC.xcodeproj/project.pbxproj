@@ -59,6 +59,7 @@
 		023A645D1B485C0C00CB096D /* HttpResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A645C1B485C0C00CB096D /* HttpResponseModel.m */; };
 		023A64601B485DA200CB096D /* SelectCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */; };
 		026592081B4D756900E194E5 /* ConfirmMileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026592071B4D756900E194E5 /* ConfirmMileViewController.m */; };
+		026BD5231B764DA000D907E9 /* ComplainListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 026BD5221B764DA000D907E9 /* ComplainListTableViewCell.m */; };
 		02744B021B612CD800B46CAD /* SelectDeptmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02744B011B612CD800B46CAD /* SelectDeptmentTableViewCell.m */; };
 		02744B051B61373C00B46CAD /* SelectProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02744B041B61373C00B46CAD /* SelectProjectViewController.m */; };
 		02744B091B613A9000B46CAD /* SelectProjectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02744B081B613A9000B46CAD /* SelectProjectTableViewCell.m */; };
@@ -356,6 +357,8 @@
 		023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCarTableViewCell.m; sourceTree = "<group>"; };
 		026592061B4D756900E194E5 /* ConfirmMileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmMileViewController.h; sourceTree = "<group>"; };
 		026592071B4D756900E194E5 /* ConfirmMileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmMileViewController.m; sourceTree = "<group>"; };
+		026BD5211B764DA000D907E9 /* ComplainListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainListTableViewCell.h; sourceTree = "<group>"; };
+		026BD5221B764DA000D907E9 /* ComplainListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainListTableViewCell.m; sourceTree = "<group>"; };
 		02744B001B612CD800B46CAD /* SelectDeptmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDeptmentTableViewCell.h; sourceTree = "<group>"; };
 		02744B011B612CD800B46CAD /* SelectDeptmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDeptmentTableViewCell.m; sourceTree = "<group>"; };
 		02744B031B61373C00B46CAD /* SelectProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectProjectViewController.h; sourceTree = "<group>"; };
@@ -922,6 +925,8 @@
 				028BE09E1B63ECF50012068C /* D_ApplyCarListTableViewCell.m */,
 				028BE0A61B63F7090012068C /* D_ConfirmMile2TableViewCell.h */,
 				028BE0A71B63F7090012068C /* D_ConfirmMile2TableViewCell.m */,
+				026BD5211B764DA000D907E9 /* ComplainListTableViewCell.h */,
+				026BD5221B764DA000D907E9 /* ComplainListTableViewCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2121,6 +2126,7 @@
 				5AB02E4E1B3FD2720003B65F /* UIView+MJExtension.m in Sources */,
 				5AB02EB31B3FD3D70003B65F /* HXBJHXBaseViewController.mm in Sources */,
 				5AB02EAF1B3FD3430003B65F /* HXRootTableViewCell.m in Sources */,
+				026BD5231B764DA000D907E9 /* ComplainListTableViewCell.m in Sources */,
 				5A85DA211B65AC38002B36CE /* ComplainAndDealViewController.m in Sources */,
 				5AB02E521B3FD2720003B65F /* NSString+Utility.m in Sources */,
 				5AB02E1A1B3FD2710003B65F /* NSData+CommonCrypto.m in Sources */,

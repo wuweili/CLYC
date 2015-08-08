@@ -294,3 +294,39 @@
 @end
 
 
+@interface ComplainListModel : NSObject
+
+/**
+ * 申请主键
+ */
+@property(nonatomic,strong)NSString *_id;
+
+/**
+ * 投诉申请人名称
+ */
+@property(nonatomic,strong)NSString *createPersonName;
+
+/**
+ * 联系电话
+ */
+@property(nonatomic,strong)NSString *createPersonTel;
+
+/**
+ * 状态
+ */
+@property(nonatomic,strong)NSString *status;
+
+/**
+ * 状态名称
+ */
+@property(nonatomic,strong)NSString *statusName;
+
+/**
+ * 申请时间
+ */
+@property(nonatomic,strong)NSString *createTime;
+
+
+
+@end
+

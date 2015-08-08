@@ -336,7 +336,7 @@
     NSDate *currDate=[NSDate date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     
     NSArray *keyArray = @[@"queryCarCode",@"queryCarModelId",@"queryBeginTime",@"queryEndTime",@"pageSize",@"pageNum"];
@@ -430,7 +430,7 @@
     NSDate *currDate=[_startTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _startTimeField.text=str;
     
@@ -450,7 +450,7 @@
     NSDate *currDate=[_startTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _startTimeField.text=str;
 }
@@ -469,7 +469,7 @@
     NSDate *currDate=[_endTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _endTimeField.text=str;
     
@@ -489,7 +489,7 @@
     NSDate *currDate=[_endTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _endTimeField.text=str;
 }

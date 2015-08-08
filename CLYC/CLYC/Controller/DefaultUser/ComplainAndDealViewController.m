@@ -10,6 +10,7 @@
 #import "MJRefresh.h"
 #import "D_ApplyCarListTableViewCell.h"
 #import "D_ConfirmMile2ViewController.h"
+#import "ComplainListTableViewCell.h"
 
 
 
@@ -90,7 +91,7 @@
 
 -(void)initTableView
 {
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(_startSearchBackGroundView.frame),kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(_startSearchBackGroundView.frame),kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight-110-35) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -277,13 +278,13 @@
     _carTypeLabel.textColor = [UIColor blackColor];
     _carTypeLabel.textAlignment = NSTextAlignmentRight;
     _carTypeLabel.backgroundColor = [UIColor clearColor];
-    _carTypeLabel.text = @"用车人：";
+    _carTypeLabel.text = @"实际用车人：";
     _carTypeLabel.hidden = !expandMoreSearchCondition;
     [_headView addSubview:_carTypeLabel];
     
     
     _carTypeField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_carTypeLabel.frame), _carTypeLabel.frame.origin.y , kMainScreenWidth-CGRectGetMaxX(_carTypeLabel.frame)-10, 30)];
-    _carTypeField.placeholder=@"请输入用车人";
+    _carTypeField.placeholder=@"请输入实际用车人";
     _carTypeField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _carTypeField.autocapitalizationType=UITextAutocapitalizationTypeNone;
     _carTypeField.font = HEL_15;
@@ -335,12 +336,10 @@
 
 -(void)obtainDefaultDataWithUpPull:(BOOL)upPull
 {
-    
-    return;
     //得到当前选中的时间
     [self initMBHudWithTitle:nil];
     
-    NSArray *keyArray = @[@"queryProjectNo",@"queryCarAppUserName",@"queryBeginTime",@"queryEndTime",@"queryDriverId",@"queryStatus",@"pageSize",@"pageNum"];
+    NSArray *keyArray = @[@"queryBeginTime",@"queryEndTime",@"queryUserId",@"pageSize",@"pageNum"];
     
     
     NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
@@ -358,24 +357,10 @@
     {
         endTimeStr = @"";
     }
+  
+    NSArray *valueArray = @[startTimeStr,endTimeStr,[HXUserModel shareInstance].userId,@"20",currentPage];
     
-    NSString *queryProjectNo = _carNumberField.text;
-    if ([NSString isBlankString:queryProjectNo])
-    {
-        queryProjectNo = @"";
-    }
-    
-    NSString *carUser = _carTypeField.text;
-    if ([NSString isBlankString:carUser])
-    {
-        carUser = @"";
-    }
-    
-    NSArray *valueArray = @[queryProjectNo,carUser,startTimeStr,endTimeStr,[HXUserModel shareInstance].userId,@"1",@"20",currentPage];
-    
-    
-    [CLYCCoreBizHttpRequest driverObtainCarApplyListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
-        
+    [CLYCCoreBizHttpRequest complainListWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
         [self stopRefresh];
         
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
@@ -388,7 +373,7 @@
                 [_dataArray removeAllObjects];
             }
             
-            [_dataArray addObjectsFromArray:ListArry];
+            [_dataArray addObjectsFromArray:listArry];
             
             _currentDoctorPageIndex++;
             
@@ -398,42 +383,11 @@
         {
             [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
-        
-        
     } keyArray:keyArray valueArray:valueArray];
-    
-    
-    
+   
 }
 
 
--(void)searchCarWithKeyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
-{
-    
-    [self initMBHudWithTitle:nil];
-    
-    [CLYCCoreBizHttpRequest selectCarInfoListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error,NSString *totalNum) {
-        
-        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-        {
-            [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
-            
-            [_dataArray addObjectsFromArray:ListArry];
-            
-            [_tableView reloadData];
-            
-        }
-        else
-        {
-            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
-        }
-        
-        
-        
-    } keyArray:keyArray valueArray:valueArray];
-    
-    
-}
 
 
 #pragma mark - 点击更多
@@ -484,7 +438,7 @@
     NSDate *currDate=[_startTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _startTimeField.text=str;
     
@@ -504,7 +458,7 @@
     NSDate *currDate=[_startTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _startTimeField.text=str;
 }
@@ -523,7 +477,7 @@
     NSDate *currDate=[_endTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _endTimeField.text=str;
     
@@ -543,7 +497,7 @@
     NSDate *currDate=[_endTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _endTimeField.text=str;
 }
@@ -571,6 +525,8 @@
         return;
         
     }
+
+    _currentDoctorPageIndex = 0;
     
     [self obtainDefaultDataWithUpPull:NO];
     
@@ -592,16 +548,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_dataArray count]>0)
-    {
-        ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
-        
-        CGFloat height = [D_ApplyCarListTableViewCell CellHeightWithApplyCarListModel:model];
-        
-        return height;
-    }
-    else
-        return 0;
+    return 70;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -609,17 +556,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if ([_dataArray count]>0)
     {
-        ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
-        
-        
-        D_ConfirmMile2ViewController *editMVC = [[D_ConfirmMile2ViewController alloc]initWithApplyCarDetailModel:model];
-        [self.navigationController pushViewController:editMVC animated:YES];
-        
-        
-        
+        ComplainListModel *model = [_dataArray objectAtIndex:indexPath.row];
+      
     }
-    
-    
     
 }
 
@@ -630,23 +569,21 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *identifier = @"ApplyCarHistoryCell";
+    NSString *identifier = @"complainCell";
     
-    D_ApplyCarListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    ComplainListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil)
     {
-        cell = [[D_ApplyCarListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[ComplainListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
     cell.backgroundColor = [UIColor whiteColor];
     
     if ([_dataArray count]>0)
     {
-        ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
-        [cell setCellContentWithApplyCarListModel:model];
-        
-        
+        ComplainListModel *model = [_dataArray objectAtIndex:indexPath.row];
+        [cell setCellContentWithComplainListModel:model];
     }
     
     return cell;

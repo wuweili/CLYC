@@ -144,5 +144,26 @@
 
 @end
 
+@implementation ComplainListModel
 
+-(id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self._id = @"";
+        self.createPersonName = @"";
+        self.createPersonTel = @"";
+        self.status = @"";
+        
+        self.statusName = @"";
+        self.createTime = @"";
+        
+    }
+    
+    return self;
+}
+
+@end
 

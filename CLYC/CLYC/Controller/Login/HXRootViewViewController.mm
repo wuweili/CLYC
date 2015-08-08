@@ -197,7 +197,7 @@
     [forgetPwdButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
     forgetPwdButton.titleLabel.font = HEL_15;
     [forgetPwdButton addTarget:self action:@selector(forgotPassword) forControlEvents:UIControlEventTouchUpInside];
-    [_footView addSubview:forgetPwdButton];
+//    [_footView addSubview:forgetPwdButton];
     
     //登录按钮
     

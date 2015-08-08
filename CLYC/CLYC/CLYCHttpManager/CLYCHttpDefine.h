@@ -26,7 +26,7 @@
  */
 
 
-#define YB_HTTP_IDP_SERVER_RELEASE_TEST    //注意：！！此宏打开表示用得是内网开发服务器
+#define YB_HTTP_IDP_SERVER_LOACL_DEBUG    //注意：！！此宏打开表示用得是内网开发服务器
 
 
 #if defined(YB_HTTP_IDP_SERVER_RELEASE)   //外网真实环境

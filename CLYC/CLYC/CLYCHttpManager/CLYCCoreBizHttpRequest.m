@@ -1146,4 +1146,60 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     }];
 }
 
++(void)complainListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *, NSString *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"ComplaintQueryByUserService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            
+            NSArray *carListArray = [returnDic objectForKey:@"dataList"];
+            
+            NSString *totalNum = [NSString stringWithoutNil:returnDic[@"totalNum"]];
+            
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in carListArray)
+                {
+                    
+                    ComplainListModel *model = [[ComplainListModel alloc]init];
+                   
+                    model._id = [NSString stringWithoutNil:dic[@"id"]];
+                    
+                    model.createPersonName = [NSString stringWithoutNil:dic[@"createPersonName"]];
+                    
+                    model.createPersonTel = [NSString stringWithoutNil:dic[@"createPersonTel"]];
+                    
+                    model.status = [NSString stringWithoutNil:dic[@"status"]];
+                    
+                    model.statusName =[NSString stringWithoutNil:dic[@"statusName"]];
+                    
+                    model.createTime =[NSString stringWithoutNil:dic[@"createTime"]];
+                    
+                    [mutabArray addObject:model];
+                    
+                }
+            }
+            
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error,totalNum);
+            }
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error,nil);
+            }
+        }
+    }];
+}
+
 @end
