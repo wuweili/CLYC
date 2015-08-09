@@ -89,29 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CLYC/Controller/Driver/D_ApplyCarListViewController.m"
-            timestampString = "460825774.098533"
+            filePath = "CLYC/Controller/Driver/D_ConfirmMile2ViewController.m"
+            timestampString = "460835247.544127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "-searchLastThreeDayDataWithUpPull:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CLYC/Controller/DefaultUser/EditApplyCarViewController.m"
-            timestampString = "460828618.509668"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "-obtainData"
+            startingLineNumber = "1049"
+            endingLineNumber = "1049"
+            landmarkName = "-clickCommitButton"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

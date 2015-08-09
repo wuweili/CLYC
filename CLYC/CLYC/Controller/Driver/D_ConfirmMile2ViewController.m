@@ -1044,6 +1044,16 @@
     
     if (_applyCarModel.beginMilStatus.intValue ==0 || _applyCarModel.beginMilStatus.intValue ==3)
     {
+        
+        
+        if (_applyCarModel.beginMil.doubleValue <0)
+        {
+            [self displaySomeInfoWithInfo:@"请输入合理的开始里程" finsh:nil];
+            
+            return;
+        }
+        
+
         [self initMBHudWithTitle:nil];
         //开始里程提交状态
         NSArray *keyArray = @[@"appId",@"beginMil",@"price"];
@@ -1102,6 +1112,12 @@
         
         NSString *addMileValueStr =[NSString getFormatStr:_applyCarModel.addMil] ;
         _applyCarModel.addMil =addMileValueStr;
+        
+        
+        NSString *driverTraveValueStr =[NSString getFormatStr:_applyCarModel.driverTraveldays] ;
+        _applyCarModel.driverTraveldays =driverTraveValueStr;
+        
+        
         
 
         NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.finishMil,_applyCarModel.addMil,_applyCarModel.driverTraveldays];
