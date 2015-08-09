@@ -11,6 +11,7 @@
 #import "D_ApplyCarListTableViewCell.h"
 #import "D_ConfirmMile2ViewController.h"
 #import "ComplainListTableViewCell.h"
+#import "SaveComplainViewController.h"
 
 
 
@@ -77,6 +78,9 @@
     [self initHeadView];
     
     [self initStartSearchView];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addComplain)];
+    self.navigationItem.rightBarButtonItem = rightButton;
     
 }
 
@@ -628,6 +632,13 @@
         _isUpPullLoading = NO;
         [_tableView footerEndRefreshing];
     }
+}
+
+
+-(void)addComplain
+{
+    SaveComplainViewController *saveMVC = [[SaveComplainViewController alloc]init];
+    [self.navigationController pushViewController:saveMVC animated:YES];
 }
 
 #pragma mark -

@@ -58,6 +58,8 @@
 		023A645A1B482CD700CB096D /* ApplyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A64591B482CD700CB096D /* ApplyCarViewController.m */; };
 		023A645D1B485C0C00CB096D /* HttpResponseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A645C1B485C0C00CB096D /* HttpResponseModel.m */; };
 		023A64601B485DA200CB096D /* SelectCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */; };
+		025EEBD11B76C8EF007B4922 /* SaveComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 025EEBD01B76C8EF007B4922 /* SaveComplainViewController.m */; };
+		025EEBD41B76C905007B4922 /* EditComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 025EEBD31B76C905007B4922 /* EditComplainViewController.m */; };
 		026592081B4D756900E194E5 /* ConfirmMileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 026592071B4D756900E194E5 /* ConfirmMileViewController.m */; };
 		026BD5231B764DA000D907E9 /* ComplainListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 026BD5221B764DA000D907E9 /* ComplainListTableViewCell.m */; };
 		02744B021B612CD800B46CAD /* SelectDeptmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02744B011B612CD800B46CAD /* SelectDeptmentTableViewCell.m */; };
@@ -355,6 +357,10 @@
 		023A645C1B485C0C00CB096D /* HttpResponseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpResponseModel.m; sourceTree = "<group>"; };
 		023A645E1B485DA200CB096D /* SelectCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectCarTableViewCell.h; sourceTree = "<group>"; };
 		023A645F1B485DA200CB096D /* SelectCarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectCarTableViewCell.m; sourceTree = "<group>"; };
+		025EEBCF1B76C8EF007B4922 /* SaveComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveComplainViewController.h; sourceTree = "<group>"; };
+		025EEBD01B76C8EF007B4922 /* SaveComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveComplainViewController.m; sourceTree = "<group>"; };
+		025EEBD21B76C905007B4922 /* EditComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditComplainViewController.h; sourceTree = "<group>"; };
+		025EEBD31B76C905007B4922 /* EditComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditComplainViewController.m; sourceTree = "<group>"; };
 		026592061B4D756900E194E5 /* ConfirmMileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmMileViewController.h; sourceTree = "<group>"; };
 		026592071B4D756900E194E5 /* ConfirmMileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmMileViewController.m; sourceTree = "<group>"; };
 		026BD5211B764DA000D907E9 /* ComplainListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainListTableViewCell.h; sourceTree = "<group>"; };
@@ -864,6 +870,10 @@
 				5A85DA231B65AD72002B36CE /* CarTrajectoryViewController.m */,
 				5A85DA251B65B17E002B36CE /* CarTrajectoryMapViewController.h */,
 				5A85DA261B65B17E002B36CE /* CarTrajectoryMapViewController.m */,
+				025EEBCF1B76C8EF007B4922 /* SaveComplainViewController.h */,
+				025EEBD01B76C8EF007B4922 /* SaveComplainViewController.m */,
+				025EEBD21B76C905007B4922 /* EditComplainViewController.h */,
+				025EEBD31B76C905007B4922 /* EditComplainViewController.m */,
 			);
 			path = DefaultUser;
 			sourceTree = "<group>";
@@ -2101,6 +2111,7 @@
 				5AB02E391B3FD2710003B65F /* FMDatabasePool.m in Sources */,
 				02B27EA71B5E989D00477278 /* SaveApplyCarTableViewCell.m in Sources */,
 				5AB02E7D1B3FD2720003B65F /* CALayer+Transition.m in Sources */,
+				025EEBD11B76C8EF007B4922 /* SaveComplainViewController.m in Sources */,
 				028D3D9F1B45949700AC7C7D /* GDataXMLNode.m in Sources */,
 				5AB02E591B3FD2720003B65F /* SBJsonStreamParser.m in Sources */,
 				028FA1B81B470405007A2C8C /* HXBackgroundViewController.m in Sources */,
@@ -2124,6 +2135,7 @@
 				5AB02E201B3FD2710003B65F /* AFURLConnectionOperation.m in Sources */,
 				028BE0891B6349DD0012068C /* MyComplainViewController.m in Sources */,
 				5AB02E4E1B3FD2720003B65F /* UIView+MJExtension.m in Sources */,
+				025EEBD41B76C905007B4922 /* EditComplainViewController.m in Sources */,
 				5AB02EB31B3FD3D70003B65F /* HXBJHXBaseViewController.mm in Sources */,
 				5AB02EAF1B3FD3430003B65F /* HXRootTableViewCell.m in Sources */,
 				026BD5231B764DA000D907E9 /* ComplainListTableViewCell.m in Sources */,

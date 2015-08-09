@@ -131,4 +131,10 @@
  */
 +(void)complainListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
 
+/**
+ * 保存投诉
+ */
++(void)saveComplainApplyWithBlock:(void (^)(NSString  *appId,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+
 @end

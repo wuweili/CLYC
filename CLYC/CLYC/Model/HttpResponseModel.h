@@ -306,6 +306,13 @@
  */
 @property(nonatomic,strong)NSString *createPersonName;
 
+
+/**
+ * 投诉申请人id
+ */
+@property(nonatomic,strong)NSString *createPersonId;
+
+
 /**
  * 联系电话
  */
@@ -326,7 +333,10 @@
  */
 @property(nonatomic,strong)NSString *createTime;
 
-
+/**
+ * 投诉内容
+ */
+@property(nonatomic,strong)NSString *complaintContent;
 
 @end
 

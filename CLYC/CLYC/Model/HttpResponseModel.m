@@ -159,6 +159,8 @@
         
         self.statusName = @"";
         self.createTime = @"";
+        self.complaintContent = @"";
+        self.createPersonId = @"";
         
     }
     

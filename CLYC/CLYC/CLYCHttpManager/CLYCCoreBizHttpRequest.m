@@ -1202,4 +1202,38 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     }];
 }
 
+
++(void)saveComplainApplyWithBlock:(void (^)(NSString *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"ComplaintSaveNewService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            NSString *appid = [NSString stringWithoutNil:returnDic[@"id"]];
+            
+            if (block)
+            {
+                block(appid,retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(nil,retCode,retMessage,error);
+            }
+        }
+        
+        
+        
+    }];
+}
+
+
 @end
