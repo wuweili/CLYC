@@ -10,4 +10,6 @@
 
 @interface EditComplainViewController : HXBJHXBaseViewController
 
+-(id)initWithComplainModel:(ComplainListModel *)model;
+
 @end
