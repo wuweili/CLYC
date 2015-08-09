@@ -93,10 +93,16 @@
     }
     else
     {
+//        [_section1Array addObjectsFromArray:@[
+//                                              FIRST_HOME_ORDER_MANAGER_image,
+//                                              FIRST_HOME_D_HistoryList_image,
+//                                              FIRST_HOME_SERVER_ASS_image,
+//                                              FIRST_HOME_SETTING_image
+//                                              ]];
+        
         [_section1Array addObjectsFromArray:@[
                                               FIRST_HOME_ORDER_MANAGER_image,
                                               FIRST_HOME_D_HistoryList_image,
-                                              FIRST_HOME_SERVER_ASS_image,
                                               FIRST_HOME_SETTING_image
                                               ]];
     }
@@ -178,11 +184,7 @@
     
     cell.cellImageView.image =[_section1Array objectAtIndex:indexPath.row];
     
-    return cell;
-    
-    
-    
-    
+    return cell;  
 }
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -290,9 +292,13 @@
                 
             case 2:
             {
-                //服务评价
-                D_ServiceCommentViewController *applyCarMVC = [[D_ServiceCommentViewController alloc]init];
+                D_CheckListViewController *applyCarMVC = [[D_CheckListViewController alloc]init];
                 [self.navigationController pushViewController:applyCarMVC animated:YES];
+                
+                
+                //服务评价
+//                D_ServiceCommentViewController *applyCarMVC = [[D_ServiceCommentViewController alloc]init];
+//                [self.navigationController pushViewController:applyCarMVC animated:YES];
             }
                 break;
                 

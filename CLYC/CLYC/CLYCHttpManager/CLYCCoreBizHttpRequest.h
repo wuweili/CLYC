@@ -134,7 +134,32 @@
 /**
  * 保存投诉
  */
-+(void)saveComplainApplyWithBlock:(void (^)(NSString  *appId,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
++(void)saveComplainApplyWithBlock:(void (^)(NSString  *appId,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray;
+
+/**
+ * 投诉编辑
+ */
++(void)obtainComplainDetailWithBlock:(void (^)(ComplainListModel *model,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray;
+
+/**
+ * 修改 -约车申请
+ */
++(void)editComplainApplyWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 提交 -投诉申请
+ */
++(void)commitComplainApplyWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 删除 -投诉申请
+ */
++(void)deleteComplainApplyWithBlock:(void (^)(NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+/**
+ * 考核查询
+ */
++(void)driverCheckListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
 
 
 @end

@@ -104,7 +104,6 @@
         self.driver = @"";
         self.driverTel = @"";
         self.totalMil = @"";
-        
         self.beginMil = @"";
         self.beginMilStatus = @"";
         self.beginMilRemark = @"";
@@ -112,10 +111,9 @@
         self.addMil = @"";
         self.finishMilStatus = @"";
         self.finishMilRemark = @"";
-        
-        
-        
-        
+        self.price = @"";
+        self.driverTraveldays = @"";
+        self.systemTime = @"";
     }
     
     return self;
@@ -161,7 +159,31 @@
         self.createTime = @"";
         self.complaintContent = @"";
         self.createPersonId = @"";
+        self.handelResults = @"";
+        self.handelPersonId = @"";
+        self.handelPersonName = @"";
+        self.handelTime = @"";
         
+    }
+    
+    return self;
+}
+
+@end
+
+@implementation DriverCheckModel
+
+-(id)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self._id = @"";
+        self.driverId = @"";
+        self.driverName = @"";
+        self.checkTime = @"";
+        self.gradeName = @"";
     }
     
     return self;

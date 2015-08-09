@@ -86,7 +86,7 @@
 
 -(void)initData
 {
-    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：", nil];
+    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：",@"单价：", nil];
     _secondDataArray = [NSMutableArray arrayWithCapacity:0];
     
     if (!_applyCarModel)
@@ -148,7 +148,7 @@
             
             if (_applyCarModel.beginMilStatus.integerValue == 0)
             {
-                //此时需要司机还未里程
+                //此时需要司机还未提交里程
                 
                 
                 NSDictionary *dic1 = @{@"mileInfoKey":@"开始里程(公里)：",@"mileInfoValue":_applyCarModel.beginMil};
@@ -259,8 +259,11 @@
                     NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
                     [_secondDataArray addObject:dic4];
                     
-                    NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                    NSDictionary *dic5 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
                     [_secondDataArray addObject:dic5];
+                    
+                    NSDictionary *dic6 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                    [_secondDataArray addObject:dic6];
                     
                     
                 }
@@ -271,8 +274,11 @@
                     NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
                     [_secondDataArray addObject:dic4];
                     
-                    NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                    NSDictionary *dic5 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
                     [_secondDataArray addObject:dic5];
+                    
+                    NSDictionary *dic6 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                    [_secondDataArray addObject:dic6];
                     
                     _tableView.tableFooterView = nil;
                     
@@ -284,7 +290,7 @@
                     NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
                     [_secondDataArray addObject:dic4];
                     
-                    NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                    NSDictionary *dic5 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
                     [_secondDataArray addObject:dic5];
                     
                     NSString *confirmStr = @"";
@@ -316,6 +322,9 @@
                     NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
                     
                     [_secondDataArray addObject:dic8];
+                    
+                    NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                    [_secondDataArray addObject:dic9];
                     
                 }
                 else if (_applyCarModel.finishMilStatus.integerValue ==2)
@@ -325,7 +334,7 @@
                     NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
                     [_secondDataArray addObject:dic4];
                     
-                    NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                    NSDictionary *dic5 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
                     [_secondDataArray addObject:dic5];
                     
                     NSString *confirmStr = @"";
@@ -357,6 +366,9 @@
                     NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
                     
                     [_secondDataArray addObject:dic8];
+                    
+                    NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                    [_secondDataArray addObject:dic9];
                     
                     _tableView.tableFooterView = nil;
                     
@@ -414,10 +426,16 @@
             return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.deptModel.deptName] +14;
             
         }
-        else
+        else if(indexPath.row == 5)
         {
             //项目名称
             return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.projectModel.projectName] +14;
+        }
+        else
+        {
+            //单价
+            return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.price] +14;
+            
         }
     }
     else
@@ -451,7 +469,7 @@
         }
         else if (indexPath.row == 5)
         {
-            //结束里程状态
+            //结束里程状态 或者出差天数
             return 44;
         }
         else if (indexPath.row == 6)
@@ -459,11 +477,16 @@
             //实际里程
             return 44;
         }
-        else
+        else if (indexPath.row == 7)
         {
             //结束里程备注
             return [self heightForSecondSectionSectionRowWitUITextViewText:_applyCarModel.finishMilRemark]+14;
             
+        }
+        else
+        {
+            //出差天数
+            return 44;
         }
     }
 }
@@ -543,20 +566,20 @@
             if (_applyCarModel.finishMilStatus.integerValue ==0)
             {
                 //说明司机还未提交结束里程
-               tipString = @"(请填写提交结束里程(加价里程不能大于50))";
+               tipString = @"(请填写提交结束里程(附加里程不能大于80))";
                 
                 
             }
             else if (_applyCarModel.finishMilStatus.integerValue ==1)
             {
                 //说明司机提交结束里程，但是用户还没有确认
-                tipString = @"(结束里程(加价里程)已提交，等待用车人确认)";
+                tipString = @"(结束里程(附加里程)已提交，等待用车人确认)";
               
             }
             else if (_applyCarModel.finishMilStatus.integerValue ==3)
             {
                 //说明用户不同意结束里程
-                tipString = @"(用车人不同意结束里程(加价里程)，请重填)";
+                tipString = @"(用车人不同意结束里程(附加里程)，请重填)";
                
                 
             }
@@ -654,13 +677,16 @@
         {
             celleStr = _applyCarModel.deptModel.deptName;
         }
-        else
+        else if (indexPath.row == 5)
         {
             celleStr = _applyCarModel.projectModel.projectName;
         }
-        
-        
-        
+        else
+        {
+            celleStr = _applyCarModel.price;
+
+        }
+                
         [cell setContentWithIndexPath:indexPath andContentStr:celleStr];
         
         return cell;
@@ -737,6 +763,14 @@
                     cell.cellTextView.delegate = self;
                     cell.cellTextView.tag = 2004;
                 }
+                else if(indexPath.row == 5)
+                {
+                    //出差天数
+                    cell.cellTextView.editable = YES;
+                    cell.cellTextView.userInteractionEnabled = YES;
+                    cell.cellTextView.delegate = self;
+                    cell.cellTextView.tag = 2005;
+                }
                 
             }
             else if (_applyCarModel.finishMilStatus.integerValue ==3)
@@ -756,6 +790,13 @@
                     cell.cellTextView.userInteractionEnabled = YES;
                     cell.cellTextView.delegate = self;
                     cell.cellTextView.tag = 2004;
+                }
+                else if (indexPath.row == 8)
+                {
+                    cell.cellTextView.editable = YES;
+                    cell.cellTextView.userInteractionEnabled = YES;
+                    cell.cellTextView.delegate = self;
+                    cell.cellTextView.tag = 2008;
                 }
          
             }
@@ -951,10 +992,24 @@
     {
         _applyCarModel.addMil = textView.text;
         
-        NSDictionary *dic4 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+        NSDictionary *dic4 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
         
         [_secondDataArray replaceObjectAtIndex:4 withObject:dic4];
         
+    }
+    else if (textView.tag == 2005)
+    {
+        _applyCarModel.driverTraveldays =textView.text;
+        
+        NSDictionary *dic5 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+        [_secondDataArray replaceObjectAtIndex:5 withObject:dic5];
+    }
+    else if (textView.tag == 2008)
+    {
+        _applyCarModel.driverTraveldays =textView.text;
+        
+        NSDictionary *dic8 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+        [_secondDataArray replaceObjectAtIndex:8 withObject:dic8];
     }
     
     [self reloadRowsWithRowTag:textView.tag];
@@ -991,12 +1046,12 @@
     {
         [self initMBHudWithTitle:nil];
         //开始里程提交状态
-        NSArray *keyArray = @[@"appId",@"beginMil"];
+        NSArray *keyArray = @[@"appId",@"beginMil",@"price"];
         
         NSString *beginMileValueStr = [NSString getFormatStr:_applyCarModel.beginMil];
         _applyCarModel.beginMil =beginMileValueStr;
         
-        NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.beginMil];
+        NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.beginMil,_applyCarModel.price];
         
         [CLYCCoreBizHttpRequest driverCommitBeginMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
             
@@ -1030,9 +1085,9 @@
     }
     else if (_applyCarModel.finishMilStatus.intValue == 0|| _applyCarModel.finishMilStatus.intValue ==3)
     {
-        if (_applyCarModel.addMil.integerValue >50)
+        if (_applyCarModel.addMil.integerValue >80)
         {
-            [self displaySomeInfoWithInfo:@"加价里程不能大于50" finsh:nil];
+            [self displaySomeInfoWithInfo:@"附加里程不能大于80" finsh:nil];
             
             return;
         }
@@ -1040,7 +1095,7 @@
         //结束里程提交状态
         [self initMBHudWithTitle:nil];
         
-        NSArray *keyArray = @[@"appId",@"finishMil",@"addMil"];
+        NSArray *keyArray = @[@"appId",@"finishMil",@"addMil",@"driverTravelDays"];
         
         NSString *finishMileValueStr =[NSString getFormatStr:_applyCarModel.finishMil] ;
         _applyCarModel.finishMil =finishMileValueStr;
@@ -1049,7 +1104,7 @@
         _applyCarModel.addMil =addMileValueStr;
         
 
-        NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.finishMil,_applyCarModel.addMil];
+        NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.finishMil,_applyCarModel.addMil,_applyCarModel.driverTraveldays];
         
         [CLYCCoreBizHttpRequest driverCommitFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
             if ([retcode isEqualToString:YB_HTTP_CODE_OK])

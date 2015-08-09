@@ -210,9 +210,7 @@
     NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
     
     
-    NSString *threeDaysAterStr = [DateFormate getThreeDaysAfterTimeStr];
-    
-    
+    NSString *threeDaysAterStr = [DateFormate getThreeDaysAfterTimeStr];    
     
     NSArray *valueArray = @[projectNumStr,carUserStr,threeDaysAterStr,@"",[HXUserModel shareInstance].userId,@"2",@"20",currentPage];
     

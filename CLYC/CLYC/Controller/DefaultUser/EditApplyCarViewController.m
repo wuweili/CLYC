@@ -116,7 +116,7 @@
 
 -(void)initData
 {
-    _dataArray = [NSMutableArray arrayWithObjects:@"用车时间：",@"车牌号：",@"用车部门：",@"项目名称：",@"出发地：",@"目的地：",@"车辆用途：",@"实际用车人：", nil];
+    _dataArray = [NSMutableArray arrayWithObjects:@"用车时间：",@"车牌号：",@"用车部门：",@"项目名称：",@"出发地：",@"目的地：",@"车辆用途：",@"实际用车人：",@"单价：", nil];
     
     if (!_applyCarModel)
     {
@@ -204,7 +204,9 @@
             
             if (_applyCarModel.status.integerValue ==1 )
             {
-                NSString *currentTime = [NSString stringWithFormat:@"%lld",(long long)[[NSDate date]timeIntervalSince1970]*1000];
+//                NSString *currentTime = [NSString stringWithFormat:@"%lld",(long long)[[NSDate date]timeIntervalSince1970]*1000];
+                
+                NSString *currentTime = [DateFormate getTimeIntervalFromTimeStr:_applyCarModel.systemTime];
                 
                 NSString *appBeginTime = [DateFormate getTimeIntervalFromTimeStr:_applyCarModel.beginTime ];
                 
@@ -269,7 +271,7 @@
                 NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
                 [_secondDataArray addObject:dic4];
                 
-                NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                NSDictionary *dic5 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
                 [_secondDataArray addObject:dic5];
                 
                 NSString *confirmStr = @"";
@@ -353,10 +355,14 @@
             return [self heightForRowWitUITextViewText:_applyCarModel.carUse] +14;
             
         }
-        else
+        else if (indexPath.row == 7)
         {
             return [self heightForRowWitUITextViewText:_applyCarModel.carAppUserName] +14;
             
+        }
+        else
+        {
+            return [self heightForRowWitUITextViewText:_applyCarModel.price] +14;
         }
     }
     else
@@ -433,6 +439,8 @@
                 
                 _applyCarModel.selectedCarModel = model;
                 
+                _applyCarModel.price = model.price;
+                
                 [_tableView reloadData];
                 
                 
@@ -455,7 +463,14 @@
         }
         else if (indexPath.row == 3)
         {
-            SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_applyCarModel.projectModel selectProjectBlock:^(ProjectListModel *model) {
+            if ( [NSString isBlankString:_applyCarModel.deptModel.deptId ] ) {
+                [self displaySomeInfoWithInfo:@"请先选择部门" finsh:nil];
+                
+                return;
+                
+            }
+            
+            SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_applyCarModel.projectModel depId:_applyCarModel.deptModel.deptId  selectProjectBlock:^(ProjectListModel *model) {
                 _applyCarModel.projectModel = model;
                 
                 [_tableView reloadData];
@@ -551,11 +566,14 @@
         {
             celleStr = _applyCarModel.carUse;
         }
-        else
+        else if(indexPath.row == 7)
         {
             celleStr = _applyCarModel.carAppUserName;
         }
-        
+        else
+        {
+            celleStr = _applyCarModel.price;
+        }
         
         [cell setContentWithIndexPath:indexPath andContentStr:celleStr];
         

@@ -251,7 +251,7 @@
 @property(nonatomic,strong)NSString *finishMil ;
 
 /**
- * ￼加价里程
+ * ￼附加里程
  */
 @property(nonatomic,strong)NSString *addMil ;
 
@@ -264,6 +264,22 @@
  * ￼结束里程备注
  */
 @property(nonatomic,strong)NSString *finishMilRemark ;
+
+/**
+ * ￼单价
+ */
+@property(nonatomic,strong)NSString *price ;
+
+/**
+ * ￼出差天数
+ */
+@property(nonatomic,strong)NSString *driverTraveldays;
+
+/**
+ * ￼系统时间
+ */
+@property(nonatomic,strong)NSString *systemTime;
+
 
 
 @end
@@ -338,5 +354,58 @@
  */
 @property(nonatomic,strong)NSString *complaintContent;
 
+/**
+ * 处理结果
+ */
+@property(nonatomic,strong)NSString *handelResults;
+
+/**
+ * 处理人
+ */
+@property(nonatomic,strong)NSString *handelPersonId;
+
+/**
+ * 处理人姓名
+ */
+@property(nonatomic,strong)NSString *handelPersonName;
+
+/**
+ * 处理时间
+ */
+@property(nonatomic,strong)NSString *handelTime;
+
+
 @end
 
+
+@interface DriverCheckModel : NSObject
+
+/**
+ * 申请主键
+ */
+@property(nonatomic,strong)NSString *_id;
+
+
+/**
+ * 司机主键
+ */
+@property(nonatomic,strong)NSString *driverId;
+
+/**
+ * 司机名称
+ */
+@property(nonatomic,strong)NSString *driverName;
+
+/**
+ * 考核时间
+ */
+@property(nonatomic,strong)NSString *checkTime;
+
+/**
+ * 等级
+ */
+@property(nonatomic,strong)NSString *gradeName;
+
+
+
+@end

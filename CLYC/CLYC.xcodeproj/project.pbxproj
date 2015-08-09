@@ -89,6 +89,7 @@
 		028FA1D11B470E29007A2C8C /* left_bar_image@@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1CD1B470E29007A2C8C /* left_bar_image@@3x.png */; };
 		028FA1D21B470E29007A2C8C /* left_bar_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1CE1B470E29007A2C8C /* left_bar_image@2x.png */; };
 		028FA1D41B470FAB007A2C8C /* banner.png in Resources */ = {isa = PBXBuildFile; fileRef = 028FA1D31B470FAB007A2C8C /* banner.png */; };
+		029AA7EE1B779A5000234FEE /* D_driverCheckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 029AA7ED1B779A5000234FEE /* D_driverCheckTableViewCell.m */; };
 		02B27EA31B5E93E400477278 /* SaveApplyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B27EA21B5E93E400477278 /* SaveApplyCarViewController.m */; };
 		02B27EA71B5E989D00477278 /* SaveApplyCarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B27EA61B5E989D00477278 /* SaveApplyCarTableViewCell.m */; };
 		02B39A741B42E4BF007FDD26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B39A731B42E4BF007FDD26 /* AudioToolbox.framework */; };
@@ -414,6 +415,8 @@
 		028FA1CD1B470E29007A2C8C /* left_bar_image@@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_bar_image@@3x.png"; sourceTree = "<group>"; };
 		028FA1CE1B470E29007A2C8C /* left_bar_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_bar_image@2x.png"; sourceTree = "<group>"; };
 		028FA1D31B470FAB007A2C8C /* banner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner.png; sourceTree = "<group>"; };
+		029AA7EC1B779A5000234FEE /* D_driverCheckTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = D_driverCheckTableViewCell.h; sourceTree = "<group>"; };
+		029AA7ED1B779A5000234FEE /* D_driverCheckTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = D_driverCheckTableViewCell.m; sourceTree = "<group>"; };
 		02B27EA11B5E93E400477278 /* SaveApplyCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveApplyCarViewController.h; sourceTree = "<group>"; };
 		02B27EA21B5E93E400477278 /* SaveApplyCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveApplyCarViewController.m; sourceTree = "<group>"; };
 		02B27EA51B5E989D00477278 /* SaveApplyCarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveApplyCarTableViewCell.h; sourceTree = "<group>"; };
@@ -937,6 +940,8 @@
 				028BE0A71B63F7090012068C /* D_ConfirmMile2TableViewCell.m */,
 				026BD5211B764DA000D907E9 /* ComplainListTableViewCell.h */,
 				026BD5221B764DA000D907E9 /* ComplainListTableViewCell.m */,
+				029AA7EC1B779A5000234FEE /* D_driverCheckTableViewCell.h */,
+				029AA7ED1B779A5000234FEE /* D_driverCheckTableViewCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2112,6 +2117,7 @@
 				02B27EA71B5E989D00477278 /* SaveApplyCarTableViewCell.m in Sources */,
 				5AB02E7D1B3FD2720003B65F /* CALayer+Transition.m in Sources */,
 				025EEBD11B76C8EF007B4922 /* SaveComplainViewController.m in Sources */,
+				029AA7EE1B779A5000234FEE /* D_driverCheckTableViewCell.m in Sources */,
 				028D3D9F1B45949700AC7C7D /* GDataXMLNode.m in Sources */,
 				5AB02E591B3FD2720003B65F /* SBJsonStreamParser.m in Sources */,
 				028FA1B81B470405007A2C8C /* HXBackgroundViewController.m in Sources */,

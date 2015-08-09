@@ -12,6 +12,7 @@
 #import "D_ConfirmMile2ViewController.h"
 #import "ComplainListTableViewCell.h"
 #import "SaveComplainViewController.h"
+#import "EditComplainViewController.h"
 
 
 
@@ -561,7 +562,9 @@
     if ([_dataArray count]>0)
     {
         ComplainListModel *model = [_dataArray objectAtIndex:indexPath.row];
-      
+        
+        EditComplainViewController *eidtMVC = [[EditComplainViewController alloc]initWithComplainModel:model];
+        [self.navigationController pushViewController:eidtMVC animated:YES];
     }
     
 }

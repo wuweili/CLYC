@@ -8,11 +8,7 @@
 
 #import "EditComplainViewController.h"
 #import "SaveApplyCarTableViewCell.h"
-#import "SelecteCarViewController.h"
-#import "SelectDeptmentViewController.h"
-#import "SelectProjectViewController.h"
 #import "DateFormate.h"
-#import "SaveApplyCarViewController.h"
 #import "SaveComplainViewController.h"
 
 @interface EditComplainViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
@@ -23,13 +19,10 @@
     
     NSMutableArray *_secondDataArray;
     
-    ApplyCarDetailModel *_applyCarModel;
-    
     NSIndexPath *_currentFirstRespondIndexPath;
     
     UIView *_editFootView;
     UIView *_cancleFootView;
-    
     ComplainListModel *_appComplainModel;
     
 }
@@ -124,10 +117,8 @@
     {
         _appComplainModel = [[ComplainListModel alloc]init];
     }
-    
-    
+    _secondDataArray = [NSMutableArray arrayWithCapacity:0];
     _currentFirstRespondIndexPath = nil;
-    
 }
 
 -(void)initTableView
@@ -180,136 +171,53 @@
     [startSearchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [startSearchButton addTarget:self action:@selector(clickCancleButton) forControlEvents:UIControlEventTouchUpInside];
     [_cancleFootView addSubview:startSearchButton];
-    
-    
 }
 
 -(void)obtainData
 {
     [self initMBHudWithTitle:nil];
     
-    NSArray *keyArray = @[@"appId"];
-    NSArray *valueArray = @[_applyCarModel.appId];
+    NSArray *keyArray = @[@"id"];
+    NSArray *valueArray = @[_appComplainModel._id];
     
-    [CLYCCoreBizHttpRequest obtainApplyCarDetailWithBlock:^(ApplyCarDetailModel *model, NSString *retcode, NSString *retmessage, NSError *error) {
+    [CLYCCoreBizHttpRequest obtainComplainDetailWithBlock:^(ComplainListModel *model, NSString *retcode, NSString *retmessage, NSError *error) {
+        
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
             [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
             
-            _applyCarModel = model;
+            _appComplainModel = model;
             
-            if (_applyCarModel.status.integerValue ==1 )
+            if (_appComplainModel.status.integerValue ==0 )
             {
-                NSString *currentTime = [NSString stringWithFormat:@"%lld",(long long)[[NSDate date]timeIntervalSince1970]*1000];
-                
-                NSString *appBeginTime = [DateFormate getTimeIntervalFromTimeStr:_applyCarModel.beginTime ];
-                
-                NSInteger residualDays = appBeginTime.longLongValue - currentTime.longLongValue;
-                
-                if (residualDays >0)
-                {
-                    _tableView.tableFooterView = nil;
-                    self.navigationItem.rightBarButtonItem = nil;
-                    _tableView.tableFooterView = _cancleFootView;
-                    
-                }
-                else
-                {
-                    
-                    _tableView.tableFooterView = nil;
-                    self.navigationItem.rightBarButtonItem = nil;
-                }
+                //暂存
+//                _tableView.tableFooterView = nil;
+//                self.navigationItem.rightBarButtonItem = nil;
+//                _tableView.tableFooterView = _cancleFootView;
                 
             }
-            else if (_applyCarModel.status.integerValue != 0)
+            else if (_appComplainModel.status.integerValue == 1)
             {
+                //提交
+                _tableView.tableFooterView = nil;
+                self.navigationItem.rightBarButtonItem = nil;
+                _tableView.tableFooterView = _cancleFootView;
+                
+            }
+            else if (_appComplainModel.status.integerValue == 2)
+            {
+                //已处理
                 _tableView.tableFooterView = nil;
                 self.navigationItem.rightBarButtonItem = nil;
             }
             
-            
-            if (_applyCarModel.beginMilStatus.integerValue != 0 )
-            {
-                NSDictionary *dic1 = @{@"mileInfoKey":@"开始里程(公里)：",@"mileInfoValue":_applyCarModel.beginMil};
-                
-                [_secondDataArray addObject:dic1];
-                
-                NSString *confirmStr = @"";
-                if ([_applyCarModel.beginMilStatus isEqualToString:@"1"])
-                {
-                    confirmStr =@"提交";
-                }
-                else if ([_applyCarModel.beginMilStatus isEqualToString:@"2"])
-                {
-                    confirmStr =@"通过";
-                }
-                else if ([_applyCarModel.beginMilStatus isEqualToString:@"3"])
-                {
-                    confirmStr =@"未通过";
-                }
-                
-                NSDictionary *dic2 = @{@"mileInfoKey":@"开始里程状态：",@"mileInfoValue":confirmStr};
-                
-                [_secondDataArray addObject:dic2];
-                
-                
-                NSDictionary *dic3 = @{@"mileInfoKey":@"开始里程备注：",@"mileInfoValue":_applyCarModel.beginMilRemark};
-                
-                [_secondDataArray addObject:dic3];
-                
-            }
-            
-            
-            if (_applyCarModel.finishMilStatus.integerValue !=0)
-            {
-                NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
-                [_secondDataArray addObject:dic4];
-                
-                NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
-                [_secondDataArray addObject:dic5];
-                
-                NSString *confirmStr = @"";
-                if ([_applyCarModel.finishMilStatus isEqualToString:@"1"])
-                {
-                    confirmStr =@"提交";
-                }
-                else if ([_applyCarModel.finishMilStatus isEqualToString:@"2"])
-                {
-                    confirmStr =@"通过";
-                }
-                else if ([_applyCarModel.finishMilStatus isEqualToString:@"3"])
-                {
-                    confirmStr =@"未通过";
-                }
-                
-                NSDictionary *dic6 = @{@"mileInfoKey":@"结束里程状态：",@"mileInfoValue":confirmStr};
-                
-                [_secondDataArray addObject:dic6];
-                
-                float realMile = [_applyCarModel.finishMil floatValue] - [_applyCarModel.beginMil floatValue]+[_applyCarModel.addMil floatValue];
-                
-                NSString *realMileStr = [NSString stringWithFormat:@"%.1f",realMile];
-                
-                NSDictionary *dic7 = @{@"mileInfoKey":@"实际里程(公里)：",@"mileInfoValue":realMileStr};
-                
-                [_secondDataArray addObject:dic7];
-                
-                
-                NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
-                
-                [_secondDataArray addObject:dic8];
-            }
-            
             [_tableView reloadData];
-            
         }
         else
         {
             [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
-        
     } keyArray:keyArray valueArray:valueArray];
-    
 }
 
 
@@ -317,43 +225,16 @@
 {
     if (indexPath.section == 0)
     {
-        if (indexPath.row == 0)
+        if (indexPath.row == 4)
         {
-            NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
-            return [self heightForRowWitUITextViewText:timeStr] +14;
-        }
-        else if (indexPath.row == 1)
-        {
-            return [self heightForRowWitUITextViewText:_applyCarModel.selectedCarModel.carCode] +14;
-        }
-        else if (indexPath.row == 2)
-        {
-            return [self heightForRowWitUITextViewText:_applyCarModel.deptModel.deptName] +14;
             
-        }
-        else if (indexPath.row == 3)
-        {
-            return [self heightForRowWitUITextViewText:_applyCarModel.projectModel.projectName] +14;
-        }
-        else if (indexPath.row == 4)
-        {
-            return [self heightForRowWitUITextViewText:_applyCarModel.beginAdrr] +14;
-        }
-        else if (indexPath.row == 5)
-        {
-            return [self heightForRowWitUITextViewText:_applyCarModel.endAdrr] +14;
-            
-        }
-        else if (indexPath.row == 6)
-        {
-            return [self heightForRowWitUITextViewText:_applyCarModel.carUse] +14;
-            
+            return [self heightForRowWitUITextViewText:_appComplainModel.complaintContent] +14;
         }
         else
         {
-            return [self heightForRowWitUITextViewText:_applyCarModel.carAppUserName] +14;
-            
+            return 44;
         }
+        
     }
     else
     {
@@ -393,7 +274,7 @@
         UILabel *sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, kMainScreenWidth-10, 30)];
         sectionLabel.backgroundColor =UIColorFromRGB(0xf3f3f3);
         sectionLabel.textAlignment = NSTextAlignmentLeft;
-        sectionLabel.text = @"约车信息";
+        sectionLabel.text = @"";
         sectionLabel.font = HEL_13;
         [sectionHeadView addSubview:sectionLabel];
         return sectionHeadView;
@@ -407,7 +288,7 @@
         UILabel *sectionLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, kMainScreenWidth-10, 30)];
         sectionLabel.backgroundColor =UIColorFromRGB(0xf3f3f3);
         sectionLabel.textAlignment = NSTextAlignmentLeft;
-        sectionLabel.text = @"里程信息";
+        sectionLabel.text = @"";
         sectionLabel.font = HEL_13;
         [sectionHeadView addSubview:sectionLabel];
         return sectionHeadView;
@@ -420,48 +301,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (indexPath.section == 0)
-    {
-        if (indexPath.row == 1)
-        {
-            SelecteCarViewController *selectCarMVC = [[SelecteCarViewController alloc]initWithDefaultSelectedCarModel:_applyCarModel.selectedCarModel beginTime:_applyCarModel.beginTime endTime:_applyCarModel.endTime selectCarBlock:^(SelectCarInfoModel *model) {
-                
-                _applyCarModel.selectedCarModel = model;
-                
-                [_tableView reloadData];
-                
-                
-            }];
-            
-            [self.navigationController pushViewController:selectCarMVC animated:YES];
-            
-        }
-        else if (indexPath.row == 2)
-        {
-            
-            SelectDeptmentViewController *selectDeptMVC = [[SelectDeptmentViewController alloc]initWithDefaultSelectedDeptModel:_applyCarModel.deptModel selectDeptBlock:^(DeptListModel *model) {
-                _applyCarModel.deptModel = model;
-                
-                [_tableView reloadData];
-                
-            }];
-            [self.navigationController pushViewController:selectDeptMVC animated:YES];
-            
-        }
-        else if (indexPath.row == 3)
-        {
-            SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_applyCarModel.projectModel selectProjectBlock:^(ProjectListModel *model) {
-                _applyCarModel.projectModel = model;
-                
-                [_tableView reloadData];
-            }];
-            
-            [self.navigationController pushViewController:selectProjectMVC animated:YES];
-        }
-    }
-    
-    
     
 }
 
@@ -498,7 +337,7 @@
         
         if (cell == nil)
         {
-            cell = [[SaveApplyCarTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
+            cell = [[SaveApplyCarTableViewCell alloc]initEditComplainWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier indexPath:indexPath];
         }
         cell.backgroundColor = [UIColor whiteColor];
         
@@ -516,40 +355,46 @@
         
         if (indexPath.row == 0)
         {
-            NSString *timeStr = [NSString stringWithFormat:@"%@至%@",_applyCarModel.beginTime,_applyCarModel.endTime];
-            celleStr = timeStr;
+            
+            celleStr = _appComplainModel.createPersonName;
         }
         else if (indexPath.row == 1)
         {
-            celleStr = _applyCarModel.selectedCarModel.carCode;
-            
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            celleStr = _appComplainModel.createTime;
         }
         else if (indexPath.row == 2)
         {
-            celleStr = _applyCarModel.deptModel.deptName;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            celleStr = _appComplainModel.statusName;
         }
         else if (indexPath.row == 3)
         {
-            celleStr = _applyCarModel.projectModel.projectName;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        }
-        else if (indexPath.row == 4)
-        {
-            celleStr = _applyCarModel.beginAdrr;
-        }
-        else if (indexPath.row == 5)
-        {
-            celleStr = _applyCarModel.endAdrr;
-        }
-        else if (indexPath.row == 6)
-        {
-            celleStr = _applyCarModel.carUse;
+            celleStr = _appComplainModel.createPersonTel;
         }
         else
         {
-            celleStr = _applyCarModel.carAppUserName;
+            celleStr = _appComplainModel.complaintContent;
+            
+            if (_appComplainModel.status.integerValue ==0 )
+            {
+                cell.cellTextView.editable = YES;
+                cell.userInteractionEnabled = YES;
+            }
+            else if (_appComplainModel.status.integerValue == 1)
+            {
+                //提交
+                cell.cellTextView.editable = NO;
+                cell.userInteractionEnabled = NO;
+
+            }
+            else if (_appComplainModel.status.integerValue == 2)
+            {
+                //已处理
+                cell.cellTextView.editable = NO;
+                cell.userInteractionEnabled = NO;
+
+            }
+            
+            
         }
         
         
@@ -633,24 +478,11 @@
 {
     
     [textView resignFirstResponder];
-    if (textView.tag == 1000)
+    if (textView.tag == 1004)
     {
+        _appComplainModel.complaintContent = textView.text;
     }
-    else if (textView.tag == 1004)
-    {
-        _applyCarModel.beginAdrr = textView.text;
-    }
-    else if (textView.tag == 1005)
-    {
-        _applyCarModel.endAdrr = textView.text;
-        
-    }
-    else if (textView.tag == 1006)
-    {
-        _applyCarModel.carUse = textView.text;
-    }
-    
-    
+
     [self reloadRowsWithRowTag:textView.tag];
 }
 
@@ -768,66 +600,19 @@
 
 -(void)clickEditButton
 {
-    if ([NSString isBlankString:_applyCarModel.selectedCarModel.carId])
+    if ([NSString isBlankString:_appComplainModel.complaintContent])
     {
-        [self displaySomeInfoWithInfo:@"请选择车辆" finsh:nil];
-        
-        return;
-    }
-    
-    if ([NSString isBlankString:_applyCarModel.deptModel.deptId])
-    {
-        [self displaySomeInfoWithInfo:@"请选择用车部门" finsh:nil];
-        
-        return;
-    }
-    
-    if ([NSString isBlankString:_applyCarModel.projectModel.projectId])
-    {
-        [self displaySomeInfoWithInfo:@"请选择项目" finsh:nil];
-        
-        return;
-    }
-    
-    if ([NSString isBlankString:_applyCarModel.beginAdrr])
-    {
-        [self displaySomeInfoWithInfo:@"请选择出发地" finsh:nil];
-        
-        return;
-    }
-    
-    if ([NSString isBlankString:_applyCarModel.endAdrr])
-    {
-        [self displaySomeInfoWithInfo:@"请选择目的地" finsh:nil];
-        
-        return;
-    }
-    
-    
-    
-    if ([NSString isBlankString:_applyCarModel.carAppUserName])
-    {
-        [self displaySomeInfoWithInfo:@"请填写实际用车人" finsh:nil];
+        [self displaySomeInfoWithInfo:@"请填写投诉内容" finsh:nil];
         
         return;
     }
     
     [self initMBHudWithTitle:nil];
+    NSArray *keyArray = @[@"id",@"complaintContent",@"createPersonId",@"createPersonTel"];
+ 
+    NSArray *valueArray = @[_appComplainModel._id,_appComplainModel.complaintContent,_appComplainModel.createPersonId,_appComplainModel.createPersonTel];
     
-    NSArray *keyArray = @[@"appId",@"carAppDeptId",@"projectId",@"projectNo",@"projectName",@"carId",@"beginAdrr",@"endAdrr",@"beginTime",@"endTime",@"carAppUserId",@"carUse",@"status",@"appTime",@"appUserId",@"appDeptId"];
-    
-    
-    //得到当前选中的时间
-    NSDate *currDate=[NSDate date];
-    
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
-    NSString *str=[dateFormatter stringFromDate:currDate ];
-    
-    NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.deptModel.deptId,_applyCarModel.projectModel.projectId,_applyCarModel.projectModel.projectNo,_applyCarModel.projectModel.projectName,_applyCarModel.selectedCarModel.carId,_applyCarModel.beginAdrr,_applyCarModel.endAdrr,_applyCarModel.beginTime,_applyCarModel.endTime,[HXUserModel shareInstance].userId,_applyCarModel.carUse,@"0",str,[HXUserModel shareInstance].userId,[HXUserModel shareInstance].deptId];
-    
-    [CLYCCoreBizHttpRequest editApplyCarWithBlock:^( NSString *retcode, NSString *retmessage, NSError *error) {
-        
+    [CLYCCoreBizHttpRequest editComplainApplyWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
             [self stopMBHudAndNSTimerWithmsg:@"修改成功" finsh:nil];
@@ -839,10 +624,7 @@
         {
             [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
-        
-        
     } keyArray:keyArray valueArray:valueArray];
-    
     
 }
 
@@ -850,10 +632,10 @@
 {
     [self initMBHudWithTitle:nil];
     
-    NSArray *keyArray = @[@"appId",@"status"];
-    NSArray *valueArray = @[_applyCarModel.appId,@"1"];
+    NSArray *keyArray = @[@"id",@"status"];
+    NSArray *valueArray = @[_appComplainModel._id,@"1"];
     
-    [CLYCCoreBizHttpRequest commitApplyCarWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
+    [CLYCCoreBizHttpRequest commitComplainApplyWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
             [self stopMBHudAndNSTimerWithmsg:@"提交成功" finsh:nil];
@@ -870,18 +652,16 @@
             [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
     } keyArray:keyArray valueArray:valueArray];
-    
 }
 
 -(void)clickCancleButton
 {
     [self initMBHudWithTitle:nil];
     
-    NSArray *keyArray = @[@"appId"];
-    NSArray *valueArray = @[_applyCarModel.appId];
+    NSArray *keyArray = @[@"id"];
+    NSArray *valueArray = @[_appComplainModel._id];
     
-    [CLYCCoreBizHttpRequest deleteApplyCarWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
-        
+    [CLYCCoreBizHttpRequest deleteComplainApplyWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
             [self stopMBHudAndNSTimerWithmsg:@"取消成功" finsh:nil];
@@ -896,9 +676,8 @@
         {
             [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
-        
-        
     } keyArray:keyArray valueArray:valueArray];
+    
     
 }
 

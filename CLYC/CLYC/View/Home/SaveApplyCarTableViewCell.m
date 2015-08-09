@@ -282,7 +282,106 @@ const static int titleLabelwidth = 90;
     return self;
 }
 
-
+-(id)initEditComplainWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    if (self)
+    {
+        self.indexPath = indexPath;
+        
+        _cellTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 7, titleLabelwidth, 30)];
+        _cellTitleLabel.textColor = [UIColor lightGrayColor];
+        _cellTitleLabel.font = HEL_14;
+        _cellTitleLabel.textAlignment = NSTextAlignmentRight;
+        _cellTitleLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:_cellTitleLabel];
+        
+        if (indexPath.row == 0)
+        {
+            //投诉申请人
+            _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2 , 30)];
+            _cellTextView.textColor = [UIColor blackColor];
+            _cellTextView.scrollEnabled = YES;
+            _cellTextView.font = HEL_14;
+            _cellTextView.returnKeyType = UIReturnKeyDone;
+            _cellTextView.tag = 1000;
+            _cellTextView.showsVerticalScrollIndicator = NO;
+            _cellTextView.userInteractionEnabled = NO;
+            
+            _cellTextView.backgroundColor = [UIColor clearColor];
+            
+            [self.contentView addSubview:_cellTextView];
+        }
+        else if (indexPath.row == 1)
+        {
+            //申请时间
+            _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2, 30)];
+            _cellTextView.textColor = [UIColor blackColor];
+            _cellTextView.scrollEnabled = YES;
+            _cellTextView.font = HEL_14;
+            _cellTextView.returnKeyType = UIReturnKeyDone;
+            _cellTextView.tag = 1001;
+            _cellTextView.showsVerticalScrollIndicator = NO;
+            _cellTextView.userInteractionEnabled = NO;
+            
+            _cellTextView.backgroundColor = [UIColor clearColor];
+            
+            [self.contentView addSubview:_cellTextView];
+        }
+        else if (indexPath.row == 2)
+        {
+            //状态
+            _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2, 30)];
+            _cellTextView.textColor = [UIColor blackColor];
+            _cellTextView.scrollEnabled = YES;
+            _cellTextView.font = HEL_14;
+            _cellTextView.returnKeyType = UIReturnKeyDone;
+            _cellTextView.tag = 1002;
+            _cellTextView.showsVerticalScrollIndicator = NO;
+            _cellTextView.userInteractionEnabled = NO;
+            
+            _cellTextView.backgroundColor = [UIColor clearColor];
+            
+            [self.contentView addSubview:_cellTextView];
+        }
+        else if (indexPath.row == 3)
+        {
+            //联系电话
+            _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2, 30)];
+            _cellTextView.textColor = [UIColor blackColor];
+            _cellTextView.scrollEnabled = YES;
+            _cellTextView.font = HEL_14;
+            _cellTextView.returnKeyType = UIReturnKeyDone;
+            _cellTextView.tag = 1003;
+            _cellTextView.showsVerticalScrollIndicator = NO;
+            _cellTextView.userInteractionEnabled = NO;
+            
+            _cellTextView.backgroundColor = [UIColor clearColor];
+            
+            [self.contentView addSubview:_cellTextView];
+        }
+        else
+        {
+            //用车人
+            _cellTextView = [[UITextView alloc]initWithFrame:CGRectMake(_cellTitleLabel.frame.origin.x+_cellTitleLabel.frame.size.width+2, _cellTitleLabel.frame.origin.y, kMainScreenWidth - 25-CGRectGetMaxX(_cellTitleLabel.frame)-2, 30)];
+            _cellTextView.textColor = [UIColor blackColor];
+            _cellTextView.scrollEnabled = YES;
+            _cellTextView.font = HEL_14;
+            _cellTextView.returnKeyType = UIReturnKeyDone;
+            _cellTextView.tag = 1004;
+            _cellTextView.showsVerticalScrollIndicator = NO;
+            _cellTextView.userInteractionEnabled = YES;
+            
+            _cellTextView.backgroundColor = [UIColor clearColor];
+            
+            [self.contentView addSubview:_cellTextView];
+        }
+        
+    }
+    
+    return self;
+}
 
 
 
@@ -350,6 +449,13 @@ const static int titleLabelwidth = 90;
 }
 
 -(void)setSaveComplainContentWithIndexPath:(NSIndexPath *)indexPath andContentStr:(NSString *)text
+{
+    self.indexPath = indexPath;
+    _cellTextView.text = text;
+    [self changeheightForTextView:_cellTextView];
+}
+
+-(void)setEditComplainContentWithIndexPath:(NSIndexPath *)indexPath andContentStr:(NSString *)text
 {
     self.indexPath = indexPath;
     _cellTextView.text = text;

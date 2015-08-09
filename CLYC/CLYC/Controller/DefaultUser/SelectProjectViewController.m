@@ -23,6 +23,8 @@
     NSString *_searchContentStr;//用此字串进行搜索
     
     NSMutableArray *_searchArray;
+    
+    NSString *_depId;
 }
 
 @property(nonatomic, strong)UISearchDisplayController *strongSearchDisplayController;
@@ -34,13 +36,15 @@
 @implementation SelectProjectViewController
 
 
--(id)initWithDefaultSelectedProjectModel:(ProjectListModel *)model selectProjectBlock:(SelectProjectBlock)block
+-(id)initWithDefaultSelectedProjectModel:(ProjectListModel *)model depId:(NSString *)depId selectProjectBlock:(SelectProjectBlock)block
 {
     self = [super init];
     
     if (self)
     {
         _selectedModel = model;
+        
+        _depId = depId;
         
         _block = block;
     }
@@ -113,7 +117,7 @@
     [self initMBHudWithTitle:nil];
     NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryProjectName",@"pageSize",@"pageNum"];
     
-    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,@"",@"",@"20",@"0"];
+    NSArray *valueArray = @[_depId,@"",@"",@"40",@"0"];
     
     [CLYCCoreBizHttpRequest obtainProjectListWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
@@ -388,7 +392,7 @@
     [self initMBHudWithTitle:nil];
     NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryProjectName",@"pageSize",@"pageNum"];
     
-    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,searchText,@"",@"20",@"0"];
+    NSArray *valueArray = @[_depId,searchText,@"",@"20",@"0"];
     
     [CLYCCoreBizHttpRequest obtainProjectListWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])

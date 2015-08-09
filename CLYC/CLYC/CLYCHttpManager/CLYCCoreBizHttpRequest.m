@@ -735,6 +735,13 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
             model.finishMilStatus = [NSString stringWithoutNil:dic[@"finishMilStatus"]];
 
             model.finishMilRemark = [NSString stringWithoutNil:dic[@"finishMilRemark"]];
+            
+            model.driverTraveldays =[NSString stringWithoutNil:dic[@"driverTraveldays"]];
+            
+            model.price =[NSString stringWithoutNil:dic[@"price"]];
+            
+            model.systemTime =[NSString stringWithoutNil:dic[@"systemTime"]];
+            
 
             if (block)
             {
@@ -1229,11 +1236,208 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
                 block(nil,retCode,retMessage,error);
             }
         }
+    }];
+}
+
++(void)obtainComplainDetailWithBlock:(void (^)(ComplainListModel *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"ComplaintEditService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            
+            ComplainListModel *model = [[ComplainListModel alloc]init];
+            
+            model._id = [NSString stringWithoutNil:dic[@"id"]];
+            model.complaintContent = [NSString stringWithoutNil:dic[@"complaintContent"]];
+            model.createPersonId = [NSString stringWithoutNil:dic[@"createPersonId"]];
+            
+            model.createPersonName = [NSString stringWithoutNil:dic[@"createPersonName"]];
+            
+            model.createPersonTel = [NSString stringWithoutNil:dic[@"createPersonTel"]];
+            
+            model.status = [NSString stringWithoutNil:dic[@"status"]];
+            model.statusName = [NSString stringWithoutNil:dic[@"statusName"]];
+            
+            
+            if (model.status.integerValue == 0)
+            {
+                model.statusName = @"暂存";
+            }
+            else if (model.status.integerValue == 1)
+            {
+                model.statusName = @"已提交";
+            }
+            else
+            {
+                model.statusName = @"已处理";
+            }
+            
+            model.createTime = [NSString stringWithoutNil:dic[@"createTime"]];
+            
+            model.handelResults = [NSString stringWithoutNil:dic[@"handelResults"]];
+            
+            model.handelPersonId = [NSString stringWithoutNil:dic[@"handelPersonId"]];
+            
+            model.handelPersonName = [NSString stringWithoutNil:dic[@"handelPersonName"]];
+            model.handelTime = [NSString stringWithoutNil:dic[@"handelTime"]];
+            
+            
+            if (block)
+            {
+                block(model,retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(nil,retCode,retMessage,error);
+            }
+        }
+        
+    }];
+}
+
++(void)editComplainApplyWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"ComplaintSaveEditService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+        
+        
+        
+    }];
+
+}
+
++(void)commitComplainApplyWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"ComplaintStatusUpdateService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
         
         
         
     }];
 }
 
++(void)deleteComplainApplyWithBlock:(void (^)(NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"ComplaintDelService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block(retCode,retMessage,error);
+            }
+        }
+        
+        
+        
+    }];
+}
+
++(void)driverCheckListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *, NSString *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarCheckByDriverService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            
+            NSArray *carListArray = [returnDic objectForKey:@"checkList"];
+            
+            NSString *totalNum = [NSString stringWithoutNil:returnDic[@"totalNum"]];
+            
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in carListArray)
+                {
+                    
+                    DriverCheckModel *model = [[DriverCheckModel alloc]init];
+                    
+                    model._id = [NSString stringWithoutNil:dic[@"id"]];
+                    
+                    model.driverId = [NSString stringWithoutNil:dic[@"driverId"]];
+                    
+                    model.driverName = [NSString stringWithoutNil:dic[@"driverName"]];
+                    
+                    model.checkTime = [NSString stringWithoutNil:dic[@"checkTime"]];
+                    
+                    model.gradeName =[NSString stringWithoutNil:dic[@"gradeName"]];
+                    
+                    [mutabArray addObject:model];
+                    
+                }
+            }
+            
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error,totalNum);
+            }
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error,nil);
+            }
+        }
+    }];
+}
 
 @end

@@ -8,6 +8,7 @@
 
 #import "SaveComplainViewController.h"
 #import "SaveApplyCarTableViewCell.h"
+#import "EditComplainViewController.h"
 
 @interface SaveComplainViewController ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate>
 {
@@ -393,6 +394,10 @@
             [self stopMBHudAndNSTimerWithmsg:@"保存成功" finsh:nil];
             
            _applyComplainModel._id =appId;
+            
+            EditComplainViewController *editMVC= [[EditComplainViewController alloc]initWithComplainModel:_applyComplainModel];
+            [self.navigationController pushViewController:editMVC animated:YES];
+
             
 //            EditApplyCarViewController *editMVC = [[EditApplyCarViewController alloc]initWithApplyCarDetailModel:_applyCarModel];
 //            [self.navigationController pushViewController:editMVC animated:YES];

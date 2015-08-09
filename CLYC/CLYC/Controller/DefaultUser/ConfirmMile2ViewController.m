@@ -85,7 +85,7 @@
 
 -(void)initData
 {
-    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：", nil];
+    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：",@"单价：", nil];
     _secondDataArray = [NSMutableArray arrayWithCapacity:0];
     
     if (!_applyCarModel)
@@ -201,7 +201,7 @@
                 NSDictionary *dic4 = @{@"mileInfoKey":@"结束里程(公里)：",@"mileInfoValue":_applyCarModel.finishMil};
                 [_secondDataArray addObject:dic4];
                 
-                NSDictionary *dic5 = @{@"mileInfoKey":@"加价里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+                NSDictionary *dic5 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
                 [_secondDataArray addObject:dic5];
                 
                 NSString *confirmStr = @"";
@@ -233,6 +233,9 @@
                 NSDictionary *dic8 = @{@"mileInfoKey":@"结束里程备注：",@"mileInfoValue":_applyCarModel.finishMilRemark};
                 
                 [_secondDataArray addObject:dic8];
+                
+                NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                [_secondDataArray addObject:dic9];
                 
                 
                 
@@ -280,10 +283,14 @@
             return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.deptModel.deptName] +14;
             
         }
-        else
+        else if (indexPath.row == 5)
         {
             //项目名称
             return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.projectModel.projectName] +14;
+        }
+        else
+        {
+            return [self heightForOneSectionRowWitUITextViewText:_applyCarModel.price] +14;
         }
     }
     else
@@ -325,11 +332,16 @@
             //实际里程
             return 44;
         }
-        else
+        else if (indexPath.row == 7)
         {
             //结束里程备注
             return [self heightForSecondSectionSectionRowWitUITextViewText:_applyCarModel.finishMilRemark]+14;
             
+        }
+        else
+        {
+            //出差天数
+            return [self heightForSecondSectionSectionRowWitUITextViewText:_applyCarModel.driverTraveldays]+14;
         }
     }
 }
@@ -384,7 +396,7 @@
         }
         else if (_applyCarModel.finishMilStatus.integerValue == 1)
         {
-            tipString = @"(请确认结束里程(加价里程)(可填备注))";
+            tipString = @"(请确认结束里程(附加里程)(可填备注))";
         }
         
         section2Label.text =tipString;
@@ -474,9 +486,13 @@
         {
             celleStr = _applyCarModel.deptModel.deptName;
         }
-        else
+        else if (indexPath.row == 5)
         {
             celleStr = _applyCarModel.projectModel.projectName;
+        }
+        else
+        {
+            celleStr = _applyCarModel.price;
         }
         
         
@@ -784,8 +800,8 @@
         //结束里程提交状态
         [self initMBHudWithTitle:nil];
         
-        NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark"];
-        NSArray *valueArray = @[_applyCarModel.appId,@"2",_applyCarModel.finishMilRemark];
+        NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark",@"addMil"];
+        NSArray *valueArray = @[_applyCarModel.appId,@"2",_applyCarModel.finishMilRemark,_applyCarModel.addMil];
         
         [CLYCCoreBizHttpRequest userConfirmFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
             if ([retcode isEqualToString:YB_HTTP_CODE_OK])

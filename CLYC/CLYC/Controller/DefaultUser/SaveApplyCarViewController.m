@@ -259,7 +259,14 @@
     }
     else if (indexPath.row == 3)
     {
-        SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_applyCarModel.projectModel selectProjectBlock:^(ProjectListModel *model) {
+        if ( [NSString isBlankString:_applyCarModel.deptModel.deptId ] ) {
+            [self displaySomeInfoWithInfo:@"请先选择部门" finsh:nil];
+            
+            return;
+            
+        }
+        
+        SelectProjectViewController *selectProjectMVC = [[SelectProjectViewController alloc]initWithDefaultSelectedProjectModel:_applyCarModel.projectModel depId:_applyCarModel.deptModel.deptId selectProjectBlock:^(ProjectListModel *model) {
             _applyCarModel.projectModel = model;
             
             [_tableView reloadData];
