@@ -116,7 +116,7 @@
 
 -(void)initData
 {
-    _dataArray = [NSMutableArray arrayWithObjects:@"用车时间：",@"车牌号：",@"用车部门：",@"项目名称：",@"出发地：",@"目的地：",@"车辆用途：",@"实际用车人：",@"单价：", nil];
+    _dataArray = [NSMutableArray arrayWithObjects:@"用车时间：",@"车牌号：",@"用车部门：",@"项目名称：",@"出发地：",@"目的地：",@"车辆用途：",@"实际用车人：",@"单价(元)：", nil];
     
     if (!_applyCarModel)
     {

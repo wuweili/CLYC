@@ -97,36 +97,29 @@
     
     NSArray *valueArray = @[[HXUserModel shareInstance].deptId,@"",@"",@"",@"",@"",@"3",[HXUserModel shareInstance].userId,@"20",currentPage];
     
-    
-    [CLYCCoreBizHttpRequest obtainApplyCarHistorWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
-        
+    [CLYCCoreBizHttpRequest obtainCarTrajectoryListWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
         [self stopRefresh];
         
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
-            
             [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
-            
             if (!upPull)
             {
                 [_dataArray removeAllObjects];
             }
             
-            [_dataArray addObjectsFromArray:ListArry];
+            [_dataArray addObjectsFromArray:listArry];
             
             _currentDoctorPageIndex++;
-            
-            
-            
+           
             [_tableView reloadData];
         }
         else
         {
             [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
-        
-        
     } keyArray:keyArray valueArray:valueArray];
+    
     
 }
 

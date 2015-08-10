@@ -15,6 +15,16 @@
      NSMutableArray *_dataArray;
 }
 
+/** 百度定位地图服务 */
+@property (nonatomic, strong) BMKLocationService *bmkLocationService;
+
+
+
+/** 位置数组 */
+@property (nonatomic, strong) NSMutableArray *locationArrayM;
+
+
+@property (nonatomic, strong) BMKPolyline *polyLine;
 @end
 
 @implementation CarTrajectoryMapViewController
@@ -41,13 +51,60 @@
     
     _dataArray = [NSMutableArray arrayWithCapacity:0];
     
+    self.locationArrayM = [NSMutableArray arrayWithCapacity:0];
+    
     
     _mapView = [[BMKMapView alloc]initWithFrame:self.view.bounds];
-    self.view = _mapView;
+    // 设置MapView的一些属性
+    [self setMapViewProperty];
     
+    [self.view addSubview:self.mapView];
+    
+
     [self obtainData];
+   
+}
+
+/**
+ *  设置 百度MapView的一些属性
+ */
+- (void)setMapViewProperty
+{
+    // 显示定位图层
+    self.mapView.showsUserLocation = YES;
+    
+    // 设置定位模式
+    self.mapView.userTrackingMode = BMKUserTrackingModeNone;
+    
+    // 允许旋转地图
+    self.mapView.rotateEnabled = YES;
+    
+    // 显示比例尺
+    self.mapView.showMapScaleBar = YES;
     
     
+    self.mapView.zoomEnabled = YES;
+    self.mapView.mapScaleBarPosition = CGPointMake(self.view.frame.size.width - 50, self.view.frame.size.height - 100);
+    
+    // 定位图层自定义样式参数
+    BMKLocationViewDisplayParam *displayParam = [[BMKLocationViewDisplayParam alloc]init];
+    displayParam.isRotateAngleValid = NO;//跟随态旋转角度是否生效
+    displayParam.isAccuracyCircleShow = YES;//精度圈是否显示
+    displayParam.locationViewOffsetX = 0;//定位偏移量(经度)
+    displayParam.locationViewOffsetY = 0;//定位偏移量（纬度）
+    [self.mapView updateLocationViewWithParam:displayParam];
+}
+
+
+
+-(NSString *)getyyyyMMddWithTimeStr:(NSString *)timeStr
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSDate *timeStrDate = [formatter dateFromString:timeStr];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *resultString = [formatter stringFromDate:timeStrDate];
+    return resultString;
     
 }
 
@@ -58,13 +115,17 @@
         
         NSArray *keyArray = @[@"applyId",@"queryTime"];
         
-        NSArray *valueArray = @[_applyCarModel.appId,@""];
+        NSString *beginTime = [self getyyyyMMddWithTimeStr:_applyCarModel.beginTime];
+        
+        
+        NSArray *valueArray = @[_applyCarModel.appId,beginTime];
         
         [CLYCCoreBizHttpRequest carTrajectoryWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error) {
             
             if ([retcode isEqualToString:YB_HTTP_CODE_OK])
             {
                 [_dataArray addObjectsFromArray:listArry];
+                
                 
                 [self dealDataArray];
                 
@@ -85,36 +146,57 @@
 {
     if ([_dataArray count]>0)
     {
+        TrajectoryListModel *model0 = [_dataArray firstObject];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:[model0.latitude doubleValue] longitude:[model0.longitude doubleValue]];
+        // 设置当前地图的显示范围，直接显示到用户位置
+        BMKCoordinateRegion adjustRegion = [self.mapView regionThatFits:BMKCoordinateRegionMake(location.coordinate, BMKCoordinateSpanMake(0.02f,0.02f))];
         
-        for (int i = 0; i<[_dataArray count]; i++)
+        [self.mapView setRegion:adjustRegion animated:YES];
+        
+        [self.locationArrayM addObject:location];
+        
+        for (int i = 1; i<[_dataArray count]; i++)
         {
-            if (i+1>=[_dataArray count])
-            {
-                return;
-            }
+            TrajectoryListModel *modeli = [_dataArray objectAtIndex:i];
             
-            TrajectoryListModel *model0 = [_dataArray objectAtIndex:i];
-            
-            TrajectoryListModel *model1 = [_dataArray objectAtIndex:i+1];
-            
-            CLLocationCoordinate2D coors[2] = {0};
-            
-            coors[0].latitude = [model0.latitude doubleValue];
-            coors[0].longitude = [model0.longitude doubleValue];
-            coors[1].latitude = [model1.latitude doubleValue];;
-            coors[1].longitude = [model1.longitude doubleValue];
-            
-            BMKPolyline* polyline = [BMKPolyline polylineWithCoordinates:coors count:2];
-            [_mapView addOverlay:polyline];
+            CLLocation *locationi = [[CLLocation alloc] initWithLatitude:[modeli.latitude doubleValue] longitude:[modeli.longitude doubleValue]];
+            [self.locationArrayM addObject:locationi];
             
         }
+        
+        [self drawWalkPolyline];
        
     }
 }
 
-- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay{
-    if ([overlay isKindOfClass:[BMKPolyline class]])
+
+/**
+ *  绘制轨迹路线
+ */
+- (void)drawWalkPolyline
+{
+    
+    
+    NSInteger pointCount = [self.locationArrayM count];
+    
+    CLLocationCoordinate2D *coordinateArray = (CLLocationCoordinate2D *)malloc(pointCount * sizeof(CLLocationCoordinate2D));
+    
+    for (int i = 0; i < pointCount; ++i)
     {
+        CLLocation *location = [self.locationArrayM objectAtIndex:i];
+        coordinateArray[i] = [location coordinate];
+    }
+    
+    self.polyLine = [BMKPolyline polylineWithCoordinates:coordinateArray count:pointCount];
+    [self.mapView addOverlay:self.polyLine];
+    
+    free(coordinateArray);
+    coordinateArray = NULL;
+    
+}
+
+- (BMKOverlayView *)mapView:(BMKMapView *)mapView viewForOverlay:(id <BMKOverlay>)overlay{
+    if ([overlay isKindOfClass:[BMKPolyline class]]){
         BMKPolylineView* polylineView = [[BMKPolylineView alloc] initWithOverlay:overlay];
         polylineView.strokeColor = [[UIColor purpleColor] colorWithAlphaComponent:1];
         polylineView.lineWidth = 5.0;

@@ -85,7 +85,7 @@
 
 -(void)initData
 {
-    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：",@"单价：", nil];
+    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：",@"单价(元)：", nil];
     _secondDataArray = [NSMutableArray arrayWithCapacity:0];
     
     if (!_applyCarModel)
@@ -234,7 +234,7 @@
                 
                 [_secondDataArray addObject:dic8];
                 
-                NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTravelDays};
                 [_secondDataArray addObject:dic9];
                 
                 
@@ -341,7 +341,7 @@
         else
         {
             //出差天数
-            return [self heightForSecondSectionSectionRowWitUITextViewText:_applyCarModel.driverTraveldays]+14;
+            return [self heightForSecondSectionSectionRowWitUITextViewText:_applyCarModel.driverTravelDays]+14;
         }
     }
 }
@@ -396,7 +396,7 @@
         }
         else if (_applyCarModel.finishMilStatus.integerValue == 1)
         {
-            tipString = @"(请确认结束里程(附加里程)(可填备注))";
+            tipString = @"(请确认结束里程(可填附加里程、备注))";
         }
         
         section2Label.text =tipString;
@@ -541,6 +541,13 @@
                 cell.cellTextView.userInteractionEnabled = YES;
                 cell.cellTextView.delegate = self;
                 cell.cellTextView.tag = 2007;
+            }
+            else if (indexPath.row == 4)
+            {
+                cell.cellTextView.editable = YES;
+                cell.cellTextView.userInteractionEnabled = YES;
+                cell.cellTextView.delegate = self;
+                cell.cellTextView.tag = 2004;
             }
         }
         else
@@ -735,6 +742,14 @@
         [_secondDataArray replaceObjectAtIndex:7 withObject:dic8];
         
     }
+    else if (textView.tag == 2004)
+    {
+        _applyCarModel.addMil =textView.text;
+        
+        NSDictionary *dic4 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
+        [_secondDataArray replaceObjectAtIndex:4 withObject:dic4];
+   
+    }
  
     [self reloadRowsWithRowTag:textView.tag];
 }
@@ -797,8 +812,18 @@
     }
     else if (_applyCarModel.finishMilStatus.intValue == 1)
     {
+        if (_applyCarModel.addMil.integerValue >80)
+        {
+            [self displaySomeInfoWithInfo:@"附加里程不能大于80" finsh:nil];
+            
+            return;
+        }
+        
         //结束里程提交状态
         [self initMBHudWithTitle:nil];
+        
+        NSString *addMileValueStr =[NSString getFormatStr:_applyCarModel.addMil] ;
+        _applyCarModel.addMil =addMileValueStr;
         
         NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark",@"addMil"];
         NSArray *valueArray = @[_applyCarModel.appId,@"2",_applyCarModel.finishMilRemark,_applyCarModel.addMil];
@@ -861,10 +886,21 @@
     else if (_applyCarModel.finishMilStatus.intValue == 1)
     {
         //结束里程提交状态
+        if (_applyCarModel.addMil.integerValue >80)
+        {
+            [self displaySomeInfoWithInfo:@"附加里程不能大于80" finsh:nil];
+            
+            return;
+        }
+        
+        
         [self initMBHudWithTitle:nil];
         
-        NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark"];
-        NSArray *valueArray = @[_applyCarModel.appId,@"3",_applyCarModel.finishMilRemark];
+        NSString *addMileValueStr =[NSString getFormatStr:_applyCarModel.addMil] ;
+        _applyCarModel.addMil =addMileValueStr;
+        
+        NSArray *keyArray = @[@"appId",@"finishMilStatus",@"finishMilRemark",@"addMil"];
+        NSArray *valueArray = @[_applyCarModel.appId,@"3",_applyCarModel.finishMilRemark,_applyCarModel.addMil];
         
         [CLYCCoreBizHttpRequest userConfirmFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
             if ([retcode isEqualToString:YB_HTTP_CODE_OK])

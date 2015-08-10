@@ -11,8 +11,10 @@
 
 @interface CarTrajectoryMapViewController : HXBJHXBaseViewController<BMKMapViewDelegate>
 {
-    BMKMapView* _mapView;
+    
 }
+
+@property(nonatomic,strong)BMKMapView* mapView;
 
 -(id)initWithApplyCarDetailModel:(ApplyCarDetailModel *)model;
 

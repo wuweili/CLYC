@@ -122,6 +122,12 @@
 
 
 /**
+ * 约车轨迹查询
+ */
++(void)obtainCarTrajectoryListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+
+/**
  * 行车轨迹
  */
 +(void)carTrajectoryWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;

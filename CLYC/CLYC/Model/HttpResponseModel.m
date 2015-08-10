@@ -112,7 +112,7 @@
         self.finishMilStatus = @"";
         self.finishMilRemark = @"";
         self.price = @"";
-        self.driverTraveldays = @"";
+        self.driverTravelDays = @"";
         self.systemTime = @"";
         self.cost = @"";
     }

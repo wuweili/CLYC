@@ -273,7 +273,7 @@
 /**
  * ￼出差天数
  */
-@property(nonatomic,strong)NSString *driverTraveldays;
+@property(nonatomic,strong)NSString *driverTravelDays;
 
 /**
  * ￼系统时间

@@ -736,7 +736,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
 
             model.finishMilRemark = [NSString stringWithoutNil:dic[@"finishMilRemark"]];
             
-            model.driverTraveldays =[NSString stringWithoutNil:dic[@"driverTraveldays"]];
+            model.driverTravelDays =[NSString stringWithoutNil:dic[@"driverTravelDays"]];
             
             model.price =[NSString stringWithoutNil:dic[@"price"]];
             
@@ -1101,6 +1101,86 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
         }
     }];
 }
+
++(void)obtainCarTrajectoryListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *, NSString *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"CarTrajectoryByUserService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            
+            NSArray *carListArray = [returnDic objectForKey:@"carAppList"];
+            
+            NSString *totalNum = [NSString stringWithoutNil:returnDic[@"totalNum"]];
+            
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in carListArray)
+                {
+                    
+                    ApplyCarDetailModel *model = [[ApplyCarDetailModel alloc]init];
+                    
+                    model.appId = [NSString stringWithoutNil:dic[@"appId"]];
+                    
+                    model.deptModel.deptId = [NSString stringWithoutNil:dic[@"carAppDeptId"]];
+                    
+                    model.projectModel.projectName = [NSString stringWithoutNil:dic[@"projectName"]];
+                    
+                    model.selectedCarModel.carCode = [NSString stringWithoutNil:dic[@"carCode"]];
+                    
+                    model.beginTime = [NSString stringWithoutNil:dic[@"beginTime"]];
+                    
+                    model.endTime = [NSString stringWithoutNil:dic[@"endTime"]];
+                    
+                    model.carAppUserName = [NSString stringWithoutNil:dic[@"carAppUserName"]];
+                    
+                    model.driver = [NSString stringWithoutNil:dic[@"driver"]];
+                    
+                    model.driverTel = [NSString stringWithoutNil:dic[@"driverTel"]];
+                    
+                    model.totalMil = [NSString stringWithoutNil:dic[@"totalMil"]];
+                    
+                    model.status = [NSString stringWithoutNil:dic[@"status"]];
+                    
+                    [mutabArray addObject:model];
+                    
+                    
+                    
+                }
+            }
+            
+            
+            
+            
+            
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error,totalNum);
+            }
+            
+            
+            
+            
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error,nil);
+            }
+        }
+        
+        
+        
+    }];
+}
+
 
 
 +(void)carTrajectoryWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
@@ -1521,7 +1601,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
                     
                     model.finishMilRemark = [NSString stringWithoutNil:dic[@"finishMilRemark"]];
                     
-                    model.driverTraveldays =[NSString stringWithoutNil:dic[@"driverTraveldays"]];
+                    model.driverTravelDays =[NSString stringWithoutNil:dic[@"driverTravelDays"]];
                     
                     model.price =[NSString stringWithoutNil:dic[@"price"]];
                     

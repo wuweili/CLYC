@@ -86,7 +86,7 @@
 
 -(void)initData
 {
-    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：",@"单价：", nil];
+    _dataArray = [NSMutableArray arrayWithObjects:@"用车人：",@"用车时间：",@"出发地：",@"目的地：",@"用车部门：",@"项目名称：",@"单价(元)：", nil];
     _secondDataArray = [NSMutableArray arrayWithCapacity:0];
     
     if (!_applyCarModel)
@@ -262,7 +262,7 @@
                     NSDictionary *dic5 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
                     [_secondDataArray addObject:dic5];
                     
-                    NSDictionary *dic6 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                    NSDictionary *dic6 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTravelDays};
                     [_secondDataArray addObject:dic6];
                     
                     
@@ -277,7 +277,7 @@
                     NSDictionary *dic5 = @{@"mileInfoKey":@"附加里程(公里)：",@"mileInfoValue":_applyCarModel.addMil};
                     [_secondDataArray addObject:dic5];
                     
-                    NSDictionary *dic6 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                    NSDictionary *dic6 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTravelDays};
                     [_secondDataArray addObject:dic6];
                     
                     _tableView.tableFooterView = nil;
@@ -323,7 +323,7 @@
                     
                     [_secondDataArray addObject:dic8];
                     
-                    NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                    NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTravelDays};
                     [_secondDataArray addObject:dic9];
                     
                 }
@@ -367,7 +367,7 @@
                     
                     [_secondDataArray addObject:dic8];
                     
-                    NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+                    NSDictionary *dic9 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTravelDays};
                     [_secondDataArray addObject:dic9];
                     
                     _tableView.tableFooterView = nil;
@@ -999,16 +999,16 @@
     }
     else if (textView.tag == 2005)
     {
-        _applyCarModel.driverTraveldays =textView.text;
+        _applyCarModel.driverTravelDays =textView.text;
         
-        NSDictionary *dic5 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+        NSDictionary *dic5 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTravelDays};
         [_secondDataArray replaceObjectAtIndex:5 withObject:dic5];
     }
     else if (textView.tag == 2008)
     {
-        _applyCarModel.driverTraveldays =textView.text;
+        _applyCarModel.driverTravelDays =textView.text;
         
-        NSDictionary *dic8 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTraveldays};
+        NSDictionary *dic8 = @{@"mileInfoKey":@"出差天数(天)：",@"mileInfoValue":_applyCarModel.driverTravelDays};
         [_secondDataArray replaceObjectAtIndex:8 withObject:dic8];
     }
     
@@ -1046,7 +1046,7 @@
     {
         
         
-        if (_applyCarModel.beginMil.doubleValue <0)
+        if (_applyCarModel.beginMil.doubleValue <=0)
         {
             [self displaySomeInfoWithInfo:@"请输入合理的开始里程" finsh:nil];
             
@@ -1114,13 +1114,10 @@
         _applyCarModel.addMil =addMileValueStr;
         
         
-        NSString *driverTraveValueStr =[NSString getFormatStr:_applyCarModel.driverTraveldays] ;
-        _applyCarModel.driverTraveldays =driverTraveValueStr;
-        
-        
-        
-
-        NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.finishMil,_applyCarModel.addMil,_applyCarModel.driverTraveldays];
+        NSString *driverTraveValueStr = [NSString stringWithFormat:@"%ld",(long)_applyCarModel.driverTravelDays.integerValue] ;
+        _applyCarModel.driverTravelDays =driverTraveValueStr;
+  
+        NSArray *valueArray = @[_applyCarModel.appId,_applyCarModel.finishMil,_applyCarModel.addMil,_applyCarModel.driverTravelDays];
         
         [CLYCCoreBizHttpRequest driverCommitFinishMileWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
             if ([retcode isEqualToString:YB_HTTP_CODE_OK])
