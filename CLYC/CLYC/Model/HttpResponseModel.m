@@ -114,6 +114,7 @@
         self.price = @"";
         self.driverTraveldays = @"";
         self.systemTime = @"";
+        self.cost = @"";
     }
     
     return self;

@@ -1440,4 +1440,119 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
     }];
 }
 
+
++(void)costSearchListWithBlock:(void (^)(NSMutableArray *, NSString *, NSString *, NSError *, NSString *))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
+{
+    NSString *  path= YB_HTTP_SERVER;
+    
+    [BaseHttpRequest basePostRequestWithPath:path keyArray:keyArray valueArray:valueArray methodName:@"QueryCostService" withBlock:^(NSString *retCode, NSString *retMessage, id responseObject, NSError *error) {
+        
+        if ([retCode isEqualToString:YB_HTTP_CODE_OK])
+        {
+            
+            NSDictionary *returnDic = (NSDictionary *)responseObject;
+            
+            
+            NSArray *carListArray = [returnDic objectForKey:@"carAppList"];
+            
+            NSString *totalNum = [NSString stringWithoutNil:returnDic[@"totalNum"]];
+            
+            NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
+            
+            @autoreleasepool {
+                for (NSDictionary *dic in carListArray)
+                {
+                    
+                    ApplyCarDetailModel *model = [[ApplyCarDetailModel alloc]init];
+                    
+                    model.appId = [NSString stringWithoutNil:dic[@"appId"]];
+                    
+                    model.deptModel.deptId = [NSString stringWithoutNil:dic[@"carAppDeptId"]];
+                    model.deptModel.deptName = [NSString stringWithoutNil:dic[@"carAppDeptName"]];
+                    
+                    model.projectModel.projectId = [NSString stringWithoutNil:dic[@"projectId"]];
+                    model.projectModel.projectName = [NSString stringWithoutNil:dic[@"projectName"]];
+                    model.projectModel.projectNo = [NSString stringWithoutNil:dic[@"projectNo"]];
+                    
+                    model.selectedCarModel.carId = [NSString stringWithoutNil:dic[@"carId"]];
+                    model.selectedCarModel.carCode = [NSString stringWithoutNil:dic[@"carCode"]];
+                    
+                    model.beginAdrr = [NSString stringWithoutNil:dic[@"beginAdrr"]];
+                    model.endAdrr = [NSString stringWithoutNil:dic[@"endAdrr"]];
+                    
+                    model.beginTime = [NSString stringWithoutNil:dic[@"beginTime"]];
+                    
+                    model.endTime = [NSString stringWithoutNil:dic[@"endTime"]];
+                    
+                    model.carAppUserId = [NSString stringWithoutNil:dic[@"carAppUserId"]];
+                    model.carAppUserName = [NSString stringWithoutNil:dic[@"carAppUserName"]];
+                    model.carAppUserTel = [NSString stringWithoutNil:dic[@"carAppUserTel"]];
+                    
+                    
+                    model.driver = [NSString stringWithoutNil:dic[@"driverName"]];
+                    
+                    model.driverTel = [NSString stringWithoutNil:dic[@"driverTel"]];
+                    
+                    
+                    model.carUse = [NSString stringWithoutNil:dic[@"carUse"]];
+                    
+                    model.status = [NSString stringWithoutNil:dic[@"status"]];
+                    
+                    model.appTime = [NSString stringWithoutNil:dic[@"appTime"]];
+                    
+                    model.appUserId = [NSString stringWithoutNil:dic[@"appUserId"]];
+                    model.appUserName = [NSString stringWithoutNil:dic[@"appUserName"]];
+                    
+                    model.applyDeptModel.deptId = [NSString stringWithoutNil:dic[@"appDeptId"]];
+                    model.applyDeptModel.deptName = [NSString stringWithoutNil:dic[@"appDeptName"]];
+                    
+                    
+                    model.beginMil = [NSString stringWithoutNil:dic[@"beginMil"]];
+                    
+                    model.beginMilStatus = [NSString stringWithoutNil:dic[@"beginMilStatus"]];
+                    
+                    model.beginMilRemark = [NSString stringWithoutNil:dic[@"beginMilRemark"]];
+                    
+                    model.finishMil = [NSString stringWithoutNil:dic[@"finishMil"]];
+                    
+                    model.addMil = [NSString stringWithoutNil:dic[@"addMil"]];
+                    
+                    model.finishMilStatus = [NSString stringWithoutNil:dic[@"finishMilStatus"]];
+                    
+                    model.finishMilRemark = [NSString stringWithoutNil:dic[@"finishMilRemark"]];
+                    
+                    model.driverTraveldays =[NSString stringWithoutNil:dic[@"driverTraveldays"]];
+                    
+                    model.price =[NSString stringWithoutNil:dic[@"price"]];
+                    
+                    model.systemTime =[NSString stringWithoutNil:dic[@"systemTime"]];
+                    
+                    
+                    model.totalMil =[NSString stringWithoutNil:dic[@"totalMil"]];
+                    model.cost     =[NSString stringWithoutNil:dic[@"cost"]];
+                    
+                    [mutabArray addObject:model];
+        
+                }
+            }
+
+            if (block)
+            {
+                block([NSMutableArray arrayWithArray:mutabArray],retCode,retMessage,error,totalNum);
+            }
+   
+        }
+        else
+        {
+            if (block)
+            {
+                block([NSMutableArray array],retCode,retMessage,error,nil);
+            }
+        }
+        
+        
+        
+    }];
+}
+
 @end

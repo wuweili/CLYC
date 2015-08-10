@@ -76,6 +76,8 @@
         
         [self.contentView addSubview:self.timeLabel];
         
+        
+        
         self.carCodeTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, CGRectGetMaxY(self.timeLabel.frame), 40, 20)];
         self.carCodeTitleLabel.font = HEL_12;
         

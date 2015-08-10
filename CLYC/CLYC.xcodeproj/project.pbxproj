@@ -127,6 +127,7 @@
 		5A85DA241B65AD72002B36CE /* CarTrajectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A85DA231B65AD72002B36CE /* CarTrajectoryViewController.m */; };
 		5A85DA271B65B17E002B36CE /* CarTrajectoryMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A85DA261B65B17E002B36CE /* CarTrajectoryMapViewController.m */; };
 		5A8BF6F61B46C15700C9573B /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BF6F41B46C15700C9573B /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5A91CB1E1B7824D700BEC402 /* CostSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A91CB1D1B7824D700BEC402 /* CostSearchTableViewCell.m */; };
 		5AB02CB21B3FD1AC0003B65F /* HXRootViewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */; };
 		5AB02CC51B3FD2270003B65F /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB51B3FD2270003B65F /* NSData+SDDataCache.m */; };
 		5AB02CC61B3FD2270003B65F /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB81B3FD2270003B65F /* TAAbstractDotView.m */; };
@@ -477,6 +478,8 @@
 		5A8BF6F31B46C15700C9573B /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		5A8BF6F41B46C15700C9573B /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		5A8BF6F51B46C15700C9573B /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		5A91CB1C1B7824D700BEC402 /* CostSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostSearchTableViewCell.h; sourceTree = "<group>"; };
+		5A91CB1D1B7824D700BEC402 /* CostSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostSearchTableViewCell.m; sourceTree = "<group>"; };
 		5AB02CB01B3FD1AC0003B65F /* HXRootViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXRootViewViewController.h; sourceTree = "<group>"; };
 		5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HXRootViewViewController.mm; sourceTree = "<group>"; };
 		5AB02CB41B3FD2270003B65F /* NSData+SDDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SDDataCache.h"; sourceTree = "<group>"; };
@@ -942,6 +945,8 @@
 				026BD5221B764DA000D907E9 /* ComplainListTableViewCell.m */,
 				029AA7EC1B779A5000234FEE /* D_driverCheckTableViewCell.h */,
 				029AA7ED1B779A5000234FEE /* D_driverCheckTableViewCell.m */,
+				5A91CB1C1B7824D700BEC402 /* CostSearchTableViewCell.h */,
+				5A91CB1D1B7824D700BEC402 /* CostSearchTableViewCell.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2248,6 +2253,7 @@
 				028BE0A81B63F7090012068C /* D_ConfirmMile2TableViewCell.m in Sources */,
 				023A645D1B485C0C00CB096D /* HttpResponseModel.m in Sources */,
 				5AB02E7A1B3FD2720003B65F /* NSString+File.m in Sources */,
+				5A91CB1E1B7824D700BEC402 /* CostSearchTableViewCell.m in Sources */,
 				5AB02E821B3FD2720003B65F /* NSString+Password.m in Sources */,
 				5AB02E301B3FD2710003B65F /* DDTTYLogger.m in Sources */,
 				5AB02CCC1B3FD2270003B65F /* UIView+SDExtension.m in Sources */,
@@ -2364,7 +2370,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "13048e6e-cb43-4411-b9cc-6517c5c9081f";
+				PROVISIONING_PROFILE = "ca1fa320-9ba9-4337-a8c5-c5e3b7968d31";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2431,7 +2437,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "13048e6e-cb43-4411-b9cc-6517c5c9081f";
+				PROVISIONING_PROFILE = "ca1fa320-9ba9-4337-a8c5-c5e3b7968d31";
 			};
 			name = Debug;
 		};
@@ -2472,6 +2478,7 @@
 				INFOPLIST_FILE = CLYCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ca1fa320-9ba9-4337-a8c5-c5e3b7968d31";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CLYC.app/CLYC";
 			};
 			name = Debug;

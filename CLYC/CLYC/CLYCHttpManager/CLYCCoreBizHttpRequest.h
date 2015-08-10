@@ -162,4 +162,10 @@
 +(void)driverCheckListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
 
 
+/**
+ * 费用查询
+ */
++(void)costSearchListWithBlock:(void (^)(NSMutableArray *listArry,NSString *retcode,NSString *retmessage,NSError *error,NSString *totalNum))block keyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray ;
+
+
 @end

@@ -10,6 +10,7 @@
 #import "MJRefresh.h"
 #import "D_ApplyCarListTableViewCell.h"
 #import "D_ConfirmMile2ViewController.h"
+#import "CostSearchTableViewCell.h"
 
 @interface D_CostSearchViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
@@ -96,7 +97,7 @@
 
 -(void)initTableView
 {
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(_startSearchBackGroundView.frame),kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(_startSearchBackGroundView.frame),kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight-110) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -146,7 +147,7 @@
     
     [moreButton addTarget:self action:@selector(clickMoreSearchConditions) forControlEvents:UIControlEventTouchUpInside];
     
-    //    [searchTipView addSubview:moreButton];
+        [searchTipView addSubview:moreButton];
     
     
     //开始时间
@@ -283,13 +284,13 @@
     _carTypeLabel.textColor = [UIColor blackColor];
     _carTypeLabel.textAlignment = NSTextAlignmentRight;
     _carTypeLabel.backgroundColor = [UIColor clearColor];
-    _carTypeLabel.text = @"用车人：";
+    _carTypeLabel.text = @"车牌号：";
     _carTypeLabel.hidden = !expandMoreSearchCondition;
     [_headView addSubview:_carTypeLabel];
     
     
     _carTypeField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_carTypeLabel.frame), _carTypeLabel.frame.origin.y , kMainScreenWidth-CGRectGetMaxX(_carTypeLabel.frame)-10, 30)];
-    _carTypeField.placeholder=@"请输入用车人";
+    _carTypeField.placeholder=@"请输入车牌号";
     _carTypeField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _carTypeField.autocapitalizationType=UITextAutocapitalizationTypeNone;
     _carTypeField.font = HEL_15;
@@ -342,11 +343,9 @@
 -(void)obtainDefaultDataWithUpPull:(BOOL)upPull
 {
     
-    return;
-    //得到当前选中的时间
     [self initMBHudWithTitle:nil];
     
-    NSArray *keyArray = @[@"queryProjectNo",@"queryCarAppUserName",@"queryBeginTime",@"queryEndTime",@"queryDriverId",@"queryStatus",@"pageSize",@"pageNum"];
+    NSArray *keyArray = @[@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryCarAppUserId",@"queryDriverId",@"pageSize",@"pageNum"];
     
     
     NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
@@ -371,17 +370,25 @@
         queryProjectNo = @"";
     }
     
-    NSString *carUser = _carTypeField.text;
-    if ([NSString isBlankString:carUser])
+    NSString *carCode = _carTypeField.text;
+    if ([NSString isBlankString:carCode])
     {
-        carUser = @"";
+        carCode = @"";
     }
     
-    NSArray *valueArray = @[queryProjectNo,carUser,startTimeStr,endTimeStr,[HXUserModel shareInstance].userId,@"1",@"20",currentPage];
+    NSArray *valueArray;
+    
+    if (IS_DefaultUser)
+    {
+        valueArray = @[queryProjectNo,carCode,startTimeStr,endTimeStr,[HXUserModel shareInstance].userId,@"",@"20",currentPage];
+    }
+    else
+    {
+        valueArray = @[queryProjectNo,carCode,startTimeStr,endTimeStr,@"",[HXUserModel shareInstance].userId,@"20",currentPage];
+    }
     
     
-    [CLYCCoreBizHttpRequest driverObtainCarApplyListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
-        
+    [CLYCCoreBizHttpRequest costSearchListWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
         [self stopRefresh];
         
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
@@ -394,7 +401,7 @@
                 [_dataArray removeAllObjects];
             }
             
-            [_dataArray addObjectsFromArray:ListArry];
+            [_dataArray addObjectsFromArray:listArry];
             
             _currentDoctorPageIndex++;
             
@@ -404,41 +411,10 @@
         {
             [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
         }
-        
-        
+
     } keyArray:keyArray valueArray:valueArray];
     
-    
-    
-}
-
-
--(void)searchCarWithKeyArray:(NSArray *)keyArray valueArray:(NSArray *)valueArray
-{
-    
-    [self initMBHudWithTitle:nil];
-    
-    [CLYCCoreBizHttpRequest selectCarInfoListWithBlock:^(NSMutableArray *ListArry, NSString *retcode, NSString *retmessage, NSError *error,NSString *totalNum) {
-        
-        if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-        {
-            [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
-            
-            [_dataArray addObjectsFromArray:ListArry];
-            
-            [_tableView reloadData];
-            
-        }
-        else
-        {
-            [self stopMBHudAndNSTimerWithmsg:retmessage finsh:nil];
-        }
-        
-        
-        
-    } keyArray:keyArray valueArray:valueArray];
-    
-    
+  
 }
 
 
@@ -490,7 +466,7 @@
     NSDate *currDate=[_startTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _startTimeField.text=str;
     
@@ -510,7 +486,7 @@
     NSDate *currDate=[_startTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _startTimeField.text=str;
 }
@@ -529,7 +505,7 @@
     NSDate *currDate=[_endTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _endTimeField.text=str;
     
@@ -549,7 +525,7 @@
     NSDate *currDate=[_endTimeDatePicker date];
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:kDEFAULT_DATE_TIME_FORMAT];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *str=[dateFormatter stringFromDate:currDate ];
     _endTimeField.text=str;
 }
@@ -598,35 +574,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_dataArray count]>0)
-    {
-        ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
-        
-        CGFloat height = [D_ApplyCarListTableViewCell CellHeightWithApplyCarListModel:model];
-        
-        return height;
-    }
-    else
-        return 0;
+    return 150;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if ([_dataArray count]>0)
-    {
-        ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
-        
-        
-        D_ConfirmMile2ViewController *editMVC = [[D_ConfirmMile2ViewController alloc]initWithApplyCarDetailModel:model];
-        [self.navigationController pushViewController:editMVC animated:YES];
-        
-        
-        
-    }
-    
-    
-    
+   
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -638,11 +592,11 @@
 {
     NSString *identifier = @"ApplyCarHistoryCell";
     
-    D_ApplyCarListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    CostSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil)
     {
-        cell = [[D_ApplyCarListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[CostSearchTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
     cell.backgroundColor = [UIColor whiteColor];
@@ -650,7 +604,7 @@
     if ([_dataArray count]>0)
     {
         ApplyCarDetailModel *model = [_dataArray objectAtIndex:indexPath.row];
-        [cell setCellContentWithApplyCarListModel:model];
+        [cell setCellContentWithApplyCarModel:model];
         
         
     }

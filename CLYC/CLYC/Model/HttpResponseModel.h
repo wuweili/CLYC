@@ -281,6 +281,12 @@
 @property(nonatomic,strong)NSString *systemTime;
 
 
+/**
+ * 费用
+ */
+@property(nonatomic,strong)NSString *cost;
+
+
 
 @end
 
