@@ -33,16 +33,21 @@
 
 #define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-#define BaiDuMap_AK                          @"LivYgBlngmQdmqkUbzqgOZZs"
+#define BaiDuMap_AK      @"yGlTK49KqpHNIzGt13dVZHsj"
 
+#define kAppId           @"ziq9kaI5gw70gzZoIjJ7V9"
+#define kAppKey          @"XcjP9Bx2Mb9BjDOIsFsFO"
+#define kAppSecret       @"y5PinKJ70C7mkL0kfOKHC3"
 
 
 #elif defined(YB_HTTP_IDP_SERVER_LOACL_TEST) //内网测试
 
 #define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-#define BaiDuMap_AK                          @"LivYgBlngmQdmqkUbzqgOZZs"
-
+#define BaiDuMap_AK      @"yGlTK49KqpHNIzGt13dVZHsj"
+#define kAppId           @"ziq9kaI5gw70gzZoIjJ7V9"
+#define kAppKey          @"XcjP9Bx2Mb9BjDOIsFsFO"
+#define kAppSecret       @"y5PinKJ70C7mkL0kfOKHC3"
 
 
 #elif defined(YB_HTTP_IDP_SERVER_RELEASE_TEST) //外网测试
@@ -50,18 +55,24 @@
 
 #define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-#define BaiDuMap_AK                          @"LivYgBlngmQdmqkUbzqgOZZs"
+#define BaiDuMap_AK                          @"yGlTK49KqpHNIzGt13dVZHsj"
+
+#define kAppId           @"ziq9kaI5gw70gzZoIjJ7V9"
+#define kAppKey          @"XcjP9Bx2Mb9BjDOIsFsFO"
+#define kAppSecret       @"y5PinKJ70C7mkL0kfOKHC3"
+
 
 
 
 #else //内网开发
 
+#define YB_HTTP_SERVER     @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-#define YB_HTTP_SERVER                       @"http://210.73.152.201:7070/wsportal/doService?wsdl"
+#define BaiDuMap_AK      @"Nk8ss3LgqWOmNbDiv1K8wL0o"
 
-#define BaiDuMap_AK                          @"Kvyfr0qeGtHIn7cekBKVr8rR"
-
-
+#define kAppId           @"FueAs6RoeSAX1taNFUpQ6"
+#define kAppKey          @"WyJf8LD9J274kSyyv5rrv7"
+#define kAppSecret       @"WyJf8LD9J274kSyyv5rrv7"
 
 
 #endif

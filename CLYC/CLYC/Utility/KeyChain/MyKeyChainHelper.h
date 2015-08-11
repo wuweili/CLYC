@@ -22,5 +22,8 @@
 + (NSString*) getPasswordWithService:(NSString*)pwdService;
 
 
++ (void)saveRegistrationId:(NSString *)ridStr;
+
++ (NSString *)getRegistrationId;
 
 @end

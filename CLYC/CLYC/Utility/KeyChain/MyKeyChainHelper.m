@@ -29,6 +29,16 @@
     SecItemAdd((CFDictionaryRef)keychainQuery, NULL);
 }
 
++ (void)saveRegistrationId:(NSString *)ridStr
+{
+    NSString *service = [NSString stringWithFormat:@"Cid_registrationId"];
+    
+    NSMutableDictionary *keychainQuery = [self getKeyChainQuery:service];
+    SecItemDelete((CFDictionaryRef)keychainQuery);
+    [keychainQuery setObject:[NSKeyedArchiver archivedDataWithRootObject:ridStr] forKey:(id)kSecValueData];
+    SecItemAdd((CFDictionaryRef)keychainQuery, NULL);
+}
+
 
 +(void)clearUserPasswordWithpsaawordKeyChain:(NSString*)psaawordKeyChain
 {
@@ -94,6 +104,34 @@
         @catch (NSException *e)
         {
             NSLog(@"Unarchive of %@ failed: %@", pwdService, e);
+        }
+        @finally
+        {
+        }
+    }
+    if (keyData)
+        CFRelease(keyData);
+    return ret;
+}
+
++ (NSString *)getRegistrationId
+{
+    NSString* ret = nil;
+    NSString *service = [NSString stringWithFormat:@"Cid_registrationId"];
+    
+    NSMutableDictionary *keychainQuery = [self getKeyChainQuery:service];
+    [keychainQuery setObject:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
+    [keychainQuery setObject:(id)kSecMatchLimitOne forKey:(id)kSecMatchLimit];
+    CFDataRef keyData = NULL;
+    if (SecItemCopyMatching((CFDictionaryRef)keychainQuery, (CFTypeRef *)&keyData) == noErr)
+    {
+        @try
+        {
+            ret = [NSKeyedUnarchiver unarchiveObjectWithData:(NSData *)keyData];
+        }
+        @catch (NSException *e)
+        {
+            NSLog(@"Unarchive of %@ failed: %@", service, e);
         }
         @finally
         {
