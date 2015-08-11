@@ -20,9 +20,9 @@
  */
 
 /**
- * 开发调试 com.yibaomd.YiBaomdPatientDevTest   极光 appKey: 8b09dcd165a8f21b02d25bbe
+ * 开发调试 com.yibaomd.YiBaomdPatientDevTest   com.clyc.skclycDevTest
  *
- * 发布环境 com.yibaomd.YiBaomdPatient          极光 appKey: 1c6ce14f71a25ff58ad0cd10
+ * 发布环境 com.yibaomd.YiBaomdPatient          com.clyc.skclyc
  */
 
 

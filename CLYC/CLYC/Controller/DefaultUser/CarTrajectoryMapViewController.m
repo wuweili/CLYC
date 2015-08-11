@@ -53,13 +53,11 @@
     
     self.locationArrayM = [NSMutableArray arrayWithCapacity:0];
     
-    
     _mapView = [[BMKMapView alloc]initWithFrame:self.view.bounds];
     // 设置MapView的一些属性
     [self setMapViewProperty];
     
     [self.view addSubview:self.mapView];
-    
 
     [self obtainData];
    

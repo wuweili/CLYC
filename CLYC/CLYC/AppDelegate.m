@@ -29,6 +29,8 @@ BMKMapManager* _mapManager;
     
     [self.window makeKeyAndVisible];
     
+    [self registerAPNS];
+    
     // 要使用百度地图，请先启动BaiduMapManager
     _mapManager = [[BMKMapManager alloc]init];
     BOOL ret = [_mapManager start:BaiDuMap_AK generalDelegate:self];
@@ -36,10 +38,7 @@ BMKMapManager* _mapManager;
     if (!ret) {
         NSLog(@"manager start failed!");
     }
-    
-    
-    
-    
+
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     
@@ -53,10 +52,7 @@ BMKMapManager* _mapManager;
     {
         [self goToLoginViewToDirectLogin];
     }
-    
-    
-    
-    
+
     return YES;
 }
 
@@ -294,7 +290,28 @@ BMKMapManager* _mapManager;
     
 }
 
+//注册推送 //推送的形式：标记，声音，提示
+-(void)registerAPNS
+{
+    
+    UIRemoteNotificationType type = UIRemoteNotificationTypeAlert |
+    UIRemoteNotificationTypeBadge |
+    UIRemoteNotificationTypeSound;
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:type];
+    
+}
+//取消推送
+-(void)unregisterAPNS
+{
+    
+    [[UIApplication sharedApplication] unregisterForRemoteNotifications];
+    
+}
 
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+   
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     
@@ -321,6 +338,12 @@ BMKMapManager* _mapManager;
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+//禁止横屏
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end
