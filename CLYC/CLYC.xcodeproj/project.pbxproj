@@ -295,6 +295,14 @@
 		5AB2C6D81B437305005B42B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AB2C6D61B437305005B42B8 /* Main.storyboard */; };
 		5AB9BE8D1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */; };
 		5ABE5C231B61C3AD002AE980 /* EditApplyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE5C221B61C3AD002AE980 /* EditApplyCarViewController.m */; };
+		5ACE40401B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACE40381B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft.png */; };
+		5ACE40411B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACE40391B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft@2x.png */; };
+		5ACE40421B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACE403A1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft.png */; };
+		5ACE40431B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACE403B1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft@2x.png */; };
+		5ACE40441B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACE403C1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight.png */; };
+		5ACE40451B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACE403D1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight@2x.png */; };
+		5ACE40461B7AD0F30040B1B5 /* UIBarButtonItemArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACE403E1B7AD0F30040B1B5 /* UIBarButtonItemArrowRight.png */; };
+		5ACE40471B7AD0F30040B1B5 /* UIBarButtonItemArrowRight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ACE403F1B7AD0F30040B1B5 /* UIBarButtonItemArrowRight@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -788,7 +796,6 @@
 		5AB02EAD1B3FD3430003B65F /* HXRootTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXRootTableViewCell.m; sourceTree = "<group>"; };
 		5AB02EB11B3FD3D70003B65F /* HXBJHXBaseViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HXBJHXBaseViewController.mm; sourceTree = "<group>"; };
 		5AB02EB21B3FD3D70003B65F /* HXBJHXBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBJHXBaseViewController.h; sourceTree = "<group>"; };
-		5AB02EB51B3FD4450003B65F /* GlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
 		5AB02EB61B3FD4450003B65F /* HXImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXImage.h; sourceTree = "<group>"; };
 		5AB02EB71B3FD4450003B65F /* HXOther.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOther.h; sourceTree = "<group>"; };
 		5AB02EB81B3FD4450003B65F /* HXStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXStrings.h; sourceTree = "<group>"; };
@@ -809,6 +816,14 @@
 		5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyCarHistoryTableViewCell.m; sourceTree = "<group>"; };
 		5ABE5C211B61C3AD002AE980 /* EditApplyCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditApplyCarViewController.h; sourceTree = "<group>"; };
 		5ABE5C221B61C3AD002AE980 /* EditApplyCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditApplyCarViewController.m; sourceTree = "<group>"; };
+		5ACE40381B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemArrowLeft.png; sourceTree = "<group>"; };
+		5ACE40391B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemArrowLeft@2x.png"; sourceTree = "<group>"; };
+		5ACE403A1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemArrowOutlineLeft.png; sourceTree = "<group>"; };
+		5ACE403B1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemArrowOutlineLeft@2x.png"; sourceTree = "<group>"; };
+		5ACE403C1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemArrowOutlineRight.png; sourceTree = "<group>"; };
+		5ACE403D1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemArrowOutlineRight@2x.png"; sourceTree = "<group>"; };
+		5ACE403E1B7AD0F30040B1B5 /* UIBarButtonItemArrowRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIBarButtonItemArrowRight.png; sourceTree = "<group>"; };
+		5ACE403F1B7AD0F30040B1B5 /* UIBarButtonItemArrowRight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIBarButtonItemArrowRight@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1852,7 +1867,6 @@
 		5AB02EB41B3FD4450003B65F /* GlobalHeader */ = {
 			isa = PBXGroup;
 			children = (
-				5AB02EB51B3FD4450003B65F /* GlobalConfig.h */,
 				5AB02EB61B3FD4450003B65F /* HXImage.h */,
 				5AB02EB71B3FD4450003B65F /* HXOther.h */,
 				5AB02EB81B3FD4450003B65F /* HXStrings.h */,
@@ -1863,6 +1877,14 @@
 		5AB02ECD1B3FDDE60003B65F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				5ACE40381B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft.png */,
+				5ACE40391B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft@2x.png */,
+				5ACE403A1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft.png */,
+				5ACE403B1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft@2x.png */,
+				5ACE403C1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight.png */,
+				5ACE403D1B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight@2x.png */,
+				5ACE403E1B7AD0F30040B1B5 /* UIBarButtonItemArrowRight.png */,
+				5ACE403F1B7AD0F30040B1B5 /* UIBarButtonItemArrowRight@2x.png */,
 				02BF94721B653B4300D1B95F /* D_history_list@2x.png */,
 				5A7F70361B64BFE40009F823 /* mapapi.bundle */,
 				023A64541B48275D00CB096D /* HXPatientDefaultHeadImage@2x.png */,
@@ -2043,12 +2065,14 @@
 				023A63FF1B47BEA100CB096D /* First_home_personal_info@2x.png in Resources */,
 				5AB02ED51B3FDEF50003B65F /* hx_icon_number@2x.png in Resources */,
 				023A644A1B47C7A700CB096D /* car_temp.png in Resources */,
+				5ACE40401B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft.png in Resources */,
 				023A641F1B47BEBC00CB096D /* pre_day.png in Resources */,
 				023A640E1B47BEAF00CB096D /* menu_travel_way.png in Resources */,
 				5AB02EDF1B3FE7AE0003B65F /* hx_icon_register@2x.png in Resources */,
 				028FA1D01B470E29007A2C8C /* FirstPageLeftMenu_bg@3x.png in Resources */,
 				023A640C1B47BEAF00CB096D /* menu_logo_default1.png in Resources */,
 				023A644B1B47C7A700CB096D /* endtime.png in Resources */,
+				5ACE40411B7AD0F30040B1B5 /* UIBarButtonItemArrowLeft@2x.png in Resources */,
 				028FA1D11B470E29007A2C8C /* left_bar_image@@3x.png in Resources */,
 				5AB02EDC1B3FE7AE0003B65F /* mj_arrow@2x.png in Resources */,
 				023A64111B47BEAF00CB096D /* menu.png in Resources */,
@@ -2062,7 +2086,9 @@
 				5AB2C6D81B437305005B42B8 /* Main.storyboard in Resources */,
 				5AB02EDD1B3FE7AE0003B65F /* hxLogin_selected@2x.png in Resources */,
 				023A64301B47C79B00CB096D /* add_img5.jpg in Resources */,
+				5ACE40451B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight@2x.png in Resources */,
 				023A64231B47BEBC00CB096D /* spinner_bg.9.png in Resources */,
+				5ACE40431B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft@2x.png in Resources */,
 				023A640F1B47BEAF00CB096D /* menu_update.png in Resources */,
 				023A641C1B47BEBC00CB096D /* more_select.png in Resources */,
 				02BF94731B653B4300D1B95F /* D_history_list@2x.png in Resources */,
@@ -2080,8 +2106,11 @@
 				5AB02E6F1B3FD2720003B65F /* PB.bundle in Resources */,
 				023A641E1B47BEBC00CB096D /* next_day.png in Resources */,
 				023A63FA1B47BEA100CB096D /* first_home_book_car@2x.png in Resources */,
+				5ACE40421B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineLeft.png in Resources */,
 				023A642C1B47C79B00CB096D /* add_img1.png in Resources */,
 				023A64431B47C7A700CB096D /* btn_submit_normal.9.png in Resources */,
+				5ACE40471B7AD0F30040B1B5 /* UIBarButtonItemArrowRight@2x.png in Resources */,
+				5ACE40461B7AD0F30040B1B5 /* UIBarButtonItemArrowRight.png in Resources */,
 				5A7F70371B64BFE40009F823 /* mapapi.bundle in Resources */,
 				5AB02E3E1B3FD2720003B65F /* hud_right.png in Resources */,
 				023A64201B47BEBC00CB096D /* push.png in Resources */,
@@ -2092,6 +2121,7 @@
 				5AB02ED11B3FDDE60003B65F /* logo@2x.png in Resources */,
 				5AB02ED71B3FE2540003B65F /* HX_login_first@2x.png in Resources */,
 				023A642F1B47C79B00CB096D /* add_img4.jpg in Resources */,
+				5ACE40441B7AD0F30040B1B5 /* UIBarButtonItemArrowOutlineRight.png in Resources */,
 				023A63F91B47BEA100CB096D /* First_history_list@2x.png in Resources */,
 				023A640A1B47BEAF00CB096D /* menu_home.png in Resources */,
 				023A643F1B47C7A700CB096D /* btn_cancel_normal.9.png in Resources */,
@@ -2454,7 +2484,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "11fe5072-2745-4119-bc90-fd5a0ed9daa2";
+				PROVISIONING_PROFILE = "436b9b1f-ae5a-4a2b-a82e-698a96d58c09";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2520,7 +2550,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11fe5072-2745-4119-bc90-fd5a0ed9daa2";
+				PROVISIONING_PROFILE = "436b9b1f-ae5a-4a2b-a82e-698a96d58c09";
 			};
 			name = Release;
 		};
@@ -2571,7 +2601,7 @@
 				INFOPLIST_FILE = CLYCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11fe5072-2745-4119-bc90-fd5a0ed9daa2";
+				PROVISIONING_PROFILE = "436b9b1f-ae5a-4a2b-a82e-698a96d58c09";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CLYC.app/CLYC";
 			};
 			name = Release;

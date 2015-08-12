@@ -15,7 +15,6 @@
 #import <UIKit/UIKit.h>
 #import "HXStrings.h"
 #import "HXImage.h"
-#import "GlobalConfig.h"
 #import "Log.h"
 #import "HXOther.h"
 #import "IMUnitsMethods.h"

@@ -10,15 +10,14 @@
 
 @interface CarTrajectoryMapViewController ()
 {
-     ApplyCarDetailModel *_applyCarModel;
+    ApplyCarDetailModel *_applyCarModel;
     
-     NSMutableArray *_dataArray;
+    NSMutableArray *_dataArray;
+    
+    UIToolbar *_toolbar;
+    
+    UIBarButtonItem *_previousButton, *_nextButton;
 }
-
-/** 百度定位地图服务 */
-@property (nonatomic, strong) BMKLocationService *bmkLocationService;
-
-
 
 /** 位置数组 */
 @property (nonatomic, strong) NSMutableArray *locationArrayM;
@@ -53,14 +52,79 @@
     
     self.locationArrayM = [NSMutableArray arrayWithCapacity:0];
     
+    
+    
+    
+    
+    
+    
     _mapView = [[BMKMapView alloc]initWithFrame:self.view.bounds];
     // 设置MapView的一些属性
     [self setMapViewProperty];
     
     [self.view addSubview:self.mapView];
+    
+    
+    
 
     [self obtainData];
    
+}
+
+- (CGRect)frameForToolbarAtOrientation:(UIInterfaceOrientation)orientation
+{
+    CGFloat height = 49;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone &&
+        UIInterfaceOrientationIsLandscape(orientation)) height = 32;
+    
+    return CGRectIntegral(CGRectMake(0, self.view.bounds.size.height - height, kMainScreenWidth, height));
+}
+
+-(void)initToorbar
+{
+    _toolbar = [[UIToolbar alloc] initWithFrame:[self frameForToolbarAtOrientation:self.interfaceOrientation]];
+    
+    _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    
+    _toolbar.barStyle = UIBarStyleBlackTranslucent;
+
+    _toolbar.backgroundColor = UIColorFromRGB(0XF5F5F5);
+    
+    UIImage *leftImage;
+    UIImage *rightImage;
+    
+    if (CurrentSystemVersion>=7.0)
+    {
+        
+        leftImage = HX_SEE_CASE_PIC_LEFT_7_IMAG;
+        rightImage = HX_SEE_CASE_PIC_RIGHT_7_IMAG;
+        
+        
+    }
+    else
+    {
+        leftImage = HX_SEE_CASE_PIC_LEFT_6_IMAG;
+        rightImage = HX_SEE_CASE_PIC_RIGHT_6_IMAG;
+        
+    }
+
+    _previousButton = [[UIBarButtonItem alloc] initWithImage:leftImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoPreviousPage)];
+    _nextButton = [[UIBarButtonItem alloc] initWithImage:rightImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoNextPage)];
+    
+    
+    
+    
+    
+    
+}
+
+- (void)gotoPreviousPage
+{
+    
+}
+- (void)gotoNextPage
+{
+    
 }
 
 /**
@@ -82,7 +146,7 @@
     
     
     self.mapView.zoomEnabled = YES;
-    self.mapView.mapScaleBarPosition = CGPointMake(self.view.frame.size.width - 50, self.view.frame.size.height - 100);
+    self.mapView.mapScaleBarPosition = CGPointMake( 20, self.view.frame.size.height - 100);
     
     // 定位图层自定义样式参数
     BMKLocationViewDisplayParam *displayParam = [[BMKLocationViewDisplayParam alloc]init];
@@ -124,15 +188,12 @@
             {
                 [_dataArray addObjectsFromArray:listArry];
                 
-                
                 [self dealDataArray];
-                
             }
             else
             {
                 
             }
-            
             
         } keyArray:keyArray valueArray:valueArray];
         
@@ -147,7 +208,10 @@
         TrajectoryListModel *model0 = [_dataArray firstObject];
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[model0.latitude doubleValue] longitude:[model0.longitude doubleValue]];
         // 设置当前地图的显示范围，直接显示到用户位置
-        BMKCoordinateRegion adjustRegion = [self.mapView regionThatFits:BMKCoordinateRegionMake(location.coordinate, BMKCoordinateSpanMake(0.02f,0.02f))];
+        BMKCoordinateRegion adjustRegion = [self.mapView regionThatFits:BMKCoordinateRegionMake(location.coordinate, BMKCoordinateSpanMake(0.2f,0.2f))];
+        
+        //BMKCoordinateSpanMake(0.2f,0.2f)  调整比例尺
+        
         
         [self.mapView setRegion:adjustRegion animated:YES];
         

@@ -520,7 +520,13 @@ BMKMapManager* _mapManager;
     }
     
     
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:payloadMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+    [alert show];
+    
     DDLogInfo(@"task id : %@, messageId:%@ payloadMsg = %@", taskId, aMsgId,payloadMsg);
+    
+    
+    
    
 }
 
