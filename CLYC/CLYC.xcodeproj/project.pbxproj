@@ -788,7 +788,6 @@
 		5AB02EAD1B3FD3430003B65F /* HXRootTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXRootTableViewCell.m; sourceTree = "<group>"; };
 		5AB02EB11B3FD3D70003B65F /* HXBJHXBaseViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HXBJHXBaseViewController.mm; sourceTree = "<group>"; };
 		5AB02EB21B3FD3D70003B65F /* HXBJHXBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXBJHXBaseViewController.h; sourceTree = "<group>"; };
-		5AB02EB51B3FD4450003B65F /* GlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
 		5AB02EB61B3FD4450003B65F /* HXImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXImage.h; sourceTree = "<group>"; };
 		5AB02EB71B3FD4450003B65F /* HXOther.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXOther.h; sourceTree = "<group>"; };
 		5AB02EB81B3FD4450003B65F /* HXStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXStrings.h; sourceTree = "<group>"; };
@@ -1852,7 +1851,6 @@
 		5AB02EB41B3FD4450003B65F /* GlobalHeader */ = {
 			isa = PBXGroup;
 			children = (
-				5AB02EB51B3FD4450003B65F /* GlobalConfig.h */,
 				5AB02EB61B3FD4450003B65F /* HXImage.h */,
 				5AB02EB71B3FD4450003B65F /* HXOther.h */,
 				5AB02EB81B3FD4450003B65F /* HXStrings.h */,
@@ -2454,7 +2452,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "11fe5072-2745-4119-bc90-fd5a0ed9daa2";
+				PROVISIONING_PROFILE = "436b9b1f-ae5a-4a2b-a82e-698a96d58c09";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2520,7 +2518,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11fe5072-2745-4119-bc90-fd5a0ed9daa2";
+				PROVISIONING_PROFILE = "436b9b1f-ae5a-4a2b-a82e-698a96d58c09";
 			};
 			name = Release;
 		};
@@ -2571,7 +2569,7 @@
 				INFOPLIST_FILE = CLYCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "11fe5072-2745-4119-bc90-fd5a0ed9daa2";
+				PROVISIONING_PROFILE = "436b9b1f-ae5a-4a2b-a82e-698a96d58c09";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CLYC.app/CLYC";
 			};
 			name = Release;

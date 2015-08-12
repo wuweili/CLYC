@@ -433,10 +433,19 @@
     [self initMBHudWithTitle:nil];
     
     NSString *pwdMd5 = [NSString getMD5_16_Str:password];
+
+    
+    NSString *cId =[MyKeyChainHelper getRegistrationId];
+    
+    if ([NSString isBlankString:cId])
+    {
+        cId = @"";
+    }
+    
     
     NSArray *keyArray = @[@"loginId",@"password",@"moblieType",@"cId"];
     
-    NSArray *valueArray = @[userName,pwdMd5,@"2",@"23456789"];
+    NSArray *valueArray = @[userName,pwdMd5,@"2",cId];
     
     
     [CLYCCoreBizHttpRequest loginYBUserWithBlock:^(NSString *retcode, NSString *retmessage, NSError *error) {
