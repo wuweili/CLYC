@@ -10,9 +10,13 @@
 
 @interface CarTrajectoryMapViewController ()
 {
-     ApplyCarDetailModel *_applyCarModel;
+    ApplyCarDetailModel *_applyCarModel;
     
-     NSMutableArray *_dataArray;
+    NSMutableArray *_dataArray;
+    
+    UIToolbar *_toolbar;
+    
+    UIBarButtonItem *_previousButton, *_nextButton;
 }
 
 /** 位置数组 */
@@ -65,6 +69,62 @@
 
     [self obtainData];
    
+}
+
+- (CGRect)frameForToolbarAtOrientation:(UIInterfaceOrientation)orientation
+{
+    CGFloat height = 49;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone &&
+        UIInterfaceOrientationIsLandscape(orientation)) height = 32;
+    
+    return CGRectIntegral(CGRectMake(0, self.view.bounds.size.height - height, kMainScreenWidth, height));
+}
+
+-(void)initToorbar
+{
+    _toolbar = [[UIToolbar alloc] initWithFrame:[self frameForToolbarAtOrientation:self.interfaceOrientation]];
+    
+    _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+    
+    _toolbar.barStyle = UIBarStyleBlackTranslucent;
+
+    _toolbar.backgroundColor = UIColorFromRGB(0XF5F5F5);
+    
+    UIImage *leftImage;
+    UIImage *rightImage;
+    
+    if (CurrentSystemVersion>=7.0)
+    {
+        
+        leftImage = HX_SEE_CASE_PIC_LEFT_7_IMAG;
+        rightImage = HX_SEE_CASE_PIC_RIGHT_7_IMAG;
+        
+        
+    }
+    else
+    {
+        leftImage = HX_SEE_CASE_PIC_LEFT_6_IMAG;
+        rightImage = HX_SEE_CASE_PIC_RIGHT_6_IMAG;
+        
+    }
+
+    _previousButton = [[UIBarButtonItem alloc] initWithImage:leftImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoPreviousPage)];
+    _nextButton = [[UIBarButtonItem alloc] initWithImage:rightImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoNextPage)];
+    
+    
+    
+    
+    
+    
+}
+
+- (void)gotoPreviousPage
+{
+    
+}
+- (void)gotoNextPage
+{
+    
 }
 
 /**

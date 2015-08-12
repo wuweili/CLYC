@@ -110,7 +110,13 @@
 
 
 
+#define HX_SEE_CASE_PIC_LEFT_7_IMAG IMAGE(@"UIBarButtonItemArrowOutlineLeft.png")
 
+#define HX_SEE_CASE_PIC_RIGHT_7_IMAG IMAGE(@"UIBarButtonItemArrowOutlineRight.png")
+
+#define HX_SEE_CASE_PIC_LEFT_6_IMAG IMAGE(@"UIBarButtonItemArrowLeft.png")
+
+#define HX_SEE_CASE_PIC_RIGHT_6_IMAG IMAGE(@"UIBarButtonItemArrowRight.png")
 
 
 
