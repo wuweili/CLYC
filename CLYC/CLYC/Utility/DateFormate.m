@@ -609,5 +609,32 @@ static NSString *MONTHFULLSPELL[] = {@"January", @"February", @"March", @"April"
     return time;
 }
 
++(NSString *)getOtherDaysWithDays:(NSInteger)days beginTime:(NSString *)beginTime
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *comps;
+    comps = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit) fromDate:[[NSDate alloc] init]];
+    
+    [comps setHour:+(24*days)]; //+24表示获取下一天的date，-24表示获取前一天的date；
+    [comps setMinute:0];
+    [comps setSecond:0];
+    
+    NSDate *nowDate = [DateFormate getNSDateFromTimeStr:beginTime];
+    
+    NSDate *threeDaysAfterDate = [calendar dateByAddingComponents:comps toDate:nowDate options:0];   //showDate表示某天的date，nowDate表示showDate的前一天或下一天的date
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/beijing"]];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *otherDaysAfterDateStr =[formatter stringFromDate:threeDaysAfterDate];
+    
+    return otherDaysAfterDateStr;
+}
+
 
 @end

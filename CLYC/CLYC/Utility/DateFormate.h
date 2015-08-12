@@ -86,4 +86,6 @@
 
 + (NSString *) NSStringLocationDateToString:(NSDate *)date;
 
++(NSString *)getOtherDaysWithDays:(NSInteger)days beginTime:(NSString *)beginTime;
+
 @end

@@ -7,20 +7,27 @@
 //
 
 #import "CarTrajectoryMapViewController.h"
+#import "DateFormate.h"
 
 @interface CarTrajectoryMapViewController ()
 {
     ApplyCarDetailModel *_applyCarModel;
     
-    NSMutableArray *_dataArray;
+    NSMutableDictionary *_dataArrayDic;
     
     UIToolbar *_toolbar;
     
-    UIBarButtonItem *_previousButton, *_nextButton;
+    UIBarButtonItem *_previousButton, *_nextButton ,*_middleTitleButton;
+    
+    NSMutableArray *_searchTimeArray;
+    
+    NSInteger _currentTimeIndex;
+    
+    NSString *_currentQueryTime;
+    
+    
+    
 }
-
-/** 位置数组 */
-@property (nonatomic, strong) NSMutableArray *locationArrayM;
 
 
 @property (nonatomic, strong) BMKPolyline *polyLine;
@@ -48,13 +55,15 @@
     
     self.title = @"车辆轨迹";
     
-    _dataArray = [NSMutableArray arrayWithCapacity:0];
+    _currentTimeIndex = 0;
     
-    self.locationArrayM = [NSMutableArray arrayWithCapacity:0];
+    _currentQueryTime = [self getyyyyMMddWithTimeStr:_applyCarModel.beginTime];
     
+    _dataArrayDic = [NSMutableDictionary dictionaryWithCapacity:0];
     
+    _searchTimeArray = [NSMutableArray arrayWithCapacity:0];
     
-    
+//    self.locationArrayM = [NSMutableArray arrayWithCapacity:0];
     
     
     
@@ -64,12 +73,45 @@
     
     [self.view addSubview:self.mapView];
     
-    
-    
+    [self initToorbar];
 
-    [self obtainData];
-   
+    [self getTimeSep];
+    
+    [self obtainDataWithIndex:_currentTimeIndex];
 }
+
+-(void)getTimeSep
+{
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSInteger numberOfDays = [DateFormate getResidualDaysWithEndTimeStr:_applyCarModel.endTime systemNowTimeStr:_applyCarModel.beginTime];
+        
+        NSString *beginTime = [self getyyyyMMddWithTimeStr:_applyCarModel.beginTime];
+        
+        [_searchTimeArray addObject:beginTime];
+        
+        if (numberOfDays+1 > 0)
+        {
+            for (int i = 1 ; i< numberOfDays+1;i++ )
+            {
+                NSString *timeStr = [DateFormate getOtherDaysWithDays:i beginTime:beginTime];
+                [_searchTimeArray addObject:timeStr];
+            }
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //刷新UI
+            if ([_searchTimeArray count]>1)
+            {
+                [self showToorBar];
+            }
+        });
+    });
+    
+    
+}
+
+
 
 - (CGRect)frameForToolbarAtOrientation:(UIInterfaceOrientation)orientation
 {
@@ -86,9 +128,11 @@
     
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     
-    _toolbar.barStyle = UIBarStyleBlackTranslucent;
+    _toolbar.barStyle = UIBarStyleDefault;
 
-    _toolbar.backgroundColor = UIColorFromRGB(0XF5F5F5);
+    _toolbar.backgroundColor = [UIColor blackColor];
+    
+    _toolbar.tintColor = [UIColor whiteColor];
     
     UIImage *leftImage;
     UIImage *rightImage;
@@ -99,7 +143,6 @@
         leftImage = HX_SEE_CASE_PIC_LEFT_7_IMAG;
         rightImage = HX_SEE_CASE_PIC_RIGHT_7_IMAG;
         
-        
     }
     else
     {
@@ -108,23 +151,107 @@
         
     }
 
+    leftImage = HX_SEE_CASE_PIC_LEFT_6_IMAG;
+    rightImage = HX_SEE_CASE_PIC_RIGHT_6_IMAG;
+    
     _previousButton = [[UIBarButtonItem alloc] initWithImage:leftImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoPreviousPage)];
+    _previousButton.enabled = NO;
     _nextButton = [[UIBarButtonItem alloc] initWithImage:rightImage style:UIBarButtonItemStylePlain target:self action:@selector(gotoNextPage)];
     
+    _middleTitleButton = [[UIBarButtonItem alloc]initWithTitle:_currentQueryTime style:UIBarButtonItemStylePlain target:nil action:nil];
+    _middleTitleButton.tintColor = [UIColor redColor];
+
+    // Toolbar items
+    UIBarButtonItem *fixedLeftSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
+    fixedLeftSpace.width = 32; // To balance action button
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    
+    [items addObject:_previousButton];
+    
+    [items addObject:flexSpace];
+    
+    [items addObject:_middleTitleButton];
+    
+    [items addObject:flexSpace];
+    
+    [items addObject:_nextButton];
     
     
+    [_toolbar setItems:items];
     
+    _toolbar.alpha = 0.5;
     
+    _toolbar.hidden = YES;
+    
+    [self.view addSubview:_toolbar];
+}
+
+
+-(void)showToorBar
+{
+    [UIView animateWithDuration:0.35 animations:^{
+        
+        _toolbar.hidden = NO;
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+-(void)hideToorBar
+{
     
 }
 
 - (void)gotoPreviousPage
 {
-    
+    if (_currentTimeIndex ==0)
+    {
+        
+    }
+    else
+    {
+        _currentTimeIndex --;
+        
+        [self updateNavigation];
+        
+        [self obtainDataWithIndex:_currentTimeIndex];
+    }
 }
 - (void)gotoNextPage
 {
+    if (_currentTimeIndex >= [_searchTimeArray count])
+    {
+        
+    }
+    else
+    {
+        _currentTimeIndex ++;
+        
+        [self updateNavigation];
+        
+        [self obtainDataWithIndex:_currentTimeIndex];
+    }
+}
+
+- (void)updateNavigation
+{
+    if ([_searchTimeArray count]>1)
+    {
+        self.title = [NSString stringWithFormat:@"%li / %lu",(long)_currentTimeIndex+1,(unsigned long)[_searchTimeArray count] ];
+        
+        _middleTitleButton.title = [_searchTimeArray objectAtIndex:_currentTimeIndex];
+    }
+    else
+    {
+        self.title = [_searchTimeArray firstObject];
+    }
     
+    
+    
+    _previousButton.enabled = (_currentTimeIndex > 0);
+    _nextButton.enabled = (_currentTimeIndex < [_searchTimeArray count]-1);
 }
 
 /**
@@ -166,67 +293,80 @@
     NSDate *timeStrDate = [formatter dateFromString:timeStr];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *resultString = [formatter stringFromDate:timeStrDate];
+    
+    if (resultString == nil)
+    {
+        resultString = @"";
+    }
+    
     return resultString;
     
 }
 
--(void)obtainData
+-(void)obtainDataWithIndex:(NSInteger )index
 {
     if (![NSString isBlankString:_applyCarModel.appId])
     {
+        if ([_searchTimeArray count]>0 && index<[_searchTimeArray count])
+        {
+            _currentQueryTime = [_searchTimeArray objectAtIndex:index];
+        }
         
-        NSArray *keyArray = @[@"applyId",@"queryTime"];
+        NSArray *queryTimeValue = [_dataArrayDic objectForKey:_currentQueryTime];
         
-        NSString *beginTime = [self getyyyyMMddWithTimeStr:_applyCarModel.beginTime];
-        
-        
-        NSArray *valueArray = @[_applyCarModel.appId,beginTime];
-        
-        [CLYCCoreBizHttpRequest carTrajectoryWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error) {
+        if (queryTimeValue && [queryTimeValue count]>0)
+        {
+            [self drawWalkPolylineWithCLLocationArray:queryTimeValue];
+        }
+        else
+        {
+            NSArray *keyArray = @[@"applyId",@"queryTime"];
             
-            if ([retcode isEqualToString:YB_HTTP_CODE_OK])
-            {
-                [_dataArray addObjectsFromArray:listArry];
-                
-                [self dealDataArray];
-            }
-            else
-            {
-                
-            }
+            NSArray *valueArray = @[_applyCarModel.appId,_currentQueryTime];
             
-        } keyArray:keyArray valueArray:valueArray];
-        
-        
+            [CLYCCoreBizHttpRequest carTrajectoryWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error) {
+                if ([retcode isEqualToString:YB_HTTP_CODE_OK])
+                {
+                    [self dealDataArrayWithArray:listArry];
+                }
+                else
+                {
+                    
+                }
+            } keyArray:keyArray valueArray:valueArray];
+        }
     }
 }
 
--(void)dealDataArray
+-(void)dealDataArrayWithArray:(NSArray *)array
 {
-    if ([_dataArray count]>0)
+    if ([array count]>0)
     {
-        TrajectoryListModel *model0 = [_dataArray firstObject];
+        TrajectoryListModel *model0 = [array firstObject];
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[model0.latitude doubleValue] longitude:[model0.longitude doubleValue]];
         // 设置当前地图的显示范围，直接显示到用户位置
         BMKCoordinateRegion adjustRegion = [self.mapView regionThatFits:BMKCoordinateRegionMake(location.coordinate, BMKCoordinateSpanMake(0.2f,0.2f))];
         
         //BMKCoordinateSpanMake(0.2f,0.2f)  调整比例尺
         
-        
         [self.mapView setRegion:adjustRegion animated:YES];
         
-        [self.locationArrayM addObject:location];
+        NSMutableArray *mutabArray = [NSMutableArray arrayWithCapacity:0];
         
-        for (int i = 1; i<[_dataArray count]; i++)
+        
+        [mutabArray addObject:location];
+        
+        for (int i = 1; i<[array count]; i++)
         {
-            TrajectoryListModel *modeli = [_dataArray objectAtIndex:i];
+            TrajectoryListModel *modeli = [array objectAtIndex:i];
             
             CLLocation *locationi = [[CLLocation alloc] initWithLatitude:[modeli.latitude doubleValue] longitude:[modeli.longitude doubleValue]];
-            [self.locationArrayM addObject:locationi];
-            
+            [mutabArray addObject:locationi];
         }
         
-        [self drawWalkPolyline];
+        [_dataArrayDic setObject:mutabArray forKey:_currentQueryTime];
+        
+        [self drawWalkPolylineWithCLLocationArray:mutabArray];
        
     }
 }
@@ -235,17 +375,15 @@
 /**
  *  绘制轨迹路线
  */
-- (void)drawWalkPolyline
+- (void)drawWalkPolylineWithCLLocationArray:(NSArray *)array
 {
-    
-    
-    NSInteger pointCount = [self.locationArrayM count];
+    NSInteger pointCount = [array count];
     
     CLLocationCoordinate2D *coordinateArray = (CLLocationCoordinate2D *)malloc(pointCount * sizeof(CLLocationCoordinate2D));
     
     for (int i = 0; i < pointCount; ++i)
     {
-        CLLocation *location = [self.locationArrayM objectAtIndex:i];
+        CLLocation *location = [array objectAtIndex:i];
         coordinateArray[i] = [location coordinate];
     }
     
