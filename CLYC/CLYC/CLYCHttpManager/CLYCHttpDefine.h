@@ -49,7 +49,7 @@ typedef enum ProjectMode
  *******************************/
 
 #ifndef PROJECT_MODE
-#define  PROJECT_MODE    0x1000   //设置此处,平时调试、发布版本时设置此处
+#define  PROJECT_MODE    0x100   //设置此处,平时调试、发布版本时设置此处
 #elif
 #warning "PROJECT_MODE already defined in other files."
 #endif
@@ -113,7 +113,7 @@ typedef enum ProjectMode
 
 #define YB_HTTP_SERVER   @"http://210.73.152.201:7070/wsportal/doService?wsdl"
 
-#define BaiDuMap_AK      @"yGlTK49KqpHNIzGt13dVZHsj"
+#define BaiDuMap_AK       @"3UiCTeyHILdNhioR1WeNXSaU" //  @"yGlTK49KqpHNIzGt13dVZHsj"
 
 #define kAppId           @"ziq9kaI5gw70gzZoIjJ7V9"
 #define kAppKey          @"XcjP9Bx2Mb9BjDOIsFsFO"

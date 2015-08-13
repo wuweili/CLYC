@@ -82,7 +82,7 @@
 
 -(void)initSwitchView
 {
-    NSArray* titles=[[NSArray alloc]initWithObjects:@"未出行", @"已出行", @"已取消", nil];
+    NSArray* titles=[[NSArray alloc]initWithObjects: @"已出行",@"未出行", @"已取消", nil];
     
     _segmentedSwitchView = [[UISegmentedControl alloc]initWithItems:titles];
     
@@ -398,11 +398,11 @@
     
     if (index == 0)
     {
-        [self searchHadNotAlreadyGoOutDataWithUpPull:NO];
+        [self searchHadAlreadyGoOutDataWithUpPull:NO];
     }
     else if (index == 1)
     {
-        [self searchHadAlreadyGoOutDataWithUpPull:NO];
+        [self searchHadNotAlreadyGoOutDataWithUpPull:NO];
     }
     else
     {
@@ -489,11 +489,13 @@
     
     if (switchIndex == 0)
     {
-        [self searchHadNotAlreadyGoOutDataWithUpPull:NO];
+        [self searchHadAlreadyGoOutDataWithUpPull:NO];
     }
     else if (switchIndex == 1)
     {
-        [self searchHadAlreadyGoOutDataWithUpPull:NO];
+        
+        
+        [self searchHadNotAlreadyGoOutDataWithUpPull:NO];
     }
     else
     {
@@ -510,11 +512,13 @@
     
     if (switchIndex == 0)
     {
-        [self searchHadNotAlreadyGoOutDataWithUpPull:YES];
+        [self searchHadAlreadyGoOutDataWithUpPull:YES];
     }
     else if (switchIndex == 1)
     {
-        [self searchHadAlreadyGoOutDataWithUpPull:YES];
+        
+        
+        [self searchHadNotAlreadyGoOutDataWithUpPull:YES];
     }
     else
     {
