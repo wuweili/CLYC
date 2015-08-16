@@ -40,7 +40,6 @@
 
 #define Left_bar_nav_image    IMAGE(@"left_bar_image.png")
 
-#define HOME_PAGE_BANNER_image    IMAGE(@"banner.png")
 
 //约车人
 //约车申请

@@ -54,15 +54,23 @@
     
     if (IS_DefaultUser)
     {
-        _dataArray = [NSArray arrayWithObjects:@"首页",@"车辆信息",@"车辆轨迹",@"费用查询",@"版本更新",@"个人信息", nil];
+//        _dataArray = [NSArray arrayWithObjects:@"首页",@"车辆信息",@"车辆轨迹",@"费用查询",@"版本更新",@"个人信息", nil];
+//        
+//        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_history_image,LEFT_menu_travel_way_image,LEFT_menu_mile_confirm_image,LEFT_menu_update_image,LEFT_menu_user_info_image, nil];
         
-        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_history_image,LEFT_menu_travel_way_image,LEFT_menu_mile_confirm_image,LEFT_menu_update_image,LEFT_menu_user_info_image, nil];
+        _dataArray = [NSArray arrayWithObjects:@"首页",@"车辆信息",@"车辆轨迹",@"费用查询",@"个人信息", nil];
+        
+        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_history_image,LEFT_menu_travel_way_image,LEFT_menu_mile_confirm_image,LEFT_menu_user_info_image, nil];
     }
     else
     {
-        _dataArray = [NSArray arrayWithObjects:@"首页",@"费用查询",@"版本更新",@"个人信息", nil];
+//        _dataArray = [NSArray arrayWithObjects:@"首页",@"费用查询",@"版本更新",@"个人信息", nil];
+//        
+//        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_mile_confirm_image,LEFT_menu_update_image,LEFT_menu_user_info_image, nil];
         
-        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_mile_confirm_image,LEFT_menu_update_image,LEFT_menu_user_info_image, nil];
+        _dataArray = [NSArray arrayWithObjects:@"首页",@"费用查询",@"个人信息", nil];
+        
+        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_mile_confirm_image,LEFT_menu_user_info_image, nil];
         
     }
     
@@ -169,7 +177,15 @@
             case 4:
             {
                 //版本更新
-                [self displaySomeInfoWithInfo:@"已是最新版本" finsh:nil];
+//                [self displaySomeInfoWithInfo:@"已是最新版本" finsh:nil];
+                
+                PersonalInfoViewController *personalMVC = [[PersonalInfoViewController alloc]init];
+                UINavigationController *userInfoNav = [[UINavigationController alloc]initWithRootViewController:personalMVC];
+                
+                userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
+                    
+                }];
 
                 
             }
@@ -222,7 +238,15 @@
             {
                 //版本更新
                 
-                [self displaySomeInfoWithInfo:@"已是最新版本" finsh:nil];
+//                [self displaySomeInfoWithInfo:@"已是最新版本" finsh:nil];
+                
+                PersonalInfoViewController *personalMVC = [[PersonalInfoViewController alloc]init];
+                UINavigationController *userInfoNav = [[UINavigationController alloc]initWithRootViewController:personalMVC];
+                
+                userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+                [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
+                    
+                }];
 
             }
                 break;

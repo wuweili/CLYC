@@ -18,7 +18,7 @@
     {
         self.backgroundColor = [UIColor clearColor];
 
-        self.cellImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetWidth(self.frame))];
+        self.cellImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
         self.cellImageView.backgroundColor = [UIColor clearColor];
         [self addSubview:self.cellImageView];
 

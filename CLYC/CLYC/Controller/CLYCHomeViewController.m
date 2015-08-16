@@ -142,6 +142,7 @@
     
     [_collectionView registerClass:[XCCenterSecondCollectionViewCell class] forCellWithReuseIdentifier:@"section1Cell"];
     
+    
     [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
 }
 
@@ -158,6 +159,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [_section1Array count];
+    
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -167,11 +169,8 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
+
     NSString *identifier = @"section1Cell";
-    
     XCCenterSecondCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     [cell sizeToFit];
     
@@ -184,7 +183,8 @@
     
     cell.cellImageView.image =[_section1Array objectAtIndex:indexPath.row];
     
-    return cell;  
+    return cell;
+   
 }
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -194,8 +194,7 @@
     [headerView addSubview:_imageScrollView];
     
     return headerView;
-    
-    
+  
 }
 
 
@@ -204,13 +203,31 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake((self.view.bounds.size.width-30-10)/2, (self.view.bounds.size.width-30-10)/2);
+    if (IS_DefaultUser)
+    {
+        return CGSizeMake((self.view.bounds.size.width-30-10)/2, (self.view.bounds.size.width-30-10)/2);
+    }
+    else
+    {
+        if (indexPath.row == 0 ||indexPath.row == 1 )
+        {
+            return CGSizeMake((self.view.bounds.size.width-30-10)/2, (self.view.bounds.size.width-30-10)/2);
+        }
+        else
+        {
+            return CGSizeMake((self.view.bounds.size.width-30), 140);
+        }
+    }
+    
+    
 }
 
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return  UIEdgeInsetsMake(10, 15, 10, 15);
+    
+    
 }
 
 
