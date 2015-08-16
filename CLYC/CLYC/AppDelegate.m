@@ -19,7 +19,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 BMKMapManager* _mapManager;
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UIAlertViewDelegate>
 
 @end
 
@@ -538,11 +538,12 @@ BMKMapManager* _mapManager;
     
     NSString *title = [dic objectForKey:@"title"];
     NSString *text = [dic objectForKey:@"text"];
-    NSString *coreAppId = [NSString stringWithFormat:@"%@",[dic objectForKey:@"appId"]];
+    _coreApplyId = [NSString stringWithFormat:@"%@",[dic objectForKey:@"appId"]];
     NSString *loginId =[NSString stringWithFormat:@"%@",[dic objectForKey:@"loginId"]];
     NSString *password =[NSString stringWithFormat:@"%@",[dic objectForKey:@"password"]] ;
         
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:text delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:text delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alert.tag = 20150816;
     [alert show];
     
     DDLogInfo(@"task id : %@, messageId:%@ payloadMsg = %@", taskId, aMsgId,payloadMsg);
@@ -567,6 +568,21 @@ BMKMapManager* _mapManager;
 - (void)GeTuiSDkDidNotifySdkState:(SdkStatus)aStatus {
     // [EXT]:通知SDK运行状态
     _sdkStatus = aStatus;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 20150816)
+    {
+        if (buttonIndex == alertView.cancelButtonIndex)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
 }
 
 
