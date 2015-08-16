@@ -72,29 +72,38 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
          
          NSData* decodeData = [GTMBase64 decodeString:resultStr];
          
-         NSDictionary * resultDic = [NSJSONSerialization JSONObjectWithData:decodeData options:0 error:nil];
-         
-         NSString *statuscode = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"statusCode"]];
-         NSString *retmessage = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"description"]];
-         
-         NSString *retSign = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"sign"]];
-         if (![NSString isBlankString:retSign])
+         if (decodeData)
          {
-             [HXUserModel shareInstance].sign = retSign;
+             NSDictionary * resultDic = [NSJSONSerialization JSONObjectWithData:decodeData options:0 error:nil];
+             
+             
+             
+             NSString *statuscode = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"statusCode"]];
+             NSString *retmessage = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"description"]];
+             
+             NSString *retSign = [NSString stringWithoutNil:[resultDic valueForKeyPath:@"sign"]];
+             if (![NSString isBlankString:retSign])
+             {
+                 [HXUserModel shareInstance].sign = retSign;
+             }
+             
+             DDLogInfo(@"%@, %@  %@", operation, response,resultDic);
+             
+             id body = [resultDic valueForKeyPath:@"body"];
+             
+             if (block)
+             {
+                 block(statuscode,retmessage,body,nil);
+             }
          }
-         
-         
-
-         id body = [resultDic valueForKeyPath:@"body"];
-
-         if (block)
+         else
          {
-             block(statuscode,retmessage,body,nil);
+             if (block)
+             {
+                 block(@"987654",nil,nil,nil);
+             }
          }
-         
-         DDLogInfo(@"%@, %@  %@", operation, response,resultDic);
-
-         
+  
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          
          NSString *response = [[NSString alloc] initWithData:(NSData *)[operation responseObject] encoding:NSUTF8StringEncoding];
@@ -1548,7 +1557,7 @@ NSString * const KNetWorkNotConnectedErrorDomain = @"com.clyc.error.networkNotCo
                     model.appId = [NSString stringWithoutNil:dic[@"appId"]];
                     
                     model.deptModel.deptId = [NSString stringWithoutNil:dic[@"carAppDeptId"]];
-                    model.deptModel.deptName = [NSString stringWithoutNil:dic[@"carAppDeptName"]];
+                    model.deptModel.deptName = [NSString stringWithoutNil:dic[@"carAppDeptId"]];
                     
                     model.projectModel.projectId = [NSString stringWithoutNil:dic[@"projectId"]];
                     model.projectModel.projectName = [NSString stringWithoutNil:dic[@"projectName"]];

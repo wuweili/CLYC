@@ -58,9 +58,9 @@
 //        
 //        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_history_image,LEFT_menu_travel_way_image,LEFT_menu_mile_confirm_image,LEFT_menu_update_image,LEFT_menu_user_info_image, nil];
         
-        _dataArray = [NSArray arrayWithObjects:@"首页",@"车辆信息",@"车辆轨迹",@"费用查询",@"个人信息", nil];
+        _dataArray = [NSArray arrayWithObjects:@"首页",@"车辆轨迹",@"费用查询",@"个人信息", nil];
         
-        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_history_image,LEFT_menu_travel_way_image,LEFT_menu_mile_confirm_image,LEFT_menu_user_info_image, nil];
+        _imageArray = [NSArray arrayWithObjects:LEFT_menu_home_image,LEFT_menu_travel_way_image,LEFT_menu_mile_confirm_image,LEFT_menu_user_info_image, nil];
     }
     else
     {
@@ -139,14 +139,14 @@
                 [HXAPPDELEGATE.backgroundViewController showHome];
             }
                 break;
-            case 1:
-            {
-                //车辆信息
-                [self displaySomeInfoWithInfo:@"即将推出，敬请期待" finsh:nil];
-            }
-                break;
+//            case 1:
+//            {
+//                //车辆信息
+//                [self displaySomeInfoWithInfo:@"即将推出，敬请期待" finsh:nil];
+//            }
+//                break;
                 
-            case 2:
+            case 1:
             {
                 //车辆轨迹
                 
@@ -160,7 +160,7 @@
                 
             }
                 break;
-            case 3:
+            case 2:
             {
                 //费用查询
                 
@@ -174,7 +174,7 @@
                 
             }
                 break;
-            case 4:
+            case 3:
             {
                 //版本更新
 //                [self displaySomeInfoWithInfo:@"已是最新版本" finsh:nil];
@@ -190,7 +190,7 @@
                 
             }
                 break;
-            case 5:
+            case 4:
             {
                 //个人信息
                 

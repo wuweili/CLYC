@@ -430,12 +430,9 @@
 
 - (void)loginWithUserName:(NSString *)userName password:(NSString *)password
 {
-
-    
     [self initMBHudWithTitle:nil];
     
     NSString *pwdMd5 = [NSString getMD5_16_Str:password];
-
     
     NSString *cId =[MyKeyChainHelper getRegistrationId];
     

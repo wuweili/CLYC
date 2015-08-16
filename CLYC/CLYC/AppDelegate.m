@@ -520,14 +520,33 @@ BMKMapManager* _mapManager;
     }
     
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:payloadMsg delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+    if (payloadMsg == nil)
+    {
+        return;
+    }
+    
+    NSData *jsonData = [payloadMsg dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err)
+    {
+        NSLog(@"json解析失败：%@",err);
+        return ;
+    }
+    
+    NSString *title = [dic objectForKey:@"title"];
+    NSString *text = [dic objectForKey:@"text"];
+    NSString *coreAppId = [NSString stringWithFormat:@"%@",[dic objectForKey:@"appId"]];
+    NSString *loginId =[NSString stringWithFormat:@"%@",[dic objectForKey:@"loginId"]];
+    NSString *password =[NSString stringWithFormat:@"%@",[dic objectForKey:@"password"]] ;
+        
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:text delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
     [alert show];
     
     DDLogInfo(@"task id : %@, messageId:%@ payloadMsg = %@", taskId, aMsgId,payloadMsg);
-    
-    
-    
-   
+  
 }
 
 - (void)GeTuiSdkDidSendMessage:(NSString *)messageId result:(int)result {

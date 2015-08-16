@@ -49,7 +49,7 @@ typedef enum ProjectMode
  *******************************/
 
 #ifndef PROJECT_MODE
-#define  PROJECT_MODE    0x100   //设置此处,平时调试、发布版本时设置此处
+#define  PROJECT_MODE    0x1   //设置此处,平时调试、发布版本时设置此处
 #elif
 #warning "PROJECT_MODE already defined in other files."
 #endif
@@ -111,7 +111,7 @@ typedef enum ProjectMode
 
 #if defined(YB_HTTP_IDP_SERVER_RELEASE)   //外网真实环境
 
-#define YB_HTTP_SERVER   @"http://210.73.152.201:7070/wsportal/doService?wsdl"
+#define YB_HTTP_SERVER   @"http://210.73.152.199:20088/wsportal/doService?wsdl"
 
 #define BaiDuMap_AK       @"3UiCTeyHILdNhioR1WeNXSaU" //  @"yGlTK49KqpHNIzGt13dVZHsj"
 
@@ -122,7 +122,7 @@ typedef enum ProjectMode
 
 #elif defined(YB_HTTP_IDP_SERVER_LOACL_TEST) //内网测试
 
-#define YB_HTTP_SERVER   @"http://210.73.152.201:7070/wsportal/doService?wsdl"
+#define YB_HTTP_SERVER   @"http://210.73.152.199:20088/wsportaltest/doService?wsdl"
 
 #define BaiDuMap_AK      @"yGlTK49KqpHNIzGt13dVZHsj"
 
@@ -134,20 +134,18 @@ typedef enum ProjectMode
 #elif defined(YB_HTTP_IDP_SERVER_RELEASE_TEST) //外网测试
 
 
-#define YB_HTTP_SERVER   @"http://210.73.152.201:7070/wsportal/doService?wsdl"
+#define YB_HTTP_SERVER   @"http://210.73.152.199:20088/wsportaltest/doService?wsdl"
 
-#define BaiDuMap_AK      @"yGlTK49KqpHNIzGt13dVZHsj"
+#define BaiDuMap_AK       @"3UiCTeyHILdNhioR1WeNXSaU" //  @"yGlTK49KqpHNIzGt13dVZHsj"
 
 #define kAppId           @"ziq9kaI5gw70gzZoIjJ7V9"
 #define kAppKey          @"XcjP9Bx2Mb9BjDOIsFsFO"
 #define kAppSecret       @"y5PinKJ70C7mkL0kfOKHC3"
 
 
-
-
 #else //内网开发
 
-#define YB_HTTP_SERVER     @"http://210.73.152.201:7070/wsportal/doService?wsdl"
+#define YB_HTTP_SERVER     @"http://210.73.152.199:20088/wsportaltest/doService?wsdl"
 
 #define BaiDuMap_AK      @"Nk8ss3LgqWOmNbDiv1K8wL0o"
 
