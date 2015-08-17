@@ -12,6 +12,8 @@
 #import "AFNetworkReachabilityManager.h"
 #import "CLYCLocationManager.h"
 
+
+
 #define NotifyActionKey "NotifyAction"
 NSString* const NotificationCategoryIdent  = @"ACTIONABLE";
 NSString* const NotificationActionOneIdent = @"ACTION_ONE";
@@ -19,7 +21,7 @@ NSString* const NotificationActionTwoIdent = @"ACTION_TWO";
 
 BMKMapManager* _mapManager;
 
-@interface AppDelegate ()<UIAlertViewDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -85,7 +87,7 @@ BMKMapManager* _mapManager;
     [GeTuiSdk startSdkWithAppId:appID appKey:appKey appSecret:appSecret delegate:self error:&err];
     
     //[1-2]:设置是否后台运行开关
-    [GeTuiSdk runBackgroundEnable:YES];
+    [GeTuiSdk runBackgroundEnable:NO];
     //[1-3]:设置电子围栏功能，开启LBS定位服务 和 是否允许SDK 弹出用户定位请求
     [GeTuiSdk lbsLocationEnable:YES andUserVerify:YES];
     
@@ -536,16 +538,13 @@ BMKMapManager* _mapManager;
         return ;
     }
     
-    NSString *title = [dic objectForKey:@"title"];
-    NSString *text = [dic objectForKey:@"text"];
-    _coreApplyId = [NSString stringWithFormat:@"%@",[dic objectForKey:@"appId"]];
-    NSString *loginId =[NSString stringWithFormat:@"%@",[dic objectForKey:@"loginId"]];
-    NSString *password =[NSString stringWithFormat:@"%@",[dic objectForKey:@"password"]] ;
-        
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:text delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alert.tag = 20150816;
-    [alert show];
     
+    
+    NSDictionary *dicBroadcast = @{Receive_pushDic:dic
+                                   };
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notify_Receive_push_msg object:dicBroadcast];
+    
+
     DDLogInfo(@"task id : %@, messageId:%@ payloadMsg = %@", taskId, aMsgId,payloadMsg);
   
 }
@@ -570,20 +569,6 @@ BMKMapManager* _mapManager;
     _sdkStatus = aStatus;
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 20150816)
-    {
-        if (buttonIndex == alertView.cancelButtonIndex)
-        {
-            
-        }
-        else
-        {
-            
-        }
-    }
-}
 
 
 @end

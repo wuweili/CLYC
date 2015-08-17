@@ -198,7 +198,7 @@
  */
 #define  Notify_Receive_push_msg          @"Notify_Receive_push_msg"
 
-#define  Receive_pushModel                @"Receive_pushModel"
+#define  Receive_pushDic                @"Receive_pushDic"
 
 /**
  *   在前台收到push消息

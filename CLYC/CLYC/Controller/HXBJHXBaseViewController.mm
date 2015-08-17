@@ -11,6 +11,9 @@
 #import "AppDelegate.h"
 #import "MJRefresh.h"
 #import "CLYCHomeViewController.h"
+#import "HXAlertView.h"
+#import "EditApplyCarViewController.h"
+#import "D_ConfirmMile2ViewController.h"
 
 
 
@@ -127,6 +130,8 @@ static  BOOL hideLeft  = NO;
 {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recivePushMsg:) name:Notify_Receive_push_msg object:nil];
+    
 
     
 }
@@ -134,7 +139,7 @@ static  BOOL hideLeft  = NO;
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:Notify_Receive_push_msg object:nil];
 }
 
 
@@ -414,6 +419,58 @@ static  BOOL hideLeft  = NO;
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma mark - 收到推送消息 -
+-(void)recivePushMsg:(NSNotification *)notifyObj
+{
+    if (!notifyObj)
+    {
+        return;
+    }
+    
+    NSDictionary *dicBroad = [notifyObj object];
+    
+    NSDictionary *dic = [dicBroad objectForKey:Receive_pushDic];
+    
+    NSString *title = [NSString stringWithoutNil:[dic objectForKey:@"title"]];
+    NSString *text =[NSString stringWithoutNil:[dic objectForKey:@"text"]];
+    NSString *coreApplyId = [NSString stringWithoutNil:[dic objectForKey:@"appId"]];;
+    NSString *loginId =[NSString stringWithoutNil:[dic objectForKey:@"loginId"]];;
+    NSString *password =[NSString stringWithoutNil:[dic objectForKey:@"password"]] ;
+    
+    HXAlertView *tipAlert = [[HXAlertView alloc]initRemindInfoWithTitle:title contentText:text leftBtnTitle:@"取消" rightBtnTitle:@"确定" haveCloseButton:NO];
+    [tipAlert show];
+    
+    __weak HXAlertView *weakAlert = tipAlert;
+     __weak UIViewController*  weakSelf = self;
+        
+    
+    tipAlert.leftBlock = ^()
+    {
+        [weakAlert removeFromSuperview];
+    };
+    
+    tipAlert.rightBlock = ^()
+    {
+        ApplyCarDetailModel *model = [[ApplyCarDetailModel alloc]init];
+        model.appId =coreApplyId;
+        
+        if (IS_DefaultUser)
+        {
+            
+            EditApplyCarViewController *editMVC = [[EditApplyCarViewController alloc]initWithApplyCarDetailModel:model];
+            [weakSelf.navigationController pushViewController:editMVC animated:YES];
+        }
+        else
+        {
+            D_ConfirmMile2ViewController *editMVC = [[D_ConfirmMile2ViewController alloc]initWithApplyCarDetailModel:model];
+            [weakSelf.navigationController pushViewController:editMVC animated:YES];
+        }
+        
+        [weakAlert removeFromSuperview];
+    };
+    
+    
+    
+}
 
 @end

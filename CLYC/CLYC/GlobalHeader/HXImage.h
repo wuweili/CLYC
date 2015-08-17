@@ -118,7 +118,11 @@
 #define HX_SEE_CASE_PIC_RIGHT_6_IMAG IMAGE(@"UIBarButtonItemArrowRight.png")
 
 
+#define ALERT_LEFT_BTN_IMAG IMAGE(@"hxAlertView_leftBtn_bg.png")
 
+#define ALERT_RIGHT_BTN_IMAG IMAGE(@"hxAlertView_rightBtn_bg.png")
+
+#define ALERT_SINGLE_RIGHT_BTN_IMAG IMAGE(@"hxAlertView_single_rightBtn_bg.png")
 
 
 

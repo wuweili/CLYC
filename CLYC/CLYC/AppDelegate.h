@@ -34,7 +34,6 @@
 @property (strong, nonatomic) NSString *payloadId;
 @property(nonatomic,strong) NSString *deviceToken;
 
-@property(nonatomic,strong)NSString *coreApplyId;
 
 
 
