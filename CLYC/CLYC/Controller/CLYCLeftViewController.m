@@ -117,6 +117,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    if (CurrentSystemVersion<8)
+    {
+        [HXAPPDELEGATE.backgroundViewController.view insertSubview:HXAPPDELEGATE.backgroundViewController.mainView aboveSubview:self.view];
+    }
 }
 
 #pragma mark - UITableViewDelegate -
@@ -156,9 +161,13 @@
                 userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
                     
+                    if (CurrentSystemVersion<8)
+                    {
+                        [HXAPPDELEGATE.backgroundViewController.view insertSubview:userInfoNav.view aboveSubview:HXAPPDELEGATE.backgroundViewController.mainView];
+                    }
                 }];
-                
             }
+
                 break;
             case 2:
             {
@@ -169,7 +178,10 @@
                 
                 userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
-                    
+                    if (CurrentSystemVersion<8)
+                    {
+                        [HXAPPDELEGATE.backgroundViewController.view insertSubview:userInfoNav.view aboveSubview:HXAPPDELEGATE.backgroundViewController.mainView];
+                    }
                 }];
                 
             }
@@ -184,7 +196,10 @@
                 
                 userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
-                    
+                    if (CurrentSystemVersion<8)
+                    {
+                        [HXAPPDELEGATE.backgroundViewController.view insertSubview:userInfoNav.view aboveSubview:HXAPPDELEGATE.backgroundViewController.mainView];
+                    }
                 }];
 
                 
@@ -200,7 +215,10 @@
                 
                 userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
-                    
+                    if (CurrentSystemVersion<8)
+                    {
+                        [HXAPPDELEGATE.backgroundViewController.view insertSubview:userInfoNav.view aboveSubview:HXAPPDELEGATE.backgroundViewController.mainView];
+                    }
                 }];
 
             }
@@ -229,7 +247,10 @@
                 
                 userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
-                    
+                    if (CurrentSystemVersion<8)
+                    {
+                        [HXAPPDELEGATE.backgroundViewController.view insertSubview:userInfoNav.view aboveSubview:HXAPPDELEGATE.backgroundViewController.mainView];
+                    }
                 }];
                 
             }
@@ -245,7 +266,10 @@
                 
                 userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
-                    
+                    if (CurrentSystemVersion<8)
+                    {
+                        [HXAPPDELEGATE.backgroundViewController.view insertSubview:userInfoNav.view aboveSubview:HXAPPDELEGATE.backgroundViewController.mainView];
+                    }
                 }];
 
             }
@@ -260,7 +284,10 @@
                 
                 userInfoNav.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
                 [self.navigationController presentViewController:userInfoNav animated:YES completion:^{
-                    
+                    if (CurrentSystemVersion<8)
+                    {
+                        [HXAPPDELEGATE.backgroundViewController.view insertSubview:userInfoNav.view aboveSubview:HXAPPDELEGATE.backgroundViewController.mainView];
+                    }
                 }];
                 
             }

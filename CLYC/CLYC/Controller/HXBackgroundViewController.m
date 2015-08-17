@@ -39,7 +39,7 @@
     
     UIView *blackCover;
     
-    UIView  *mainView;
+    
     
     UITapGestureRecognizer *tapGesture;
 
@@ -47,7 +47,9 @@
 
 @end
 
+
 @implementation HXBackgroundViewController
+
 
 -(void)dealloc
 {
@@ -106,19 +108,19 @@
     
     
     
-    mainView = [[UIView alloc]initWithFrame:self.view.frame];
+    _mainView = [[UIView alloc]initWithFrame:self.view.frame];
     
     homeViewController = [[CLYCHomeViewController alloc]init];
     
     homeNavigationController = [[UINavigationController alloc]initWithRootViewController:homeViewController];
     
-    [mainView addSubview:homeNavigationController.view];
-    [self.view addSubview:mainView];
+    [_mainView addSubview:homeNavigationController.view];
+    [self.view addSubview:_mainView];
     
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [mainView setUserInteractionEnabled:YES];
-    [mainView addGestureRecognizer:pan];
+    [_mainView setUserInteractionEnabled:YES];
+    [_mainView addGestureRecognizer:pan];
     
     tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHome)];
 
@@ -182,7 +184,7 @@
 
 -(void)showLeft
 {
-    [mainView addGestureRecognizer:tapGesture];
+    [_mainView addGestureRecognizer:tapGesture];
     
     distance = self.view.center.x * (FullDistance*2 + Proportion - 1);
     
@@ -194,7 +196,7 @@
 
 -(void)showHome
 {
-    [mainView removeGestureRecognizer:tapGesture];
+    [_mainView removeGestureRecognizer:tapGesture];
     
     distance = 0;
     
@@ -204,7 +206,7 @@
 
 -(void)showRight
 {
-    [mainView addGestureRecognizer:tapGesture];
+    [_mainView addGestureRecognizer:tapGesture];
     distance = self.view.center.x * -(FullDistance*2 + Proportion - 1);
     [self doTheAnimateProportion:Proportion showWhat:@"right"];
 }
@@ -215,8 +217,8 @@
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
         //        () -> Void in;
-        mainView.center = CGPointMake(self.view.center.x + distance, self.view.center.y);
-        mainView.transform = CGAffineTransformScale(CGAffineTransformIdentity, proportion, proportion);
+        _mainView.center = CGPointMake(self.view.center.x + distance, self.view.center.y);
+        _mainView.transform = CGAffineTransformScale(CGAffineTransformIdentity, proportion, proportion);
         if ([showWhat isEqualToString: @"left"])
         {
             leftNavigationController.view.center = CGPointMake(centerOfLeftViewAtBeginning.x + distanceOfLeftView, leftNavigationController.view.center.y);

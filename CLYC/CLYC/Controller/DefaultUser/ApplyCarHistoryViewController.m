@@ -427,15 +427,8 @@
         
         EditApplyCarViewController *editMVC = [[EditApplyCarViewController alloc]initWithApplyCarDetailModel:model];
         [self.navigationController pushViewController:editMVC animated:YES];
-        
-        
-        
     }
-    
-    
-    
-    
-    
+   
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -10,6 +10,8 @@
 
 @interface HXBackgroundViewController : UIViewController
 
+@property(nonatomic,strong)UIView  *mainView;
+
 -(void)showHome;
 
 -(void)showLeft;

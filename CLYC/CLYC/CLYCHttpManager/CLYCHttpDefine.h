@@ -113,7 +113,7 @@ typedef enum ProjectMode
 
 #define YB_HTTP_SERVER   @"http://210.73.152.199:20088/wsportal/doService?wsdl"
 
-#define BaiDuMap_AK       @"3UiCTeyHILdNhioR1WeNXSaU" //  @"yGlTK49KqpHNIzGt13dVZHsj"
+#define BaiDuMap_AK      @"yGlTK49KqpHNIzGt13dVZHsj"
 
 #define kAppId           @"ziq9kaI5gw70gzZoIjJ7V9"
 #define kAppKey          @"XcjP9Bx2Mb9BjDOIsFsFO"
@@ -124,7 +124,7 @@ typedef enum ProjectMode
 
 #define YB_HTTP_SERVER   @"http://210.73.152.199:20088/wsportaltest/doService?wsdl"
 
-#define BaiDuMap_AK      @"yGlTK49KqpHNIzGt13dVZHsj"
+#define BaiDuMap_AK      @"yGlTK49KqpHNIzGt13dVZHsj"  //@"Nk8ss3LgqWOmNbDiv1K8wL0o"
 
 #define kAppId           @"ziq9kaI5gw70gzZoIjJ7V9"
 #define kAppKey          @"XcjP9Bx2Mb9BjDOIsFsFO"
@@ -136,7 +136,7 @@ typedef enum ProjectMode
 
 #define YB_HTTP_SERVER   @"http://210.73.152.199:20088/wsportaltest/doService?wsdl"
 
-#define BaiDuMap_AK       @"3UiCTeyHILdNhioR1WeNXSaU" //  @"yGlTK49KqpHNIzGt13dVZHsj"
+#define BaiDuMap_AK       @"3UiCTeyHILdNhioR1WeNXSaU" //  @"Nk8ss3LgqWOmNbDiv1K8wL0o"
 
 #define kAppId           @"ziq9kaI5gw70gzZoIjJ7V9"
 #define kAppKey          @"XcjP9Bx2Mb9BjDOIsFsFO"
