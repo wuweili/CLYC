@@ -49,7 +49,7 @@ typedef enum ProjectMode
  *******************************/
 
 #ifndef PROJECT_MODE
-#define  PROJECT_MODE    0x1   //设置此处,平时调试、发布版本时设置此处
+#define  PROJECT_MODE    0x1000   //设置此处,平时调试、发布版本时设置此处
 #elif
 #warning "PROJECT_MODE already defined in other files."
 #endif
@@ -101,8 +101,8 @@ typedef enum ProjectMode
  */
 #ifdef PROJECT_MODE
 #if PROJECT_MODE == 0x1000
-#define CONSOLE_LOG_ON
-#define FILE_LOG_ON
+#define CONSOLE_LOG_OFF
+#define FILE_LOG_OFF
 #define YB_HTTP_IDP_SERVER_RELEASE_TEST   //外网测试环境
 #endif
 #endif
@@ -134,7 +134,7 @@ typedef enum ProjectMode
 #elif defined(YB_HTTP_IDP_SERVER_RELEASE_TEST) //外网测试
 
 
-#define YB_HTTP_SERVER   @"http://210.73.152.199:20088/wsportaltest/doService?wsdl"
+#define YB_HTTP_SERVER   @"http://210.73.152.199:20088/wsportal/doService?wsdl"
 
 #define BaiDuMap_AK       @"3UiCTeyHILdNhioR1WeNXSaU" //  @"Nk8ss3LgqWOmNbDiv1K8wL0o"
 
