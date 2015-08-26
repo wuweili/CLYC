@@ -114,6 +114,7 @@
 		5A85DA271B65B17E002B36CE /* CarTrajectoryMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A85DA261B65B17E002B36CE /* CarTrajectoryMapViewController.m */; };
 		5A8BF6F61B46C15700C9573B /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A8BF6F41B46C15700C9573B /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5A91CB1E1B7824D700BEC402 /* CostSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A91CB1D1B7824D700BEC402 /* CostSearchTableViewCell.m */; };
+		5A9EFA3A1B84032D00D8ADE0 /* UserAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9EFA391B84032D00D8ADE0 /* UserAgreementViewController.m */; };
 		5AB02CB21B3FD1AC0003B65F /* HXRootViewViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */; };
 		5AB02CC51B3FD2270003B65F /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB51B3FD2270003B65F /* NSData+SDDataCache.m */; };
 		5AB02CC61B3FD2270003B65F /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB02CB81B3FD2270003B65F /* TAAbstractDotView.m */; };
@@ -466,6 +467,8 @@
 		5A8BF6F51B46C15700C9573B /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		5A91CB1C1B7824D700BEC402 /* CostSearchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CostSearchTableViewCell.h; sourceTree = "<group>"; };
 		5A91CB1D1B7824D700BEC402 /* CostSearchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CostSearchTableViewCell.m; sourceTree = "<group>"; };
+		5A9EFA381B84032D00D8ADE0 /* UserAgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAgreementViewController.h; sourceTree = "<group>"; };
+		5A9EFA391B84032D00D8ADE0 /* UserAgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAgreementViewController.m; sourceTree = "<group>"; };
 		5AB02CB01B3FD1AC0003B65F /* HXRootViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXRootViewViewController.h; sourceTree = "<group>"; };
 		5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HXRootViewViewController.mm; sourceTree = "<group>"; };
 		5AB02CB41B3FD2270003B65F /* NSData+SDDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SDDataCache.h"; sourceTree = "<group>"; };
@@ -1097,6 +1100,8 @@
 				5AB02CB31B3FD2270003B65F /* SDCycleScrollView */,
 				5AB02CB01B3FD1AC0003B65F /* HXRootViewViewController.h */,
 				5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */,
+				5A9EFA381B84032D00D8ADE0 /* UserAgreementViewController.h */,
+				5A9EFA391B84032D00D8ADE0 /* UserAgreementViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2274,6 +2279,7 @@
 				5AB02E821B3FD2720003B65F /* NSString+Password.m in Sources */,
 				5AB02E301B3FD2710003B65F /* DDTTYLogger.m in Sources */,
 				5AB02CCC1B3FD2270003B65F /* UIView+SDExtension.m in Sources */,
+				5A9EFA3A1B84032D00D8ADE0 /* UserAgreementViewController.m in Sources */,
 				5AB02E7F1B3FD2720003B65F /* NSDate+Extend.m in Sources */,
 				5AB02E751B3FD2720003B65F /* PhotoImageView.m in Sources */,
 				028FA1CA1B470ACE007A2C8C /* XCCenterSecondCollectionViewCell.m in Sources */,
@@ -2409,8 +2415,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Medpal Health Solution Co,ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Medpal Health Solution Co,ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: JIANGSU Union of Science and Technology (7HJR243U8V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: JIANGSU Union of Science and Technology (7HJR243U8V)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2430,7 +2436,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "1d43a3a8-bde0-47ef-880f-ee431a764683";
+				PROVISIONING_PROFILE = "436b9b1f-ae5a-4a2b-a82e-698a96d58c09";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2473,8 +2479,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Medpal Health Solution Co,ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Medpal Health Solution Co,ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: JIANGSU Union of Science and Technology (7HJR243U8V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: JIANGSU Union of Science and Technology (7HJR243U8V)";
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2496,7 +2502,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1d43a3a8-bde0-47ef-880f-ee431a764683";
+				PROVISIONING_PROFILE = "436b9b1f-ae5a-4a2b-a82e-698a96d58c09";
 			};
 			name = Release;
 		};

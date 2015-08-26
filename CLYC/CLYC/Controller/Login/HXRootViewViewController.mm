@@ -19,6 +19,8 @@
 
 #import "AppDelegate.h"
 
+#import "UserAgreementViewController.h"
+
 
 @interface HXRootViewViewController ()<RadioButtonDelegate,SDCycleScrollViewDelegate>
 {
@@ -211,6 +213,15 @@
     
     [loginBtn addTarget:self action:@selector(clickLoginButton) forControlEvents:UIControlEventTouchUpInside];
     [_footView addSubview:loginBtn];
+    
+    UIButton *checkTipButton = [[UIButton alloc]initWithFrame:CGRectMake(0, _footView.frame.size.height-20-30  , kMainScreenWidth, 20)];
+    
+    checkTipButton.titleLabel.font = HEL_13;
+    [checkTipButton setTitle:@"服务协议" forState:UIControlStateNormal];
+    [checkTipButton setTitleColor:UIColorFromRGB(0xABABAB) forState:UIControlStateNormal];
+    checkTipButton.backgroundColor = [UIColor clearColor];
+    [checkTipButton addTarget:self action:@selector(clickCheckTipButton) forControlEvents:UIControlEventTouchUpInside];
+    [_footView addSubview:checkTipButton];
    
    
 }
@@ -485,7 +496,10 @@
 #pragma mark - 点击最下面的审核提示
 -(void)clickCheckTipButton
 {
-    
+    [IMUnitsMethods drawTheLeftBarBtn:self btnTitle:@"返回"];
+    UserAgreementViewController *userMVC = [[UserAgreementViewController alloc]init];
+    userMVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:userMVC animated:YES];
 }
 
 
@@ -776,6 +790,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 @end
