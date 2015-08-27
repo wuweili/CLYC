@@ -275,6 +275,7 @@
 		5AB02EDD1B3FE7AE0003B65F /* hxLogin_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB02ED91B3FE7AE0003B65F /* hxLogin_selected@2x.png */; };
 		5AB02EDE1B3FE7AE0003B65F /* hxLogin_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB02EDA1B3FE7AE0003B65F /* hxLogin_unselected@2x.png */; };
 		5AB02EDF1B3FE7AE0003B65F /* hx_icon_register@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5AB02EDB1B3FE7AE0003B65F /* hx_icon_register@2x.png */; };
+		5AB295041B8E932800C1BDB3 /* HXVerifyTelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB295031B8E932800C1BDB3 /* HXVerifyTelViewController.m */; };
 		5AB2C6D81B437305005B42B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AB2C6D61B437305005B42B8 /* Main.storyboard */; };
 		5AB9BE8D1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */; };
 		5ABE5C231B61C3AD002AE980 /* EditApplyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABE5C221B61C3AD002AE980 /* EditApplyCarViewController.m */; };
@@ -782,6 +783,8 @@
 		5AB02ED91B3FE7AE0003B65F /* hxLogin_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hxLogin_selected@2x.png"; sourceTree = "<group>"; };
 		5AB02EDA1B3FE7AE0003B65F /* hxLogin_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hxLogin_unselected@2x.png"; sourceTree = "<group>"; };
 		5AB02EDB1B3FE7AE0003B65F /* hx_icon_register@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hx_icon_register@2x.png"; sourceTree = "<group>"; };
+		5AB295021B8E932800C1BDB3 /* HXVerifyTelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXVerifyTelViewController.h; sourceTree = "<group>"; };
+		5AB295031B8E932800C1BDB3 /* HXVerifyTelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXVerifyTelViewController.m; sourceTree = "<group>"; };
 		5AB2C6D71B437305005B42B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5AB9BE8B1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyCarHistoryTableViewCell.h; sourceTree = "<group>"; };
 		5AB9BE8C1B4A04CC00B00579 /* ApplyCarHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyCarHistoryTableViewCell.m; sourceTree = "<group>"; };
@@ -1102,6 +1105,8 @@
 				5AB02CB11B3FD1AC0003B65F /* HXRootViewViewController.mm */,
 				5A9EFA381B84032D00D8ADE0 /* UserAgreementViewController.h */,
 				5A9EFA391B84032D00D8ADE0 /* UserAgreementViewController.m */,
+				5AB295021B8E932800C1BDB3 /* HXVerifyTelViewController.h */,
+				5AB295031B8E932800C1BDB3 /* HXVerifyTelViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2255,6 +2260,7 @@
 				5A023E6F1B606EFA00823035 /* SelecteCarViewController.m in Sources */,
 				5AB02E911B3FD2720003B65F /* NSData+ImageContentType.m in Sources */,
 				5AB02E551B3FD2720003B65F /* Reachability.m in Sources */,
+				5AB295041B8E932800C1BDB3 /* HXVerifyTelViewController.m in Sources */,
 				5AB02EAE1B3FD3430003B65F /* HXRadioButton.m in Sources */,
 				5AB02CC81B3FD2270003B65F /* TADotView.m in Sources */,
 				5AB02E901B3FD2720003B65F /* MKAnnotationView+WebCache.m in Sources */,

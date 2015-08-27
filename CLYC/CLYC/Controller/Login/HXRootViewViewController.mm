@@ -214,7 +214,7 @@
     [loginBtn addTarget:self action:@selector(clickLoginButton) forControlEvents:UIControlEventTouchUpInside];
     [_footView addSubview:loginBtn];
     
-    UIButton *checkTipButton = [[UIButton alloc]initWithFrame:CGRectMake(0, _footView.frame.size.height-20-30  , kMainScreenWidth, 20)];
+    UIButton *checkTipButton = [[UIButton alloc]initWithFrame:CGRectMake(0, _footView.frame.size.height-20-30  , (kMainScreenWidth-20)/2, 20)];
     
     checkTipButton.titleLabel.font = HEL_13;
     [checkTipButton setTitle:@"服务协议" forState:UIControlStateNormal];
@@ -222,6 +222,20 @@
     checkTipButton.backgroundColor = [UIColor clearColor];
     [checkTipButton addTarget:self action:@selector(clickCheckTipButton) forControlEvents:UIControlEventTouchUpInside];
     [_footView addSubview:checkTipButton];
+    
+    
+    UIButton *registerButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(checkTipButton.frame)+20, _footView.frame.size.height-20-30  , (kMainScreenWidth-30)/2, 20)];
+    
+    registerButton.titleLabel.font = HEL_13;
+    [registerButton setTitle:@"开始注册" forState:UIControlStateNormal];
+    [registerButton setTitleColor:UIColorFromRGB(0xABABAB) forState:UIControlStateNormal];
+    registerButton.backgroundColor = [UIColor clearColor];
+    [registerButton addTarget:self action:@selector(clickCheckTipButton) forControlEvents:UIControlEventTouchUpInside];
+    [_footView addSubview:registerButton];
+    
+    
+    
+    
    
    
 }
@@ -501,6 +515,14 @@
     userMVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:userMVC animated:YES];
 }
+
+#pragma mark - 注册 - 
+
+-(void)clickRegiserButton
+{
+    
+}
+
 
 
 #pragma mark - KeyboardNotification
