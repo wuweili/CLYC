@@ -20,6 +20,7 @@
 #import "AppDelegate.h"
 
 #import "UserAgreementViewController.h"
+#import "HXRegisterViewController.h"
 
 
 @interface HXRootViewViewController ()<RadioButtonDelegate,SDCycleScrollViewDelegate>
@@ -230,7 +231,7 @@
     [registerButton setTitle:@"开始注册" forState:UIControlStateNormal];
     [registerButton setTitleColor:UIColorFromRGB(0xABABAB) forState:UIControlStateNormal];
     registerButton.backgroundColor = [UIColor clearColor];
-    [registerButton addTarget:self action:@selector(clickCheckTipButton) forControlEvents:UIControlEventTouchUpInside];
+    [registerButton addTarget:self action:@selector(clickRegiserButton) forControlEvents:UIControlEventTouchUpInside];
     [_footView addSubview:registerButton];
     
     
@@ -520,6 +521,11 @@
 
 -(void)clickRegiserButton
 {
+    [IMUnitsMethods drawTheLeftBarBtn:self btnTitle:@"返回"];
+    HXRegisterViewController *regiserMVC = [[HXRegisterViewController alloc]init];
+    regiserMVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:regiserMVC animated:YES];
+    
     
 }
 

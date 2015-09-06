@@ -93,6 +93,7 @@
 		02BF94791B65464400D1B95F /* D_ServiceCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BF94781B65464400D1B95F /* D_ServiceCommentViewController.m */; };
 		02BF947C1B65476E00D1B95F /* D_CheckListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BF947B1B65476E00D1B95F /* D_CheckListViewController.m */; };
 		02BF947F1B65485000D1B95F /* D_CostSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BF947E1B65485000D1B95F /* D_CostSearchViewController.m */; };
+		02CCC86D1B9C77FA0036F6C0 /* HXRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02CCC86C1B9C77FA0036F6C0 /* HXRegisterViewController.m */; };
 		5A0042CF1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0042CE1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.m */; };
 		5A023E6F1B606EFA00823035 /* SelecteCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A023E6E1B606EFA00823035 /* SelecteCarViewController.m */; };
 		5A023E721B60764200823035 /* SelectDeptmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A023E711B60764200823035 /* SelectDeptmentViewController.m */; };
@@ -431,6 +432,8 @@
 		02BF947B1B65476E00D1B95F /* D_CheckListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = D_CheckListViewController.m; sourceTree = "<group>"; };
 		02BF947D1B65485000D1B95F /* D_CostSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = D_CostSearchViewController.h; sourceTree = "<group>"; };
 		02BF947E1B65485000D1B95F /* D_CostSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = D_CostSearchViewController.m; sourceTree = "<group>"; };
+		02CCC86B1B9C77FA0036F6C0 /* HXRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HXRegisterViewController.h; sourceTree = "<group>"; };
+		02CCC86C1B9C77FA0036F6C0 /* HXRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HXRegisterViewController.m; sourceTree = "<group>"; };
 		5A0042CD1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplyCarListDetailViewController.h; sourceTree = "<group>"; };
 		5A0042CE1B5B7E6E00DC25C2 /* ApplyCarListDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplyCarListDetailViewController.m; sourceTree = "<group>"; };
 		5A023E6D1B606EFA00823035 /* SelecteCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelecteCarViewController.h; sourceTree = "<group>"; };
@@ -1107,6 +1110,8 @@
 				5A9EFA391B84032D00D8ADE0 /* UserAgreementViewController.m */,
 				5AB295021B8E932800C1BDB3 /* HXVerifyTelViewController.h */,
 				5AB295031B8E932800C1BDB3 /* HXVerifyTelViewController.m */,
+				02CCC86B1B9C77FA0036F6C0 /* HXRegisterViewController.h */,
+				02CCC86C1B9C77FA0036F6C0 /* HXRegisterViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2142,6 +2147,7 @@
 				028FA1BB1B470471007A2C8C /* BaseLeftViewController.m in Sources */,
 				5AB02E401B3FD2720003B65F /* MBProgressHUD.m in Sources */,
 				5AB02E2C1B3FD2710003B65F /* DDAbstractDatabaseLogger.m in Sources */,
+				02CCC86D1B9C77FA0036F6C0 /* HXRegisterViewController.m in Sources */,
 				5AB02E6C1B3FD2720003B65F /* PBConst.m in Sources */,
 				5AB02E731B3FD2720003B65F /* PBSaveBtn.m in Sources */,
 				5AB02E391B3FD2710003B65F /* FMDatabasePool.m in Sources */,

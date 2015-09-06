@@ -49,7 +49,7 @@ typedef enum ProjectMode
  *******************************/
 
 #ifndef PROJECT_MODE
-#define  PROJECT_MODE    0x100   //设置此处,平时调试、发布版本时设置此处
+#define  PROJECT_MODE    0x1000   //设置此处,平时调试、发布版本时设置此处
 #elif
 #warning "PROJECT_MODE already defined in other files."
 #endif
