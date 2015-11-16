@@ -41,7 +41,7 @@
         _projectNameTitleLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_projectNameTitleLabel];
         
-        _projectNameContentLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_projectNameTitleLabel.frame), CGRectGetMinY(_projectNameTitleLabel.frame), kMainScreenWidth-50-CGRectGetMaxX(_projectNameTitleLabel.frame), 20)];
+        _projectNameContentLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_projectNameTitleLabel.frame), CGRectGetMinY(_projectNameTitleLabel.frame), kMainScreenWidth-10-CGRectGetMaxX(_projectNameTitleLabel.frame), 20)];
         _projectNameContentLabel.textColor = [UIColor blackColor];
         _projectNameContentLabel.font = HEL_14;
         _projectNameContentLabel.textAlignment = NSTextAlignmentLeft;

@@ -111,8 +111,6 @@
     
     [self.view addSubview:_headView];
     
-    
-    
     UIView *searchTipView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 30)];
     searchTipView.backgroundColor = UIColorFromRGB(0xEFEFEF);
     

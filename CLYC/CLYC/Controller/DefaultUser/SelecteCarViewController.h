@@ -7,8 +7,6 @@
 //
 
 #import "HXBJHXBaseViewController.h"
-
-
 typedef void(^SelectCarBlock)(SelectCarInfoModel *model);
 
 @interface SelecteCarViewController : HXBJHXBaseViewController
