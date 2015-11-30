@@ -24,7 +24,6 @@
     
     UITextField *_carNumTextField;
     
-    
     UITableView *_tableView;
     
     NSMutableArray *_dataArray;
