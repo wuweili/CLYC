@@ -49,7 +49,7 @@ typedef enum ProjectMode
  *******************************/
 
 #ifndef PROJECT_MODE
-#define  PROJECT_MODE    0x100   //设置此处,平时调试、发布版本时设置此处
+#define  PROJECT_MODE    0x1   //设置此处,平时调试、发布版本时设置此处
 #elif
 #warning "PROJECT_MODE already defined in other files."
 #endif
@@ -149,9 +149,14 @@ typedef enum ProjectMode
 
 #define BaiDuMap_AK      @"Nk8ss3LgqWOmNbDiv1K8wL0o"
 
-#define kAppId           @"FueAs6RoeSAX1taNFUpQ6"
-#define kAppKey          @"WyJf8LD9J274kSyyv5rrv7"
-#define kAppSecret       @"WyJf8LD9J274kSyyv5rrv7"
+//#define kAppId           @"FueAs6RoeSAX1taNFUpQ6"
+//#define kAppKey          @"WyJf8LD9J274kSyyv5rrv7"
+//#define kAppSecret       @"WyJf8LD9J274kSyyv5rrv7"
+
+
+#define kAppId           @"RW3Kr2lktA7eso2o5O87H4"
+#define kAppKey          @"W0xTHI825y9eSd1KoCEe63"
+#define kAppSecret       @"bS0dznFnKC9zwEgFIWnWk1"
 
 
 #endif
