@@ -8,6 +8,7 @@
 
 #import "SelectProjectViewController.h"
 #import "SelectProjectTableViewCell.h"
+#import "MJRefresh.h"
 
 @interface SelectProjectViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,UISearchDisplayDelegate>
 {
@@ -25,6 +26,11 @@
     NSMutableArray *_searchArray;
     
     NSString *_depId;
+    
+    BOOL _isDownPullLoading;
+    BOOL _isUpPullLoading;
+    
+    int _currentDoctorPageIndex;
 }
 
 @property(nonatomic, strong)UISearchDisplayController *strongSearchDisplayController;
@@ -61,10 +67,11 @@
     _dataArray = [NSMutableArray arrayWithCapacity:0];
     _searchArray = [NSMutableArray arrayWithCapacity:0];
     _isSearch = NO;
+    _currentDoctorPageIndex = 0;
     [self initSearchBar];
     
     [self initTableView];
-    
+    [self initRefreshView];
     
     
     [self obtainData];
@@ -90,6 +97,14 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }
+
+-(void)initRefreshView
+{
+    [_tableView addFooterWithTarget:self action:@selector(footerRefreshing)];
+    
+    [self tableViewMJRefresh:_tableView];
+}
+
 
 -(void)initSearchBar
 {
@@ -117,14 +132,20 @@
     [self initMBHudWithTitle:nil];
     NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryProjectName",@"pageSize",@"pageNum"];
     
-    NSArray *valueArray = @[_depId,@"",@"",@"40",@"0"];
+    NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
+    
+    NSArray *valueArray = @[_depId,@"",@"",@"20",currentPage];
     
     [CLYCCoreBizHttpRequest obtainProjectListWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
+        [self stopRefresh];
+        
         if ([retcode isEqualToString:YB_HTTP_CODE_OK])
         {
             [self stopMBHudAndNSTimerWithmsg:nil finsh:nil];
             
             [_dataArray addObjectsFromArray:listArry];
+            
+            _currentDoctorPageIndex++;
             
             [_tableView reloadData];
         }
@@ -419,6 +440,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)footerRefreshing
+{
+    _isUpPullLoading = YES;
+    [self obtainData];
+  
+    
+}
+
+//如果有更多数据，
+-(void)stopRefresh
+{
+    
+    if (_isUpPullLoading)
+    {
+        _isUpPullLoading = NO;
+        [_tableView footerEndRefreshing];
+    }
+}
 /*
 #pragma mark - Navigation
 

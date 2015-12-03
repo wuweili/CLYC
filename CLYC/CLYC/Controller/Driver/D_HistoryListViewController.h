@@ -8,11 +8,5 @@
 
 #import "HXBJHXBaseViewController.h"
 #import "D_ApplyCarListTableViewCell.h"
-
-
 @interface D_HistoryListViewController : HXBJHXBaseViewController
-
-
-
-
 @end

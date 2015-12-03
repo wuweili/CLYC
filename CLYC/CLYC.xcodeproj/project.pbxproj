@@ -2001,6 +2001,7 @@
 				TargetAttributes = {
 					5A1BC83F1B09E4D500A2A1DC = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 7HJR243U8V;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2377,8 +2378,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: luo hong (SA8P6RMYTV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: luo hong (SA8P6RMYTV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhu chunhui (ZV8VFADZAX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhu chunhui (ZV8VFADZAX)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
@@ -2406,7 +2407,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "ce53a02c-fda0-4a31-893e-54f7ea8c9d81";
+				PROVISIONING_PROFILE = "230c2dd4-31a4-41c0-b737-5dd09db61ab6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2461,8 +2462,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: luo hong (SA8P6RMYTV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: luo hong (SA8P6RMYTV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhu chunhui (ZV8VFADZAX)";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2485,7 +2486,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce53a02c-fda0-4a31-893e-54f7ea8c9d81";
+				PROVISIONING_PROFILE = "230c2dd4-31a4-41c0-b737-5dd09db61ab6";
 			};
 			name = Debug;
 		};
@@ -2494,7 +2495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: JIANGSU Union of Science and Technology (7HJR243U8V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: JIANGSU Union of Science and Technology (7HJR243U8V)";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
@@ -2526,8 +2527,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: luo hong (SA8P6RMYTV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: luo hong (SA8P6RMYTV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: zhu chunhui (ZV8VFADZAX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: zhu chunhui (ZV8VFADZAX)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2545,7 +2546,7 @@
 				INFOPLIST_FILE = CLYCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ce53a02c-fda0-4a31-893e-54f7ea8c9d81";
+				PROVISIONING_PROFILE = "230c2dd4-31a4-41c0-b737-5dd09db61ab6";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CLYC.app/CLYC";
 			};
 			name = Debug;

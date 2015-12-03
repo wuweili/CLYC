@@ -12,7 +12,7 @@
 #import "EditApplyCarViewController.h"
 #import "CarTrajectoryMapViewController.h"
 
-@interface CarTrajectoryViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface CarTrajectoryViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     UITableView *_tableView;
     
@@ -22,6 +22,10 @@
     BOOL _isUpPullLoading;
     
     int _currentDoctorPageIndex;
+    
+    UIView *_conditionView;
+    UITextField *_projectNumTextField;
+    UITextField *_carNumTextField;
 }
 
 @end
@@ -32,9 +36,7 @@
 {
     
     [self dismissViewControllerAnimated:YES completion:^{
-        
-        
-        
+   
     }];
 }
 
@@ -48,7 +50,7 @@
     _dataArray = [NSMutableArray arrayWithCapacity:0];
     
     _currentDoctorPageIndex = 0;
-    
+    [self initConditionView];
     [self initTableView];
     
     [self initRefreshView];
@@ -58,11 +60,78 @@
     
 }
 
+-(void)initConditionView
+{
+    _conditionView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 120)];
+    _conditionView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_conditionView];
+    
+    //项目号
+    
+    UILabel *startTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 70, 30)];
+    startTimeLabel.font = HEL_14;
+    startTimeLabel.textColor = [UIColor blackColor];
+    startTimeLabel.textAlignment = NSTextAlignmentRight;
+    startTimeLabel.backgroundColor = [UIColor clearColor];
+    startTimeLabel.text = @"项目号：";
+    [_conditionView addSubview:startTimeLabel];
+    
+    
+    _projectNumTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(startTimeLabel.frame), startTimeLabel.frame.origin.y , kMainScreenWidth-CGRectGetMaxX(startTimeLabel.frame)-10, 30)];
+    _projectNumTextField.placeholder=@"请输入项目号";
+    _projectNumTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _projectNumTextField.autocapitalizationType=UITextAutocapitalizationTypeNone;
+    _projectNumTextField.font = HEL_15;
+    _projectNumTextField.layer.borderColor=[UIColorFromRGB(0xcccccc) CGColor];
+    _projectNumTextField.layer.cornerRadius = 4.0;
+    _projectNumTextField.layer.borderWidth = 1.0;
+    _projectNumTextField.delegate = self;
+    _projectNumTextField.borderStyle = UITextBorderStyleRoundedRect;
+    
+    [_conditionView addSubview:_projectNumTextField];
+   
+    //车辆号
+    
+    UILabel *endTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, CGRectGetMaxY(startTimeLabel.frame)+5, 70, 30)];
+    endTimeLabel.font = HEL_14;
+    endTimeLabel.textColor = [UIColor blackColor];
+    endTimeLabel.textAlignment = NSTextAlignmentRight;
+    endTimeLabel.backgroundColor = [UIColor clearColor];
+    endTimeLabel.text = @"车辆号：";
+    [_conditionView addSubview:endTimeLabel];
+   
+    _carNumTextField = [[UITextField alloc] initWithFrame:CGRectMake(CGRectGetMaxX(endTimeLabel.frame), endTimeLabel.frame.origin.y , kMainScreenWidth-CGRectGetMaxX(endTimeLabel.frame)-10, 30)];
+    _carNumTextField.placeholder=@"请输入车辆号";
+    _carNumTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _carNumTextField.autocapitalizationType=UITextAutocapitalizationTypeNone;
+    _carNumTextField.font = HEL_15;
+    _carNumTextField.layer.borderColor=[UIColorFromRGB(0xcccccc) CGColor];
+    _carNumTextField.layer.cornerRadius = 4.0;
+    _carNumTextField.layer.borderWidth = 1.0;
+    _carNumTextField.delegate = self;
+    _carNumTextField.borderStyle = UITextBorderStyleRoundedRect;
+    
+    [_conditionView addSubview:_carNumTextField];
+    
+    
+    UIButton *startSearchButton = [[UIButton alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(endTimeLabel.frame)+10, kMainScreenWidth-20, 30)];
+    [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search.png"] forState:UIControlStateNormal];
+    
+    [startSearchButton setBackgroundImage:[UIImage imageNamed:@"button_search_select.png"] forState:UIControlStateHighlighted];
+    
+    [startSearchButton setTitle:@"查询" forState:UIControlStateNormal];
+    
+    [startSearchButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [startSearchButton addTarget:self action:@selector(clickStartSearchButton) forControlEvents:UIControlEventTouchUpInside];
+    [_conditionView addSubview:startSearchButton];
+    
+}
+
 
 
 -(void)initTableView
 {
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,0,kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight) style:UITableViewStylePlain];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(_conditionView.frame),kMainScreenWidth ,kScreenHeightNoStatusAndNoNaviBarHeight-120) style:UITableViewStylePlain];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.showsVerticalScrollIndicator = NO;
@@ -82,22 +151,38 @@
     [self tableViewMJRefresh:_tableView];
 }
 
+#pragma mark - 点击查询 -
 
-
+-(void)clickStartSearchButton
+{
+    _currentDoctorPageIndex = 0;
+    
+    [self searchHadAlreadyGoOutDataWithUpPull:NO];
+}
 
 #pragma mark - 查询已出行
 
 -(void)searchHadAlreadyGoOutDataWithUpPull:(BOOL)upPull
 {
     [self initMBHudWithTitle:nil];
-    
     NSArray *keyArray = @[@"queryDeptId",@"queryProjectNo",@"queryCarCode",@"queryBeginTime",@"queryEndTime",@"queryState",@"queryTravelstate",@"queryCarAppUserId",@"pageSize",@"pageNum"];
     
-   
+    NSString *projectNumStr = _projectNumTextField.text;
+    
+    if ([NSString isBlankString:_projectNumTextField.text])
+    {
+        projectNumStr = @"";
+    }
+    
+    NSString *carNumStr = _carNumTextField.text;
+    
+    if ([NSString isBlankString:_carNumTextField.text])
+    {
+        carNumStr = @"";
+    }
+    
     NSString *currentPage = [NSString stringWithFormat:@"%d",_currentDoctorPageIndex];
-    
-    
-    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,@"",@"",@"",@"",@"",@"3",[HXUserModel shareInstance].userId,@"20",currentPage];
+    NSArray *valueArray = @[[HXUserModel shareInstance].deptId,projectNumStr,carNumStr,@"",@"",@"",@"3",[HXUserModel shareInstance].userId,@"20",currentPage];
     
     [CLYCCoreBizHttpRequest obtainCarTrajectoryListWithBlock:^(NSMutableArray *listArry, NSString *retcode, NSString *retmessage, NSError *error, NSString *totalNum) {
         [self stopRefresh];
@@ -186,9 +271,6 @@
     
     
 }
-
-
-
 
 #pragma mark - 下拉刷新 -
 
